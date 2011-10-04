@@ -1,0 +1,101 @@
+/* boozurk v0.24 - Theme options stylesheet */
+
+#boozurk-infos ul {
+	list-style: disc outside;
+	margin-left: 30px;
+}
+#boozurk-options,
+#boozurk-infos {
+	background: #f9f9f9;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+	margin: 0;
+	padding: 20px 10px;
+}
+#tabs-container {
+	margin: 20px 20px 20px 150px;
+}
+#boozurk-options th,
+#boozurk-options td {
+	padding: 10px 5px;
+	font-size: 12px;
+}
+#boozurk-options tr {
+	border-bottom: 1px solid #999;
+}
+#boozurk-options select {
+	max-width: 60px;
+}
+#bz-tabselector,
+#selector {
+	position: absolute;
+	top: 100px;
+	left: 0;
+}
+#bz-tabselector li,
+#selector li {
+	width: 130px;
+	padding: 3px 16px 3px 4px;
+}
+#bz-tabselector li a,
+#selector li a {
+	text-decoration: none;
+}
+.sel-active a {
+	color: #000;
+}
+
+.sel-active {
+	font-weight: bold;
+	background: url("../images/litem_rtl.png") no-repeat 135px center transparent;
+}
+#bz-main-wrap {
+	position: relative;
+}
+th.column-nam {
+	width: 220px;
+}
+th.column-chk {
+	width: 50px;
+}
+th.column-des {
+}
+th.column-req {
+	width: 100px;
+}
+td.column-nam {
+	width: 220px;
+	font-weight: bold;
+	border-right:1px solid #ccc;
+}
+td.column-chk {
+	width: 50px;
+	border-right:1px solid #ccc;
+	text-align:center;
+}
+td.column-des {
+	font-style:italic;
+	border-right:1px solid #ccc;
+}
+td.column-req {
+	width: 100px;
+}
+.color_preview_box {
+	width:2em;
+	border:1px solid #262626;
+	cursor: crosshair;
+}
+.bz_cp {
+	background:#eee;
+	border:1px solid #ccc;
+	position:absolute;
+	display:none;
+	top: 25px;
+	left: 25px;
+	z-index: 500;
+}
+.farbtastic .wheel {
+    left: 0;
+    top: 0;
+}

@@ -1,0 +1,1673 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Fastfood 0.28\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. Text in function
+#: functions.php:1
+msgid "\"aside\" posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "\"status\" posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:552
+#: functions.php:589
+#: mobile/mobile-comments.php:12
+#: comments.php:16
+#: comments.php:21
+msgid "% Comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "%s ago"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "%s months ago"
+msgstr ""
+
+#. Text in function
+#: footer.php:10
+msgid "(for mobile)"
+msgstr ""
+
+#. Text in echo
+#: search.php:15
+#: loop/post-protected.php:4
+#: attachment.php:25
+#: functions.php:1
+#: functions.php:1210
+#: single.php:26
+#: page.php:26
+#: mobile/mobile-index.php:51
+#: one-column-page.php:33
+#: mobile/mobile-single.php:38
+#: loop/post-standard.php:5
+msgid "(no title)"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- \"aside\" format"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- \"gallery\" format"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- \"status\" format"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- post author"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- post categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- post comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- post date"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- post tags"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- recent comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- recent posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- static info"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "-- user"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "---- mini login"
+msgstr ""
+
+#. Text in function
+#: functions.php:552
+#: functions.php:589
+#: mobile/mobile-comments.php:12
+#: comments.php:16
+#: comments.php:21
+msgid "1 Comment"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "A list of popular categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Abstract"
+msgstr ""
+
+#. Text in echo
+#: footer.php:96
+msgid "Add New Post"
+msgstr ""
+
+#. Text in echo
+#: allcat.php:11
+msgid "All Categories"
+msgstr ""
+
+#. Text in echo
+#: footer.php:10
+msgid "All rights reserved"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Ancient Tree"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Aperture"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Aqua"
+msgstr ""
+
+#. Text in function
+#: index.php:6
+#: mobile/mobile-index.php:31
+#: sidebar.php:22
+msgid "Archives"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:320
+#: lib/my-custom-background.php:478
+msgid "Attachment"
+msgstr ""
+
+#. Text in function
+#: index.php:6
+msgid "Author"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Background"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:479
+msgid "Background Attachment"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:492
+msgid "Background Color"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:349
+msgid "Background Image"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:437
+msgid "Background Position"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:469
+msgid "Background Repeat"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:341
+msgid "Background updated. <a href=\"%s\">Visit your site</a> to see how it looks."
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Bamboo Forest"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Bird"
+msgstr ""
+
+#. Text in echo
+#: sidebar.php:19
+msgid "Blogroll"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:462
+msgid "Bottom"
+msgstr ""
+
+#. Text in echo
+#: footer.php:249
+#: footer.php:251
+msgid "Bottom of page"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Camera"
+msgstr ""
+
+#. Text in function
+#: comments.php:41
+msgid "Cancel reply"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Caption"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Carps"
+msgstr ""
+
+#. Text in echo
+#: allcat.php:9
+#: functions.php:526
+#: functions.php:591
+#: index.php:6
+#: footer.php:49
+#: sidebar.php:20
+msgid "Categories"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-index.php:31
+msgid "Category"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:458
+msgid "Center"
+msgstr ""
+
+#. Text in echo
+#: mobile/mobile-single.php:81
+msgid "Child pages: "
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:405
+msgid "Choose an image from your computer:"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:495
+msgid "Clear"
+msgstr ""
+
+#. Text in echo
+#: functions.php:1178
+msgid "Click on thumbnails"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:13
+#: functions.php:1142
+#: single.php:15
+#: page.php:14
+#: one-column-page.php:21
+msgid "Close"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Clouds"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:321
+#: lib/my-custom-background.php:491
+msgid "Color"
+msgstr ""
+
+#. Text in echo
+#: functions.php:761
+msgid "Colors"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
+msgstr ""
+
+#. Text in echo
+#: functions.php:551
+#: functions.php:589
+#: footer.php:103
+msgid "Comments"
+msgstr ""
+
+#. Text in echo
+#: functions.php:755
+msgid "Content"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Copyright"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Cork"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Credit"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:338
+msgid "Custom Background"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Date Taken"
+msgstr ""
+
+#. Text in echo
+#: functions.php:816
+msgid "Default"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:432
+msgid "Display Options"
+msgstr ""
+
+#. Text in function
+#: functions.php:578
+#: functions.php:592
+#: loop/post-status.php:7
+msgid "Edit"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:25
+msgid "Email"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Enrich the page 404 with some useful widgets"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Enter %1$s account link:"
+msgstr ""
+
+#. Text in echo
+#: mobile/mobile-comments.php:6
+#: comments.php:2
+msgid "Enter your password to view comments."
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "Fastfood Default Gravatar"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Fastfood theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "First Footer Widget Area"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:486
+msgid "Fixed"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Focal Length"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Fog"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Follow Me"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+#: lib/my-custom-background.php:507
+msgid "Globe"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Green Wave"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Header height"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Heart"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Height"
+msgstr ""
+
+#. Text in echo
+#: footer.php:224
+msgid "Home"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "ISO"
+msgstr ""
+
+#. Text in echo
+#: functions.php:832
+msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
+msgstr ""
+
+#. Text in echo
+#: attachment.php:68
+msgid "Image Details"
+msgstr ""
+
+#. Text in echo
+#: functions.php:759
+msgid "Javascript"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Latest activity"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Latest comment authors"
+msgstr ""
+
+#. Text in function
+#: comments.php:41
+msgid "Leave a Reply"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:36
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:36
+#: comments.php:16
+#: comments.php:41
+#: footer.php:148
+#: footer.php:150
+msgid "Leave a comment"
+msgstr ""
+
+#. Text in echo
+#: functions.php:833
+msgid "Leave a feedback"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:440
+msgid "Left"
+msgstr ""
+
+#. Text in echo
+#: functions.php:1151
+#: functions.php:1139
+msgid "Log in"
+msgstr ""
+
+#. Text in echo
+#: footer.php:106
+msgid "Log out"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:36
+#: comments.php:41
+#: footer.php:79
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
+msgstr ""
+
+#. Text in function
+#: functions.php:471
+msgid "Lower pages: "
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Main Navigation Menu"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Menu Widget Area"
+msgstr ""
+
+#. Text in echo
+#: sidebar.php:10
+msgid "Meta"
+msgstr ""
+
+#. Text in echo
+#: footer.php:52
+msgid "More..."
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:25
+msgid "Name"
+msgstr ""
+
+#. Text in function
+#: footer.php:235
+msgid "Newer Posts"
+msgstr ""
+
+#. Text in function
+#: footer.php:211
+msgid "Next Post"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-index.php:70
+#: footer.php:196
+msgid "Next page"
+msgstr ""
+
+#. Text in function
+#: functions.php:552
+#: functions.php:589
+#: mobile/mobile-comments.php:12
+#: comments.php:16
+#: comments.php:21
+msgid "No Comments"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:470
+msgid "No Repeat"
+msgstr ""
+
+#. Text in echo
+#: functions.php:539
+#: functions.php:590
+msgid "No Tags"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No comments yet."
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No preview: this is a comment of a protected post"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "No preview: this is a protected post"
+msgstr ""
+
+#. Text in function
+#: footer.php:79
+msgid "Not logged in"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:422
+msgid "Number of categories to show:"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:228
+#: lib/widgets.php:724
+#: lib/widgets.php:847
+msgid "Number of posts to show:"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:344
+msgid "Number of users to show:"
+msgstr ""
+
+#. Text in function
+#: footer.php:232
+msgid "Older Posts"
+msgstr ""
+
+#. Text in echo
+#: functions.php:765
+msgid "Options"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "Options saved."
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Orange landscape"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Orange stripes"
+msgstr ""
+
+#. Text in echo
+#: functions.php:760
+msgid "Other"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Page 404"
+msgstr ""
+
+#. Text in echo
+#: 404.php:6
+msgid "Page not found"
+msgstr ""
+
+#. Text in function
+#: attachment.php:112
+#: loop/post-gallery.php:67
+#: single.php:46
+#: page.php:47
+#: mobile/mobile-index.php:85
+#: one-column-page.php:51
+#: mobile/mobile-single.php:111
+#: loop/post-standard.php:28
+#: sidebar.php:18
+msgid "Pages"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Paper"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Paper and coffee"
+msgstr ""
+
+#. Text in echo
+#: mobile/mobile-single.php:93
+msgid "Parent page: "
+msgstr ""
+
+#. Text in echo
+#: 404.php:17
+msgid "Perhaps using the search form will help..."
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Pink"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Popular Categories"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Popular Posts"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:318
+#: lib/my-custom-background.php:436
+msgid "Position"
+msgstr ""
+
+#. Text in echo
+#: functions.php:757
+msgid "Post formats"
+msgstr ""
+
+#. Text in echo
+#: functions.php:1176
+msgid "Post loading, please wait..."
+msgstr ""
+
+#. Text in echo
+#: functions.php:756
+msgid "Post/Page details"
+msgstr ""
+
+#. Text in echo
+#: mobile/mobile-index.php:45
+msgid "Posts"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-index.php:31
+msgid "Posts by %s"
+msgstr ""
+
+#. Text in echo
+#: footer.php:10
+msgid "Powered by WordPress"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:420
+msgid "Predefined themes"
+msgstr ""
+
+#. Text in echo
+#: functions.php:1177
+#: lib/my-custom-background.php:353
+msgid "Preview"
+msgstr ""
+
+#. Text in function
+#: footer.php:215
+msgid "Previous Post"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-index.php:69
+#: footer.php:188
+msgid "Previous page"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:14
+#: single.php:16
+#: page.php:15
+#: one-column-page.php:22
+#: footer.php:141
+msgid "Print"
+msgstr ""
+
+#. Text in function
+#: functions.php:588
+msgid "Published on: %1$s"
+msgstr ""
+
+#. Text in function
+#: functions.php:563
+msgid "Published on: <b>%1$s</b>"
+msgstr ""
+
+#. Text in echo
+#: functions.php:754
+msgid "Quickbar"
+msgstr ""
+
+#. Text in echo
+#: mobile/mobile-single.php:114
+#: footer.php:63
+msgid "Recent Comments"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+#: footer.php:36
+msgid "Recent Posts"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:726
+msgid "Recent Posts in %s"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:726
+msgid "Recent Posts in Category"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:382
+msgid "Remove Background Image"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:378
+msgid "Remove Image"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:319
+#: lib/my-custom-background.php:468
+msgid "Repeat"
+msgstr ""
+
+#. Text in function
+#: comments.php:41
+msgid "Reply to Comment"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:391
+#: lib/my-custom-background.php:395
+msgid "Restore Original Image"
+msgstr ""
+
+#. Text in function
+#: footer.php:203
+#: footer.php:205
+msgid "Return to %s"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:448
+msgid "Right"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:36
+#: comments.php:41
+msgid "Say It!"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:482
+msgid "Scroll"
+msgstr ""
+
+#. Text in echo
+#: searchform.php:3
+#: searchform.php:5
+#: mobile/mobile-index.php:76
+#: mobile/mobile-single.php:102
+msgid "Search"
+msgstr ""
+
+#. Text in function
+#: search.php:6
+#: mobile/mobile-index.php:41
+msgid "Search results for &#8220;%s&#8221;"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Second Footer Widget Area"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Secondary Navigation Menu #1"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Secondary Navigation Menu #2"
+msgstr ""
+
+#. Text in echo
+#: functions.php:815
+#: lib/my-custom-background.php:495
+msgid "Select a Color"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:517
+msgid "Select your icon size"
+msgstr ""
+
+#. Text in function
+#: functions.php:606
+#: functions.php:609
+#: functions.php:612
+#: functions.php:615
+#: functions.php:618
+#: functions.php:621
+#: functions.php:624
+#: functions.php:627
+msgid "Share with %s"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:852
+msgid "Show post thumbnails"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Shutter Speed"
+msgstr ""
+
+#. Text in echo
+#: functions.php:758
+msgid "Sidebar"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#. Text in echo
+#: search.php:41
+#: attachment.php:123
+#: index.php:84
+#: single.php:59
+#: page.php:56
+#: mobile/mobile-index.php:74
+#: one-column-page.php:60
+#: mobile/mobile-single.php:100
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#. Text in echo
+#: 404.php:7
+msgid "Sorry, you're looking for something that isn't here"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Squared Night"
+msgstr ""
+
+#. Text in echo
+#: header.php:45
+msgid "Syndicate this site using RSS 2.0"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-index.php:31
+msgid "Tag"
+msgstr ""
+
+#. Text in function
+#: index.php:6
+msgid "Tags"
+msgstr ""
+
+#. Text in echo
+#: functions.php:538
+#: functions.php:590
+msgid "Tags:"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "The first footer widget area"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "The latest comment authors"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "The latest commented posts/pages of your site"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "The most commented posts on your site"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:726
+msgid "The most recent posts in a single category"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "The second footer widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "The sidebar widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "The third footer widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "The widget area under the main menu"
+msgstr ""
+
+#. Text in echo
+#: functions.php:762
+#: functions.php:766
+msgid "Theme Info"
+msgstr ""
+
+#. Text in function
+#: functions.php:630
+#: functions.php:752
+msgid "Theme Options"
+msgstr ""
+
+#. Text in echo
+#: 404.php:16
+msgid "There are several links scattered around the page, maybe you can find what you\\'re looking for"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "Third Footer Widget Area"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:383
+msgid "This will remove the background image. You will not be able to restore any customizations."
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:396
+msgid "This will restore the original background image. You will not be able to restore any customizations."
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:471
+msgid "Tile"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:472
+msgid "Tile Horizontally"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:473
+msgid "Tile Vertically"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Title"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:417
+#: lib/widgets.php:483
+#: lib/widgets.php:709
+#: lib/widgets.php:825
+#: lib/widgets.php:830
+msgid "Title:"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:454
+msgid "Top"
+msgstr ""
+
+#. Text in echo
+#: footer.php:242
+#: footer.php:244
+msgid "Top of page"
+msgstr ""
+
+#. Text in echo
+#: footer.php:166
+msgid "Trackback URL"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:712
+msgid "Type of posts to show:"
+msgstr ""
+
+#. Text in echo
+#: functions.php:827
+msgid "Undo Changes"
+msgstr ""
+
+#. Text in echo
+#: functions.php:826
+msgid "Update Options"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:408
+msgid "Upload"
+msgstr ""
+
+#. Text in echo
+#: lib/my-custom-background.php:403
+msgid "Upload Image"
+msgstr ""
+
+#. Text in function
+#: functions.php:471
+msgid "Upper page: "
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "Use this widget to list your recent Aside and Status posts"
+msgstr ""
+
+#. Text in echo
+#: footer.php:76
+msgid "User"
+msgstr ""
+
+#. Text in function
+#: functions.php:846
+msgid "Vector Flowers"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:395
+msgid "View all"
+msgstr ""
+
+#. Text in echo
+#: lib/widgets.php:395
+#: footer.php:52
+msgid "View all categories"
+msgstr ""
+
+#. Text in function
+#: functions.php:585
+msgid "View all posts by %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "View all posts in %s"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:59
+#: functions.php:1296
+msgid "View full size"
+msgstr ""
+
+#. Text in function
+#: loop/post-gallery.php:55
+msgid "View gallery"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Violet"
+msgstr ""
+
+#. Text in echo
+#: footer.php:10
+msgid "Visit author homepage"
+msgstr ""
+
+#. Text in function
+#: mobile/mobile-comments.php:25
+msgid "Website"
+msgstr ""
+
+#. Text in echo
+#: footer.php:120
+msgid "Welcome"
+msgstr ""
+
+#. Text in function
+#: attachment.php:69
+msgid "Width"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Wood"
+msgstr ""
+
+#. Text in function
+#: lib/my-custom-background.php:507
+msgid "Yellow"
+msgstr ""
+
+#. Text in echo
+#: 404.php:9
+msgid "You can try the following:"
+msgstr ""
+
+#. Text in function
+#: comments.php:41
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
+msgstr ""
+
+#. Text in echo
+#: footer.php:94
+msgid "Your Profile"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = #CCCCCC]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = #D2691E]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = #FF4500]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = 11px]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = 120px]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "[default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "a month ago"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "a small login form in the user panel [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "about"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "add style to the editor in order to write the post exactly how it will appear on the site [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: lib/widgets.php:855
+msgid "besides..."
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "by"
+msgstr ""
+
+#. Text in function
+#: functions.php:518
+#: functions.php:586
+msgid "by %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "content summary"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "custom adminbar style"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "custom background"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "custom comment reply form"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "custom floating form for post/reply comments [default = enabled]"
+msgstr ""
+
+#. Text in echo
+#: functions.php:778
+msgid "description"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "editor style"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "expands a post to show the full contents when the reader clicks the \"Read more...\" link [default = enabled]"
+msgstr ""
+
+#. Text in echo
+#: footer.php:155
+#: footer.php:157
+msgid "feed for comments on this post"
+msgstr ""
+
+#. Text in function
+#: index.php:23
+msgid "follow %s on Facebook"
+msgstr ""
+
+#. Text in function
+#: index.php:23
+msgid "follow %s on Twitter"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "font size"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "gallery preview"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "highlighted links"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "images informations"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "info in overview"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "info in pages"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "info in posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "javascript animations"
+msgstr ""
+
+#. Text in function
+#: footer.php:120
+msgid "l"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "linked header"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "links"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "load gallery images on fly [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "mobile support"
+msgstr ""
+
+#. Text in echo
+#: functions.php:776
+msgid "name"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "navigation buttons"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "over a year ago"
+msgstr ""
+
+#. Text in function
+#: search.php:32
+#: index.php:71
+#: mobile/mobile-index.php:67
+msgid "page %1$s of %2$s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "please, don't hide theme credits [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "post expander"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "post formats support"
+msgstr ""
+
+#. Text in function
+#: functions.php:1210
+msgid "quite a long while ago..."
+msgstr ""
+
+#. Text in echo
+#: functions.php:779
+msgid "require"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "selected links"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "share this content"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show EXIF informations on image attachments [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show aside posts on overview [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show author on posts details [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show categories on posts details [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show comments on post/page details [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show date on posts details [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show details (author, date, tags, etc) in posts overview [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show details (author, date, tags, etc) in posts [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show details (author, date, tags, etc) in pages [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show details as a static list (not dropdown animated) [default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show right sidebar on pages [default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show right sidebar on posts [default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show share links after the post content [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show status posts on overview [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "show tags on posts details [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "sidebar on pages"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "sidebar on posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "sliding menu"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "someone"
+msgstr ""
+
+#. Text in echo
+#: functions.php:777
+msgid "status"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "style integration with the theme for admin bar [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "theme credits"
+msgstr ""
+
+#. Text in function
+#: functions.php:1153
+msgid "this post is quoted by"
+msgstr ""
+
+#. Text in function
+#: footer.php:120
+msgid "today is %1$s, %2$s"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "try disable animations if you encountered problems with javascript [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "use a dedicated style in mobile devices [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "use the enhanced custom background page instead of the standard one. Disable it if the <a href=\"%s\">custom background page</a> works weird [default = enabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "use the header image as home link. The <a href=\"%s\">header image</a> must be set. If enabled, the site title and description are hidden [default = disabled]"
+msgstr ""
+
+#. Text in function
+#: functions.php:1
+msgid "use the summary instead of content in posts overview [default = disabled]"
+msgstr ""
+
+msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
+msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
+msgstr[0] ""
+msgstr[1] ""
