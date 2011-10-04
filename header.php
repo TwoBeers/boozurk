@@ -19,16 +19,17 @@
 	</head>
 
 	<body <?php body_class(); ?>>
+		<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
 		<div id="main">
 
 		<div id="content">
 			<div id="pages">
 				<div id="pages_c">
-					<div class="description"><?php bloginfo( 'description' ); ?></div>
-				<?php get_sidebar( 'fixed' ); // show header widgets area ?>
+					<?php if ( isset( $boozurk_opt['boozurk_logo'] ) && ( $boozurk_opt['boozurk_logo'] != '' ) ) echo '<img class="bz-logo" alt="logo" src="' . $boozurk_opt['boozurk_logo'] . '" />'?>
+					<div class="bz-description"><?php bloginfo( 'description' ); ?></div>
+					<?php get_sidebar( 'fixed' ); // show header widgets area ?>
 				</div>
 			</div>
-			<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
 			<?php boozurk_hook_before_header(); ?>
 			<div id="head">
 				<?php boozurk_hook_before_site_title(); ?>

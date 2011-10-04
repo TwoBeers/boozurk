@@ -29,7 +29,6 @@ body {
 	font-family: monospace;
 	background: transparent url('images/bg2.png') 256px 0px repeat-y;
 	font-size: 15px;
-	margin-top: 20px;
 }
 a img {
 	border: none;
@@ -253,6 +252,7 @@ input[type=reset]:hover {
 }
 #main {
 	position: relative;
+	margin-top: 20px;
 }
 #posts_content {
 }
@@ -397,37 +397,6 @@ input[type=reset]:hover {
 	text-align: center;
     margin-top: 20px;
 }
-.comment-edit-link {
-    display:block;
-    height:20px;
-    overflow:hidden;
-    position:absolute;
-    right:0;
-	top: 0;
-    text-indent:-1000px;
-    width:20px;
-	background: url('images/edit.png') no-repeat center;
-}
-.comment-edit-link:hover {
-	background: url('images/edit_hi.png') no-repeat center;
-}
-#cancel-comment-reply-link {
-    display: block;
-    height: 12px;
-    overflow: hidden;
-    position: absolute;
-    right: 10px;
-	top: 10px;
-    text-indent: -1000px;
-    width: 13px;
-	background: url('images/header_popup_closebtn.png') no-repeat right top;
-}
-#cancel-comment-reply-link:hover {
-	background-position: left top;
-}
-.comment {
-	position: relative;
-}
 #bz-page-nav {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
@@ -436,20 +405,6 @@ input[type=reset]:hover {
 }
 #bz-page-nav a {
     margin: 0 10px;
-}
-.form-allowed-tags {
-	color: #999;
-}
-#respond .comment-form-author,
-#respond .comment-form-email,
-#respond .comment-form-url {
-	margin: 5px auto;
-}
-#author,
-#email,
-#url {
-	margin-right: 10px;
-	margin-left: -1px;
 }
 .img-navi-prev {
     margin: 10px 0;
@@ -472,6 +427,18 @@ input[type=reset]:hover {
 	padding: 10px;
 	font-weight: bold;
 }
+.more-link.ajaxed {
+	padding-left: 20px;
+	background: url('images/loading.gif') no-repeat scroll left center transparent;
+}
+.bz-description {
+	margin-bottom: 10px;
+}
+.bz-logo {
+	max-width: 200px;
+	height: auto;
+}
+
 /* Posts (by format)
 ----------------------------------------------------------*/
 .format-status .avatar,
@@ -643,14 +610,11 @@ img.bz-thumb-format {
 	z-index: 30;
 	max-width: 300px;
 	min-width: 150px;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 1px solid #fff;
-	background-color: #eee;
+	border: 1px solid #777;
+	background-color: #fff;
 	margin: 0;
 	padding: 5px 10px 10px;
+	box-shadow: 0 0 2px #404040;
 }
 #mainmenu > li:hover > ul {
 	display: block;
@@ -663,6 +627,30 @@ img.bz-thumb-format {
 .bz-menu-thumb.default {
 	border: 1px solid #ddd;
 }
+/* secondary menus
+----------------------------------------------------------*/
+#secondary1 {
+	background: #fff;
+	border-bottom: 1px solid #777;
+	box-shadow: 0 0 4px #404040;
+	text-align: center;
+	line-height: 30px;
+}
+#secondary1 li {
+	display: inline;
+	margin: 10px;
+}
+#secondary2 {
+	border: 1px solid #ddd;
+	border-left: none;
+	text-align: center;
+	line-height: 20px;
+}
+#secondary2 li {
+	display: inline;
+	margin: 10px;
+}
+
 /* author bio
 ----------------------------------------------------------*/
 .bz-author-bio {
@@ -982,6 +970,45 @@ img.bz-thumb-format {
 	padding: 10px;
 	position: relative;
 }
+.form-allowed-tags {
+	color: #999;
+}
+#respond .comment-form-author,
+#respond .comment-form-email,
+#respond .comment-form-url {
+	margin: 5px auto;
+}
+#author,
+#email,
+#url {
+	margin-right: 10px;
+	margin-left: -1px;
+}
+.comment-edit-link {
+    display: none;
+	font-size: 10px;
+}
+.comment-body:hover .comment-edit-link {
+    display: inline;
+}
+#cancel-comment-reply-link {
+    display: block;
+    height: 12px;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+	top: 10px;
+    text-indent: -1000px;
+    width: 13px;
+	background: url('images/header_popup_closebtn.png') no-repeat right top;
+}
+#cancel-comment-reply-link:hover {
+	background-position: left top;
+}
+.comment {
+	position: relative;
+}
+
 /* Gallery
 ----------------------------------------------------------*/
 .gallery {
@@ -1020,6 +1047,33 @@ img.bz-thumb-format {
 }
 .gallery-columns-7 .gallery-item {
 	width: 14%;
+}
+.bzg-slider {
+	margin: 20px 0;
+	padding: 10px;
+    border: 1px solid #ddd;
+	text-align: center;
+}
+.bzg-slider .loading {
+	display: block;
+	background: url('images/loading.gif') no-repeat scroll center center transparent;
+	height: 30px;
+}
+.bzg-preview-link {
+	background: url('images/preview.png') no-repeat 5px center transparent;
+	padding: 5px 5px 5px 25px;
+    border: 1px solid #ccc;
+    -moz-border-radius: 2px;
+    -khtml-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+.bzg-slideshow {
+	margin: 20px 0;
+}
+img.thumbsel {
+	box-shadow: 0 0 2px #404040;
+    border: 1px solid #777;
 }
 
 /* =calendar
