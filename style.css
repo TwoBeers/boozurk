@@ -297,42 +297,6 @@ input[type=reset]:hover {
 #posts_content .attachment {
     border-left: 40px solid skyBlue;
 }
-#posts_content .format-aside,
-#posts_content .category-aside {
-    border-left: 40px solid Yellow;
-}
-#posts_content .format-status,
-#posts_content .category-status {
-    border-left: 40px solid Tomato;
-}
-#posts_content .format-gallery,
-#posts_content .category-gallery {
-    border-left: 40px solid Violet;
-}
-#posts_content .format-quote,
-#posts_content .category-quote {
-    border-left: 40px solid YellowGreen;
-}
-#posts_content .format-audio,
-#posts_content .category-audio {
-    border-left: 40px solid Brown;
-}
-#posts_content .format-video,
-#posts_content .category-video {
-    border-left: 40px solid DarkGoldenRod;
-}
-#posts_content .format-image,
-#posts_content .category-image {
-    border-left: 40px solid Purple;
-}
-#posts_content .format-chat,
-#posts_content .category-chat {
-    border-left: 40px solid Pink;
-}
-#posts_content .format-link,
-#posts_content .category-link {
-    border-left: 40px solid Orange;
-}
 
 .pmb_comm {
 	background-color: rgba(255, 255, 255, 0.5);
@@ -515,6 +479,12 @@ div.bz_Widget_post_details ul {
 .bz_Widget_post_details .article-share {
 	text-align: center;
     margin-top: 10px;
+}
+.widget .cat-item , #posts_content .cat-item  {
+	margin-top: 5px;
+}
+.widget .cat-item  a, #posts_content .cat-item a {
+	padding-left: 5px;
 }
 
 /* Post Format icons

@@ -78,6 +78,9 @@ function boozurk_get_coa() {
 		'boozurk_colors_link' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#D2691E','description'=>__( 'links','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_colors_link_hover' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#FF4500','description'=>__( 'highlighted links','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_colors_link_sel' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#CCCCCC','description'=>__( 'selected links','boozurk' ),'info'=>'','req'=>'' ),
+
+		'boozurk_cat_colors' => array( 'group' =>'colors', 'type' =>'catcol', 'default'=>'#87CEEB','description'=>__( 'colors for categories','boozurk' ),'info'=>'','req'=>'' ),
+
 		'boozurk_cust_comrep' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','boozurk' ),'info'=>__( 'custom floating form for post/reply comments','boozurk' ),'req'=>'boozurk_jsani' ),
 		'boozurk_editor_style' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'editor style', 'boozurk' ),'info'=>__( "add style to the editor in order to write the post exactly how it will appear on the site", 'boozurk' ),'req'=>'' ),
 		'boozurk_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','boozurk' ),'info'=>__( 'use a dedicated style in mobile devices','boozurk' ),'req'=>'' ),
@@ -256,7 +259,19 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 	}	
 	#third_fwa {
 		width:<?php echo $boozurk_opt['boozurk_sidebar_foot_3_width']; ?>;
-	}	
+	}
+<?php
+	$args=array(
+		'orderby' => 'name',
+		'order' => 'DESC'
+	);
+	$categories=get_categories($args);
+	foreach($categories as $category) {
+		$catcolor = isset($boozurk_opt['boozurk_cat_colors'][$category->term_id]) ? $boozurk_opt['boozurk_cat_colors'][$category->term_id] : $boozurk_coa['boozurk_cat_colors']['default'];
+		echo '#posts_content .category-' . $category->slug . ' { border-left-color:' . $catcolor . ' ;}' . "\n";
+		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-left: 1em solid ' . $catcolor . ' ; }' . "\n";
+	}
+?>
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -1062,13 +1077,13 @@ if ( !function_exists( 'boozurk_widgets_scripts' ) ) {
 if ( !function_exists( 'boozurk_register_tb_settings' ) ) {
 	function boozurk_register_tb_settings() {
 		//register boozurk settings
-		register_setting( 'bz_settings_group', 'boozurk_options', 'boozurk_sanitaze_options' );
+		register_setting( 'bz_settings_group', 'boozurk_options', 'boozurk_sanitize_options' );
 	}
 }
 
 // sanitize options value
-if ( !function_exists( 'boozurk_sanitaze_options' ) ) {
-	function boozurk_sanitaze_options($input) {
+if ( !function_exists( 'boozurk_sanitize_options' ) ) {
+	function boozurk_sanitize_options($input) {
 		global $boozurk_current_theme;
 		$boozurk_coa = boozurk_get_coa();
 		// check for updated values and return 0 for disabled ones <- index notice prevention
@@ -1089,6 +1104,11 @@ if ( !function_exists( 'boozurk_sanitaze_options' ) ) {
 			} elseif( $boozurk_coa[$key]['type'] == 'url' ) {
 				$input[$key] = esc_url( $input[$key] );
 			}
+		}
+		foreach ( $input['boozurk_cat_colors'] as $key => $val ) {
+			$color = str_replace( '#' , '' , $input['boozurk_cat_colors'][$key] );
+			$color = preg_replace( '/[^0-9a-fA-F]/' , '' , $color );
+			$input['boozurk_cat_colors'][$key] = '#' . $color;
 		}
 		// check for required options
 		foreach ( $boozurk_coa as $key => $val ) {
@@ -1218,6 +1238,33 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											<input class="bz_input" id="bz_input_<?php echo $key; ?>" type="text" name="boozurk_options[<?php echo $key; ?>]" value="<?php echo $boozurk_opt[$key]; ?>" />
 											<a class="hide-if-no-js" href="#" onclick="showMeColorPicker('<?php echo $key; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>&nbsp;-&nbsp;
 											<a class="hide-if-no-js" style="color:<?php echo $boozurk_coa[$key]['default']; ?>;" href="#" onclick="pickColor('<?php echo $key; ?>','<?php echo $boozurk_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
+										</td>
+										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
+									</tr>
+								<?php } elseif ( $boozurk_coa[$key]['type'] == 'catcol' ) { ?>
+									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?> hide-if-no-js">
+										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
+										<td class="column-chk"></td>
+										<td class="column-des">
+										<?php
+											$args=array(
+												'orderby' => 'name',
+												'order' => 'ASC'
+											);
+											$categories=get_categories($args);
+											foreach($categories as $category) {
+												$catcolor = isset($boozurk_opt[$key][$category->term_id]) ? $boozurk_opt[$key][$category->term_id] : $boozurk_coa[$key]['default'];
+										?>
+											<div style="position:relative; display: block;">
+												<?php echo $category->name; ?>
+												<input onclick="showMeColorPicker('<?php echo $key.'-'.$category->term_id; ?>');" style="background-color:<?php echo $catcolor; ?>;" class="color_preview_box" type="text" id="bz_box_<?php echo $key.'-'.$category->term_id; ?>" value="" readonly="readonly" />
+												<div class="bz_cp" id="bz_colorpicker_<?php echo $key.'-'.$category->term_id; ?>"></div>
+												<input class="bz_input" id="bz_input_<?php echo $key.'-'.$category->term_id; ?>" type="text" name="boozurk_options[<?php echo $key; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" />
+												<a class="hide-if-no-js" href="#" onclick="showMeColorPicker('<?php echo $key.'-'.$category->term_id; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>&nbsp;-&nbsp;
+												<a class="hide-if-no-js" style="color:<?php echo $boozurk_coa[$key]['default']; ?>;" href="#" onclick="pickColor('<?php echo $key.'-'.$category->term_id; ?>','<?php echo $boozurk_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
+											</div>
+										<?php }	?>
+										
 										</td>
 										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
 									</tr>
