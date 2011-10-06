@@ -56,7 +56,7 @@
 	<ul>
 		<li>for any question/problem contact us at
 			<ul>
-				<li><a href="http://www.twobeers.net/annunci/tema-per-wordpress-boozurk" title="Boozurk theme page" target="_blank" >http://www.twobeers.net/annunci/tema-per-wordpress-fastfood</a></li>
+				<li><a href="http://www.twobeers.net/annunci/tema-per-wordpress-boozurk" title="Boozurk theme page" target="_blank" >http://www.twobeers.net/annunci/tema-per-wordpress-boozurk</a></li>
 				<li><a href="http://prj.twobeers.net/" title="TwoBeers Support Forum" target="_blank" >http://prj.twobeers.net/</a></li>
 			</ul>
 		</li>

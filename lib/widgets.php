@@ -283,7 +283,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 					if ( $comment->comment_author_url == '' ) {
 						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</li>';
 					} else {
-						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
+						$output .=  '<li title="' .  $comment->comment_author . '"><a target="_blank" href="' . $comment->comment_author_url . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -1151,6 +1151,90 @@ class boozurk_Widget_image_EXIF extends WP_Widget {
 }
 
 /**
+ * User_quick_links widget class
+ *
+ */
+class boozurk_Widget_user_quick_links extends WP_Widget {
+
+	function boozurk_Widget_user_quick_links() {
+		$widget_ops = array('classname' => 'bz_widget_user_quick_links', 'description' => __( 'Some useful links for users','boozurk' ) );
+		$this->WP_Widget('bz-user-quick-links', __('User quick links','boozurk'), $widget_ops);
+		$this->alt_option_name = 'bz_widget_user_quick_links';
+	}
+
+	function widget( $args, $instance ) {
+		global $current_user;
+		
+		extract($args, EXTR_SKIP);
+		
+		$title = apply_filters('widget_title', empty($instance['title']) ? __('Welcome %s','boozurk') : $instance['title'], $instance, $this->id_base);
+		$name = is_user_logged_in() ? $current_user->display_name : __('guest','boozurk');
+		$title = sprintf ( $title, $name );
+		
+		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
+		if ( $use_thumbs ) {
+			if ( is_user_logged_in() ) { //fix for notice when user not log-in
+				$email = $current_user->user_email;
+				$title = get_avatar( $email, 32, $default = get_template_directory_uri() . '/images/user.png','user-avatar' ) . ' ' . $title;
+			} else {
+				$title = get_avatar( 'dummyemail', 32, $default=get_option('avatar_default') ) . ' ' . $title;
+			}
+		}
+		
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<ul>
+			<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
+			<?php if ( is_user_logged_in() ) { ?>
+				<?php if ( current_user_can( 'read' ) ) { ?>
+					<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'boozurk' ); ?></a></li>
+					<?php if ( current_user_can( 'publish_posts' ) ) { ?>
+						<li><a title="<?php _e( 'Add New Post', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'boozurk' ); ?></a></li>
+					<?php } ?>
+					<?php if ( current_user_can( 'moderate_comments' ) ) {
+						$awaiting_mod = wp_count_comments();
+						$awaiting_mod = $awaiting_mod->moderated;
+						$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+					?>
+						<li><a title="<?php _e( 'Comments', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'boozurk' ); ?></a><?php echo $awaiting_mod; ?></li>
+					<?php } ?>
+				<?php } ?>
+			<?php } ?>
+			<li><?php wp_loginout(); ?></li>
+		</ul>
+		<?php echo $after_widget; ?>
+<?php
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
+		$thumb = 1;
+		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
+			$thumb = 0;
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:','boozurk'); ?><br /><?php _e('default: "Welcome %s" , where %s is the user name','boozurk');?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
+			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show user gravatar','boozurk'); ?></label>
+		</p>
+
+<?php
+	}
+}
+
+
+/**
  * Register all of the default WordPress widgets on startup.
  */
 function boozurk_widgets_init() {
@@ -1178,6 +1262,8 @@ function boozurk_widgets_init() {
 	register_widget('boozurk_Widget_post_formats');
 	
 	register_widget('boozurk_Widget_image_EXIF');
+	
+	register_widget('boozurk_Widget_user_quick_links');
 }
 
 add_action('widgets_init', 'boozurk_widgets_init');

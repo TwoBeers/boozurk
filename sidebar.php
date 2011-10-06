@@ -1,5 +1,5 @@
 <!-- begin sidebar -->
-<div id="sidebardx">
+<div id="sidebarsx">
 	<?php boozurk_hook_before_right_sidebar_content(); ?>
 	<?php 	/* Widgetized sidebar, if you have the plugin installed. */
 	if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>

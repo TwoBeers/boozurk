@@ -89,6 +89,8 @@ function boozurk_get_coa() {
 		'boozurk_main_menu' => array( 'group' =>'other', 'type' =>'sel', 'default'=>__('text','boozurk'), 'options'=>array( __('text','boozurk'), __('thumbnail','boozurk'), __('thumbnail and text','boozurk') ), 'description'=>__( 'main menu look','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_main_menu_icon_size' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'48', 'options'=>array ('32', '48', '64', '96'), 'description'=>__( 'main menu icon size','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_logo' => array( 'group' =>'other', 'type' =>'url', 'default'=>'','description'=>__( 'Logo','boozurk' ),'info'=>'','req'=>'' ),
+		'boozurk_logo_login' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'Logo in login page','boozurk' ),'info'=>'','req'=>'' ),
+		
 		'boozurk_post_formats' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support','boozurk' ),'info'=>__('','boozurk' ),'req'=>'' ),
 		'boozurk_post_formats_gallery' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "gallery" format','boozurk' ),'info'=>__( '','boozurk' ),'req'=>'boozurk_post_formats' ),
 		'boozurk_post_formats_aside' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "aside" format','boozurk' ),'info'=>__( '','boozurk' ),'req'=>'boozurk_post_formats' ),
@@ -141,6 +143,12 @@ if ( !function_exists( 'boozurk_setopt_admin_notice' ) ) {
 if ( current_user_can( 'manage_options' ) && $boozurk_opt['version'] < $boozurk_current_theme['Version'] ) {
 	add_action( 'admin_notices', 'boozurk_setopt_admin_notice' );
 }
+
+if ( ( $boozurk_opt['boozurk_logo_login'] == 1 ) && ( $boozurk_opt['boozurk_logo'] != '' ) ) {
+	add_action( 'login_footer', 'boozurk_login_footer' );
+	add_action( 'login_head', 'boozurk_login_head' );
+}
+
 
 if ( !function_exists( 'boozurk_widget_area_init' ) ) {
 	function boozurk_widget_area_init() {
@@ -572,6 +580,30 @@ if (!function_exists('boozurk_search_reminder')) {
 			<?php }
 			echo '</div>';
 		}
+	}
+}
+
+// the last commenters of a post
+if ( !function_exists( 'boozurk_last_comments' ) ) {
+	function boozurk_last_comments( $id , $num = 5 ) {
+		global $boozurk_opt;
+		$comments = get_comments( 'status=approve&number=' . $num . '&type=comment&post_id=' . $id ); // valid type values (not documented) : 'pingback','trackback','comment'
+		if ( $comments ) { ?>
+			<div class="bz-last-cop fixfloat">
+				<span class="item"><?php _e('last comments','boozurk'); ?> : </span>
+				<?php foreach ( $comments as $comment ) { ?>
+					<div class="item">
+						<?php echo get_avatar( $comment, 32, $default=get_option('avatar_default'), $comment->comment_author );?>
+						<div class="bz-tooltip"><div class="bz-tooltip-inner">
+							<?php echo $comment->comment_author; ?>
+							<br/><br/>
+							<?php comment_excerpt( $comment->comment_ID ); ?>
+						</div></div>
+					</div>
+				<?php } ?>
+				<div class="fixfloat"></div>
+			</div>
+		<?php }
 	}
 }
 
@@ -1165,11 +1197,10 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 			<div class="icon32" id="icon-themes"><br></div>
 			<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
 			<ul id="bz-tabselector" class="hide-if-no-js">
-				<li id="bz-selgroup-quickbar"><a href="#" onClick="boozurkSwitchTab.set('quickbar'); return false;"><?php _e( 'Quickbar' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-content"><a href="#" onClick="boozurkSwitchTab.set('content'); return false;"><?php _e( 'Content' , 'boozurk' ); ?></a></li>
-				<li id="bz-selgroup-postinfo"><a href="#" onClick="boozurkSwitchTab.set('postinfo'); return false;"><?php _e( 'Post/Page details' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-postformats"><a href="#" onClick="boozurkSwitchTab.set('postformats'); return false;"><?php _e( 'Post formats' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-sidebar"><a href="#" onClick="boozurkSwitchTab.set('sidebar'); return false;"><?php _e( 'Sidebar' , 'boozurk' ); ?></a></li>
+				<li id="bz-selgroup-widgets"><a href="#" onClick="boozurkSwitchTab.set('widgets'); return false;"><?php _e( 'Widgets' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-javascript"><a href="#" onClick="boozurkSwitchTab.set('javascript'); return false;"><?php _e( 'Javascript' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-other"><a href="#" onClick="boozurkSwitchTab.set('other'); return false;"><?php _e( 'Other' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-colors"><a href="#" onClick="boozurkSwitchTab.set('colors'); return false;"><?php _e( 'Colors' , 'boozurk' ); ?></a></li>
@@ -1182,70 +1213,36 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 			<div id="tabs-container">
 				<div class="clear"></div>
 				<div id="boozurk-options">
-					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','boozurk' ); ?><h2>
+					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','boozurk' ); ?></h2>
 					<form method="post" action="options.php">
 						<?php settings_fields( 'bz_settings_group' ); ?>
 						<div id="stylediv">
-							<table style="border-collapse: collapse; width: 100%;border-bottom: 2px groove #fff;">
-								<tr style="border-bottom: 2px groove #fff;">
-									<th class="column-nam"><?php _e( 'name' , 'boozurk' ); ?></th>
-									<th class="column-chk"><?php _e( 'status' , 'boozurk' ); ?></th>
-									<th class="column-des"><?php _e( 'description' , 'boozurk' ); ?></th>
-									<th class="column-req"><?php _e( 'require' , 'boozurk' ); ?></th>
-								</tr>
 							<?php foreach ($boozurk_coa as $key => $val) { ?>
+								<div class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?>">
+									<span class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></span>
 								<?php if ( $boozurk_coa[$key]['type'] == 'chk' ) { ?>
-									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?>">
-										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
-										<td class="column-chk">
-											<input name="boozurk_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $boozurk_opt[$key] ); ?> />
-										</td>
-										<td class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></td>
-										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
-									</tr>
+										<input name="boozurk_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $boozurk_opt[$key] ); ?> />
+										<?php if ( $boozurk_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $boozurk_coa[$key]['type'] == 'sel' ) { ?>
-									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?>">
-										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
-										<td class="column-chk">
-											<select name="boozurk_options[<?php echo $key; ?>]">
-											<?php foreach($boozurk_coa[$key]['options'] as $option) { ?>
-												<option value="<?php echo $option; ?>" <?php selected( $boozurk_opt[$key], $option ); ?>><?php echo $option; ?></option>
-											<?php } ?>
-											</select>
-										</td>
-										<td class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></td>
-										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
-									</tr>
+										<select name="boozurk_options[<?php echo $key; ?>]">
+										<?php foreach($boozurk_coa[$key]['options'] as $option) { ?>
+											<option value="<?php echo $option; ?>" <?php selected( $boozurk_opt[$key], $option ); ?>><?php echo $option; ?></option>
+										<?php } ?>
+										</select>
+										<?php if ( $boozurk_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $boozurk_coa[$key]['type'] == 'url' ) { ?>
-									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?>">
-										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
-										<td class="column-chk">
-											<input class="bz_text" id="bz_text_<?php echo $key; ?>" type="text" name="boozurk_options[<?php echo $key; ?>]" value="<?php echo $boozurk_opt[$key]; ?>" />
-										</td>
-										<td class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></td>
-										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
-									</tr>
+										<input class="bz_text" id="bz_text_<?php echo $key; ?>" type="text" name="boozurk_options[<?php echo $key; ?>]" value="<?php echo $boozurk_opt[$key]; ?>" />
+										<?php if ( $boozurk_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $boozurk_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $boozurk_coa[$key]['type'] == 'col' ) { ?>
-									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?> hide-if-no-js">
-										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
-										<td class="column-chk">
-											<div style="position:relative; display: block;">
-												<input onclick="showMeColorPicker('<?php echo $key; ?>');" style="background-color:<?php echo $boozurk_opt[$key]; ?>;" class="color_preview_box" type="text" id="bz_box_<?php echo $key; ?>" value="" readonly="readonly" />
-												<div class="bz_cp" id="bz_colorpicker_<?php echo $key; ?>"></div>
-											</div>
-										</td>
-										<td class="column-des">
+										<div class="bz-col-tools">
+											<input onclick="showMeColorPicker('<?php echo $key; ?>');" style="background-color:<?php echo $boozurk_opt[$key]; ?>;" class="color_preview_box" type="text" id="bz_box_<?php echo $key; ?>" value="" readonly="readonly" />
+											<div class="bz_cp" id="bz_colorpicker_<?php echo $key; ?>"></div>
 											<input class="bz_input" id="bz_input_<?php echo $key; ?>" type="text" name="boozurk_options[<?php echo $key; ?>]" value="<?php echo $boozurk_opt[$key]; ?>" />
 											<a class="hide-if-no-js" href="#" onclick="showMeColorPicker('<?php echo $key; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>&nbsp;-&nbsp;
 											<a class="hide-if-no-js" style="color:<?php echo $boozurk_coa[$key]['default']; ?>;" href="#" onclick="pickColor('<?php echo $key; ?>','<?php echo $boozurk_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
-										</td>
-										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
-									</tr>
+										</div>
 								<?php } elseif ( $boozurk_coa[$key]['type'] == 'catcol' ) { ?>
-									<tr class="bz-tab-opt bz-tabgroup-<?php echo $boozurk_coa[$key]['group']; ?> hide-if-no-js">
-										<td class="column-nam"><?php echo $boozurk_coa[$key]['description']; ?></td>
-										<td class="column-chk"></td>
-										<td class="column-des">
+										<div>
 										<?php
 											$args=array(
 												'orderby' => 'name',
@@ -1255,8 +1252,8 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											foreach($categories as $category) {
 												$catcolor = isset($boozurk_opt[$key][$category->term_id]) ? $boozurk_opt[$key][$category->term_id] : $boozurk_coa[$key]['default'];
 										?>
-											<div style="position:relative; display: block;">
-												<?php echo $category->name; ?>
+											<?php echo $category->name; ?>
+											<div class="bz-col-tools">
 												<input onclick="showMeColorPicker('<?php echo $key.'-'.$category->term_id; ?>');" style="background-color:<?php echo $catcolor; ?>;" class="color_preview_box" type="text" id="bz_box_<?php echo $key.'-'.$category->term_id; ?>" value="" readonly="readonly" />
 												<div class="bz_cp" id="bz_colorpicker_<?php echo $key.'-'.$category->term_id; ?>"></div>
 												<input class="bz_input" id="bz_input_<?php echo $key.'-'.$category->term_id; ?>" type="text" name="boozurk_options[<?php echo $key; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" />
@@ -1265,12 +1262,11 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											</div>
 										<?php }	?>
 										
-										</td>
-										<td class="column-req"><?php if ( $boozurk_coa[$key]['req'] != '' ) echo $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></td>
-									</tr>
+										</div>
 								<?php }	?>
+									<?php if ( $boozurk_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','boozurk') . '</u>: ' . $boozurk_coa[$boozurk_coa[$key]['req']]['description']; ?></div><?php } ?>
+								</div>
 							<?php }	?>
-							</table>
 						</div>
 						<p>
 							<input type="hidden" name="boozurk_options[hidden_opt]" value="default" />
@@ -1527,6 +1523,44 @@ function boozurk_post_expander_activate ( ) {
 	if ( isset( $_POST["bz_post_expander"] ) ) {
 		add_action( 'wp', 'boozurk_post_expander_show_post' );
 	}
+}
+
+function boozurk_login_footer() {
+	global $boozurk_opt;
+	?>	
+<script type="text/javascript">
+	/* <![CDATA[ */
+		div = document.createElement('div');
+		div.id = 'bz-logo';
+		div.innerHTML = '<a href="<?php echo get_bloginfo('url'); ?>"><img src="<?php echo $boozurk_opt['boozurk_logo']; ?>" alt="logo" title="<?php echo get_bloginfo('description'); ?>" /></a>';
+		d = document.getElementById('login');
+		first = d.firstChild;
+		d.insertBefore(div,first);
+	/* ]]> */
+</script>
+	<?php 
+}
+
+function boozurk_login_head() {
+	?>	
+<style type="text/css">
+	#backtoblog,
+	#login h1 {
+		display: none;
+	}
+	#login {
+		margin-top: 20px;
+	}
+	#bz-logo img {
+		border: none;
+		margin: 0 0 16px 8px;
+		max-width: 312px;
+	}
+	#bz-logo {
+		text-align: center;
+	}
+</style>
+	<?php 
 }
 
 

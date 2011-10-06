@@ -1,9 +1,9 @@
 /*
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
-Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.2 full compatible.
-Version: 0.1
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
+Description: this is Boozurk!
+Version: 0.2
+Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -256,7 +256,7 @@ input[type=reset]:hover {
 }
 #posts_content {
 }
-#sidebardx {
+#sidebarsx {
     width: 250px;
     left: 0;
     position: absolute;
@@ -360,6 +360,7 @@ input[type=reset]:hover {
 	border-top: 1px solid #ddd;
 	text-align: center;
     margin-top: 20px;
+	padding:5px 0;
 }
 #bz-page-nav {
     border-bottom: 1px solid #ddd;
@@ -401,6 +402,44 @@ input[type=reset]:hover {
 .bz-logo {
 	max-width: 200px;
 	height: auto;
+}
+.bz-last-cop {
+    border-top: 1px solid #ddd;
+}
+.bz-last-cop img {
+	border: 1px solid #ddd;
+	margin: 4px;
+	padding: 4px;
+}
+.bz-last-cop .item {
+	float: left;
+}
+.bz-last-cop .bz-tooltip {
+	position: absolute;
+	display: none;
+	padding: 5px;
+	width: 200px;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+	z-index: 300;
+	background: transparent url(images/tipsy.gif) -225px top no-repeat;
+	font-size: 11px;
+}
+.item:hover .bz-tooltip {
+	display: block;
+}
+.bz-tooltip:hover {
+	display: none;
+}
+.bz-last-cop .bz-tooltip-inner {
+	background: #000;
+	color: #fff;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 5px;
+	box-shadow:0 0 3px #000;
 }
 
 /* Posts (by format)
@@ -486,7 +525,9 @@ div.bz_Widget_post_details ul {
 .widget .cat-item  a, #posts_content .cat-item a {
 	padding-left: 5px;
 }
-
+.bz-social-icon {
+	display: inline-block;
+}
 /* Post Format icons
 ----------------------------------------------------------*/
 
@@ -664,18 +705,19 @@ img.bz-thumb-format {
 
 .tipsy {
 	padding: 5px;
-	font-size: 10px;
+	font-size: 11px;
 	opacity: 0.8;
 	filter: alpha(opacity=80);
 	background-repeat: no-repeat;
 	background-image: url(images/tipsy.gif);
 }
 .tipsy-inner {
-	padding: 5px 8px 4px 8px;
+	padding: 5px;
 	background-color: black;
 	color: white;
 	max-width: 200px;
 	text-align: center;
+	box-shadow:0 0 3px #000;
 }
 .tipsy-inner {
 	-moz-border-radius:3px;
@@ -732,7 +774,7 @@ img.bz-thumb-format {
 	white-space: pre;
 	z-index: 300;
 	padding: 5px;
-	font-size: 10px;
+	font-size: 11px;
 	opacity: 0.8;
 	filter: alpha(opacity=80);
 /* 	background-repeat: no-repeat;
@@ -746,6 +788,7 @@ img.bz-thumb-format {
 	padding: 5px 8px 4px 8px;
 	background-color: black;
 	color: white;
+	box-shadow:0 0 3px #000;
 }
 .nb_tooltip {
 	background-position: -230px top;

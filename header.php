@@ -25,7 +25,7 @@
 		<div id="content">
 			<div id="pages">
 				<div id="pages_c">
-					<?php if ( isset( $boozurk_opt['boozurk_logo'] ) && ( $boozurk_opt['boozurk_logo'] != '' ) ) echo '<img class="bz-logo" alt="logo" src="' . $boozurk_opt['boozurk_logo'] . '" />'?>
+					<?php if ( isset( $boozurk_opt['boozurk_logo'] ) && ( $boozurk_opt['boozurk_logo'] != '' ) ) echo '<img class="bz-logo" alt="logo" src="' . $boozurk_opt['boozurk_logo'] . '" />';?>
 					<div class="bz-description"><?php bloginfo( 'description' ); ?></div>
 					<?php get_sidebar( 'fixed' ); // show header widgets area ?>
 				</div>
