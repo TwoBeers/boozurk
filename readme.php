@@ -1,6 +1,6 @@
 <h3>Boozurk - WordPress theme</h3>
 	<ul>
-		<li>version: 0.1</li>
+		<li>version: 0.3</li>
 	</ul>
  
 <h3>Project page:</h3>

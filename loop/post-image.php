@@ -23,4 +23,5 @@
 		}
 	?>
 	<div class="fixfloat"> </div>
+	<?php boozurk_last_comments( get_the_ID() ); ?>
 </div>

@@ -10,6 +10,7 @@ add_action( 'widgets_init', 'boozurk_widget_area_init' );
 add_action( 'wp_print_styles', 'boozurk_stylesheet' );
 add_action( 'wp_head', 'boozurk_custom_style' );
 add_action( 'wp_head', 'boozurk_localize_js' );
+add_action( 'wp_footer', 'boozurk_initialize_scripts' );
 // Add js animations
 add_action( 'template_redirect', 'boozurk_scripts' );
 // Add custom category page
@@ -31,9 +32,29 @@ $boozurk_opt = get_option( 'boozurk_options' );
 
 // check if is mobile browser
 $bz_is_mobile_browser = boozurk_mobile_device_detect();
-
 function boozurk_mobile_device_detect() {
 	global $boozurk_opt;
+	
+	// #1 check: mobile support is off (via options)
+	if ( ( isset( $boozurk_opt['boozurk_mobile_css'] ) && ( $boozurk_opt['boozurk_mobile_css'] == 0) ) ) return false;
+	
+	// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set/deleted
+	if ( isset( $_GET['mobile_override'] ) ) {
+		if ( $_GET['mobile_override'] == 'mobile' ) {
+			setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12) );
+			return true;
+		} else {
+			setcookie( "mobile_override", "desktop", time()-3600 );
+			return false;
+		}
+	}
+	
+	// #3 check: the cookie is already set
+	if (isset($_COOKIE["mobile_override"])) {
+		return true;
+	}
+	
+	// #4 check: search for a mobile user agent
 	if ( !isset($_SERVER['HTTP_USER_AGENT']) ) return false;
 	$user_agent = $_SERVER['HTTP_USER_AGENT'];
     if ( ( !isset( $boozurk_opt['boozurk_mobile_css'] ) || ( $boozurk_opt['boozurk_mobile_css'] == 1) ) && preg_match( '/(ipad|ipod|iphone|android|opera mini|blackberry|palm|symbian|palm os|palm|hiptop|avantgo|plucker|xiino|blazer|elaine|iris|3g_t|windows ce|opera mobi|windows ce; smartphone;|windows ce; iemobile|mini 9.5|vx1000|lge |m800|e860|u940|ux840|compal|wireless| mobi|ahong|lg380|lgku|lgu900|lg210|lg47|lg920|lg840|lg370|sam-r|mg50|s55|g83|t66|vx400|mk99|d615|d763|el370|sl900|mp500|samu3|samu4|vx10|xda_|samu5|samu6|samu7|samu9|a615|b832|m881|s920|n210|s700|c-810|_h797|mob-x|sk16d|848b|mowser|s580|r800|471x|v120|rim8|c500foma:|160x|x160|480x|x640|t503|w839|i250|sprint|w398samr810|m5252|c7100|mt126|x225|s5330|s820|htil-g1|fly v71|s302|-x113|novarra|k610i|-three|8325rc|8352rc|sanyo|vx54|c888|nx250|n120|mtk |c5588|s710|t880|c5005|i;458x|p404i|s210|c5100|teleca|s940|c500|s590|foma|samsu|vx8|vx9|a1000|_mms|myx|a700|gu1100|bc831|e300|ems100|me701|me702m-three|sd588|s800|8325rc|ac831|mw200|brew |d88|htc\/|htc_touch|355x|m50|km100|d736|p-9521|telco|sl74|ktouch|m4u\/|me702|8325rc|kddi|phone|lg |sonyericsson|samsung|240x|x320|vx10|nokia|sony cmd|motorola|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo)/i' , $user_agent ) ) { // there were other words for mobile detecting but this is enought ;-)
@@ -42,18 +63,6 @@ function boozurk_mobile_device_detect() {
 		return false;
 	}
 }
-
-// check if is ie6
-$bz_is_ie6 = boozurk_ie6_detect();
-
-function boozurk_ie6_detect() {
-if ( isset($_SERVER['HTTP_USER_AGENT']) && ( strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !== false ) && !( strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== false ) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
@@ -68,29 +77,27 @@ if ( ! isset( $content_width ) ) {
 function boozurk_get_coa() {
 	$boozurk_coa = array(
 		'boozurk_jsani' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','boozurk' ),'info'=>__( 'try disable animations if you encountered problems with javascript','boozurk' ),'req'=>'' ),
-		'boozurk_sidebar_head_split' => array( 'group' =>'sidebar', 'type' =>'sel', 'default'=>'3', 'options'=>array('1','2','3'), 'description'=>__( 'split Header widget area','boozurk' ),'info'=>__( 'number of widget that can stay in the widget area side by side','boozurk' ),'req'=>'' ),
-		'boozurk_sidebar_single_split' => array( 'group' =>'sidebar', 'type' =>'sel', 'default'=>'1', 'options'=>array('1','2','3'), 'description'=>__( 'split Post widget area','boozurk' ),'info'=>__( 'number of widget that can stay in the widget area side by side','boozurk' ),'req'=>'' ),
-		'boozurk_sidebar_foot_1_width' => array( 'group' =>'sidebar', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #1','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
-		'boozurk_sidebar_foot_2_width' => array( 'group' =>'sidebar', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #2','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
-		'boozurk_sidebar_foot_3_width' => array( 'group' =>'sidebar', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #3','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
-		'boozurk_share_this' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'share this content','boozurk' ),'info'=>__( 'show share links after the post content','boozurk' ),'req'=>'' ),
-		'boozurk_exif_info' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'images informations', 'boozurk' ),'info'=>__( 'show EXIF informations on image attachments', 'boozurk' ),'req'=>'' ),
+		'boozurk_js_gallery' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'gallery preview','boozurk' ),'info'=>__( 'load gallery images on fly','boozurk' ),'req'=>'boozurk_jsani' ),
+		'boozurk_js_post_expander' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'post expander','boozurk' ),'info'=>__( 'expands a post to show the full content when the reader clicks the "Read more..." link','boozurk' ),'req'=>'boozurk_jsani' ),
+		'boozurk_js_tooltips' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'cool tooltips','boozurk' ),'info'=>__( 'replace link titles with cool tooltips','boozurk' ),'req'=>'boozurk_jsani' ),
+		'boozurk_sidebar_head_split' => array( 'group' =>'widgets', 'type' =>'sel', 'default'=>'3', 'options'=>array('1','2','3'), 'description'=>__( 'split Header widget area','boozurk' ),'info'=>__( 'number of widget that can stay in the widget area side by side','boozurk' ),'req'=>'' ),
+		'boozurk_sidebar_single_split' => array( 'group' =>'widgets', 'type' =>'sel', 'default'=>'1', 'options'=>array('1','2','3'), 'description'=>__( 'split Post widget area','boozurk' ),'info'=>__( 'number of widget that can stay in the widget area side by side','boozurk' ),'req'=>'' ),
+		'boozurk_sidebar_foot_1_width' => array( 'group' =>'widgets', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #1','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
+		'boozurk_sidebar_foot_2_width' => array( 'group' =>'widgets', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #2','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
+		'boozurk_sidebar_foot_3_width' => array( 'group' =>'widgets', 'type' =>'sel', 'default'=>'33%', 'options'=>array('100%','50%','33%'), 'description'=>__( 'footer widget area #3','boozurk' ),'info'=>__( 'width of the widget area','boozurk' ),'req'=>'' ),
+		'boozurk_custom_widgets' => array( 'group' =>'widgets', 'type' =>'chk', 'default'=>1, 'description'=>__( 'custom widgets','boozurk' ),'info'=>__( 'add a lot of new usefull widgets','boozurk' ),'req'=>'' ),
 		'boozurk_colors_link' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#D2691E','description'=>__( 'links','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_colors_link_hover' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#FF4500','description'=>__( 'highlighted links','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_colors_link_sel' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#CCCCCC','description'=>__( 'selected links','boozurk' ),'info'=>'','req'=>'' ),
-
 		'boozurk_cat_colors' => array( 'group' =>'colors', 'type' =>'catcol', 'default'=>'#87CEEB','description'=>__( 'colors for categories','boozurk' ),'info'=>'','req'=>'' ),
-
-		'boozurk_cust_comrep' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','boozurk' ),'info'=>__( 'custom floating form for post/reply comments','boozurk' ),'req'=>'boozurk_jsani' ),
-		'boozurk_editor_style' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'editor style', 'boozurk' ),'info'=>__( "add style to the editor in order to write the post exactly how it will appear on the site", 'boozurk' ),'req'=>'' ),
-		'boozurk_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','boozurk' ),'info'=>__( 'use a dedicated style in mobile devices','boozurk' ),'req'=>'' ),
 		'boozurk_font_family' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'monospace', 'options'=>array('monospace','Arial, sans-serif','Helvetica, sans-serif','Comic Sans MS, cursive','Courier New, monospace','Georgia, serif','Lucida Console, Monaco, monospace','Lucida Sans Unicode, Lucida Grande, sans-serif','Palatino Linotype, Book Antiqua, Palatino, serif','Tahoma, Geneva, sans-serif','Times New Roman, Times, serif','Trebuchet MS, sans-serif','Verdana, Geneva, sans-serif'), 'description'=>__( 'font family','boozurk' ),'info'=>'','req'=>'' ),
 		'boozurk_font_size' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'11px', 'options'=>array('10px','11px','12px','13px','14px','15px','16px'), 'description'=>__( 'font size','boozurk' ),'info'=>'','req'=>'' ),
-		'boozurk_main_menu' => array( 'group' =>'other', 'type' =>'sel', 'default'=>__('text','boozurk'), 'options'=>array( __('text','boozurk'), __('thumbnail','boozurk'), __('thumbnail and text','boozurk') ), 'description'=>__( 'main menu look','boozurk' ),'info'=>'','req'=>'' ),
-		'boozurk_main_menu_icon_size' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'48', 'options'=>array ('32', '48', '64', '96'), 'description'=>__( 'main menu icon size','boozurk' ),'info'=>'','req'=>'' ),
-		'boozurk_logo' => array( 'group' =>'other', 'type' =>'url', 'default'=>'','description'=>__( 'Logo','boozurk' ),'info'=>'','req'=>'' ),
-		'boozurk_logo_login' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'Logo in login page','boozurk' ),'info'=>'','req'=>'' ),
-		
+		'boozurk_logo' => array( 'group' =>'other', 'type' =>'url', 'default'=>'','description'=>__( 'Logo','boozurk' ),'info'=>'a logo in the upper right corner of the window. paste here the complete path to image location','req'=>'' ),
+		'boozurk_logo_login' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'Logo in login page','boozurk' ),'info'=>'use the logo in the login page','req'=>'' ),
+		'boozurk_main_menu' => array( 'group' =>'other', 'type' =>'sel', 'default'=>__('text','boozurk'), 'options'=>array( __('text','boozurk'), __('thumbnail','boozurk'), __('thumbnail and text','boozurk') ), 'description'=>__( 'main menu look','boozurk' ),'info'=>'select the style of the main menu: text, thumbnails or both','req'=>'' ),
+		'boozurk_main_menu_icon_size' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'48', 'options'=>array ('32', '48', '64', '96'), 'description'=>__( 'main menu icon size','boozurk' ),'info'=>'the dimension of the thumbnails in main menu (if "thumbnails" style is selected)','req'=>'' ),
+		'boozurk_editor_style' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'editor style', 'boozurk' ),'info'=>__( "add style to the editor in order to write the post exactly how it will appear on the site", 'boozurk' ),'req'=>'' ),
+		'boozurk_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','boozurk' ),'info'=>__( 'use a dedicated style in mobile devices','boozurk' ),'req'=>'' ),
 		'boozurk_post_formats' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support','boozurk' ),'info'=>__('','boozurk' ),'req'=>'' ),
 		'boozurk_post_formats_gallery' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "gallery" format','boozurk' ),'info'=>__( '','boozurk' ),'req'=>'boozurk_post_formats' ),
 		'boozurk_post_formats_aside' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "aside" format','boozurk' ),'info'=>__( '','boozurk' ),'req'=>'boozurk_post_formats' ),
@@ -230,7 +237,7 @@ if ( !function_exists( 'boozurk_widget_area_init' ) ) {
 		) );
 		// Area 7, located after the post body.
 		register_sidebar( array(
-			'name' => __( 'Post sidebar', 'boozurk' ),
+			'name' => __( 'Post Widget Area', 'boozurk' ),
 			'id' => 'single-widgets-area',
 			'description' => __( 'a widget area located after the post body', 'boozurk' ),
 			'before_widget' => '<div class="bz-widget"><div id="%1$s" class="widget %2$s">',
@@ -316,6 +323,26 @@ if ( !function_exists( 'boozurk_localize_js' ) ) {
 	}
 }
 
+// initialize js
+if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
+	function boozurk_initialize_scripts() {
+		global $boozurk_opt;
+		if ( $boozurk_opt['boozurk_jsani'] == 0 ) return;
+		?>
+<script type="text/javascript">
+	/* <![CDATA[ */
+	jQuery(document).ready(function($){
+		$('#mainmenu').animate_menu();
+		<?php if ( $boozurk_opt['boozurk_js_post_expander'] == 1 ) { ?>$('a.more-link').postexpander();<?php } ?>
+		<?php if ( $boozurk_opt['boozurk_js_gallery'] == 1 ) { ?>$('.storycontent .gallery').gallery_slider();<?php } ?>
+		<?php if ( $boozurk_opt['boozurk_js_tooltips'] == 1 ) { ?>$('.bz_widget_latest_commentators li,.bz-widget-social a,.post-format-item.compact img,.pmb_comm').tipsy();<?php } ?>
+	});
+	/* ]]> */
+</script>
+		<?php
+	}
+}
+
 // Add stylesheets to page
 if ( !function_exists( 'boozurk_stylesheet' ) ) {
 	function boozurk_stylesheet(){
@@ -335,15 +362,8 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 	function boozurk_scripts(){
 		global $boozurk_opt, $boozurk_version, $bz_is_mobile_browser;
 		if ( $bz_is_mobile_browser ) return; //no scripts in print preview or mobile view
-		if ( is_singular() ) {
-			if ( $boozurk_opt['boozurk_cust_comrep'] == 1 ) {
-				wp_enqueue_script( 'bz-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $boozurk_version, false   ); //custom comment-reply pop-up box
-			} else {
-				wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
-			}
-		}
-		wp_enqueue_script( 'bz-js', get_template_directory_uri() . '/js/boozurk.dev.js', array( 'jquery' ), $boozurk_version, true   );
-		//wp_enqueue_script( 'bz-tipsy', get_template_directory_uri() . '/js/jquery.tipsy.js', array( 'jquery' ), $boozurk_version, true   ); //tipsy
+		if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
+		if ( $boozurk_opt['boozurk_jsani'] == 1 ) wp_enqueue_script( 'bz-js', get_template_directory_uri() . '/js/boozurk.dev.js', array( 'jquery' ), $boozurk_version, true   );
 	}
 }
 
@@ -402,24 +422,15 @@ if ( !function_exists( 'boozurk_multipages' ) ) {
 			'numberposts' => 0
 			);
 		$childrens = get_posts( $args ); // retrieve the child pages
-		$the_parent_page = $post->post_parent; // retrieve the parent page
 		$has_herarchy = false;
-
-		if ( ( $childrens ) || ( $the_parent_page ) ) {
-			if ( $the_parent_page ) {
-				$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . get_the_title( $the_parent_page ) . '">' . get_the_title( $the_parent_page ) . '</a>';
-				echo __('Upper page','boozurk'). ': ' . $the_parent_link ; // echoes the parent
+		if ( $childrens ) {
+			$the_child_list = '';
+			foreach ($childrens as $children) {
+				$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
 			}
-			if ( ( $childrens ) && ( $the_parent_page ) ) { echo '</br>'; } // if parent & child, echoes the separator
-			if ( $childrens ) {
-				$the_child_list = '';
-				foreach ($childrens as $children) {
-					$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
-				}
-				$the_child_list = implode(', ' , $the_child_list);
-				echo __('Lower pages','boozurk'). ': ' . $the_child_list; // echoes the childs
-			}
-		$has_herarchy = true;
+			$the_child_list = implode(' | ' , $the_child_list);
+			echo '<div class="bz-breadcrumb-reminder"><span class="bz-breadcrumb-childs">&nbsp;</span>' . $the_child_list . '</div>'; // echoes the childs
+			$has_herarchy = true;
 		}
 		return $has_herarchy;
 	}
@@ -428,7 +439,6 @@ if ( !function_exists( 'boozurk_multipages' ) ) {
 // print extra info for posts/pages
 if ( !function_exists( 'boozurk_extrainfo' ) ) {
 	function boozurk_extrainfo( $comm = true ) {
-		global $boozurk_opt;
 		// extra info management
 
 		?>
@@ -448,7 +458,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 // print extra info for posts/pages
 if ( !function_exists( 'boozurk_post_details' ) ) {
 	function boozurk_post_details( $auth, $date, $tags, $cats, $hiera = false, $av_size = 48 ) {
-		global $post, $boozurk_opt;
+		global $post;
 		?>
 			<?php if ( $auth ) {
 				$author = $post->post_author;
@@ -475,43 +485,42 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 			<?php if ( $cats ) { echo __( 'Categories', 'boozurk' ) . ': '; the_category( ', ' ); echo '<br/>'; } ?>
 			<?php if ( $tags ) { echo __( 'Tags', 'boozurk' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'boozurk' ); } else { the_tags('', ', ', ''); } echo '<br/>'; } ?>
 			<?php if ( $date ) { printf( __( 'Published on : <b>%1$s</b>', 'boozurk' ), get_the_time( get_option( 'date_format' ) ) ); echo '<br/>'; } ?>
-			<?php if ( $hiera ) { boozurk_multipages(); echo '<br/>'; } ?>
 		<?php
 	}
 }
 
 //add share links to post/page
 if ( !function_exists( 'boozurk_share_this' ) ) {
-	function boozurk_share_this(){
-		global $post, $boozurk_opt;
-		if ( $boozurk_opt['boozurk_share_this'] == 1 ) { ?>
+	function boozurk_share_this( $icon_size = 24 ){
+		global $post;
+		?>
 		   <div class="article-share fixfloat">
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://twitter.com/share?url=<?php echo get_permalink(); ?>&amp;text=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Twitter.png" width="24" height="24" alt="Twitter Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Twitter' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://twitter.com/share?url=<?php echo get_permalink(); ?>&amp;text=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Twitter.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Twitter Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Twitter' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://digg.com/submit?url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Digg.png" width="24" height="24" alt="Digg Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Digg' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://digg.com/submit?url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Digg.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Digg Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Digg' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/StumbleUpon.png" width="24" height="24" alt="StumbleUpon Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'StumbleUpon' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/StumbleUpon.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="StumbleUpon Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'StumbleUpon' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo get_permalink(); ?>&amp;t=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Facebook.png" width="24" height="24" alt="Facebook Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Facebook' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo get_permalink(); ?>&amp;t=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Facebook.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Facebook Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Facebook' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://reddit.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Reddit.png" width="24" height="24" alt="Reddit Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Reddit' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://reddit.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Reddit.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Reddit Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Reddit' ); ?>" /></a>
 				</span>		
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://www.google.com/reader/link?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Buzz.png" width="24" height="24" alt="Buzz Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Buzz' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.google.com/reader/link?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Buzz.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Buzz Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Buzz' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="24" height="24" alt="Sina Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Sina' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Sina Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Sina' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="24" height="24" alt="Tencent Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Tencent' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="<?php echo $icon_size; ?>" height="<?php echo $icon_size; ?>" alt="Tencent Button" title="<?php printf( __( 'Share with %s','boozurk' ), 'Tencent' ); ?>" /></a>
 				</span>
 			</div>
-		<?php }
+		<?php
 	}
 }
 
@@ -579,6 +588,8 @@ if (!function_exists('boozurk_search_reminder')) {
 				</div><!-- #entry-author-info -->
 			<?php }
 			echo '</div>';
+		} elseif ( is_page() ) {
+			boozurk_multipages();
 		}
 	}
 }
@@ -590,7 +601,8 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 		$comments = get_comments( 'status=approve&number=' . $num . '&type=comment&post_id=' . $id ); // valid type values (not documented) : 'pingback','trackback','comment'
 		if ( $comments ) { ?>
 			<div class="bz-last-cop fixfloat">
-				<span class="item"><?php _e('last comments','boozurk'); ?> : </span>
+				<span class="item-label"><?php _e('last comments','boozurk'); ?></span>
+				<span class="bz-breadcrumb-sep item-label">&nbsp;</span>
 				<?php foreach ( $comments as $comment ) { ?>
 					<div class="item">
 						<?php echo get_avatar( $comment, 32, $default=get_option('avatar_default'), $comment->comment_author );?>
@@ -798,7 +810,7 @@ if (!function_exists('boozurk_navbuttons')) {
 
 		<?php if ( $comment ) { // ------- Leave a comment ------- ?>
 			<div class="minibutton">
-				<a href="#respond" title="<?php _e( 'Leave a comment','boozurk' ); ?>"<?php if ( $boozurk_opt['boozurk_cust_comrep'] == 1 ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
+				<a href="#respond" title="<?php _e( 'Leave a comment','boozurk' ); ?>">
 					<span class="minib_img minib_comment">&nbsp;</span>
 				</a>
 				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Leave a comment','boozurk' ); ?></div></div>
@@ -1197,13 +1209,11 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 			<div class="icon32" id="icon-themes"><br></div>
 			<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
 			<ul id="bz-tabselector" class="hide-if-no-js">
-				<li id="bz-selgroup-content"><a href="#" onClick="boozurkSwitchTab.set('content'); return false;"><?php _e( 'Content' , 'boozurk' ); ?></a></li>
+				<li id="bz-selgroup-colors"><a href="#" onClick="boozurkSwitchTab.set('colors'); return false;"><?php _e( 'Colors' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-postformats"><a href="#" onClick="boozurkSwitchTab.set('postformats'); return false;"><?php _e( 'Post formats' , 'boozurk' ); ?></a></li>
-				<li id="bz-selgroup-sidebar"><a href="#" onClick="boozurkSwitchTab.set('sidebar'); return false;"><?php _e( 'Sidebar' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-widgets"><a href="#" onClick="boozurkSwitchTab.set('widgets'); return false;"><?php _e( 'Widgets' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-javascript"><a href="#" onClick="boozurkSwitchTab.set('javascript'); return false;"><?php _e( 'Javascript' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-other"><a href="#" onClick="boozurkSwitchTab.set('other'); return false;"><?php _e( 'Other' , 'boozurk' ); ?></a></li>
-				<li id="bz-selgroup-colors"><a href="#" onClick="boozurkSwitchTab.set('colors'); return false;"><?php _e( 'Colors' , 'boozurk' ); ?></a></li>
 				<li id="bz-selgroup-info"><a href="#" onClick="boozurkSwitchTab.set('info'); return false;"><?php _e( 'Theme Info' , 'boozurk' ); ?></a></li>
 			</ul>
 			<ul id="selector" class="hide-if-js">
@@ -1565,7 +1575,7 @@ function boozurk_login_head() {
 
 
 // load the custom widgets module
-get_template_part('lib/widgets');
+if ( $boozurk_opt['boozurk_custom_widgets'] == 1 ) get_template_part('lib/widgets');
 
 // load the custom hooks
 get_template_part('lib/hooks');

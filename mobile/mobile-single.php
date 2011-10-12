@@ -48,9 +48,9 @@
 						<?php if ( ! is_page() ) { ?>
 							<div class="commentmetadata fixfloat">
 								<?php if ( is_attachment() ) { 
-									boozurk_extrainfo();
+									boozurk_post_details( false, false, false, false );
 								} else { 
-									boozurk_extrainfo(); 
+									boozurk_post_details( true, true, true, true, false, 24 ); 
 								} ?>
 							</div>
 						<?php } ?>
@@ -110,17 +110,11 @@
 			</div>
 			<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span><?php _e( 'Pages', 'boozurk' ); ?></span> <a href="#themecredits">&#8744;</a></h2>
 			<?php wp_nav_menu( array( 'menu_class' => 'bz-group', 'menu_id' => 'mainmenu', 'fallback_cb' => 'boozurk_pages_menu_mobile', 'theme_location' => 'primary', 'depth' => 1 ) ); //main menu ?>
-			<?php if ( $boozurk_opt['boozurk_qbar_reccom'] == 1 ) { // recent comments menu ?>
-				<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span><?php _e( 'Recent Comments', 'boozurk' ); ?></span> <a href="#themecredits">&#8744;</a></h2>
-				<ul id="bz-reccom">
-					<?php boozurk_get_recentcomments(); ?>
-				</ul>
-			<?php } ?>
 			<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?></span></h2>
 			<p id="themecredits">
 				<?php if ( $boozurk_opt['boozurk_tbcred'] == 1 ) { ?>
-					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>boozurk</strong></a>. 
-				<?php } ?>
+					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Boozurk</strong></a><?php if ( ( !isset( $boozurk_opt['boozurk_mobile_css'] ) || ( $boozurk_opt['boozurk_mobile_css'] == 1) ) ) echo ' - <a href="' . home_url() . '?mobile_override=desktop">'. __('Switch to Desktop View','boozurk') .'</a>'; ?>
+				<?php } ?><br/>
 				<?php wp_loginout(); wp_register(' | ', ''); ?>
 			</p>
 		</div>

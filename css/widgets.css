@@ -1,24 +1,32 @@
-/* Boozurk v0.1 - Widgets page */
+/* Boozurk - Widgets page */
 
 #primary-widget-area {
+	background: url("../images/widgets/widget_s2.png") no-repeat center 10px transparent;
+	padding-top: 90px;
+}
+#fixed-widget-area {
 	background: url("../images/widgets/widget_s1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+	padding-top: 90px;
 }
 #first-footer-widget-area {
 	background: url("../images/widgets/widget_f1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+	padding-top: 90px;
 }
 #second-footer-widget-area {
 	background: url("../images/widgets/widget_f2.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+	padding-top: 90px;
 }
 #third-footer-widget-area {
 	background: url("../images/widgets/widget_f3.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+	padding-top: 90px;
 }
 #header-widget-area {
 	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+	padding-top: 90px;
+}
+#single-widgets-area {
+	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
+	padding-top: 90px;
 }
 
 div[id*=_bz-] .widget-title {

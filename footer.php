@@ -7,7 +7,7 @@
 				<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 				<?php get_sidebar( 'footer' ); ?>
 
-				<div id="bz-credits">&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','boozurk' ); ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','boozurk' ); ?>">WordPress</a><?php if ( $boozurk_opt['boozurk_tbcred'] == 1 ) { ?> and <a href="http://www.twobeers.net/" title="<?php _e( 'Visit authors homepage','boozurk' ); ?> @ twobeers.net">Boozurk</a><?php } ?></div>
+				<div id="bz-credits">&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','boozurk' ); ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','boozurk' ); ?>">WordPress</a><?php if ( $boozurk_opt['boozurk_tbcred'] == 1 ) { ?> and <a href="http://www.twobeers.net/" title="<?php _e( 'Visit authors homepage','boozurk' ); ?> @ twobeers.net">Boozurk</a><?php } ?><?php if ( ( !isset( $boozurk_opt['boozurk_mobile_css'] ) || ( $boozurk_opt['boozurk_mobile_css'] == 1) ) ) echo ' - <a href="' . home_url() . '?mobile_override=mobile">'. __('Switch to Mobile View','boozurk') .'</a>'; ?></div>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->

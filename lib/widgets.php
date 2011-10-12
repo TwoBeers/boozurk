@@ -1,8 +1,6 @@
 <?php
 
-/**
- * boozurk Widgets
- */
+/* Boozurk - Widgets */
 
 /**
  * Popular_Posts widget class
@@ -425,7 +423,7 @@ class boozurk_Widget_social extends WP_Widget {
 	function boozurk_Widget_social() {
 		$widget_ops = array(
             'classname' => 'bz-widget-social',
-            'description' => __("This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "boozurk"));
+            'description' => __("This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "boozurk"));
 		$control_ops = array('width' => 650);
 
 		$this->WP_Widget("bz-social", __("Follow Me", "boozurk"), $widget_ops, $control_ops);
@@ -459,7 +457,7 @@ class boozurk_Widget_social extends WP_Widget {
 
     function form($instance) {
         $defaults = array("title" => __("Follow Me", "boozurk"),
-            "icon_size" => '48px',
+            "icon_size" => 48,
         );
         foreach ($this->follow_urls as $follow_service ) {
             $defaults[$follow_service."_icon"] = $follow_service;
@@ -477,7 +475,7 @@ class boozurk_Widget_social extends WP_Widget {
         <div style="float: left; width: 40%; margin: 0pt 5%;">
 			<h2>
 				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
+				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
 				<?php echo $follow_service; ?>
 			</h2>
 <?php
@@ -504,10 +502,10 @@ class boozurk_Widget_social extends WP_Widget {
             <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'boozurk'); ?></label><br />
             <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
 <?php
-            $size_array = array ('16px', '24px', '32px', '40px', '50px', '60px');
+            $size_array = array ('16', '24', '32', '48', '64');
             foreach($size_array as $size) {
 ?>
-                <option value="<?php echo $size; ?>" <?php selected( $instance['icon_size'], $size ); ?>><?php echo $size; ?></option>
+                <option value="<?php echo $size; ?>" <?php selected( $instance['icon_size'], $size ); ?>><?php echo $size; ?>px</option>
 <?php
             }
 ?>
@@ -520,7 +518,7 @@ class boozurk_Widget_social extends WP_Widget {
     function update($new_instance, $old_instance) {
         $instance = $old_instance;
         $instance["title"] = strip_tags($new_instance["title"]);
-        $instance["icon_size"] = $new_instance["icon_size"];
+        $instance["icon_size"] = in_array( $new_instance["icon_size"], array ('16', '24', '32', '48', '64') ) ? $new_instance["icon_size"] : '16' ;
 
         foreach ($this->follow_urls as $follow_service ) {
             $instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
@@ -533,7 +531,7 @@ class boozurk_Widget_social extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract($args);
         $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
-		$icon_size = ( isset($instance['icon_size']) ) ? $instance['icon_size'] : '48px';
+		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
         echo $before_widget;
         if (!empty($title)) {
             echo $before_title;
@@ -549,7 +547,7 @@ class boozurk_Widget_social extends WP_Widget {
 			if ($show && !empty($account)) {
 ?>
         <a target="_blank" href="<?php echo $account; ?>" class="bz-social-icon" title="<?php echo $follow_service;?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
+            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
         </a>
 <?php
             }
@@ -846,7 +844,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 class boozurk_Widget_navbuttons extends WP_Widget {
 
 	function boozurk_Widget_navbuttons() {
-		$widget_ops = array('classname' => 'bz_Widget_navbuttons', 'description' => __( 'Navigation buttons','boozurk') );
+		$widget_ops = array('classname' => 'bz_Widget_navbuttons', 'description' => __( 'Some usefull buttons for an easier navigation experience','boozurk') );
 		$this->WP_Widget('bz-navbuttons', __('Navigation buttons','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_navbuttons';
 
@@ -924,7 +922,7 @@ class boozurk_Widget_navbuttons extends WP_Widget {
 class boozurk_Widget_post_details extends WP_Widget {
 
 	function boozurk_Widget_post_details() {
-		$widget_ops = array('classname' => 'bz_Widget_post_details', 'description' => __( 'Post details','boozurk') );
+		$widget_ops = array('classname' => 'bz_Widget_post_details', 'description' => __( 'Show some details and links related to the current post. It\'s visible ONLY in single posts/pages','boozurk') );
 		$this->WP_Widget('bz-post-details', __('Post details','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_post_details';
 
@@ -934,21 +932,21 @@ class boozurk_Widget_post_details extends WP_Widget {
 		if ( !is_singular() ) return;
 		extract($args);
 		
-		if ( is_page() && !$instance['hierarchy'] ) return;
 		if ( !is_page() && !$instance['author'] && !$instance['date'] && !$instance['tags'] && !$instance['categories'] && !$instance['share'] ) return;
+
+		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
+		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
 
 		$title = apply_filters('widget_title', empty($instance['title']) ? __('Post details','boozurk') : $instance['title'], $instance, $this->id_base);
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php if ( is_page() ) {
-			boozurk_post_details(false, false, false, false, $instance['hierarchy']);
-		} elseif ( is_attachment() ) {
+		<?php if ( is_page() || is_attachment() ) {
 			boozurk_post_details(false, false, false, false, false);
 		} else {
-			boozurk_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false );
+			boozurk_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size );
 		} ?>
-		<?php if ( $instance['share'] ) boozurk_share_this(); ?>
+		<?php if ( $instance['share'] ) boozurk_share_this( $icon_size ); ?>
 		<?php echo $after_widget; ?>
 <?php
 	}
@@ -957,11 +955,12 @@ class boozurk_Widget_post_details extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['author'] = (int) $new_instance['author'] ? 1 : 0;
+        $instance["avatar_size"] = in_array( $new_instance["avatar_size"], array ('32', '48', '64', '96', '128') ) ? $new_instance["avatar_size"] : '48' ;
 		$instance['date'] = (int) $new_instance['date'] ? 1 : 0;
 		$instance['tags'] = (int) $new_instance['tags'] ? 1 : 0;
 		$instance['categories'] = (int) $new_instance['categories'] ? 1 : 0;
-		$instance['hierarchy'] = (int) $new_instance['hierarchy'] ? 1 : 0;
 		$instance['share'] = (int) $new_instance['share'] ? 1 : 0;
+        $instance["icon_size"] = in_array( $new_instance["icon_size"], array ('16', '24', '32', '48', '64') ) ? $new_instance["icon_size"] : '16' ;
 
 		return $instance;
 	}
@@ -969,11 +968,12 @@ class boozurk_Widget_post_details extends WP_Widget {
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$author = isset($instance['author']) ? absint($instance['author']) : 1;
+		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
 		$date = isset($instance['date']) ? absint($instance['date']) : 1;
 		$tags = isset($instance['tags']) ? absint($instance['tags']) : 1;
 		$categories = isset($instance['categories']) ? absint($instance['categories']) : 1;
-		$hierarchy = isset($instance['hierarchy']) ? absint($instance['hierarchy']) : 1;
 		$share = isset($instance['share']) ? absint($instance['share']) : 1;
+		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','boozurk'); ?></label>
@@ -982,6 +982,19 @@ class boozurk_Widget_post_details extends WP_Widget {
 		<p>
 			<input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />
 			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Author','boozurk'); ?></label>
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('avatar_size'); ?>"><?php _e('Select avatar size', 'boozurk'); ?></label>
+            <select name="<?php echo $this->get_field_name('avatar_size'); ?>" id="<?php echo $this->get_field_id('avatar_size'); ?>" >
+<?php
+            $size_array = array ('32', '48', '64', '96', '128');
+            foreach($size_array as $size) {
+?>
+                <option value="<?php echo $size; ?>" <?php selected( $avatar_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+            }
+?>
+            </select>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" value="1" type="checkbox" <?php checked( 1 , $date ); ?> />
@@ -996,12 +1009,21 @@ class boozurk_Widget_post_details extends WP_Widget {
 			<label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e('Categories','boozurk'); ?></label>
 		</p>
 		<p>
-			<input id="<?php echo $this->get_field_id('hierarchy'); ?>" name="<?php echo $this->get_field_name('hierarchy'); ?>" value="1" type="checkbox" <?php checked( 1 , $hierarchy ); ?> />
-			<label for="<?php echo $this->get_field_id('hierarchy'); ?>"><?php _e('Hierarchy','boozurk'); ?></label>
-		</p>
-		<p>
 			<input id="<?php echo $this->get_field_id('share'); ?>" name="<?php echo $this->get_field_name('share'); ?>" value="1" type="checkbox" <?php checked( 1 , $share ); ?> />
 			<label for="<?php echo $this->get_field_id('share'); ?>"><?php _e('Share links','boozurk'); ?></label>
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select icon size', 'boozurk'); ?></label>
+            <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
+<?php
+            $size_array = array ('16', '24', '32', '48', '64');
+            foreach($size_array as $size) {
+?>
+                <option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+            }
+?>
+            </select>
 		</p>
 
 <?php
@@ -1043,7 +1065,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Post Formats' ) : $instance['title'], $instance, $this->id_base);
 		$c = $instance['count'] ? '1' : '0';
-		$i = $instance['icon'] ? '1' : '0';
+		$i = in_array( $instance['icon'], array ('1', '2', '3') ) ? $instance['icon'] : '3' ;
 
 		echo $before_widget;
 		if ( $title )
@@ -1057,13 +1079,16 @@ class boozurk_Widget_post_formats extends WP_Widget {
 				$post_format = get_term_by( 'slug', 'post-format-' . $slug, 'post_format' );
 				if ( $post_format->count > 0 ) {
 					$count = $c ? ' (' . $post_format->count . ')' : '';
-					$icon = $i ? '<img class="bz-thumb-format ' . $slug . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />' : '';
-					echo '<li class="post-format-item"><a title="" href="' . get_post_format_link($slug) . '">' . $icon . $string . '</a>' . $count . '</li>';
+					$text = ( $i != '2' ) ? $string : '';
+					$icon = ( $i != '1' ) ? '<img title="' . $string . '" class="bz-thumb-format ' . $slug . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />' : '';
+					$class = ( $i == '2' ) ? ' compact' : '';
+					echo '<li class="post-format-item' . $class . '"><a href="' . get_post_format_link($slug) . '">' . $icon . $text . '</a>' . $count . '</li>';
 				}
 			}
 		}
 ?>
 		</ul>
+		<div class="fixfloat"></div>
 <?php
 		echo $after_widget;
 		$cache[$args['widget_id']] = ob_get_flush();
@@ -1073,8 +1098,8 @@ class boozurk_Widget_post_formats extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['count'] = !empty($new_instance['count']) ? 1 : 0;
-		$instance['icon'] = !empty($new_instance['icon']) ? 1 : 0;
+		$instance['icon'] = in_array( $new_instance['icon'], array ('1', '2', '3') ) ? $new_instance['icon'] : '3' ;
+		$instance['count'] = ( !empty($new_instance['count']) && ( $instance['icon'] != '2' ) ) ? 1 : 0;
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -1089,18 +1114,23 @@ class boozurk_Widget_post_formats extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
 		$title = !empty($instance['title']) ? esc_attr( $instance['title'] ) : 'Post Formats';
 		$count = isset($instance['count']) ? (bool) $instance['count'] : false;
-		$icon = isset($instance['icon']) ? (bool) $instance['icon'] : false;
+		$icon = isset($instance['icon']) ? absint($instance['icon']) : 3;
 ?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 		<p>
-			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id('count'); ?>"><?php _e( 'Show post counts' ); ?></label><br />
+			<label for="<?php echo $this->get_field_id('icon'); ?>"><?php _e( 'Show' ); ?></label><br />
+			<select name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" >
+				<option value="3" <?php selected( '3', $icon ); ?>><?php echo __('icons & text','boozurk'); ?></option>
+				<option value="2" <?php selected( '2', $icon ); ?>><?php echo __('icons','boozurk'); ?></option>
+				<option value="1" <?php selected( '1', $icon ); ?>><?php echo __('text','boozurk'); ?></option>
+			</select>
 		</p>
 		<p>
-			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('icon'); ?>" name="<?php echo $this->get_field_name('icon'); ?>"<?php checked( $icon ); ?> />
-			<label for="<?php echo $this->get_field_id('icon'); ?>"><?php _e( 'Show format icon' ); ?></label><br />
+			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>"<?php checked( $count ); ?> />
+			<label for="<?php echo $this->get_field_id('count'); ?>"><?php _e( 'Show posts count' ); ?></label><br />
 		</p>
+
 <?php
 	}
 
@@ -1112,7 +1142,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 class boozurk_Widget_image_EXIF extends WP_Widget {
 
 	function boozurk_Widget_image_EXIF() {
-		$widget_ops = array('classname' => 'bz_Widget_exif_details', 'description' => __( 'Display image EXIF details','boozurk') );
+		$widget_ops = array('classname' => 'bz_Widget_exif_details', 'description' => __( 'Display image EXIF details. It\'s visible ONLY in single attachments','boozurk') );
 		$this->WP_Widget('bz-exif-details', __('Image EXIF details','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_exif_details';
 
@@ -1157,7 +1187,7 @@ class boozurk_Widget_image_EXIF extends WP_Widget {
 class boozurk_Widget_user_quick_links extends WP_Widget {
 
 	function boozurk_Widget_user_quick_links() {
-		$widget_ops = array('classname' => 'bz_widget_user_quick_links', 'description' => __( 'Some useful links for users','boozurk' ) );
+		$widget_ops = array('classname' => 'bz_widget_user_quick_links', 'description' => __( 'Some useful links for users. It\'s a kind of enhanced meta widget','boozurk' ) );
 		$this->WP_Widget('bz-user-quick-links', __('User quick links','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_user_quick_links';
 	}

@@ -1,4 +1,6 @@
 <?php
+/* Boozurk - Hooks */
+
 /**
  * Contains all hook wrappers.
  */

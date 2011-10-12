@@ -17,7 +17,7 @@ function pickColor(domid,color) {
 }
 
 jQuery(document).ready(function(){
-	boozurkSwitchTab.set('quickbar');
+	boozurkSwitchTab.set('colors');
 	
 	jQuery('.bz_input').keyup(function() {
 		var _hex = jQuery(this).val();

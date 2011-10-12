@@ -1,3 +1,5 @@
+/* Boozurk - Mobile stylesheet */
+
 body {
 	background: #ddd;
 	color: #333;
@@ -92,6 +94,13 @@ pre {
 .bz-group li span.bz-details {
 	color: #404040;
 	font-size: 11px;
+}
+.bz-format {
+    background:url("../images/icons/formats.png") no-repeat scroll center -224px transparent;
+    float:left;
+    height:32px;
+    width:32px;
+	margin: 0 5px 5px 0;
 }
 .halfsep {
 	background-image: url("images/half-divider.png");
@@ -208,7 +217,7 @@ pre {
 	margin-top: 10px;
 }
 .comment-reply-link {
-    background: #f1f1f1 url("../images/comment_reply.png") 5px center no-repeat;
+    background: #f1f1f1 url("images/reply.png") 5px center no-repeat;
     font-size: 10px;
     padding: 5px 5px 5px 30px;
     border-color: #fff #aaa #aaa #fff;
@@ -327,4 +336,83 @@ img.alignleft,
 img.alignright,
 img.aligncenter {
 	margin-bottom: 12px;
+}
+/* author bio
+----------------------------------------------------------*/
+.bz-author-bio {
+	background-color: #eee;
+	border: 2px groove #fff;
+	padding: 5px;
+	margin: 5px 0;
+}
+.bz-author-bio li {
+    margin: 0;
+    padding: 0;
+}
+.bz-author-bio ul {
+	list-style: none outside none;
+	margin-left: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.bz-author-bio .author-avatar img {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.bz-author-bio .author-avatar {
+    display: inline-block;
+    float: left;
+}
+.bz-author-bio .author-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.bz-author-bio .author-description {
+    font-size: .9em;
+}
+.bz-author-bio .author-social {
+	border-top:1px solid #ddd;
+	margin-top:5px;
+	padding-top:5px;
+	text-align:center;
+	clear: both;
+}
+.bz-author-bio .author-description a {
+	text-decoration: underline;
+}
+/* Post Format icons
+----------------------------------------------------------*/
+
+.bz-format.aside {
+	background-position: center 0;
+}
+.bz-format.audio {
+	background-position: center -32px;
+}
+.bz-format.chat {
+	background-position: center -64px;
+}
+.bz-format.gallery {
+	background-position: center -96px;
+}
+.bz-format.image {
+	background-position: center -128px;
+}
+.bz-format.link {
+	background-position: center -160px;
+}
+.bz-format.quote {
+	background-position: center -192px;
+}
+.bz-format.standard {
+	background-position: center -224px;
+}
+.bz-format.status {
+	background-position: center -256px;
+}
+.bz-format.video {
+	background-position: center -288px;
 }

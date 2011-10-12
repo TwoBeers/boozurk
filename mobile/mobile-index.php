@@ -48,7 +48,9 @@
 					the_post(); ?>
 					<?php $bz_alter_style = ( !isset($bz_alter_style) || $bz_alter_style == 'bz-odd' ) ? 'bz-even' : 'bz-odd'; ?>
 					<li class="<?php echo $bz_alter_style; ?>">
-						<a href="<?php the_permalink() ?>" rel="bookmark"><?php 
+						<a href="<?php the_permalink() ?>" rel="bookmark">
+							<span class="bz-format <?php echo get_post_format( $post->ID ); ?>"></span>
+							<?php 
 							$bz_post_title = the_title( '','',false );
 							if ( !$bz_post_title ) {
 								_e( '(no title)', 'boozurk' );
@@ -60,16 +62,18 @@
 					</li>
 				<?php } ?>
 				</ul>
-				<?php //num of pages
-				global $paged;
-				if ( !$paged ) { $paged = 1; }
-				?>
-				<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span><?php printf( __( 'page %1$s of %2$s', 'boozurk' ), $paged, $wp_query->max_num_pages ); ?></span> <a href="#themecredits">&#8744;</a></h2>
-				<div class="bz-navi halfsep">
-						<span class="bz-halfspan bz-prev"><?php previous_posts_link( __( 'Previous page', 'boozurk' ) ); ?></span>
-						<span class="bz-halfspan bz-next"><?php next_posts_link( __( 'Next page', 'boozurk' ) ); ?></span>
-						<div class="fixfloat"> </div>
-				</div>
+				<?php if ( $wp_query->max_num_pages > 1 ) { ?>
+					<?php //num of pages
+					global $paged;
+					if ( !$paged ) { $paged = 1; }
+					?>
+					<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span><?php printf( __( 'page %1$s of %2$s', 'boozurk' ), $paged, $wp_query->max_num_pages ); ?></span> <a href="#themecredits">&#8744;</a></h2>
+					<div class="bz-navi halfsep">
+							<span class="bz-halfspan bz-prev"><?php previous_posts_link( __( 'Previous page', 'boozurk' ) ); ?></span>
+							<span class="bz-halfspan bz-next"><?php next_posts_link( __( 'Next page', 'boozurk' ) ); ?></span>
+							<div class="fixfloat"> </div>
+					</div>
+				<?php } ?>
 			<?php } else { ?>
 				<p class="bz-padded"><?php _e( 'Sorry, no posts matched your criteria.', 'boozurk' );?></p>
 			<?php } ?>
@@ -87,9 +91,9 @@
 			<h2 class="bz-seztit"><a href="#head">&#8743;</a> <span>&copy; <?php echo date( 'Y' ); ?> <?php bloginfo( 'name' ); ?></span></h2>
 			<p id="themecredits">
 				<?php if ( $boozurk_opt['boozurk_tbcred'] == 1 ) { ?>
-					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>boozurk</strong></a>. 
-				<?php } ?>
-				<?php wp_loginout(); wp_register(' | ', ''); ?>
+					Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Boozurk</strong></a>.
+				<?php } ?><br/>
+				<?php wp_loginout(); wp_register(' | ', ''); ?><?php if ( ( !isset( $boozurk_opt['boozurk_mobile_css'] ) || ( $boozurk_opt['boozurk_mobile_css'] == 1) ) ) echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __('Switch to Desktop View','boozurk') .'</a>'; ?>
 			</p>
 		</div>
 		<?php wp_footer(); ?>

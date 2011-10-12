@@ -113,23 +113,8 @@
                 tip.get(0).className = 'tipsy'; // reset classname in case of dynamic gravity
                 tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
                 var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
-                var gravity = (typeof opts.gravity == 'function') ? opts.gravity.call(this) : opts.gravity;
-
-                switch (gravity.charAt(0)) {
-                    case 'n':
-                        tip.css({top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}).addClass('tipsy-north');
-                        break;
-                    case 's':
-                        tip.css({top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}).addClass('tipsy-south');
-                        break;
-                    case 'e':
-                        tip.css({top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}).addClass('tipsy-east');
-                        break;
-                    case 'w':
-                        tip.css({top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}).addClass('tipsy-west');
-                        break;
-                }
-
+				var h_pos = ( $(this).parents('#pages').length ) ? 'to_left' : ''; // if in right sidebar, move to left
+				tip.css({top: pos.top + pos.height, left: pos.left}).addClass(h_pos);
                 if (opts.fade) {
                     tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.8});
                 } else {
@@ -166,7 +151,6 @@
     $.fn.tipsy.defaults = {
         fade: false,
         fallback: '',
-        gravity: 'n',
         html: false,
         title: 'title'
     };	
@@ -233,22 +217,6 @@ function bz_SwitchMe(domid) {
 		1000
 	);
 }
-
-jQuery(document).ready(function($){
-    $('a.more-link').postexpander();
-    $('#mainmenu').animate_menu();
-    $('.storycontent .gallery').gallery_slider();
-    $('#sidebarsx .bz_widget_latest_commentators li').tipsy({gravity: 'w'});
-    $('#pages .bz_widget_latest_commentators li').tipsy({gravity: 'e'});
-    $('#header-widget-area .bz_widget_latest_commentators li').tipsy({gravity: 'n'});
-    $('#footer-widget-area .bz_widget_latest_commentators li').tipsy({gravity: 's'});
-    $('#sidebarsx .bz-widget-social a').tipsy({gravity: 'w'});
-    $('#pages .bz-widget-social a').tipsy({gravity: 'e'});
-    $('#header-widget-area .bz-widget-social a').tipsy({gravity: 'n'});
-    $('#footer-widget-area .bz-widget-social a').tipsy({gravity: 's'});
-    $('.pmb_comm').tipsy({gravity: 'w'});
-	
-});
 
 
 
