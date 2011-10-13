@@ -7,26 +7,28 @@
 		while ( have_posts() ) {
 			the_post(); ?>
 			<?php boozurk_hook_before_post(); ?>
+			<?php if ( wp_attachment_is_image() ) {
+				$bz_attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+				foreach ( $bz_attachments as $bz_k => $bz_attachment ) {
+					if ( $bz_attachment->ID == $post->ID )
+						break;
+				}
+				$bz_nextk = $bz_k + 1;
+				$bz_prevk = $bz_k - 1;
+				?>
+				<div class="img-navi">
+					<?php if ( isset( $bz_attachments[ $bz_prevk ] ) ) { ?>
+						<a class="img-navi-prev" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_prevk ]->ID, array( 70, 70 ) ); ?></a>
+					<?php } ?>
+					<?php if ( isset( $bz_attachments[ $bz_nextk ] ) ) { ?>
+						<a class="img-navi-next" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_nextk ]->ID, array( 70, 70 ) ); ?></a>
+					<?php } ?>
+				</div>
+			<?php } ?>
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
 				<?php boozurk_hook_before_post_content(); ?>
-				<?php if ( wp_attachment_is_image() ) {
-					$bz_attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
-					foreach ( $bz_attachments as $bz_k => $bz_attachment ) {
-						if ( $bz_attachment->ID == $post->ID )
-							break;
-					}
-					$bz_nextk = $bz_k + 1;
-					$bz_prevk = $bz_k - 1;
-					?>
-					<div class="img-navi">
-						<?php if ( isset( $bz_attachments[ $bz_prevk ] ) ) { ?>
-							<a class="img-navi-prev" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $bz_attachments[ $bz_prevk ]->ID, array( 70, 70 ) ); ?></a>
-						<?php } ?>
-						<?php if ( isset( $bz_attachments[ $bz_nextk ] ) ) { ?>
-							<a class="img-navi-next" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_nextk ]->ID, array( 70, 70 ) ); ?> &raquo;</a>
-						<?php } ?>
-					</div>
+				<?php if ( wp_attachment_is_image() ) { ?>
 					<div class="storycontent">
 						<div class="att_content">
 							<a class="bz-view-full-size" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','boozurk' ) ;  // link to Full size image ?>" rel="attachment"><?php

@@ -18,7 +18,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class(); ?>>
+	<body <?php body_class( 'no-js' ); ?>>
 		<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
 		<div id="main">
 

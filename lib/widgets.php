@@ -541,12 +541,14 @@ class boozurk_Widget_social extends WP_Widget {
         foreach ($this->follow_urls as $follow_service ) {
 			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
+			$prefix = __('Follow us on %s','boozurk');
 			if ($follow_service == 'RSS') {
 				$account = get_bloginfo( 'rss2_url' );
+				$prefix = __('Keep updated with our %s feed','boozurk');
 			}
 			if ($show && !empty($account)) {
 ?>
-        <a target="_blank" href="<?php echo $account; ?>" class="bz-social-icon" title="<?php echo $follow_service;?>">
+        <a target="_blank" href="<?php echo $account; ?>" class="bz-social-icon" title="<?php printf( $prefix, $follow_service ); ?>">
             <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
         </a>
 <?php
@@ -933,6 +935,7 @@ class boozurk_Widget_post_details extends WP_Widget {
 		extract($args);
 		
 		if ( !is_page() && !$instance['author'] && !$instance['date'] && !$instance['tags'] && !$instance['categories'] && !$instance['share'] ) return;
+		if ( is_attachment() && !$instance['share'] ) return;
 
 		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
 		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
@@ -1198,7 +1201,8 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 		extract($args, EXTR_SKIP);
 		
 		$title = apply_filters('widget_title', empty($instance['title']) ? __('Welcome %s','boozurk') : $instance['title'], $instance, $this->id_base);
-		$name = is_user_logged_in() ? $current_user->display_name : __('guest','boozurk');
+		$nick = ( isset($instance['nick']) && ( $instance['nick'] == 1 ) ) ? boozurk_random_nick() : __('guest','boozurk');
+		$name = is_user_logged_in() ? $current_user->display_name : $nick;
 		$title = sprintf ( $title, $name );
 		
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
@@ -1241,18 +1245,22 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$instance['nick'] = (int) $new_instance['nick'] ? 1 : 0;
 		return $instance;
 	}
 
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$thumb = 1;
-		if ( isset($instance['thumb']) && !$thumb = (int) $instance['thumb'] )
-			$thumb = 0;
+		$nick = isset($instance['nick']) ? absint($instance['nick']) : 0;
+		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:','boozurk'); ?><br /><?php _e('default: "Welcome %s" , where %s is the user name','boozurk');?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('nick'); ?>" name="<?php echo $this->get_field_name('nick'); ?>" value="1" type="checkbox" <?php checked( 1 , $nick ); ?> />
+			<label for="<?php echo $this->get_field_id('nick'); ?>"><?php _e('Create a random nick for not-logged users','boozurk'); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />

@@ -1,7 +1,8 @@
 /* Boozurk - stylesheet for print */
 
 body {
-	font-size: 14px;
+	font-family: monospace;
+	font-size: 15px;
 }
 h1,
 h2,
@@ -45,34 +46,31 @@ th {
 blockquote {
 	font-style: italic;
 }
-.avatar,
+.hide_if_print,
 .comment-edit-link,
 .comment-reply-link,
 .says,
-.description,
-.post-edit-link,
+.post_meta_container,
+#mainmenu_container,
+#secondary1,
+#secondary2,
 #footer-widget-area,
 #header-widget-area,
-#headerimg,
+#single-widgets-area,
 #respond,
 #pages,
-.ff-menu,
-#sidebardx,
-#quickbar,
-#edit_link,
+#bz-breadcrumb,
+#navbuttons,
+#sidebarsx,
 #fixedfoot,
+#print-links,
 body #wpadminbar {
 	display: none;
 }
-.metafield div {
-	height: auto !important;
-	overflow: visible !important;
-}
 .meta,
 .comment-meta,
-.comment_tools,
 #footer,
-#head {
+#head h1 {
 	font-size: 11px;
 }
 .meta {
@@ -89,6 +87,7 @@ body #wpadminbar {
 	border-top: 1px solid #ccc;
 	margin-top: 10px;
 	padding-top: 10px;
+	font-size: 11px;
 }
 .comment-body {
 	border: 1px solid #ccc;
@@ -103,6 +102,10 @@ body #wpadminbar {
 	font-weight: bold;
 }
 #head,
-#footer {
+#footer,
+.storytitle {
 	text-align: right;
+}
+.storytitle {
+	border-bottom: 1px solid #ccc;
 }

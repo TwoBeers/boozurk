@@ -28,9 +28,7 @@
         return this.children('li').each(function() {
             
 			var d = $(this).children('ul'); //for each main item, get the sub list
-
 			var margintop_in = 50; //the starting distance between menu item and the popup submenu
-
 			var margintop_out = 20; //the exiting distance between menu item and the popup submenu
 
 			if(d.size() !== 0){ //if the sub list exists...
@@ -41,24 +39,11 @@
 				
 				$(this).mouseenter(function(){ //when mouse enters, slide down the sub list
 
-					d.css({'display' : 'block' });
-
-					d.animate(
-						{ 'opacity' : 1 , 'margin-top' : 0 },
-						200,
-						'swing'
-					);
+					d.css({'display' : 'block' }).animate( { 'opacity' : 1 , 'margin-top' : 0 },	200, 'swing' );
 
 				}).mouseleave(function(){ //when mouse leaves, hide the sub list
 
-					d.stop();
-
-					d.animate(
-						{ 'opacity' : 0 , 'margin-top' : margintop_out },
-						200,
-						'swing',
-						function(){ d.css({'display' : '' , 'margin-top' : margintop_in }); }
-					);
+					d.stop().animate( { 'opacity' : 0 , 'margin-top' : margintop_out },	200, 'swing', function(){ d.css({'display' : '' , 'margin-top' : margintop_in }); }	);
 
 				});
 			}
@@ -84,6 +69,8 @@
         return this.each(function() {
             
             var opts = $.fn.tipsy.elementOptions(this, options);
+			
+			//opts.fade = false;
             
             $(this).hover(function() {
 
@@ -100,23 +87,18 @@
                     $(this).attr('original-title', $(this).attr('title') || '').removeAttr('title');
                 }
 
-                var title;
-                if (typeof opts.title == 'string') {
-                    title = $(this).attr(opts.title == 'title' ? 'original-title' : opts.title);
-                } else if (typeof opts.title == 'function') {
-                    title = opts.title.call(this);
-                }
+                var title = $(this).attr('original-title');
 
-                tip.find('.tipsy-inner')[opts.html ? 'html' : 'text'](title || opts.fallback);
+                tip.find('.tipsy-inner')['text'](title || opts.fallback);
 
                 var pos = $.extend({}, $(this).offset(), {width: this.offsetWidth, height: this.offsetHeight});
                 tip.get(0).className = 'tipsy'; // reset classname in case of dynamic gravity
                 tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
                 var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
 				var h_pos = ( $(this).parents('#pages').length ) ? 'to_left' : ''; // if in right sidebar, move to left
-				tip.css({top: pos.top + pos.height, left: pos.left}).addClass(h_pos);
+				tip.css({top: pos.top + pos.height, left: pos.left+(pos.width / 2)}).addClass(h_pos);
                 if (opts.fade) {
-                    tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.8});
+                    tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
                 } else {
                     tip.css({visibility: 'visible'});
                 }
@@ -150,11 +132,30 @@
     
     $.fn.tipsy.defaults = {
         fade: false,
-        fallback: '',
-        html: false,
-        title: 'title'
+        fallback: ''
     };	
-	
+
+    $.fn.tooltips = function() {
+
+        return this.each(function() {
+            
+			var p = $(this).parent();
+			var self = $(this);
+			
+			p.mouseenter(function(){
+
+				self.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
+
+			}).mouseleave(function(){
+
+				self.stop().delay(100).fadeOut();
+
+			});
+            
+        });
+        
+    };
+
 })(jQuery);
 
 function bz_SwitchMe(domid) {

@@ -16,5 +16,5 @@
 	<div class="fixfloat" style="padding-top: 1px;">
 			<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div>' ); ?>
 	</div>
-	<?php boozurk_last_comments( get_the_ID() ); ?>
 </div>
+<?php boozurk_last_comments( get_the_ID() ); ?>

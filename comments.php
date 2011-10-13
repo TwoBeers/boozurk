@@ -9,7 +9,7 @@
 
 <?php if ( comments_open() ) { ?>
 	<div id="comments" style="text-align: right;">
-		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment",'boozurk' ); ?>"><?php _e( "Leave a comment",'boozurk' ); ?></a>
+		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?><span class="hide_if_print"> - <a href="#respond" title="<?php _e( "Leave a comment",'boozurk' ); ?>"><?php _e( "Leave a comment",'boozurk' ); ?></a></span>
 	</div>
 	<?php
 } elseif ( have_comments() ) { ?>

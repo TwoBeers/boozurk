@@ -1,5 +1,8 @@
 /* Boozurk - Theme options stylesheet */
 
+#bz-icon {
+	background: url('../images/icons/boozurk.png') no-repeat scroll center transparent;
+}
 #boozurk-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
@@ -12,7 +15,7 @@
 	margin: 20px 20px 20px 150px;
 }
 #boozurk-options select {
-	max-width: 60px;
+	max-width: 160px;
 }
 #bz-tabselector,
 #selector {
@@ -41,16 +44,14 @@
 	position: relative;
 }
 .bz-tab-opt {
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 5px;
 	margin-bottom: 20px;
 	padding: 10px;
 }
-.bz-tab-opt {
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	margin-bottom: 20px;
-	padding: 10px;
+.bz-tab-opt:hover {
+	background-color: #EAF2FA;
+	border-color: transparent;
 }
 .bz-tab-opt input {
 	margin-left: 10px;
