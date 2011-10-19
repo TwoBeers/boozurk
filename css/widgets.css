@@ -30,6 +30,6 @@
 }
 
 div[id*=_bz-] .widget-title {
-	background: url("../images/tb_micrologo.png") no-repeat 2px center transparent;
-	padding-left: 30px;
+	background: url("../images/widgets/bz_micrologo.png") no-repeat 2px center transparent;
+	padding-left: 24px;
 }

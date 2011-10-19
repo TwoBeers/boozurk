@@ -33,7 +33,7 @@ kbd {
 	padding: 0 8px;
 }
 code {
-	background-color: #262626;
+	background-color: #aaa;
 }
 pre {
 	background-color: #fff;
@@ -53,7 +53,7 @@ pre {
 	margin:0;
 }
 #head a {
-	background: #f1f1f1 url("images/head.png") left center repeat-x;
+	background: #2B2B2B url("images/head.png") left top repeat-x;
 	padding: 10px 5px;
 	display: block;
 	text-shadow: -1px -1px 0 #000;
@@ -77,8 +77,6 @@ pre {
 	line-height: 1.7em;
 	list-style: none outside none;
 	margin: 4px 8px;
-	-moz-box-shadow: 0 0 2px #000;
-	-webkit-box-shadow: 0 0 2px #000;
 	box-shadow: 0 0 2px #000;
 }
 .bz-group li {
@@ -137,8 +135,6 @@ pre {
 	border-bottom: 1px solid #aaa;
 	line-height: 1.7em;
 	margin: 4px 8px;
-	-moz-box-shadow: 0 0 2px #000;
-	-webkit-box-shadow: 0 0 2px #000;
 	box-shadow: 0 0 2px #000;
 }
 .bz-seztit,
@@ -173,13 +169,11 @@ pre {
 }
 .bz-pc-navi a {
     background: #f1f1f1;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 3px;
     padding: 0.3em 0.5em;
     border-color: #fff #aaa #aaa #fff;
     border-style: solid;
     border-width: 1px;
-	-moz-box-shadow: 0 0 2px #000;
-	-webkit-box-shadow: 0 0 2px #000;
 	box-shadow: 0 0 2px #000;
 }
 .bz-post {
@@ -223,7 +217,7 @@ pre {
     border-color: #fff #aaa #aaa #fff;
     border-style: solid;
     border-width: 1px;
-    border-radius: 3px 3px 3px 3px;
+    border-radius: 3px;
 }
 .trackback .comment-reply-link,
 .pingback .comment-reply-link,
@@ -253,9 +247,6 @@ pre {
     float: left;
     margin-right: 5px;
     margin-bottom: 5px;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	border: 1px solid #404040;
 	padding: 5px;
@@ -265,55 +256,67 @@ pre {
 .format-image .size-thumbnail img,
 .category-image .size-thumbnail img {
 }
+/* Gallery*/
 .gallery {
-	margin: 0 auto 18px;
+	margin: auto;
 }
-.gallery .gallery-item {
+.gallery-item {
 	float: left;
-	margin: 0 6px 12px;
-	border: 1px solid #404040;
-	padding: 5px;
+	margin-top: 10px;
 	text-align: center;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	color: #fff;
 }
-.img-caption {
-	border: 1px solid #404040;
+.gallery img {
+	border: 1px solid #fff;
+    padding: 5px;
+	max-width: 80%;
+}
+.gallery img:hover {
+	border: 1px solid #777;
+}
+.gallery-caption {
+	margin-left: 0;
+}
+.gallery-columns-1 .gallery-item {
+	width: 99%;
+}
+.gallery-columns-2 .gallery-item {
+	width: 49%;
+}
+.gallery-columns-3 .gallery-item {
+	width: 33%;
+}
+.gallery-columns-4 .gallery-item {
+	width: 24%;
+}
+.gallery-columns-5 .gallery-item {
+	width: 19%;
+}
+.gallery-columns-6 .gallery-item {
+	width: 16%;
+}
+.gallery-columns-7 .gallery-item {
+	width: 14%;
+}
+/* Captions*/
+.wp-caption {
+	border: 1px solid #fff;
 	padding: 5px;
 	text-align: center;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	color: #fff;
 	margin: 10px;
 	max-width: 94%;
 }
-.img-caption img {
+.wp-caption img {
 	border: 0 none;
 	margin: 0;
 	padding: 0;
 }
-.img-caption .img-caption-inside {
-	position: relative;
-}
-.img-caption .img-caption-text {
+.wp-caption-text {
 	font-size: 11px;
 	line-height: 17px;
 	margin: 0;
-	width: 100%;
 	padding: 0 0 5px;
-	background: url('../images/device/black.png') repeat left top transparent;
-	position: absolute;
-	bottom: 0;
-	left: 0;
 }
-.img-caption:hover .img-caption-text {
-	display: none;
-}
+/* Aligments*/
 .aligncenter,
 div.aligncenter,
 img.aligncenter {
@@ -324,21 +327,22 @@ img.aligncenter {
 }
 img.alignleft,
 .alignleft {
+	display: inline;
 	float: left;
-	margin-right: 12px;
+	margin-right: 24px;
 }
 img.alignright,
 .alignright {
+	display: inline;
 	float: right;
-	margin-left: 12px;
+	margin-left: 24px;
 }
 img.alignleft,
 img.alignright,
 img.aligncenter {
 	margin-bottom: 12px;
 }
-/* author bio
-----------------------------------------------------------*/
+/* author bio*/
 .bz-author-bio {
 	background-color: #eee;
 	border: 2px groove #fff;
@@ -357,8 +361,6 @@ img.aligncenter {
 }
 
 .bz-author-bio .author-avatar img {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;
     margin-right: 10px;
 }
@@ -383,9 +385,7 @@ img.aligncenter {
 .bz-author-bio .author-description a {
 	text-decoration: underline;
 }
-/* Post Format icons
-----------------------------------------------------------*/
-
+/* Post Format icons*/
 .bz-format.aside {
 	background-position: center 0;
 }

@@ -1,6 +1,6 @@
 <h3>Boozurk - WordPress theme</h3>
 	<ul>
-		<li>version: 0.4</li>
+		<li>version: 0.5</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -30,7 +30,7 @@
 		<li>Three columns</li>
 		<li>Widgets Support</li>
 		<li>Translation ready</li>
-		<li>Up to 6 sidebars</li>
+		<li>Up to 7 sidebars</li>
 		<li>Standard WordPress</li>
 		<li>Gravatars Support</li>
 		<li>Quick navigation</li>

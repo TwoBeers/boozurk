@@ -11,7 +11,7 @@
 				$bz_post_title = $bz_first_link['title'];
 	?>
 		<?php boozurk_hook_before_post_title(); ?>
-		<h2 class="storytitle"><a target="_blank" href="<?php $bz_first_link['href']; ?>" rel="bookmark"><?php echo $bz_post_title; ?></a></h2>
+		<h2 class="storytitle"><a target="_blank" href="<?php echo $bz_first_link['href']; ?>" rel="bookmark"><?php echo $bz_post_title; ?></a></h2>
 		<?php boozurk_hook_after_post_title(); ?>
 	<?php 
 		} 

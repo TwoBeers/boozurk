@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: this is Boozurk!
-Version: 0.4
+Version: 0.5
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -114,7 +114,7 @@ input[type=password] {
 	border: 1px solid #404040;
 }
 input[type=password] {
-	background: #fff url('images/lock.png') right center no-repeat;
+	background: #fff url('images/icons/details.png') 3px -298px no-repeat;
 	min-height: 20px;
 }
 input[type=button],
@@ -157,6 +157,9 @@ input[type=reset]:focus {
 	cursor: pointer;
     background-color: #F5F5F5;
     color: #666;
+}
+input[type=password]:focus {
+	background: #fff;
 }
 .storycontent p {
 	line-height: 1.3em;
@@ -288,11 +291,11 @@ input[type=reset]:focus {
 	float: right;
 }
 .img-navi-prev {
-	background: url('images/bc-sep.gif') no-repeat left center;
+	background: url('images/bc-sep.png') no-repeat left center;
 	padding-left: 15px;
 }
 .img-navi-next {
-	background: url('images/bc-sep.gif') no-repeat right center;
+	background: url('images/bc-sep.png') no-repeat right center;
 	padding-right: 15px;
 }
 .img-navi img {
@@ -315,12 +318,12 @@ input[type=reset]:focus {
 }
 .nav-next {
 	padding: 0 55px 0 0;
-	background: url('images/bc-sep.gif') no-repeat right center;
+	background: url('images/bc-sep.png') no-repeat right center;
 	text-align: right;
 }
 .nav-previous {
 	padding: 0 0 0 55px;
-	background: url('images/bc-sep.gif') no-repeat left center;
+	background: url('images/bc-sep.png') no-repeat left center;
 }
 .nav-next img {
 	position: absolute;
@@ -358,41 +361,41 @@ input[type=reset]:focus {
 	min-height: 60px;
 }
 #posts_content .post {
-    border-left: 40px solid skyBlue;
+    border-left: 40px solid #87CEEB;
 }
 #posts_content .page {
-    border-left: 40px solid skyBlue;
+    border-left: 40px solid #87CEEB;
 }
 #posts_content .attachment {
-    border-left: 40px solid skyBlue;
-}
-#posts_content .sticky {
-	background: url('images/sticky.png') repeat-y right top transparent;
+    border-left: 40px solid #87CEEB;
 }
 .att_content {
 	text-align: center;
 }
 .pmb_comm {
-	background-color: rgba(255, 255, 255, 0.5);
-	border: 1px solid #eee;
-    border-left: none;
-    border-right: none;
+	background-color: #fff;
 	color: #000;
 	display: block;
 	line-height: 20px;
 	text-align: center;
 	width: 40px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
 }
 .pmb_format {
-	background-color: rgba(255, 255, 255, 0.8);
-	border: 1px solid #eee;
-    border-left: none;
-    border-right: none;
+	background-color: #fff;
 	display: block;
 	width: 32px;
 	height:32px;
 	margin: 4px 0;
 	padding: 0 4px;
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+}
+.pmb_comm:hover,
+.pmb_format:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }
 .post_meta_container {
     left: -40px;
@@ -417,7 +420,7 @@ input[type=reset]:focus {
 	background-color: rgba(255, 255, 255, 0.8);
 	line-height: 34px;
 	margin: 0;
-	min-height: 58px;
+	min-height: 53px;
 	padding-left: 2%;
 	padding-right: 1px;
 	position: absolute;
@@ -512,6 +515,7 @@ input[type=reset]:focus {
 }
 .widget {
     margin-bottom: 20px;
+	overflow: hidden;
 }
 #footer-widget-area .widget {
 	padding: 10px;
@@ -548,6 +552,23 @@ div.bz_Widget_post_details ul li,
 div.bz_widget_post_formats ul li {
 	list-style: none outside none;
 }
+.bz-post-details-cats,
+.bz-post-details-tags,
+.bz-post-details-date {
+	background-repeat: no-repeat;
+	background-image: url('images/icons/details.png');
+	line-height: 25px;
+	padding: 1px 0 5px 25px;
+}
+.bz-post-details-cats {
+	background-position: left -200px;
+}
+.bz-post-details-tags {
+	background-position: left -100px;
+}
+.bz-post-details-date {
+	background-position: left 0;
+}
 div.bz_widget_post_formats ul li.compact {
 	float: left;
 	margin: 0 10px 5px 0;
@@ -579,7 +600,7 @@ div.bz_Widget_post_details ul {
 	display: inline-block;
 }
 .bz-social-icon img{
-	max-width: 32px;
+	max-width: 128px;
 }
 .widget img.bz-thumb-format {
 	max-width: 32px;
@@ -648,7 +669,12 @@ img.bz-thumb-format {
 .attachment .pmb_format {
 	background-position: center -320px;
 }
-
+.post-password-required .pmb_format {
+	background-position: center -352px;
+}
+.sticky .pmb_format {
+	background-position: center -384px;
+}
 /* Main menu 
 ----------------------------------------------------------*/
 #mainmenu_container {
@@ -698,14 +724,14 @@ img.bz-thumb-format {
 ----------------------------------------------------------*/
 #secondary1 {
 	background: #fff;
-	border-bottom: 1px solid #777;
-	box-shadow: 0 0 4px #404040;
+	border-bottom: 5px solid #424242;
+	box-shadow: 0 0 4px #000;
 	text-align: center;
 	line-height: 30px;
 }
 #secondary1 li {
 	display: inline;
-	margin: 10px;
+	margin: 0 10px;
 }
 #secondary2 {
 	border: 1px solid #ddd;
@@ -935,17 +961,17 @@ img.bz-thumb-format {
 	padding: 0 5px;
 }
 .bz-breadcrumb-sep {
-	background: url('images/bc-sep.gif') no-repeat right center;
+	background: url('images/bc-sep.png') no-repeat right center;
 	padding: 5px;
 }
 .bz-breadcrumb-childs {
 	padding: 5px 10px;
-	background: url('images/bc-childs.gif') no-repeat center;
+	background: url('images/bc-sep.png') no-repeat center;
 	margin-left:4px;
 }
 .bz-breadcrumb-home
 {
-	background:url('images/IconHome.gif') no-repeat center 0;
+	background:url('images/icons/details.png') no-repeat center -500px;
     float:left;
     height:16px;
     margin:0.5em;
@@ -953,7 +979,7 @@ img.bz-thumb-format {
 }
 .bz-breadcrumb-home:hover
 {
-	background-position: center -16px;
+	background-position: center -516px;
 }
 .bz-breadcrumb-reminder {
 	border-top: solid 1px #ddd;	
@@ -1011,7 +1037,7 @@ img.bz-thumb-format {
     position: absolute;
     left: -36px;
 }
-.bypostauthor .avatar {
+.bypostauthor > .comment-body .avatar {
     left: -40px;
 }
 .comment .reply {
@@ -1059,10 +1085,10 @@ img.bz-thumb-format {
 	top: 10px;
     text-indent: -1000px;
     width: 13px;
-	background: url('images/header_popup_closebtn.png') no-repeat right top;
+	background: url('images/icons/details.png') no-repeat left -600px;
 }
 #cancel-comment-reply-link:hover {
-	background-position: left top;
+	background-position: left -612px;
 }
 .comment {
 	position: relative;
@@ -1123,7 +1149,7 @@ img.bz-thumb-format {
 	height: 30px;
 }
 .bzg-preview-link {
-	background: url('images/preview.png') no-repeat 5px center transparent;
+	background: url('images/icons/details.png') no-repeat 3px -396px transparent;
 	padding: 5px 5px 5px 25px;
     border: 1px solid #ccc;
     border-radius: 2px;
@@ -1240,5 +1266,3 @@ img.alignright,
 img.aligncenter {
 	margin-bottom: 12px;
 }
-
-
