@@ -564,7 +564,7 @@ class boozurk_Widget_social extends WP_Widget {
 				$class= ' hide-if-no-js';
 				$onclick = ' onclick="this.href=\'' . $account . '\'.replace(/(.)(.)/g, \'$2$1\');"';
 				$account = '#';
-				$target = '';
+				$target = '_self';
 			}
 			if ($show && !empty($account)) {
 ?>

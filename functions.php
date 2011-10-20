@@ -66,8 +66,14 @@ function boozurk_mobile_device_detect() {
 
 // check if in preview mode or not
 $bz_is_printpreview = false;
-if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) { //print preview
+if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) {
 	$bz_is_printpreview = true;
+}
+
+// check if in allcat view
+$bz_is_allcat_page = false;
+if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
+	$bz_is_allcat_page = true;
 }
 
 // Set the content width based on the theme's design
@@ -355,8 +361,8 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 		<?php if ( $boozurk_opt['boozurk_js_gallery'] == 1 ) { ?>
 		$('.storycontent .gallery').gallery_slider();<?php } ?>
 		<?php if ( $boozurk_opt['boozurk_js_tooltips'] == 1 ) { ?>
-		$('.share-item img,.bz_widget_categories a,#bz-quotethis,.bz_widget_latest_commentators li,.bz-widget-social a,.post-format-item.compact img').tipsy({fade: true});
-		$('.pmb_comm').tipsy({fade: true, fallback: '<?php _e( 'Comments closed','boozurk' ); ?>'});<?php } ?>
+		$('.minibutton,.share-item img,.bz_widget_categories a,#bz-quotethis,.bz_widget_latest_commentators li,.bz-widget-social a,.post-format-item.compact img').cooltips({fade: true});
+		$('.pmb_comm').cooltips({fade: true, fallback: '<?php _e( 'Comments closed','boozurk' ); ?>'});<?php } ?>
 	});
 	/* ]]> */
 </script>
@@ -412,7 +418,7 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 		global $boozurk_version, $bz_is_mobile_browser, $bz_is_printpreview;
 		// mobile style
 		if ( $bz_is_mobile_browser ) {
-			wp_enqueue_style( 'bz_mobile-style', get_template_directory_uri() . '/mobile/mobile-style.css', false, $boozurk_version, 'screen' );
+			wp_enqueue_style( 'bz_mobile-style', get_template_directory_uri() . '/mobile/mobile-style.min.css', false, $boozurk_version, 'screen' );
 			return;
 		}
 		if ( $bz_is_printpreview ) { //print preview
@@ -431,14 +437,15 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 		global $boozurk_opt, $boozurk_version, $bz_is_mobile_browser, $bz_is_printpreview;
 		if ( $bz_is_mobile_browser || $bz_is_printpreview ) return; // skip if in print preview or mobile view
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
-		if ( $boozurk_opt['boozurk_jsani'] == 1 ) wp_enqueue_script( 'bz-js', get_template_directory_uri() . '/js/boozurk.dev.js', array( 'jquery' ), $boozurk_version, true   );
+		if ( $boozurk_opt['boozurk_jsani'] == 1 ) wp_enqueue_script( 'bz-js', get_template_directory_uri() . '/js/boozurk.min.js', array( 'jquery' ), $boozurk_version, true   );
 	}
 }
 
 // show all categories list (redirect to allcat.php if allcat=y)
 if ( !function_exists( 'boozurk_allcat' ) ) {
 	function boozurk_allcat () {
-		if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
+		global $bz_is_allcat_page;
+		if( $bz_is_allcat_page ) {
 			get_template_part( 'allcat' );
 			exit;
 		}
@@ -586,8 +593,8 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 						<li class="author-name"><a href= "<?php echo $author_link; ?>" ><?php echo $name; ?></a></li>
 						<li class="author-description"><?php echo $description; ?> </li>
 						<li class="author-social">
-							<?php if ( get_the_author_meta('twitter', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Twitter', 'boozurk'), $name ) . '" href="'.get_the_author_meta('twitter', $author).'"><img alt="twitter" class="avatar" width=24 height=24 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>'; ?>
-							<?php if ( get_the_author_meta('facebook', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Facebook', 'boozurk'), $name ) . '" href="'.get_the_author_meta('facebook', $author).'"><img alt="facebook" class="avatar" width=24 height=24 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>'; ?>
+							<?php if ( get_the_author_meta('twitter', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Twitter', 'boozurk'), $name ) . '" href="'.get_the_author_meta('twitter', $author).'"><img alt="twitter" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>'; ?>
+							<?php if ( get_the_author_meta('facebook', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Facebook', 'boozurk'), $name ) . '" href="'.get_the_author_meta('facebook', $author).'"><img alt="facebook" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>'; ?>
 						</li>
 					</ul>
 				</div>
@@ -886,23 +893,26 @@ function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</d
 
 if (!function_exists('boozurk_navbuttons')) {
 	function boozurk_navbuttons( $print = 1, $comment = 1, $feed = 1, $trackback = 1, $home = 1, $next_prev = 1, $up_down = 1, $fixed = 1 ) {
-		global $post, $boozurk_opt;
+		global $post, $boozurk_opt, $bz_is_allcat_page;
+		
+		$is_post = is_single() && !is_attachment() && !$bz_is_allcat_page;
+		$is_image = is_attachment() && !$bz_is_allcat_page;
+		$is_page = is_singular() && !is_single() && !is_attachment() && !$bz_is_allcat_page;
+		$is_singular = is_singular() && !$bz_is_allcat_page;
 	?>
 
 <div id="navbuttons"<?php if ( $fixed ) echo ' class="fixed"'; ?>>
-	<?php if ( is_singular() ) { ?>
-	
-	
-		<div class="minibutton">
-			<a href="<?php echo get_edit_post_link(); ?>">
-				<span class="minib_img minib_edit">&nbsp;</span>
-			</a>
-			<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Edit','boozurk' ); ?></div></div>
-		</div>
+
+		<?php if ( $is_singular ) { 																		// ------- Edit ------- ?>
+			<div class="minibutton" title="<?php _e( 'Edit','boozurk' ); ?>">
+				<a href="<?php echo get_edit_post_link(); ?>">
+					<span class="minib_img minib_edit">&nbsp;</span>
+				</a>
+			</div>
+		<?php } ?>
 		
-		
-		<?php if ( $print ) { // ------- Print ------- ?>
-			<div class="minibutton">
+		<?php if ( $print && $is_singular ) { 																// ------- Print ------- ?>
+			<div class="minibutton" title="<?php _e( 'Print','boozurk' ); ?>">
 				<a href="<?php
 					$bz_arr_params['style'] = 'printme';
 					if ( get_query_var('page') ) {
@@ -915,162 +925,92 @@ if (!function_exists('boozurk_navbuttons')) {
 					?>">
 					<span class="minib_img minib_print">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Print','boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-		<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
-
-
-		<?php if ( $comment ) { // ------- Leave a comment ------- ?>
-			<div class="minibutton">
-				<a href="#respond" title="<?php _e( 'Leave a comment','boozurk' ); ?>">
+		<?php if ( $comment && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- Leave a comment ------- ?>
+			<div class="minibutton" title="<?php _e( 'Leave a comment','boozurk' ); ?>">
+				<a href="#respond">
 					<span class="minib_img minib_comment">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Leave a comment','boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-		<?php if ( $feed ) { // ------- RSS feed ------- ?>
-			<div class="minibutton">
-				<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> " title="<?php _e( 'feed for comments on this post', 'boozurk' ); ?>">
+		<?php if ( $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- RSS feed ------- ?>
+			<div class="minibutton" title="<?php _e( 'Feed for comments on this post', 'boozurk' ); ?>">
+				<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> ">
 					<span class="minib_img minib_rss">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Feed for comments on this post', 'boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-			<?php if ( pings_open() ) { ?>
-
-
-		<?php if ( $trackback ) { // ------- Trackback ------- ?>
-			<div class="minibutton">
-				<a href="<?php global $bz_tmptrackback; echo $bz_tmptrackback; ?>" rel="trackback" title="Trackback URL">
+		<?php if ( $trackback && $is_singular && pings_open() ) { 											// ------- Trackback ------- ?>
+			<div class="minibutton" title="<?php _e( 'Trackback URL','boozurk' ); ?>">
+				<a href="<?php global $bz_tmptrackback; echo $bz_tmptrackback; ?>" rel="trackback">
 					<span class="minib_img minib_track">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Trackback URL','boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-			<?php
-			}
-		}
-		?>
-
-
-		<?php if ( $home ) { // ------- Home ------- ?>
-			<div class="minibutton">
-				<a href="<?php echo home_url(); ?>" title="home">
+		<?php if ( $home ) { 																				// ------- Home ------- ?>
+			<div class="minibutton" title="<?php _e( 'Home','boozurk' ); ?>">
+				<a href="<?php echo home_url(); ?>">
 					<span class="minib_img minib_home">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Home','boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-		<?php if ( is_attachment() ) { ?>
+		<?php if ( $is_image ) { 																			// ------- Back to parent post ------- ?>
 			<?php if ( !empty( $post->post_parent ) ) { ?>
-				<div class="minibutton">
-					<a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php esc_attr( printf( __( 'Return to %s', 'boozurk' ), get_the_title( $post->post_parent ) ) ); ?>" rel="gallery">
+				<div class="minibutton" title="<?php esc_attr( printf( __( 'Return to %s', 'boozurk' ), get_the_title( $post->post_parent ) ) ); ?>">
+					<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery">
 						<span class="minib_img minib_backtopost">&nbsp;</span>
 					</a>
-					<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php esc_attr( printf( __( 'Return to %s', 'boozurk' ), get_the_title( $post->post_parent ) ) ); ?></div></div>
 				</div>
 			<?php } ?>
-		<?php } elseif ( is_single() ){ ?>
-			<?php if ( get_next_post() ) {?>
+		<?php } ?>
 
-
-		<?php if ( $next_prev ) { // ------- Next post ------- ?>
-			<div class="minibutton">
-				<a href="<?php echo get_permalink( get_next_post() ); ?>" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', get_the_title( get_next_post() ) ) ); ?>">
+		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
+			<div class="minibutton" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', get_the_title( get_next_post() ) ) ); ?>">
+				<a href="<?php echo get_permalink( get_next_post() ); ?>">
 					<span class="minib_img minib_npage">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', get_the_title( get_next_post() ) ) ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-			<?php } ?>
-
-			<?php if ( get_previous_post() ) {?>
-
-
-		<?php if ( $next_prev ) { // ------- Previous post ------- ?>
-			<div class="minibutton">
-				<a href="<?php echo get_permalink( get_previous_post() ); ?>" title="<?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', get_the_title( get_previous_post() ) ) ); ?>">
+		<?php if (  $next_prev && $is_post && get_previous_post() ) { 										// ------- Previous post ------- ?>
+			<div class="minibutton" title="<?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', get_the_title( get_previous_post() ) ) ); ?>">
+				<a href="<?php echo get_permalink( get_previous_post() ); ?>">
 					<span class="minib_img minib_ppage">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', get_the_title( get_previous_post() ) ) ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-			<?php } ?>
-		<?php } ?>
-
-	<?php } else {?>
-
-
-		<?php if ( $home ) { // ------- Home ------- ?>
-			<div class="minibutton">
-				<a href="<?php echo home_url(); ?>" title="home">
-					<span class="minib_img minib_home">&nbsp;</span>
-				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Home','boozurk' ); ?></div></div>
-			</div>
-		<?php } ?>
-
-
-		<?php
-		if( !isset( $boozurk_is_allcat_page ) || !$boozurk_is_allcat_page ) {
-		?>
-			<?php if ( get_previous_posts_link() ) {?>
-
-
-		<?php if ( $next_prev ) { // ------- Newer Posts ------- ?>
-			<div class="minibutton">
+		<?php if ( $next_prev && !$is_singular && !$bz_is_allcat_page && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
+			<div class="minibutton" title="<?php echo __( 'Newer Posts', 'boozurk' ); ?>">
 				<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php echo __( 'Newer Posts', 'boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-			<?php } ?>
-			<?php if ( get_next_posts_link() ) {?>
-
-
-		<?php if ( $next_prev ) { // ------- Older Posts ------- ?>
-			<div class="minibutton">
+		<?php if ( $next_prev && !$is_singular && !$bz_is_allcat_page && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
+			<div class="minibutton" title="<?php echo __( 'Older Posts', 'boozurk' ); ?>">
 				<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php echo __( 'Older Posts', 'boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-
-			<?php } ?>
-		<?php
-		}
-	} ?>
-
-		<?php if ( $up_down ) { // ------- Top ------- ?>
-			<div class="minibutton">
-				<a href="#" title="<?php _e( 'Top of page', 'boozurk' ); ?>">
+		<?php if ( $up_down ) { 																			// ------- Top ------- ?>
+			<div class="minibutton" title="<?php _e( 'Top of page', 'boozurk' ); ?>">
+				<a href="#">
 					<span class="minib_img minib_top">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Top of page', 'boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 
-		<?php if ( $up_down ) { // ------- Bottom ------- ?>
-			<div class="minibutton">
-				<a href="#footer" title="<?php _e( 'Bottom of page', 'boozurk' ); ?>">
+		<?php if ( $up_down ) { 																			// ------- Bottom ------- ?>
+			<div class="minibutton" title="<?php _e( 'Bottom of page', 'boozurk' ); ?>">
+				<a href="#footer">
 					<span class="minib_img minib_bottom">&nbsp;</span>
 				</a>
-				<div class="nb_tooltip"><div class="nb_tooltip_inner"><?php _e( 'Bottom of page', 'boozurk' ); ?></div></div>
 			</div>
 		<?php } ?>
 	<div class="fixfloat"> </div>

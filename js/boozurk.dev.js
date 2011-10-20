@@ -62,25 +62,27 @@
 
     };
 
-    $.fn.tipsy = function(options) {
+	// Based on Tipsy JQuery Plugin
+	// http://plugins.jquery.com/project/tipsy
+    $.fn.cooltips = function(options) {
 
-        options = $.extend({}, $.fn.tipsy.defaults, options);
+        options = $.extend({}, $.fn.cooltips.defaults, options);
         
         return this.each(function() {
             
-            var opts = $.fn.tipsy.elementOptions(this, options);
+            var opts = $.fn.cooltips.elementOptions(this, options);
 			
 			//opts.fade = false;
             
             $(this).hover(function() {
 
-                $.data(this, 'cancel.tipsy', true);
+                $.data(this, 'cancel.cooltips', true);
 
-                var tip = $.data(this, 'active.tipsy');
+                var tip = $.data(this, 'active.cooltips');
                 if (!tip) {
-                    tip = $('<div class="tipsy"><div class="tipsy-inner"/></div>');
+                    tip = $('<div class="cooltips"><div class="cooltips-inner"/></div>');
                     tip.css({position: 'absolute', zIndex: 100000});
-                    $.data(this, 'active.tipsy', tip);
+                    $.data(this, 'active.cooltips', tip);
                 }
 
                 if ($(this).attr('title') || typeof($(this).attr('original-title')) != 'string') {
@@ -89,14 +91,14 @@
 
                 var title = $(this).attr('original-title');
 
-                tip.find('.tipsy-inner')['text'](title || opts.fallback);
+                tip.find('.cooltips-inner')['text'](title || opts.fallback);
 
                 var pos = $.extend({}, $(this).offset(), {width: this.offsetWidth, height: this.offsetHeight});
-                tip.get(0).className = 'tipsy'; // reset classname in case of dynamic gravity
+                tip.get(0).className = 'cooltips'; // reset classname in case of dynamic gravity
                 tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
                 var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
-				var h_pos = ( $(this).parents('#pages').length ) ? 'to_left' : ''; // if in right sidebar, move to left
-				tip.css({top: pos.top + pos.height, left: pos.left+(pos.width / 2)}).addClass(h_pos);
+				var h_pos = ( $(this).parents('#pages,#navbuttons.fixed').length ) ? 'to_left' : ''; // if in right sidebar, move to left
+				tip.css({top: pos.top - actualHeight, left: pos.left+(pos.width / 2)}).addClass(h_pos);
                 if (opts.fade) {
                     tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
                 } else {
@@ -104,11 +106,11 @@
                 }
 
             }, function() {
-                $.data(this, 'cancel.tipsy', false);
+                $.data(this, 'cancel.cooltips', false);
                 var self = this;
                 setTimeout(function() {
-                    if ($.data(this, 'cancel.tipsy')) return;
-                    var tip = $.data(self, 'active.tipsy');
+                    if ($.data(this, 'cancel.cooltips')) return;
+                    var tip = $.data(self, 'active.cooltips');
                     if (opts.fade) {
                         tip.stop().fadeOut(function() { $(this).remove(); });
                     } else {
@@ -122,15 +124,11 @@
         
     };
     
-    // Overwrite this method to provide options on a per-element basis.
-    // For example, you could store the gravity in a 'tipsy-gravity' attribute:
-    // return $.extend({}, options, {gravity: $(ele).attr('tipsy-gravity') || 'n' });
-    // (remember - do not modify 'options' in place!)
-    $.fn.tipsy.elementOptions = function(ele, options) {
+    $.fn.cooltips.elementOptions = function(ele, options) {
         return $.metadata ? $.extend({}, options, $(ele).metadata()) : options;
     };
     
-    $.fn.tipsy.defaults = {
+    $.fn.cooltips.defaults = {
         fade: false,
         fallback: ''
     };	

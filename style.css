@@ -1,7 +1,7 @@
 /*
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
-Description: this is Boozurk!
+Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars (the right one is fixed), up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
 Version: 0.5
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
 Author: TwoBeers Crew
@@ -270,7 +270,7 @@ input[type=password]:focus {
 }
 #bz-credits {
     text-align:center;
-	padding: 5px;
+	padding: 50px 5px;
 	font-size: .7em;
 }
 
@@ -482,7 +482,7 @@ input[type=password]:focus {
 	opacity: 0.9;
 	filter: alpha(opacity=90);
 	z-index: 300;
-	background: transparent url(images/tipsy.gif) 0 top no-repeat;
+	background: transparent url(images/cooltips.gif) 0 top no-repeat;
 	font-size: 11px;
 	margin-left : 25px;
 }
@@ -782,21 +782,21 @@ img.bz-thumb-format {
 	text-decoration: underline;
 }
 
-/* tipsy
+/* cooltips
 ----------------------------------------------------------*/
-.tipsy {
+.cooltips {
 	padding: 5px 0;
 	font-size: 11px;
 	opacity: 0.9;
 	filter: alpha(opacity=90);
-	background: transparent url(images/tipsy.gif) 0 top no-repeat;
+	background: transparent url(images/cooltips.gif) 0 bottom no-repeat;
 	width: 200px;
 }
-.tipsy.to_left {
-	background-position : right top;
+.cooltips.to_left {
+	background-position : right bottom;
 	margin-left: -200px;
 }
-.tipsy-inner {
+.cooltips-inner {
 	padding: 5px;
 	background-color: black;
 	color: white;
@@ -805,13 +805,11 @@ img.bz-thumb-format {
 	box-shadow: 0 0 3px #000;
 	border-radius: 3px;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* Navigation buttons
 ----------------------------------------------------------*/
-#navbuttons {
-	position: relative;
-}
 #navbuttons.fixed {
 	position: fixed;
 	bottom: 5px;
@@ -833,41 +831,8 @@ img.bz-thumb-format {
 .minibutton {
 	float:left;
 	margin:3px;
-}
-.minibutton .nb_tooltip {
-	display: none;
-	position: absolute;
-	top: 30px;
-	left: -5px;
-	white-space: pre;
+	position: relative;
 	z-index: 300;
-	padding: 5px;
-	font-size: 11px;
-	opacity: 0.9;
-	filter: alpha(opacity=90);
-}
-.minibutton .nb_tooltip_inner {
-	border-radius: 3px;
-	padding: 5px 8px 4px 8px;
-	background-color: black;
-	color: white;
-	box-shadow:0 0 3px #000;
-}
-.nb_tooltip {
-	background-position: -230px top;
-}
-.fixed .minibutton .nb_tooltip,
-#fixed-widget-area  .minibutton .nb_tooltip {
-	top: -30px;
-	right: 0;
-	bottom: auto;
-	left: 0;
-}
-.minibutton:hover .nb_tooltip {
-	display: block;
-}
-.minibutton .nb_tooltip:hover {
-	display: none;
 }
 .minib_print{
 	background-position: left 0;
