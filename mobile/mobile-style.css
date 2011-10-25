@@ -51,6 +51,7 @@ pre {
 }
 #head h1 {
 	margin:0;
+	text-align:center;
 }
 #head a {
 	background: #2B2B2B url("images/head.png") left top repeat-x;
@@ -94,11 +95,12 @@ pre {
 	font-size: 11px;
 }
 .bz-format {
-    background:url("../images/icons/formats.png") no-repeat scroll center -224px transparent;
+    background:url("../images/formats.png") no-repeat scroll center -224px transparent;
     float:left;
     height:32px;
     width:32px;
-	margin: 0 5px 5px 0;
+	margin: 5px 5px 5px 0;
+	border: 1px solid #ddd;
 }
 .halfsep {
 	background-image: url("images/half-divider.png");
@@ -111,6 +113,8 @@ pre {
 }
 .bz-halfspan a {
 	display: block;
+	overflow:hidden;
+	white-space:pre;
 }
 .bz-next {
 	float: right;
@@ -123,10 +127,12 @@ pre {
 	background: transparent url("images/arr_l.png") left center no-repeat;
 }
 .bz-next a {
-	padding: 5px 30px 5px 5px ;
+	padding: 5px 0 5px 5px;
+	margin-right: 30px;
 }
 .bz-prev a {
-	padding: 5px 5px 5px 30px ;
+	padding: 5px 5px 5px 0;
+	margin-left: 30px;
 }
 .bz-navi {
 	clear: both;
@@ -386,33 +392,33 @@ img.aligncenter {
 	text-decoration: underline;
 }
 /* Post Format icons*/
-.bz-format.aside {
+.bz-format.f-aside {
 	background-position: center 0;
 }
-.bz-format.audio {
+.bz-format.f-audio {
 	background-position: center -32px;
 }
-.bz-format.chat {
+.bz-format.f-chat {
 	background-position: center -64px;
 }
-.bz-format.gallery {
+.bz-format.f-gallery {
 	background-position: center -96px;
 }
-.bz-format.image {
+.bz-format.f-image {
 	background-position: center -128px;
 }
-.bz-format.link {
+.bz-format.f-link {
 	background-position: center -160px;
 }
-.bz-format.quote {
+.bz-format.f-quote {
 	background-position: center -192px;
 }
-.bz-format.standard {
+.bz-format.f-standard {
 	background-position: center -224px;
 }
-.bz-format.status {
+.bz-format.f-status {
 	background-position: center -256px;
 }
-.bz-format.video {
+.bz-format.f-video {
 	background-position: center -288px;
 }

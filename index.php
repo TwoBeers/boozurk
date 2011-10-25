@@ -16,7 +16,7 @@ if ( have_posts() ) {
 				function_exists( 'get_post_format' ) && 
 				isset( $boozurk_opt['boozurk_post_formats_' . get_post_format( $post->ID ) ] ) && 
 				$boozurk_opt['boozurk_post_formats_' . get_post_format( $post->ID ) ] == 1 
-			) ? get_post_format( $post->ID ) : 'standard' ;
+			) ? get_post_format( $post->ID ) : '' ;
 		} ?>
 		
 		<?php boozurk_hook_before_post(); ?>

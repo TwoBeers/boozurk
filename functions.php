@@ -38,20 +38,24 @@ function boozurk_mobile_device_detect() {
 	// #1 check: mobile support is off (via options)
 	if ( ( isset( $boozurk_opt['boozurk_mobile_css'] ) && ( $boozurk_opt['boozurk_mobile_css'] == 0) ) ) return false;
 	
-	// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set/deleted
+	// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set
 	if ( isset( $_GET['mobile_override'] ) ) {
-		if ( $_GET['mobile_override'] == 'mobile' ) {
+		if ( md5( $_GET['mobile_override'] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
 			setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12) );
 			return true;
 		} else {
-			setcookie( "mobile_override", "desktop", time()-3600 );
+			setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12) );
 			return false;
 		}
 	}
 	
 	// #3 check: the cookie is already set
 	if (isset($_COOKIE["mobile_override"])) {
-		return true;
+		if ( md5( $_COOKIE["mobile_override"] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// #4 check: search for a mobile user agent
@@ -494,7 +498,8 @@ if ( !function_exists( 'boozurk_multipages' ) ) {
 			'post_parent' => $post->ID,
 			'order' => 'ASC',
 			'orderby' => 'menu_order',
-			'numberposts' => 0
+			'numberposts' => 0,
+			'no_found_rows' => true
 			);
 		$childrens = get_posts( $args ); // retrieve the child pages
 		$has_herarchy = false;

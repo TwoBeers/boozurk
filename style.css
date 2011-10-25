@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars (the right one is fixed), up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
-Version: 0.5
+Version: 0.6
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -114,7 +114,7 @@ input[type=password] {
 	border: 1px solid #404040;
 }
 input[type=password] {
-	background: #fff url('images/icons/details.png') 3px -298px no-repeat;
+	background: #fff url('images/details.png') 3px -298px no-repeat;
 	min-height: 20px;
 }
 input[type=button],
@@ -168,7 +168,7 @@ input[type=password]:focus {
 .storycontent ul li,
 .widget ul li,
 .comment-body ul li {
-	list-style: disc outside url('images/litem.png');
+	list-style: square outside none;
 }
 .storycontent table,
 .comment-body table {
@@ -212,6 +212,7 @@ input[type=password]:focus {
 ----------------------------------------------------------*/
 #head {
 	padding: 0 10px 20px;
+	text-align: center;
 }
 #head h1 {
 	font-size: 3.5em;
@@ -271,7 +272,7 @@ input[type=password]:focus {
 #bz-credits {
     text-align:center;
 	padding: 50px 5px;
-	font-size: .7em;
+	font-size: .8em;
 }
 
 /* Some browsing links
@@ -556,7 +557,7 @@ div.bz_widget_post_formats ul li {
 .bz-post-details-tags,
 .bz-post-details-date {
 	background-repeat: no-repeat;
-	background-image: url('images/icons/details.png');
+	background-image: url('images/details.png');
 	line-height: 25px;
 	padding: 1px 0 5px 25px;
 }
@@ -605,13 +606,19 @@ div.bz_Widget_post_details ul {
 .widget img.bz-thumb-format {
 	max-width: 32px;
 }
-
+.bz_widget_recent_entries .bz-cat-descr {
+	background-color: #eee;
+	border: 1px solid #ddd;
+	padding: 0 5px;
+	margin: 0;
+	font-size: .8em;
+}
 /* Post Format icons
 ----------------------------------------------------------*/
 .bz-thumb-format,
 img.bz-thumb-format {
 	background-repeat: no-repeat;
-	background-image: url('images/icons/formats.png');
+	background-image: url('images/formats.png');
 	vertical-align: middle;
     margin: 1px 0;
 }
@@ -769,7 +776,7 @@ img.bz-thumb-format {
     margin-bottom: 10px;
 }
 .bz-author-bio .author-description {
-    font-size: .9em;
+    font-size: .8em;
 }
 .bz-author-bio .author-social {
 	border-top:1px solid #ddd;
@@ -936,7 +943,7 @@ img.bz-thumb-format {
 }
 .bz-breadcrumb-home
 {
-	background:url('images/icons/details.png') no-repeat center -500px;
+	background:url('images/details.png') no-repeat center -500px;
     float:left;
     height:16px;
     margin:0.5em;
@@ -1050,7 +1057,7 @@ img.bz-thumb-format {
 	top: 10px;
     text-indent: -1000px;
     width: 13px;
-	background: url('images/icons/details.png') no-repeat left -600px;
+	background: url('images/details.png') no-repeat left -600px;
 }
 #cancel-comment-reply-link:hover {
 	background-position: left -612px;
@@ -1114,7 +1121,7 @@ img.bz-thumb-format {
 	height: 30px;
 }
 .bzg-preview-link {
-	background: url('images/icons/details.png') no-repeat 3px -396px transparent;
+	background: url('images/details.png') no-repeat 3px -396px transparent;
 	padding: 5px 5px 5px 25px;
     border: 1px solid #ccc;
     border-radius: 2px;

@@ -49,7 +49,7 @@
 					<?php $bz_alter_style = ( !isset($bz_alter_style) || $bz_alter_style == 'bz-odd' ) ? 'bz-even' : 'bz-odd'; ?>
 					<li class="<?php echo $bz_alter_style; ?>">
 						<a href="<?php the_permalink() ?>" rel="bookmark">
-							<span class="bz-format <?php echo get_post_format( $post->ID ); ?>"></span>
+							<span class="bz-format f-<?php echo get_post_format( $post->ID ); ?>"></span>
 							<?php 
 							$bz_post_title = the_title( '','',false );
 							if ( !$bz_post_title ) {

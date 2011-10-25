@@ -435,12 +435,12 @@ class boozurk_Widget_social extends WP_Widget {
 			'Facebook',
 			'Flickr',
 			'Github',
+			'GooglePlus',
 			'Hi5',
 			'LinkedIn',
 			'Myspace',
 			'Odnoklassniki',
 			'Orkut',
-			'Plus',
 			'Qzone',
 			'Reddit',
 			'Sina',
@@ -761,10 +761,11 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 			if ( !is_single() || is_attachment() ) return;
 			global $post;
 			$category = get_the_category( $post->ID );
-			if ( $category ) { $category = $category[0]->cat_ID; } else { $category = ''; }
+			$category = ( $category ) ? $category[0]->cat_ID : '';
 		}
 		
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
+		$description = ( !isset($instance['description']) || $description = (int) $instance['description'] ) ? 1 : 0;
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
 		if ( ! $number = absint( $instance['number'] ) )
@@ -775,6 +776,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php if ( $description ) echo '<div class="bz-cat-descr">' . category_description( $category ) . '</div>'; ?>
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
@@ -800,6 +802,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['category'] = (int) $new_instance['category'];
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$instance['description'] = (int) $new_instance['description'] ? 1 : 0;
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -818,6 +821,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
 		$category = isset($instance['category']) ? intval($instance['category']) : '';
 		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
+		$description = isset($instance['description']) ? absint($instance['description']) : 1;
 ?>
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'boozurk' ); ?></label>
@@ -844,11 +848,17 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 			<?php 
 			echo str_replace( '</select>', '<option ' . selected( $category , -1 , 0 ) . 'value="-1" class="level-0">' . __( '(current post category)', 'boozurk' ) . '</option></select>', $dropdown_categories );
 			?>
-			<small><?php echo 'by selecting "(current post category)", the widget will be visible ONLY in single posts'; ?></small>
+			<small><?php echo __( 'by selecting "(current post category)", the widget will be visible ONLY in single posts', 'boozurk' ); ?></small>
 		</p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show', 'boozurk' ); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<p>
+			<input id="<?php echo $this->get_field_id('description'); ?>" name="<?php echo $this->get_field_name('description'); ?>" value="1" type="checkbox" <?php checked( 1 , $description ); ?> />
+			<label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Show category description','boozurk'); ?></label>
+		</p>	
+		<p>
+			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show', 'boozurk' ); ?></label>
+			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+		</p>
 
 		<p>
 			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
