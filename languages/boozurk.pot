@@ -1326,6 +1326,21 @@ msgstr ""
 msgid "use the logo in the login page"
 msgstr ""
 
+#. Text in function
+#: functions.php:317
+msgid "swf audio player"
+msgstr ""
+
+#. Text in function
+#: functions.php:317
+msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:317
+msgid "this audio type is not supported by your browser"
+msgstr ""
+
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] ""

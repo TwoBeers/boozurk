@@ -12,7 +12,6 @@
 
 			</div><!-- close footer -->
 			<?php boozurk_hook_after_footer(); ?>
-			<?php if ( ! is_active_widget(false, false, 'bz-navbuttons', true) ) { boozurk_navbuttons(); } ?>
 
 <?php get_sidebar(); // show sidebar ?>
 

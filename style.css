@@ -26,7 +26,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 ----------------------------------------------------------*/
 body {
 	font-family: monospace;
-	background: transparent url('images/bg2.png') 256px 0px repeat-y;
+	background: transparent url('images/bg.png') 256px 0px repeat-y;
 	font-size: 15px;
 }
 a img {
@@ -129,7 +129,7 @@ input[type=reset] {
     font-weight: bold;
     height: 29px;
     line-height: 27px;
-    margin: 11px 6px;
+    margin: 10px 4px;
     min-width: 54px;
     padding: 0 8px;
     text-align: center;
@@ -350,12 +350,10 @@ input[type=password]:focus {
 /* Posts/Pages/Attachments
 ----------------------------------------------------------*/
 #posts_content .post, #posts_content .page, #posts_content .attachment {
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
     border-left: 40px solid #555;
     margin-left: -40px;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 10px 11px;
     clear: both;
     margin-top: 20px;
 	position: relative;
@@ -401,7 +399,7 @@ input[type=password]:focus {
 .post_meta_container {
     left: -40px;
     position: absolute;
-    top: 0;
+    top: 2px;
 }
 .storytitle {
 	line-height: 40px;
@@ -411,7 +409,7 @@ input[type=password]:focus {
     padding-top : 10px;
 }
 .bz-featured-title {
-    margin: -1px -10px 0 -6px;
+    margin: 0 -10px;
     max-height: 300px;
     overflow: hidden;
     padding: 0;
@@ -421,21 +419,27 @@ input[type=password]:focus {
 	background-color: rgba(255, 255, 255, 0.8);
 	line-height: 34px;
 	margin: 0;
-	min-height: 53px;
-	padding-left: 2%;
-	padding-right: 1px;
+	min-height: 54px;
 	position: absolute;
 	top: 2px;
-	width: 98%;
+	width: 100%;
 	left: 0;
+}
+.bz-featured-title .storytitle a {
+	padding-left: 10px;
 }
 .bz-featured-title img {
 	width: 100%;
 }
 .format-status .avatar,
 .category-status .avatar {
-	float: left;
-    margin: 0 10px 10px 0;
+	position: absolute;
+	left:10px;
+	top:10px;
+}
+.format-status .storycontent,
+.category-status .storycontent {
+	padding-left: 60px;
 }
 .gallery-thumb {
 	float: left;
@@ -454,6 +458,40 @@ input[type=password]:focus {
 	text-align: center;
 	margin-top: 20px;
 	padding:5px 0;
+}
+.post-edit-link {
+	background:url("images/details.png") no-repeat center -700px transparent;
+	border:1px solid #ddd;
+	border-radius:3px;
+	display:none;
+	height:16px;
+	overflow:hidden;
+	position:absolute;
+	right:1px;
+	text-indent:-1000px;
+	top:3px;
+	width:16px;
+	z-index:100;
+}
+#posts_content .post:hover .post-edit-link {
+	display: block;
+}
+
+/* Audio player
+----------------------------------------------------------*/
+.bz-player-container {
+	margin-bottom: 20px;
+	width: 300px;
+	padding: 5px;
+	background: #222;
+    color:#fff;
+}
+.bz-player-content {
+	margin-top: 10px;
+}
+.bz-player-notice {
+    color:#aaa;
+    font-size:.8em;
 }
 /* Last comments on post (last-cop)
 ----------------------------------------------------------*/
@@ -620,7 +658,7 @@ img.bz-thumb-format {
 	background-repeat: no-repeat;
 	background-image: url('images/formats.png');
 	vertical-align: middle;
-    margin: 1px 0;
+    margin: 0 0 2px;
 }
 .bz-thumb-format.aside,
 .format-aside .pmb_format,
@@ -686,9 +724,6 @@ img.bz-thumb-format {
 ----------------------------------------------------------*/
 #mainmenu_container {
     margin-bottom: 20px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
 	max-width: 100%;
 }
 #mainmenu {
@@ -697,7 +732,7 @@ img.bz-thumb-format {
 }
 #mainmenu > li {
 	float: left;
-	margin-right: 15px;
+	margin-right: 25px;
 	padding: 2px;
 }
 #mainmenu > li > a {
@@ -726,7 +761,9 @@ img.bz-thumb-format {
 .bz-menu-thumb.default {
 	border: 1px solid #ddd;
 }
-
+.hiraquo {
+	padding-left :5px;
+}
 /* secondary menus
 ----------------------------------------------------------*/
 #secondary1 {
@@ -839,7 +876,6 @@ img.bz-thumb-format {
 	float:left;
 	margin:3px;
 	position: relative;
-	z-index: 300;
 }
 .minib_print{
 	background-position: left 0;
@@ -922,8 +958,7 @@ img.bz-thumb-format {
 
 /* BreadCrumb 
 ----------------------------------------------------------*/
-#bz-breadcrumb
-{
+#bz-breadcrumb {
 	margin: 0;
 	display: block;
 	border:solid 1px #ddd;
@@ -932,9 +967,14 @@ img.bz-thumb-format {
 	margin-bottom:20px;
 	padding: 0 5px;
 }
+#bz-breadcrumb span,
+#bz-breadcrumb a {
+    float:left;
+}
+
 .bz-breadcrumb-sep {
 	background: url('images/bc-sep.png') no-repeat right center;
-	padding: 5px;
+	padding: 0 5px;
 }
 .bz-breadcrumb-childs {
 	padding: 5px 10px;
@@ -1087,6 +1127,7 @@ img.bz-thumb-format {
 
 .gallery-caption {
 	margin-left: 0;
+	font-size: .8em;
 }
 .gallery-columns-1 .gallery-item {
 	width: 99%;
@@ -1142,12 +1183,12 @@ img.thumbsel {
 #wp-calendar caption {
 	text-align: right;
 	color: #333;
-	font-size: .7em;
+	font-size: .8em;
 	margin-top: 10px;
 	margin-bottom: 15px;
 }
 #wp-calendar thead {
-	font-size: .7em;
+	font-size: .8em;
 }
 #wp-calendar thead th {
 	padding-bottom: 10px;
@@ -1168,13 +1209,13 @@ img.thumbsel {
 	background: none;
 }
 #wp-calendar tfoot #next {
-	font-size: .7em;
+	font-size: .8em;
 	text-transform: uppercase;
 	padding-top: 10px;
 	text-align: right;
 }
 #wp-calendar tfoot #prev {
-	font-size: .7em;
+	font-size: .8em;
 	text-transform: uppercase;
 	padding-top: 10px;
 }

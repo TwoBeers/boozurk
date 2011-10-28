@@ -1,5 +1,5 @@
 (function($) {
-    $.fn.postexpander = function() {
+    $.fn.boozurk_PostExpander = function() {
 
         return this.each(function() {
             
@@ -23,7 +23,7 @@
 
     };
 
-    $.fn.animate_menu = function() {
+    $.fn.boozurk_AnimateMenu = function() {
 
         return this.children('li').each(function() {
             
@@ -52,7 +52,7 @@
 
     };
 
-    $.fn.gallery_slider = function() {
+    $.fn.boozurk_GallerySlider = function() {
 
         return this.each(function() {
             
@@ -64,13 +64,13 @@
 
 	// Based on Tipsy JQuery Plugin
 	// http://plugins.jquery.com/project/tipsy
-    $.fn.cooltips = function(options) {
+    $.fn.boozurk_Cooltips = function(options) {
 
-        options = $.extend({}, $.fn.cooltips.defaults, options);
+        options = $.extend({}, $.fn.boozurk_Cooltips.defaults, options);
         
         return this.each(function() {
             
-            var opts = $.fn.cooltips.elementOptions(this, options);
+            var opts = $.fn.boozurk_Cooltips.elementOptions(this, options);
 			
 			//opts.fade = false;
             
@@ -124,16 +124,16 @@
         
     };
     
-    $.fn.cooltips.elementOptions = function(ele, options) {
+    $.fn.boozurk_Cooltips.elementOptions = function(ele, options) {
         return $.metadata ? $.extend({}, options, $(ele).metadata()) : options;
     };
     
-    $.fn.cooltips.defaults = {
+    $.fn.boozurk_Cooltips.defaults = {
         fade: false,
         fallback: ''
     };	
 
-    $.fn.tooltips = function() {
+    $.fn.boozurk_Tooltips = function() {
 
         return this.each(function() {
             
@@ -153,6 +153,45 @@
         });
         
     };
+	
+    $.fn.boozurk_AudioPlayer = function() {
+
+		var the_id = 0;
+		return this.each(function() {
+			the_id++;
+			$(this).attr('id', 'bz-player-id' + the_id );
+			var the_source = $(this).children('source:first-child');
+			if ( the_source.size() !== 0 ) {
+				the_href = the_source.attr('src');
+				var the_type = the_href.substr( the_href.length - 4, 4 )
+				switch (the_type)
+				{
+				case '.ogg':
+					if ( !document.createElement("audio").canPlayType ) {
+						$(this).parent().html('<span class="bz-player-notice">' + bz_unknown_media_format + '</span>');
+					}
+					break;
+				case '.mp3':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
+						bz_AudioPlayer.embed(this.id, {  
+							soundFile: the_href
+						});  
+					}
+					break;
+				case '.m4a':
+					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
+						$(this).parent().html('<span class="bz-player-notice">' + bz_unknown_media_format + '</span>');
+					}
+					break;
+				default:
+					$(this).parent().html('<span class="bz-player-notice">' + bz_unknown_media_format + '</span>');
+				}				
+			}
+			
+        });
+        
+    };
+
 
 })(jQuery);
 
@@ -217,9 +256,133 @@ function bz_SwitchMe(domid) {
 	);
 }
 
+var bz_AudioPlayer = function () {
+	var instances = [];
+	var activePlayerID;
+	var playerURL = "";
+	var defaultOptions = {};
+	var currentVolume = -1;
+	var requiredFlashVersion = "9";
+	
+	function getPlayer(playerID) {
+		if (document.all && !window[playerID]) {
+			for (var i = 0; i < document.forms.length; i++) {
+				if (document.forms[i][playerID]) {
+					return document.forms[i][playerID];
+					break;
+				}
+			}
+		}
+		return document.all ? window[playerID] : document[playerID];
+	}
+	
+	function addListener (playerID, type, func) {
+		getPlayer(playerID).addListener(type, func);
+	}
+	
+	return {
+		setup: function (url, options) {
+			playerURL = url;
+			defaultOptions = options;
+			if (swfobject.hasFlashPlayerVersion(requiredFlashVersion)) {
+				swfobject.switchOffAutoHideShow();
+				swfobject.createCSS(".swf-audio-player small", "display:none;");
+			}
+		},
 
+		getPlayer: function (playerID) {
+			return getPlayer(playerID);
+		},
+		
+		addListener: function (playerID, type, func) {
+			addListener(playerID, type, func);
+		},
+		
+		embed: function (elementID, options) {
+			var instanceOptions = {};
+			var key;
+			
+			var flashParams = {};
+			var flashVars = {};
+			var flashAttributes = {};
+	
+			// Merge default options and instance options
+			for (key in defaultOptions) {
+				instanceOptions[key] = defaultOptions[key];
+			}
+			for (key in options) {
+				instanceOptions[key] = options[key];
+			}
+			
+			if (instanceOptions.transparentpagebg == "yes") {
+				flashParams.bgcolor = "#FFFFFF";
+				flashParams.wmode = "transparent";
+			} else {
+				if (instanceOptions.pagebg) {
+					flashParams.bgcolor = "#" + instanceOptions.pagebg;
+				}
+				flashParams.wmode = "opaque";
+			}
+			
+			flashParams.menu = "false";
+			
+			for (key in instanceOptions) {
+				if (key == "pagebg" || key == "width" || key == "transparentpagebg") {
+					continue;
+				}
+				flashVars[key] = instanceOptions[key];
+			}
+			
+			flashAttributes.name = elementID;
+			flashAttributes.style = "outline: none";
+			
+			flashVars.playerID = elementID;
+			
+			swfobject.embedSWF(playerURL, elementID, instanceOptions.width.toString(), "24", requiredFlashVersion, false, flashVars, flashParams, flashAttributes);
+			
+			instances.push(elementID);
+		},
+		
+		syncVolumes: function (playerID, volume) {	
+			currentVolume = volume;
+			for (var i = 0; i < instances.length; i++) {
+				if (instances[i] != playerID) {
+					getPlayer(instances[i]).setVolume(currentVolume);
+				}
+			}
+		},
+		
+		activate: function (playerID, info) {
+			if (activePlayerID && activePlayerID != playerID) {
+				getPlayer(activePlayerID).close();
+			}
 
-
-
-
+			activePlayerID = playerID;
+		},
+		
+		load: function (playerID, soundFile, titles, artists) {
+			getPlayer(playerID).load(soundFile, titles, artists);
+		},
+		
+		close: function (playerID) {
+			getPlayer(playerID).close();
+			if (playerID == activePlayerID) {
+				activePlayerID = null;
+			}
+		},
+		
+		open: function (playerID, index) {
+			if (index == undefined) {
+				index = 1;
+			}
+			getPlayer(playerID).open(index == undefined ? 0 : index-1);
+		},
+		
+		getVolume: function (playerID) {
+			return currentVolume;
+		}
+		
+	}
+	
+}();
 

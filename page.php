@@ -9,7 +9,7 @@
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
 				<?php boozurk_hook_before_post_title(); ?>
-				<?php boozurk_featured_title();	?>
+				<?php boozurk_featured_title( array( 'featured' => true ) ); ?>
 				<?php boozurk_hook_after_post_title(); ?>
 				<?php boozurk_hook_before_post_content(); ?>
 				<div class="storycontent">

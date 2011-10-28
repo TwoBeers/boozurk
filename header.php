@@ -30,6 +30,7 @@
 					<?php get_sidebar( 'fixed' ); // show header widgets area ?>
 				</div>
 			</div>
+			<?php if ( ! is_active_widget(false, false, 'bz-navbuttons', true) ) { boozurk_navbuttons(); } ?>
 			<?php boozurk_hook_before_header(); ?>
 			<div id="head">
 				<?php boozurk_hook_before_site_title(); ?>
@@ -40,7 +41,7 @@
 			
 			<?php boozurk_hook_before_pages(); ?>
 			<div id="mainmenu_container">
-				<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'boozurk_pages_menu', 'theme_location' => 'primary', 'walker' => new boozurk_Thumb_Walker ) ); ?>
+				<?php wp_nav_menu( array( 'container' => false, 'menu_id' => 'mainmenu', 'fallback_cb' => 'boozurk_pages_menu', 'theme_location' => 'primary', 'walker' => new boozurk_Thumb_Walker ) ); ?>
 				<div class="fixfloat"></div>
 			</div>
 			<?php boozurk_hook_after_pages(); ?>

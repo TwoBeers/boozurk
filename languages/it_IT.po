@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Boozurk 0.5\n"
+"Project-Id-Version: Boozurk 0.6\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
@@ -506,7 +506,7 @@ msgstr "Altro"
 #. Text in function
 #: functions.php:731
 msgid "Page"
-msgstr "Pagine"
+msgstr "Pagina"
 
 #. Text in function
 #: functions.php:317
@@ -1320,6 +1320,21 @@ msgstr "un logo in alto a destra. incolla qui il percorso completo all'immagine.
 #: functions.php:317
 msgid "use the logo in the login page"
 msgstr "utilizza il logo nella pagina di autenticazione"
+
+#. Text in function
+#: functions.php:317
+msgid "swf audio player"
+msgstr "swf audio player"
+
+#. Text in function
+#: functions.php:317
+msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
+msgstr "crea un player per i file audio (mp3,ogg e m4a) inserti come link all'interno degli articoli formato audio"
+
+#. Text in function
+#: functions.php:317
+msgid "this audio type is not supported by your browser"
+msgstr "questo tipo di file audio non è supportato dal tuo browser"
 
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"

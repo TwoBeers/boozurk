@@ -10,11 +10,12 @@
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
 				<?php boozurk_hook_before_post_title(); ?>
-				<?php boozurk_featured_title();	?>
+				<?php boozurk_featured_title( array( 'featured' => true ) ); ?>
 				<?php boozurk_hook_after_post_title(); ?>
 				<?php boozurk_hook_before_post_content(); ?>
 				<div class="storycontent">
-					<?php the_content(); ?>
+				<?php the_content(); ?>
+				<?php if ( !post_password_required() && isset( $boozurk_opt['boozurk_post_formats_audio' ] ) && $boozurk_opt['boozurk_post_formats_audio' ] == 1 ) boozurk_add_audio_player(); ?>
 				</div>
 				<?php boozurk_hook_after_post_content(); ?>
 				<div class="fixfloat" style="padding-top: 20px;">
