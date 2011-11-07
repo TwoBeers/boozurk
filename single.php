@@ -5,8 +5,8 @@
 	<?php if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post(); ?>
-			<?php boozurk_hook_before_post(); ?>
 			<?php boozurk_single_nav(); ?>
+			<?php boozurk_hook_before_post(); ?>
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
 				<?php boozurk_hook_before_post_title(); ?>
@@ -33,7 +33,7 @@
 			<?php comments_template(); // Get wp-comments.php template ?>
 		<?php } //end while
 	} else {?>
-		<p class="bz-no-post"><?php _e( 'Sorry, no posts matched your criteria.','boozurk' );?></p>
+		<div class="post"><p><?php _e( 'Sorry, no posts matched your criteria.','boozurk' ); ?></p></div>
 	<?php } ?>
 </div><!-- posts_wide -->
 <?php boozurk_hook_after_posts(); ?>

@@ -53,6 +53,7 @@ blockquote {
 .post_meta_container,
 .nav-single,
 .img-navi,
+.bz-featured-title img,
 #mainmenu_container,
 #secondary1,
 #secondary2,
@@ -95,7 +96,7 @@ body #wpadminbar {
 	border: 1px solid #ccc;
 	margin-bottom: 3px;
 	position: relative;
-	padding: 3px;
+	padding: 1em 3px 3px;
 }
 #commentlist li {
 	list-style: disc outside none;
@@ -108,6 +109,108 @@ body #wpadminbar {
 .storytitle {
 	text-align: right;
 }
+.bz-featured-title {
+	border-color:inherit;
+}
 .storytitle {
-	border-bottom: 1px solid #ccc;
+	border-bottom-style:solid;
+	border-bottom-width:10px;
+	border-color:inherit;
+}
+#posts_content {
+    overflow:hidden;
+}
+
+/* Gallery
+----------------------------------------------------------*/
+.gallery {
+	margin: auto;
+}
+.gallery-item {
+	float: left;
+	margin-top: 10px;
+	text-align: center;
+}
+.gallery img {
+	border: 1px solid #ddd;
+    padding: 5px;
+	max-width: 80%;
+	background: #F5F5F5;
+	height:auto;
+	width: auto;
+}
+.gallery-caption {
+	margin-left: 0;
+	font-size: .8em;
+}
+.gallery-columns-1 .gallery-item {
+	width: 99%;
+}
+.gallery-columns-2 .gallery-item {
+	width: 49%;
+}
+.gallery-columns-3 .gallery-item {
+	width: 33%;
+}
+.gallery-columns-4 .gallery-item {
+	width: 24%;
+}
+.gallery-columns-5 .gallery-item {
+	width: 19%;
+}
+.gallery-columns-6 .gallery-item {
+	width: 16%;
+}
+.gallery-columns-7 .gallery-item {
+	width: 14%;
+}
+
+/* Captions
+----------------------------------------------------------*/
+.wp-caption {
+	border: 1px solid #ddd;
+	padding: 5px;
+	text-align: center;
+	margin: 10px;
+	max-width: 94%;
+	background: #F5F5F5;
+}
+.wp-caption img {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.wp-caption .wp-caption-text {
+	font-size: 11px;
+}
+.wp-caption-inside {
+	overflow: hidden;
+}
+
+/* Aligments
+----------------------------------------------------------*/
+.aligncenter,
+div.aligncenter,
+img.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+img.alignleft,
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 24px;
+}
+img.alignright,
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 24px;
+}
+img.alignleft,
+img.alignright,
+img.aligncenter {
+	margin-bottom: 12px;
 }

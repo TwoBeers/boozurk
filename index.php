@@ -25,21 +25,28 @@ if ( have_posts() ) {
 	
 	<?php } //end while ?>
 
-	<div class="w_title" id="bz-page-nav">
-		<?php //num of pages
-		global $paged;
-		if ( !$paged ) {
-			$paged = 1;
-		}
-		previous_posts_link( '&laquo;' );
-		printf( __( 'page %1$s of %2$s','boozurk' ), $paged, $wp_query->max_num_pages );
-		next_posts_link( '&raquo;' );
-		?>
+	<div id="bz-page-nav">
+		<div id="bz-page-nav-msg"></div>
+		<div id="bz-page-nav-subcont">
+			<?php //num of pages
+			global $paged;
+			if ( !$paged ) {
+				$paged = 1;
+			}
+			previous_posts_link( '&laquo;' );
+			printf( __( 'page %1$s of %2$s','boozurk' ), $paged, $wp_query->max_num_pages );
+			?>
+			<span id="bz-next-posts-link"><?php next_posts_link( '&raquo;' ); ?></span>
+		</div>
+		<div class="w_title"></div>
+		<div id="bz-next-posts-button" class="hide-if-no-js">
+			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurk_AJAX_paged();" />
+		</div>
 	</div>
 
 <?php } else { ?>
 
-	<p><?php _e( 'Sorry, no posts matched your criteria.','boozurk' ); ?></p>
+	<div class="post"><p><?php _e( 'Sorry, no posts matched your criteria.','boozurk' ); ?></p></div>
 
 <?php } //endif ?>
 

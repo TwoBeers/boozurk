@@ -1,17 +1,41 @@
+<?php global $boozurk_opt; ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php $bz_first_img = boozurk_get_first_image(); ?>
-	<?php boozurk_featured_title( array( 'alternative' => $bz_first_img ? $bz_first_img['title'] : '' ) ); ?>
+	<?php
+		switch ( $boozurk_opt['boozurk_post_formats_image_title'] ) {
+			case __( 'post title','boozurk' ):
+				boozurk_featured_title();
+				break;
+			case __( 'post date','boozurk' ):
+				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
+				break;
+			case __( 'first image title','boozurk' ):
+				boozurk_featured_title( array( 'alternative' => $bz_first_img ? $bz_first_img['title'] : '' ) );
+				break;
+		}
+	?>
 	<?php boozurk_hook_after_post_title(); ?>
 	<div class="storycontent">
-		<?php if ( $bz_first_img ) { ?>
-			<a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo $bz_first_img['title']; ?>"><?php echo $bz_first_img['img']; ?></a>
-			<br />
-			<?php the_excerpt(); ?>
-		<?php } else { ?>
-			<?php the_content(); ?>
-		<?php } ?>
+		<?php
+			switch ( $boozurk_opt['boozurk_post_formats_image_content'] ) {
+				case __( 'first image','boozurk' ):
+					if ( $bz_first_img ) {
+						?><a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo $bz_first_img['title']; ?>"><?php echo $bz_first_img['img']; ?></a><br /><?php
+						the_excerpt();
+					} else {
+						the_content();
+					}
+					break;
+				case __( 'content','boozurk' ):
+					the_content();
+					break;
+				case __( 'excerpt','boozurk' ):
+					the_excerpt();
+					break;
+			}
+		?>
 	</div>
 	<div class="fixfloat"> </div>
 </div>

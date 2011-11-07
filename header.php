@@ -19,6 +19,11 @@
 	</head>
 
 	<body <?php body_class( 'no-js' ); ?>>
+<!--[if lte IE 6]>
+<div style="background:#e29808;color:#fff;padding:10px;">
+	It looks like you're using an old and insecure version of Internet Explorer. Using an outdated browser makes your computer unsafe. For the best WordPress experience, please update your browser
+</div>
+<![endif]-->
 		<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
 		<div id="main">
 

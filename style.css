@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars (the right one is fixed), up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
-Version: 0.6
+Version: 1.00
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -338,15 +338,42 @@ input[type=password]:focus {
 }
 
 #bz-page-nav {
-    border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     text-align: center;
     margin: 20px 0;
+	min-height: 20px;
+	line-height: 20px;
+}
+#bz-page-nav.ajaxed {
+	min-height: 74px;
+    margin: 20px 0 0;
+}
+.ajaxed #bz-page-nav-msg {
+    padding-top: 15px;
+	height: 20px;
+}
+.ajaxed #bz-page-nav-msg.loading {
+	background: url('images/loading.gif') no-repeat center top transparent;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+#bz-page-nav.ajaxed #bz-page-nav-subcont {
+	display: none;
 }
 #bz-page-nav a {
     margin: 0 10px;
 }
-
+#bz-next-posts-button {
+	display: none;
+    margin-bottom: 0;
+}
+.paged-separator {
+    border-bottom:1px solid #ddd;
+    font-weight:bold;
+    margin:35px 0 50px;
+    text-align:center;
+	height: 20px;
+}
 /* Posts/Pages/Attachments
 ----------------------------------------------------------*/
 #posts_content .post, #posts_content .page, #posts_content .attachment {
@@ -357,7 +384,7 @@ input[type=password]:focus {
     clear: both;
     margin-top: 20px;
 	position: relative;
-	min-height: 60px;
+	min-height: 80px;
 }
 #posts_content .post {
     border-left: 40px solid #87CEEB;
@@ -396,6 +423,11 @@ input[type=password]:focus {
 	opacity: 1;
 	filter: alpha(opacity=100);
 }
+.bz-plusone-wrap {
+	width: 38px;
+	margin: 4px 1px;
+	z-index: 300;
+}
 .post_meta_container {
     left: -40px;
     position: absolute;
@@ -416,7 +448,7 @@ input[type=password]:focus {
 	position: relative;
 }
 .bz-featured-title .storytitle {
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: #fff;
 	line-height: 34px;
 	margin: 0;
 	min-height: 54px;
@@ -424,6 +456,8 @@ input[type=password]:focus {
 	top: 2px;
 	width: 100%;
 	left: 0;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
 }
 .bz-featured-title .storytitle a {
 	padding-left: 10px;
@@ -476,15 +510,23 @@ input[type=password]:focus {
 #posts_content .post:hover .post-edit-link {
 	display: block;
 }
-
+.bz-post-top-date {
+	color:#aaa;
+	font-size:11px;
+	margin:20px 0 -20px;
+	text-align:right;
+}
 /* Audio player
 ----------------------------------------------------------*/
 .bz-player-container {
 	margin-bottom: 20px;
 	width: 300px;
 	padding: 5px;
-	background: #222;
-    color:#fff;
+	background: #F5F5F5;
+	border: 1px solid #ddd;
+}
+.bz-player-container:hover {
+	border: 1px solid #777;
 }
 .bz-player-content {
 	margin-top: 10px;
@@ -625,8 +667,7 @@ div.bz_Widget_post_details ul {
 #single-widgets-area .widget {
 	padding: 10px;
 }
-.bz_Widget_post_details .article-share {
-	text-align: center;
+.bz-article-share {
     margin-top: 10px;
 }
 .widget .cat-item , #posts_content .cat-item  {
@@ -744,11 +785,11 @@ img.bz-thumb-format {
 	z-index: 30;
 	max-width: 300px;
 	min-width: 150px;
-	border: 1px solid #777;
-	background-color: #fff;
+	border: 1px solid #ddd;
+	background-color: #f5f5f5;
 	margin: 0;
 	padding: 5px 10px 10px;
-	box-shadow: 0 0 2px #404040;
+	box-shadow: 0 0 8px #fff;
 }
 #mainmenu > li:hover > ul {
 	display: block;
@@ -1120,6 +1161,7 @@ img.bz-thumb-format {
 	border: 1px solid #ddd;
     padding: 5px;
 	max-width: 80%;
+	background: #F5F5F5;
 }
 .gallery img:hover {
 	border: 1px solid #777;
@@ -1228,6 +1270,7 @@ img.thumbsel {
 	text-align: center;
 	margin: 10px;
 	max-width: 94%;
+	background: #F5F5F5;
 }
 .wp-caption img {
 	border: 0 none;
@@ -1243,10 +1286,12 @@ img.thumbsel {
 	margin: 0;
 	width: 100%;
 	padding: 0 0 5px;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: #fff;
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
 }
 .wp-caption:hover .wp-caption-text {
 	display: none;
@@ -1278,4 +1323,63 @@ img.alignleft,
 img.alignright,
 img.aligncenter {
 	margin-bottom: 12px;
+}
+
+/* Thickbox
+----------------------------------------------------------*/
+
+#TB_next a,
+#TB_prev a {
+	position: absolute;
+	top: 50%;
+	display: none;
+	text-indent: -1000px;
+	overflow: hidden;
+	width: 42px;
+	height: 42px;
+	margin-top: -24px;
+}
+
+#TB_next a {
+	right: -20px;
+	background: url('images/thickbox-navi.png') no-repeat right top transparent;
+}
+#TB_prev a {
+	left: -20px;
+	background: url('images/thickbox-navi.png') no-repeat left top transparent;
+}
+#TB_next a:hover {
+	background: url('images/thickbox-navi.png') no-repeat right -42px transparent;
+}
+#TB_prev a:hover {
+	background: url('images/thickbox-navi.png') no-repeat left -42px transparent;
+}
+#TB_window:hover #TB_next a,
+#TB_window:hover #TB_prev a {
+	display: block;
+}
+#TB_window img#TB_Image {
+	border: 1px solid #ddd;
+}
+#TB_closeWindow {
+	float: none;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	padding: 0;
+}
+#TB_closeWindow a {
+	display: block;
+	width: 24px;
+	height: 24px;
+	background: url('images/thickbox-navi.png') no-repeat left bottom transparent;
+}
+#TB_closeWindow a:hover {
+	background: url('images/thickbox-navi.png') no-repeat right bottom transparent;
+}
+
+#TB_closeWindow a img {
+	display: none;
 }

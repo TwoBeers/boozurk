@@ -43,7 +43,6 @@ jQuery(document).ready(function(){
 		jQuery(this).delay(2000).fadeOut(600);
 	});
 
-
 });
 
 boozurkSwitchTab = {

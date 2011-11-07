@@ -64,7 +64,7 @@
 		<?php	} //end while
 	} else {?>
 		
-		<p class="bz-no-post"><?php _e( 'Sorry, no posts matched your criteria.','boozurk' );?></p>
+		<div class="post"><p><?php _e( 'Sorry, no posts matched your criteria.','boozurk' ); ?></p></div>
 		
 	<?php } ?>
 
