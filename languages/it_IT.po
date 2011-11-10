@@ -147,7 +147,7 @@ msgstr "Pagine discendenti: "
 #. Text in function
 #: functions.php:1715
 msgid "Click an image to select"
-msgstr "Click sull'immagine per selezionarla"
+msgstr "Click sulla immagine per selezionarla"
 
 #. Text in echo
 #: functions.php:642
@@ -240,7 +240,7 @@ msgstr "Arricchisci la pagina 404 con alcuni widget utili"
 #. Text in function
 #: lib/widgets.php:1333
 msgid "Enter mail address"
-msgstr "Inserisci l'indirizzo email"
+msgstr "Inserisci l&apos;indirizzo email"
 
 #. Text in function
 #: lib/widgets.php:1333
@@ -558,7 +558,7 @@ msgstr "Area Widget degli articoli"
 #. Text in function
 #: lib/widgets.php:1333
 msgid "Post details"
-msgstr "Dettagli dell'articolo"
+msgstr "Dettagli dell&apos;articolo"
 
 #. Text in echo
 #: functions.php:640
@@ -689,7 +689,7 @@ msgstr "Selezionare un colore"
 #. Text in echo
 #: lib/widgets.php:1010
 msgid "Select avatar size"
-msgstr "Seleziona la dimensione dell'avatar"
+msgstr "Seleziona la dimensione dell&apos;avatar"
 
 #. Text in echo
 #: lib/widgets.php:1320
@@ -744,7 +744,7 @@ msgstr "Visualizza i link di alcuni tra i più diffusi servizi di sharing. Quest
 #. Text in echo
 #: lib/widgets.php:1269
 msgid "Show user gravatar"
-msgstr "Visualizza l'avatar dell'utente"
+msgstr "Visualizza l&apos;avatar dell&apos;utente"
 
 #. Text in function
 #: functions.php:1063
@@ -811,7 +811,7 @@ msgstr "La prima area widget nel fondo pagina"
 #. Text in function
 #: functions.php:2410
 msgid "The fixed widget area"
-msgstr "L'area widget fissa"
+msgstr "L&apos;area widget fissa"
 
 #. Text in function
 #: lib/widgets.php:1333
@@ -930,7 +930,7 @@ msgstr "Usa questo widget per elencare gli articoli recenti del tipo \"stato\" e
 #. Text in function
 #: lib/widgets.php:1333
 msgid "User quick links"
-msgstr "Link rapidi per l'utente"
+msgstr "Link rapidi per l&apos;utente"
 
 #. Text in echo
 #: lib/widgets.php:379
@@ -960,7 +960,7 @@ msgstr "Guarda la galleria"
 #. Text in echo
 #: footer.php:10
 msgid "Visit authors homepage"
-msgstr "Visita la homepage dell'autore"
+msgstr "Visita la homepage dell&apos;autore"
 
 #. Text in function
 #: mobile/mobile-comments.php:23
@@ -996,7 +996,7 @@ msgstr "Il tuo profilo"
 #. Text in function
 #: functions.php:2410
 msgid "a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore"
-msgstr "un logo in alto a destra. incolla qui il percorso completo all'immagine. se non ti serve, lascialo vuoto"
+msgstr "un logo in alto a destra. incolla qui il percorso completo all&apos;immagine. se non ti serve, lascialo vuoto"
 
 #. Text in function
 #: functions.php:1807
@@ -1006,7 +1006,7 @@ msgstr "un mese fa"
 #. Text in function
 #: functions.php:2410
 msgid "a widget area located after the post body"
-msgstr "un'area widget sotto il corpo degli articoli"
+msgstr "un&apos;area widget sotto il corpo degli articoli"
 
 #. Text in function
 #: functions.php:2410
@@ -1016,12 +1016,12 @@ msgstr "aggiungi un sacco di nuovi e utili widget"
 #. Text in function
 #: functions.php:2410
 msgid "add style to the editor in order to write the post exactly how it will appear on the site"
-msgstr "applica lo stile all'editor per scrivere gli articoli esattamente come appariranno nel sito"
+msgstr "applica lo stile all&apos;editor per scrivere gli articoli esattamente come appariranno nel sito"
 
 #. Text in function
 #: functions.php:2410
 msgid "add the thickbox effect to each linked image and galleries in post content"
-msgstr "aggiunge un effetto thickbox ad ogni immagine (dotata di collegamento) e galleria all'interno del articolo"
+msgstr "aggiunge un effetto thickbox ad ogni immagine (dotata di collegamento) e galleria all&apos;interno del articolo"
 
 #. Text in function
 #: functions.php:2410
@@ -1046,7 +1046,7 @@ msgstr "auto"
 #. Text in function
 #: functions.php:2410
 msgid "auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts"
-msgstr "auto: quando l'utente raggiunge il fondo pagina - manual: cliccando il pulsante a fine pagina"
+msgstr "auto: quando l&apos;utente raggiunge il fondo pagina - manual: cliccando il pulsante a fine pagina"
 
 #. Text in function
 #: functions.php:2410
@@ -1102,7 +1102,7 @@ msgstr "cool tooltips"
 #. Text in function
 #: functions.php:2410
 msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
-msgstr "crea un player per i file audio (mp3,ogg e m4a) inserti come link all'interno degli articoli formato audio"
+msgstr "crea un player per i file audio (mp3,ogg e m4a) inserti come link all&apos;interno degli articoli formato audio"
 
 #. Text in function
 #: functions.php:2410
@@ -1112,12 +1112,12 @@ msgstr "widget speciali"
 #. Text in echo
 #: lib/widgets.php:1261
 msgid "default: \"Welcome %s\" , where %s is the user name"
-msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell'utente"
+msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell&apos;utente"
 
 #. Text in function
 #: functions.php:2410
 msgid "editor style"
-msgstr "stile dell'editor"
+msgstr "stile dell&apos;editor"
 
 #. Text in function
 #: functions.php:2410
@@ -1132,7 +1132,7 @@ msgstr "riassunto"
 #. Text in function
 #: functions.php:2410
 msgid "expands a post to show the full content when the reader clicks the \"Read more...\" link"
-msgstr "espandi l'articolo per visualizzare il contenuto completo quando il lettore clicca il link \"(continua...)\""
+msgstr "espandi l&apos;articolo per visualizzare il contenuto completo quando il lettore clicca il link \"(continua...)\""
 
 #. Text in function
 #: functions.php:2410
@@ -1289,7 +1289,7 @@ msgstr "nessuno"
 #. Text in function
 #: functions.php:2410
 msgid "number of widget that can stay in the widget area side by side"
-msgstr "numero di widget che possono stare affiancati nell'area widget"
+msgstr "numero di widget che possono stare affiancati nell&apos;area widget"
 
 #. Text in function
 #: lib/media.php:1
@@ -1316,7 +1316,7 @@ msgstr "per favore, non nascondete i crediti del tema"
 #. Text in function
 #: functions.php:2410
 msgid "post date"
-msgstr "data dell'articolo"
+msgstr "data dell&apos;articolo"
 
 #. Text in function
 #: functions.php:2410
@@ -1331,7 +1331,7 @@ msgstr "supporto per i formati degli articoli"
 #. Text in function
 #: functions.php:2410
 msgid "post title"
-msgstr "titolo dell'articolo"
+msgstr "titolo dell&apos;articolo"
 
 #. Text in function
 #: functions.php:2410
@@ -1391,12 +1391,12 @@ msgstr "breve estratto della citazione"
 #. Text in function
 #: functions.php:2410
 msgid "show a link for easily add the selected text as a quote inside the comment form"
-msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all'interno della pagina, sottoforma di citazione nel del modulo di risposta"
+msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&apos;interno della pagina, sottoforma di citazione nel del modulo di risposta"
 
 #. Text in function
 #: functions.php:2410
 msgid "show date right before post content (only in posts index)"
-msgstr "visualizza la data appena sopra il contenuto dell'articolo (solo nell'elenco degli articoli)"
+msgstr "visualizza la data appena sopra il contenuto dell&apos;articolo (solo nell&apos;elenco degli articoli)"
 
 #. Text in function
 #: functions.php:2410
@@ -1406,12 +1406,12 @@ msgstr "visualizza i link di navigazione prima del contenuto del articolo"
 #. Text in function
 #: functions.php:2410
 msgid "split Header widget area"
-msgstr "dividi l'area widget di testata"
+msgstr "dividi l&apos;area widget di testata"
 
 #. Text in function
 #: functions.php:2410
 msgid "split Post widget area"
-msgstr "dividi l'area widget degli articoli"
+msgstr "dividi l&apos;area widget degli articoli"
 
 #. Text in function
 #: functions.php:2410
@@ -1496,28 +1496,10 @@ msgstr "video"
 #. Text in function
 #: functions.php:2410
 msgid "width of the widget area"
-msgstr "larghezza dell'area widget"
+msgstr "larghezza dell&apos;area widget"
 
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
 msgstr[1] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagini</a>"
 
-#~ msgid "-- link"
-#~ msgstr "-- link"
-
-#~ msgid "-- quote"
-#~ msgstr "-- quota"
-
-#~ msgid "Post formats"
-#~ msgstr "Formato degli articoli"
-
-#~ msgid "select the type of content to display in posts list"
-#~ msgstr ""
-#~ "scegli il tipo di contenuto da visualizzare nella lista degli articoli"
-
-#~ msgid "select the type of title to display in posts list"
-#~ msgstr "scegli il tipo di titolo da visualizzare nella lista degli articoli"
-
-#~ msgid "show the post title with the featured image"
-#~ msgstr "visualizza il titolo del articolo con l'immagine in evidenza"

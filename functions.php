@@ -282,7 +282,7 @@ function boozurk_get_coa() {
 								),
 		'boozurk_post_date'=>	array( 									'group'=>'other',									'type'=>'chk',									'default'=>1,									'description'=>__( 'post date', 'boozurk' ),									'info'=>__( 'show date right before post content (only in posts index)', 'boozurk' ),									'req'=>'' 
 								),
-		'boozurk_featured_title'=>	array( 												'group'=>'other',												'type'=>'sel',												'default'=>'lists',												'description'=>__( 'enhanced post title','boozurk' ),												'info'=>'use the featured image as background for the post title',												'options'=>array('lists','single','both','none'),												'options_l10n'=>array(__('in lists','boozurk'),__('in single posts/pages','boozurk'),__('both','boozurk'),__('none','boozurk')),
+		'boozurk_featured_title'=>	array( 												'group'=>'other',												'type'=>'sel',												'default'=>'lists',												'description'=>__( 'enhanced post title','boozurk' ),												'info'=>__( 'use the featured image as background for the post title','boozurk' ),												'options'=>array('lists','single','both','none'),												'options_l10n'=>array(__('in lists','boozurk'),__('in single posts/pages','boozurk'),__('both','boozurk'),__('none','boozurk')),
 												'req'=>'',
 												'sub'=>array('boozurk_featured_title_height') 
 											),
