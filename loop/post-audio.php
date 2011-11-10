@@ -5,13 +5,13 @@
 	<?php $bz_first_link = boozurk_get_first_link(); ?>
 	<?php
 		switch ( $boozurk_opt['boozurk_post_formats_audio_title'] ) {
-			case __( 'post title','boozurk' ):
+			case 'post title':
 				boozurk_featured_title();
 				break;
-			case __( 'post date','boozurk' ):
+			case 'post date':
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
-			case __( 'first link text','boozurk' ):
+			case 'first link text':
 				boozurk_featured_title( array( 'alternative' => $bz_first_link ? $bz_first_link['text'] : '' ) );
 				break;
 		}
@@ -20,13 +20,13 @@
 	<div class="storycontent">
 		<?php
 			switch ( $boozurk_opt['boozurk_post_formats_audio_content'] ) {
-				case __( 'audio player','boozurk' ):
+				case 'audio player':
 					( $bz_first_link ) ? boozurk_add_audio_player( $bz_first_link['anchor'] ) : the_content();
 					break;
-				case __( 'content','boozurk' ):
+				case 'content':
 					the_content();
 					break;
-				case __( 'excerpt','boozurk' ):
+				case 'excerpt':
 					the_excerpt();
 					break;
 			}

@@ -968,15 +968,16 @@ class boozurk_Widget_post_details extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
-		boozurk_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size );
+		boozurk_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size, $instance['featured'] );
 		echo $after_widget;
 	}
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['featured'] = (int) $new_instance['featured'] ? 1 : 0;
 		$instance['author'] = (int) $new_instance['author'] ? 1 : 0;
-        $instance["avatar_size"] = in_array( $new_instance["avatar_size"], array ('32', '48', '64', '96', '128') ) ? $new_instance["avatar_size"] : '48' ;
+        $instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ('32', '48', '64', '96', '128') ) ? $new_instance['avatar_size'] : '48' ;
 		$instance['date'] = (int) $new_instance['date'] ? 1 : 0;
 		$instance['tags'] = (int) $new_instance['tags'] ? 1 : 0;
 		$instance['categories'] = (int) $new_instance['categories'] ? 1 : 0;
@@ -986,6 +987,7 @@ class boozurk_Widget_post_details extends WP_Widget {
 
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Post details','boozurk');
+		$featured = isset($instance['featured']) ? absint($instance['featured']) : 0;
 		$author = isset($instance['author']) ? absint($instance['author']) : 1;
 		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
 		$date = isset($instance['date']) ? absint($instance['date']) : 1;
@@ -995,6 +997,10 @@ class boozurk_Widget_post_details extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','boozurk'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('featured'); ?>" name="<?php echo $this->get_field_name('featured'); ?>" value="1" type="checkbox" <?php checked( 1 , $featured ); ?> />
+			<label for="<?php echo $this->get_field_id('featured'); ?>"><?php _e('thumbnail','boozurk'); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />

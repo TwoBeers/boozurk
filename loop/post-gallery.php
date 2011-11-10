@@ -4,10 +4,10 @@
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php
 		switch ( $boozurk_opt['boozurk_post_formats_gallery_title'] ) {
-			case __( 'post title','boozurk' ):
+			case 'post title':
 				boozurk_featured_title();
 				break;
-			case __( 'post date','boozurk' ):
+			case 'post date':
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 		}
@@ -16,7 +16,7 @@
 	<div class="storycontent">
 		<?php
 			switch ( $boozurk_opt['boozurk_post_formats_gallery_content'] ) {
-				case __( 'presentation','boozurk' ):
+				case 'presentation':
 					$bz_images = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
 					if ( $bz_images ) {
 						$bz_total_images = count( $bz_images );
@@ -42,10 +42,10 @@
 					<?php }
 					the_excerpt();
 					break;
-				case __( 'content','boozurk' ):
+				case 'content':
 					the_content();
 					break;
-				case __( 'excerpt','boozurk' ):
+				case 'excerpt':
 					the_excerpt();
 					break;
 			}

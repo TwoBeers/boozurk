@@ -5,13 +5,13 @@
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php
 		switch ( $boozurk_opt['boozurk_post_formats_quote_title'] ) {
-			case __( 'post title','boozurk' ):
+			case 'post title':
 				boozurk_featured_title();
 				break;
-			case __( 'post date','boozurk' ):
+			case 'post date':
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
-			case __( 'short quote excerpt','boozurk' ):
+			case 'short quote excerpt':
 				boozurk_featured_title( array( 'alternative' => $bz_first_quote ? '&ldquo;'.$bz_first_quote['quote'].'&rdquo;' : '' ) );
 				break;
 		}
@@ -20,10 +20,10 @@
 	<div class="storycontent">
 		<?php
 			switch ( $boozurk_opt['boozurk_post_formats_quote_content'] ) {
-				case __( 'content','boozurk' ):
+				case 'content':
 					the_content();
 					break;
-				case __( 'excerpt','boozurk' ):
+				case 'excerpt':
 					the_excerpt();
 					break;
 			}

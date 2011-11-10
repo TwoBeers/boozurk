@@ -5,13 +5,13 @@
 	<?php $bz_first_img = boozurk_get_first_image(); ?>
 	<?php
 		switch ( $boozurk_opt['boozurk_post_formats_image_title'] ) {
-			case __( 'post title','boozurk' ):
+			case 'post title':
 				boozurk_featured_title();
 				break;
-			case __( 'post date','boozurk' ):
+			case 'post date':
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
-			case __( 'first image title','boozurk' ):
+			case 'first image title':
 				boozurk_featured_title( array( 'alternative' => $bz_first_img ? $bz_first_img['title'] : '' ) );
 				break;
 		}
@@ -20,7 +20,7 @@
 	<div class="storycontent">
 		<?php
 			switch ( $boozurk_opt['boozurk_post_formats_image_content'] ) {
-				case __( 'first image','boozurk' ):
+				case 'first image':
 					if ( $bz_first_img ) {
 						?><a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo $bz_first_img['title']; ?>"><?php echo $bz_first_img['img']; ?></a><br /><?php
 						the_excerpt();
@@ -28,10 +28,10 @@
 						the_content();
 					}
 					break;
-				case __( 'content','boozurk' ):
+				case 'content':
 					the_content();
 					break;
-				case __( 'excerpt','boozurk' ):
+				case 'excerpt':
 					the_excerpt();
 					break;
 			}
