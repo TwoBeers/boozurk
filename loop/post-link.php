@@ -12,7 +12,7 @@
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'first link text':
-				boozurk_featured_title( $bz_first_link ? array( 'alternative' => $bz_first_link['text'] , 'target' => '_blank', 'title' => $bz_first_link['text'] ) : '' ) ;
+				boozurk_featured_title( $bz_first_link ? array( 'alternative' => $bz_first_link['text'] , 'href' => $bz_first_link['href'], 'target' => '_blank', 'title' => $bz_first_link['text'] ) : '' ) ;
 				break;
 		}
 	?>

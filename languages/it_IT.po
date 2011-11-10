@@ -1498,6 +1498,11 @@ msgstr "video"
 msgid "width of the widget area"
 msgstr "larghezza dell&apos;area widget"
 
+#. Text in function
+#: functions.php:2410
+msgid "use the featured image as background for the post title"
+msgstr "usa l&apos;immagine in evidenza come sfondo del titolo"
+
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
