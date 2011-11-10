@@ -1732,7 +1732,11 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											);
 											$categories=get_categories($args);
 											foreach($categories as $category) {
-												$catcolor = isset($boozurk_opt[$key][$category->term_id]) ? $boozurk_opt[$key][$category->term_id] : $boozurk_coa[$key]['defaultcolor'];
+												$hexnumber = '#';
+												for ($i2=1; $i2<=3; $i2++) {
+													$hexnumber .= dechex( rand(64,256) );
+												}
+												$catcolor = isset($boozurk_opt[$key][$category->term_id]) ? $boozurk_opt[$key][$category->term_id] : $hexnumber;
 										?>
 											<?php echo $category->name; ?>
 											<div class="bz-col-tools">
