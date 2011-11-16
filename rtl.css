@@ -1,0 +1,548 @@
+/* Standard tags
+----------------------------------------------------------*/
+
+ul {
+	margin-right: 15px;
+	margin-left: auto;
+}
+
+ol ul, ol ol, ul ul, ul ol {
+	margin: 0 15px 0 0;
+}
+
+dd {
+	margin: 0 40px .5em 0;
+}
+
+blockquote {
+	border-right: 5px solid #ddd;
+	margin-right: 15px;
+	padding-right: 15px;
+	padding-left: 0;
+	margin-left: auto;
+	border-left: none;
+}
+
+.storycontent table,
+.comment-body table {
+	text-align: right;
+}
+
+/* Some browsing links
+----------------------------------------------------------*/
+
+.img-navi-prev,
+.nav-previous {
+	float: right;
+}
+
+.img-navi-next,
+.nav-next {
+	float: left;
+}
+
+.img-navi-prev {
+	background: url('images/bc-sep.png') no-repeat right center;
+	padding-right: 15px;
+	padding-left: 0;
+}
+
+.img-navi-next {
+	background: url('images/bc-sep.png') no-repeat left center;
+	padding-left: 15px;
+	padding-right: 0;
+}
+
+.nav-next {
+	padding: 0 0 0 55px;
+	background: url('images/bc-sep.png') no-repeat left center;
+	text-align: left;
+}
+
+.nav-previous {
+	padding: 0 55px 0 0;
+	background: url('images/bc-sep.png') no-repeat right center;
+}
+
+.nav-next img {
+	left: 15px;
+	right: auto;
+}
+
+.nav-previous img {
+	right: 15px;
+	left: auto;
+}
+
+/* Posts/Pages/Attachments
+----------------------------------------------------------*/
+
+.bz-featured-title .storytitle {
+	right: 0;
+	left: auto;
+}
+
+.bz-featured-title .storytitle a {
+	padding-right: 10px;
+	padding-left: 0;
+}
+
+.bz-featured-title img.attachment-thumbnail {
+	border-left: 1px solid #ddd;
+	padding: 0 0 5px 5px;
+	border-right: none;
+}
+
+.format-status .avatar,
+.category-status .avatar {
+	right:10px;
+	left: auto;
+}
+
+.format-status .storycontent,
+.category-status .storycontent {
+	padding-right: 60px;
+	padding-left: 0;
+}
+
+.gallery-thumb {
+	float: right;
+	margin: 0 0 10px 10px;
+}
+
+.more-link.ajaxed {
+	padding-right: 20px;
+	background: url('images/loading.gif') no-repeat scroll right center transparent;
+	padding-left: 0;
+}
+
+.more-link {
+	display: block;
+	clear: both;
+}
+
+.post-edit-link {
+	left:6px;
+	right: auto;
+}
+
+.bz-post-top-date {
+	text-align:left;
+	margin-left: 10px;
+}
+
+/* Last comments on post (last-cop)
+----------------------------------------------------------*/
+
+.bz-last-cop .item {
+	float: right;
+}
+
+.bz-last-cop .item-label {
+	float: right;
+}
+
+.bz-last-cop .bz-tooltip {
+	margin-right : 25px;
+	background: transparent url(images/cooltips.gif) right top no-repeat;
+}
+
+/* Widgets
+----------------------------------------------------------*/
+
+#first_fwa, #second_fwa, #third_fwa {
+	float: right;
+}
+
+#header-widget-area .bz-widget {
+	float: right;
+}
+
+div.bz_widget_latest_commentators ul li {
+	float: right;
+}
+
+.bz-post-details-cats,
+.bz-post-details-tags,
+.bz-post-details-date {
+	padding: 1px 25px 5px 0;
+}
+
+.bz-post-details-cats {
+	background-position: right -200px;
+}
+
+.bz-post-details-tags {
+	background-position: right -100px;
+}
+
+.bz-post-details-date {
+	background-position: right 0;
+}
+
+div.bz_widget_post_formats ul li.compact {
+	float: right;
+	margin: 0 0 5px 10px;
+}
+
+#single-widgets-area .bz-widget {
+	float: right;
+}
+
+.widget .cat-item  a, #posts_content .cat-item a {
+	padding-right: 5px;
+	padding-left: 0;
+}
+
+/* Main menu 
+----------------------------------------------------------*/
+
+#mainmenu > li {
+	float: right;
+	margin-left: 25px;
+	margin-right: auto;
+}
+
+.bz-menu-thumb {
+	margin-left: 5px;
+	margin-right: auto;
+}
+
+.hiraquo {
+	padding-right :5px;
+}
+
+/* secondary menus
+----------------------------------------------------------*/
+
+#secondary2 {
+	border-right: none;
+	border-left: none;
+}
+
+/* author bio
+----------------------------------------------------------*/
+
+.bz-author-bio .author-avatar img {
+	margin-left: 10px;
+	margin-right: auto;
+}
+
+.bz-author-bio .author-avatar {
+	float: right;
+}
+
+/* cooltips
+----------------------------------------------------------*/
+
+.cooltips.to_right {
+	background-position : left bottom;
+	margin-right: -200px;
+	margin-left: auto;
+}
+
+/* Navigation buttons
+----------------------------------------------------------*/
+
+.minibutton {
+	float:right;
+}
+
+.minib_print {
+	background-position: right 0;
+}
+
+.minib_comment {
+	background-position: right -32px;
+}
+
+.minib_rss {
+	background-position: right -64px;
+}
+
+.minib_track {
+	background-position: right -96px;
+}
+
+.minib_home {
+	background-position: right -128px;
+}
+
+.minib_ppage {
+	background-position: right -192px;
+}
+
+.minib_npage {
+	background-position: right -160px;
+}
+
+.minib_ppages {
+	background-position: right -160px;
+}
+
+.minib_npages {
+	background-position: right -192px;
+}
+
+.minib_top {
+	background-position: right -224px;
+}
+
+.minib_bottom {
+	background-position: right -256px;
+}
+
+.minib_backtopost {
+	background-position: right -160px;
+}
+
+.minib_edit {
+	background-position: right -288px;
+}
+
+.minib_print:hover {
+	background-position: left 0;
+}
+
+.minib_comment:hover {
+	background-position: left -32px;
+}
+
+.minib_rss:hover {
+	background-position: left -64px;
+}
+
+.minib_track:hover {
+	background-position: left -96px;
+}
+
+.minib_home:hover {
+	background-position: left -128px;
+}
+
+.minib_ppage:hover {
+	background-position: left -192px;
+}
+
+.minib_npage:hover {
+	background-position: left -160px;
+}
+
+.minib_ppages:hover {
+	background-position: left -160px;
+}
+
+.minib_npages:hover {
+	background-position: left -192px;
+}
+
+.minib_top:hover {
+	background-position: left -224px;
+}
+
+.minib_bottom:hover {
+	background-position: left -256px;
+}
+
+.minib_backtopost:hover {
+	background-position: left -160px;
+}
+
+.minib_edit:hover {
+	background-position: left -288px;
+}
+
+/* BreadCrumb 
+----------------------------------------------------------*/
+
+#bz-breadcrumb span,
+#bz-breadcrumb a {
+	float:right;
+}
+
+.bz-breadcrumb-sep {
+	background: url('images/bc-sep.png') no-repeat left center;
+}
+
+.bz-breadcrumb-childs {
+	margin-right:4px;
+	margin-left: auto;
+}
+
+.bz-breadcrumb-home {
+	float:right;
+}
+
+/* Comments 
+----------------------------------------------------------*/
+
+.children .comment-body {
+	padding-right: 50px;
+	padding-left: 10px;
+}
+
+.children .children .comment-body {
+	padding-right: 100px;
+	padding-left: 10px;
+}
+
+.children .children .children .comment-body {
+	padding-right: 150px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .comment-body {
+	padding-right: 200px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .comment-body {
+	padding-right: 250px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .children .comment-body {
+	padding-right: 300px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .children .children .comment-body {
+	padding-right: 350px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .children .children .children .comment-body {
+	padding-right: 400px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .children .children .children .children .comment-body {
+	padding-right: 450px;
+	padding-left: 10px;
+}
+
+.children .children .children .children .children .children .children .children .children .children .comment-body {
+	padding-right: 500px;
+	padding-left: 10px;
+}
+
+.bypostauthor > .comment-body {
+	margin-left: auto;
+}
+
+.bypostauthor > .comment-body .avatar {
+    left: -37px;
+}
+
+.comment .reply {
+	text-align: left;
+}
+
+#author,
+#email,
+#url {
+	margin-left: 10px;
+	margin-right: -1px;
+}
+
+#cancel-comment-reply-link {
+	left: 10px;
+	background: url('images/details.png') no-repeat right -600px;
+	right: auto;
+}
+
+#cancel-comment-reply-link:hover {
+	background-position: right -612px;
+}
+
+/* Gallery
+----------------------------------------------------------*/
+
+.gallery-item {
+	float: right;
+}
+
+.gallery-caption {
+	margin-right: 0;
+	margin-left: auto;
+}
+
+.bzg-preview-link {
+	padding: 5px 25px 5px 5px;
+}
+
+/* =calendar
+----------------------------------------------------------*/
+
+#wp-calendar caption {
+	text-align: left;
+}
+
+#wp-calendar tfoot #next {
+	text-align: left;
+}
+
+/* Captions
+----------------------------------------------------------*/
+
+.wp-caption .wp-caption-text {
+	right: 0;
+	left: auto;
+}
+
+/* Aligments
+----------------------------------------------------------*/
+.aligncenter,
+div.aligncenter,
+img.aligncenter {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+img.alignright,
+.alignright {
+	float: right;
+	margin-left: 24px;
+	margin-right: auto;
+}
+
+img.alignleft,
+.alignleft {
+	float: left;
+	margin-right: 24px;
+	margin-left: auto;
+}
+
+/* Thickbox
+----------------------------------------------------------*/
+
+#TB_closeWindow {
+	left: 20px;
+	right: auto;
+}
+#TB_window #TB_next a,
+#TB_window #TB_prev a {
+	color: transparent;
+}
+#TB_prev a {
+	right: 20px;
+	left: auto;
+	background: url('images/thickbox-navi.png') no-repeat -42px top transparent;
+}
+#TB_next a {
+	left: 20px;
+	background: url('images/thickbox-navi.png') no-repeat left top transparent;
+	right: auto;
+}
+#TB_window img#TB_Image {
+    margin: 15px 15px 0 0;
+}
+#TB_window {
+	text-align: right;
+}
+#TB_caption {
+    float: right;
+    padding: 7px 25px 10px 30px;
+}
+
+/* Generated by the RTLer - http://wordpress.org/extend/plugins/rtler/ */

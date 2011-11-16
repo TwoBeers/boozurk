@@ -1,6 +1,6 @@
 <h3>Boozurk - WordPress theme</h3>
 	<ul>
-		<li>version: 1.01</li>
+		<li>version: 1.02</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -35,6 +35,7 @@
 		<li>Gravatars Support</li>
 		<li>Theme options</li>
 		<li>Post formats support</li>
+		<li>rtl language support</li>
 	</ul>
  
 <h3>ADVANCED THEME FEATURES:</h3>
@@ -118,6 +119,9 @@
 		</li>
 		<li><h4>User quick links</h4>
 			<p>It's some kind of an enhanced "meta" widget, showing useful links for users. By activating the "funny nick" option, your unregistered visitors will be greeted with a funny nickname (randomly generated).</p>
+		</li>
+		<li><h4>Clean Archives</h4>
+			<p>Show archives links in a clean and simple way.</p>
 		</li>
 		<li><h4>Share this</h4>
 			<p>Show some popular sharing services links to publicize your contents. It's visible ONLY in single posts.

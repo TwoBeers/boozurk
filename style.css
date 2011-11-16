@@ -2,8 +2,8 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars (the right one is fixed), up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
-Version: 1.01
-Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats
+Version: 1.02
+Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -447,7 +447,7 @@ input[type=password]:focus {
 	position: relative;
 }
 .bz-featured-title .storytitle {
-	background-color: #fff;
+	background-color: #f5f5f5;
 	line-height: 34px;
 	margin: 0;
 	min-height: 54px;
@@ -461,8 +461,9 @@ input[type=password]:focus {
 .bz-featured-title .storytitle a {
 	padding-left: 10px;
 }
-.bz-featured-title img {
+.bz-featured-title img.attachment-large {
 	width: 100%;
+	height: auto;
 }
 .format-status .avatar,
 .category-status .avatar {
@@ -698,6 +699,10 @@ div.bz_Widget_post_details ul {
 	margin: 0;
 	font-size: .8em;
 }
+.bz-clean-archives .bz-year-link {
+	font-weight: bold;
+	font-size: 1.2em;
+}
 /* Post Format icons
 ----------------------------------------------------------*/
 .bz-thumb-format,
@@ -866,11 +871,13 @@ img.bz-thumb-format {
 	border-top:1px solid #ddd;
 	margin-top:5px;
 	padding-top:5px;
-	text-align:center;
 	clear: both;
 }
 .bz-author-bio .author-description a {
 	text-decoration: underline;
+}
+#bz-breadcrumb .bz-author-bio {
+	line-height: 1em;
 }
 
 /* cooltips
@@ -1041,7 +1048,12 @@ img.bz-thumb-format {
 	background-position: center -516px;
 }
 .bz-breadcrumb-reminder {
-	border-top: solid 1px #ddd;	
+	border-top: solid 1px #ddd;
+	padding-top: 5px;
+}
+#bz-breadcrumb .bz-breadcrumb-reminder span,
+#bz-breadcrumb .bz-breadcrumb-reminder a {
+    float:none;
 }
 
 /* Comments 

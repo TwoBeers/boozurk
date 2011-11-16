@@ -1334,6 +1334,90 @@ class boozurk_Widget_share_this extends WP_Widget {
 	}
 }
 
+/**
+ * Clean Archives Widget
+ */
+class boozurk_Widget_clean_archives extends WP_Widget {
+
+	function boozurk_Widget_clean_archives() {
+		$widget_ops = array('classname' => 'bz_Widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'boozurk') );
+		$this->WP_Widget('bz-clean-archives', __('Clean Archives','boozurk'), $widget_ops);
+		$this->alt_option_name = 'bz_Widget_clean_archives';
+
+	}
+
+	function widget($args, $instance) {
+		extract($args);
+		
+		global $wpdb; // Wordpress Database
+		
+		$years = $wpdb->get_results( "SELECT distinct year(post_date) AS year, count(ID) as posts FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' GROUP BY year(post_date) ORDER BY post_date DESC" );
+		
+		if ( empty( $years ) ) {
+			return; // empty archive
+		}
+		
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+		$month_style = ( isset($instance['month_style']) && in_array( $instance['month_style'], array ('number', 'acronym') ) ) ? $instance['month_style'] : 'number';
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php
+			if ( $month_style == 'acronym' )
+				$months_short = array( '', __('jan','boozurk'), __('feb','boozurk'), __('mar','boozurk'), __('apr','boozurk'), __('may','boozurk'), __('jun','boozurk'), __('jul','boozurk'), __('aug','boozurk'), __('sep','boozurk'), __('oct','boozurk'), __('nov','boozurk'), __('dec','boozurk') );
+			else
+				$months_short = array( '', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' );
+			
+		?>
+		<ul class="bz-clean-archives">
+		<?php foreach ( $years as $year ) {
+			echo '<li><a class="bz-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a> ';
+			
+			for ( $month = 1; $month <= 12; $month++ ) {
+				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
+					echo '<a class="bz-month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
+				}
+				
+				if ( $month != 12 ) {
+					echo ' ';
+				}
+			}
+			
+			echo '</li>';
+		} ?>
+		
+		</ul>
+		<?php echo $after_widget; ?>
+<?php
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+        $instance["month_style"] = in_array( $new_instance["month_style"], array ('number', 'acronym') ) ? $new_instance["month_style"] : 'number' ;
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Archives','boozurk');
+		$month_style = isset($instance['month_style']) ? esc_attr($instance['month_style']) : 'number';
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','boozurk'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('month_style'); ?>"><?php _e('Select month style', 'boozurk'); ?></label>
+            <select name="<?php echo $this->get_field_name('month_style'); ?>" id="<?php echo $this->get_field_id('month_style'); ?>" >
+                <option value="number" <?php selected( $month_style, 'number' ); ?>>number</option>
+                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>>acronym</option>
+            </select>
+		</p>
+<?php
+	}
+}
+
 
 /**
  * Register all of the default WordPress widgets on startup.
@@ -1367,6 +1451,8 @@ function boozurk_widgets_init() {
 	register_widget('boozurk_Widget_user_quick_links');
 	
 	register_widget('boozurk_Widget_share_this');
+	
+	register_widget('boozurk_Widget_clean_archives');
 }
 
 add_action('widgets_init', 'boozurk_widgets_init');

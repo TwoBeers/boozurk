@@ -123,8 +123,18 @@ function boozurk_get_coa() {
 									'default'=>1,
 									'description'=>__( 'thickbox preview','boozurk' ),
 									'info'=>__( 'add the thickbox effect to each linked image and galleries in post content','boozurk' ),
-									'req'=>'boozurk_jsani'
+									'req'=>'boozurk_jsani',
+									'sub'=>array('boozurk_js_thickbox_force') 
 								),
+		'boozurk_js_thickbox_force'=>array( 
+											'group'=>'javascript',
+											'type'=>'chk',
+											'default'=>1,
+											'description'=>__( 'replace links','boozurk' ),
+											'info'=>__( 'force galleries to use links to image instead of links to attachment','boozurk' ),
+											'req'=>'',
+											'sub'=>false 
+										),
 		'boozurk_js_post_expander'=>array( 
 										'group'=>'javascript',
 										'type'=>'chk',
@@ -284,7 +294,7 @@ function boozurk_get_coa() {
 								),
 		'boozurk_featured_title'=>	array( 												'group'=>'other',												'type'=>'sel',												'default'=>'lists',												'description'=>__( 'enhanced post title','boozurk' ),												'info'=>__( 'use the featured image as background for the post title','boozurk' ),												'options'=>array('lists','single','both','none'),												'options_l10n'=>array(__('in lists','boozurk'),__('in single posts/pages','boozurk'),__('both','boozurk'),__('none','boozurk')),
 												'req'=>'',
-												'sub'=>array('boozurk_featured_title_height') 
+												'sub'=>array('boozurk_featured_title_height','boozurk_featured_title_thumb') 
 											),
 		'boozurk_featured_title_height'=>	array( 
 												'group'=>'other',
@@ -294,6 +304,15 @@ function boozurk_get_coa() {
 												'info'=>'',
 												'options'=>array('100px','150px','200px','250px','300px','350px','400px','auto'),
 												'options_l10n'=>array('100px','150px','200px','250px','300px','350px','400px','auto'),
+												'req'=>'',
+												'sub'=>false 
+											),
+		'boozurk_featured_title_thumb'=>	array( 
+												'group'=>'other',
+												'type'=>'chk',
+												'default'=>0,
+												'description'=>__( 'thumbnail','boozurk' ),
+												'info'=>'use small thumbnail instead of the full image',
 												'req'=>'',
 												'sub'=>false 
 											),
@@ -308,8 +327,17 @@ function boozurk_get_coa() {
 											'sub'=>false 
 										),
 		'boozurk_logo'=>array( 							'group'=>'other',							'type'=>'url',							'default'=>'',							'description'=>__( 'Logo','boozurk' ),							'info'=>__( 'a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore','boozurk' ),							'req'=>'',
-							'sub'=>array('boozurk_logo_login') 
+							'sub'=>array('boozurk_logo_login','boozurk_logo_description') 
 						),
+		'boozurk_logo_description'=>	array( 
+									'group'=>'other',
+									'type'=>'chk',
+									'default'=>1,
+									'description'=>__( 'tagline','boozurk' ),
+									'info'=>__( 'show site description below the logo','boozurk' ),
+									'req'=>'',
+									'sub'=>false 
+								),
 		'boozurk_logo_login'=>	array( 									'group'=>'other',									'type'=>'chk',									'default'=>1,									'description'=>__( 'Logo in login page','boozurk' ),									'info'=>__( 'use the logo in the login page','boozurk' ),									'req'=>'boozurk_logo',
 									'sub'=>false 
 								),
@@ -467,6 +495,15 @@ if ( ( $boozurk_opt['boozurk_logo_login'] == 1 ) && ( $boozurk_opt['boozurk_logo
 	add_action( 'login_head', 'boozurk_login_head' );
 }
 
+// custom gallery shortcode function
+if ( isset( $boozurk_opt['boozurk_js_thickbox_force'] ) && ( $boozurk_opt['boozurk_js_thickbox_force'] == 1 ) ) {
+	remove_shortcode( 'gallery', 'gallery_shortcode' );
+	add_shortcode( 'gallery', 'boozurk_gallery_shortcode' );
+}
+function boozurk_gallery_shortcode($attr) {
+	$attr['link'] = 'file';
+	echo gallery_shortcode($attr);
+}
 
 if ( !function_exists( 'boozurk_widget_area_init' ) ) {
 	function boozurk_widget_area_init() {
@@ -952,8 +989,8 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 		// Check if this is a post or page, if it has a thumbnail, and if it's a big one
 		if ( $args['featured'] && has_post_thumbnail( $post->ID ) && ( $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'post-thumbnail' ) ) ) {
 			?>
-			<div class="storycontent bz-featured-title"<?php echo ( $boozurk_opt['boozurk_featured_title_height'] != 'auto') ? 'style="max-height:' . $boozurk_opt['boozurk_featured_title_height'] . ';"' : ''; ?>>
-				<?php echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' ); ?>
+			<div class="bz-featured-title"<?php echo ( $boozurk_opt['boozurk_featured_title_height'] != 'auto') ? 'style="max-height:' . $boozurk_opt['boozurk_featured_title_height'] . ';"' : ''; ?>>
+				<?php echo get_the_post_thumbnail( $post->ID, $boozurk_opt['boozurk_featured_title_thumb'] ? 'thumbnail' : 'large' ); ?>
 				<?php echo $post_title; ?>
 			</div>
 			<?php
@@ -1003,11 +1040,11 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 				$author_link = get_author_posts_url($author);
 
 				?>
-				<div class="bz-author-bio">
+				<div class="bz-author-bio vcard">
 					<ul>
 						<li class="author-avatar"><?php echo $avatar; ?></li>
-						<li class="author-name"><a href= "<?php echo $author_link; ?>" ><?php echo $name; ?></a></li>
-						<li class="author-description"><?php echo $description; ?> </li>
+						<li class="author-name"><a class="fn" href="<?php echo $author_link; ?>" ><?php echo $name; ?></a></li>
+						<li class="author-description note"><?php echo $description; ?> </li>
 						<li class="author-social">
 							<?php if ( get_the_author_meta('twitter', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Twitter', 'boozurk'), $name ) . '" href="'.get_the_author_meta('twitter', $author).'"><img alt="twitter" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>'; ?>
 							<?php if ( get_the_author_meta('facebook', $author) ) echo '<a target="_blank" class="url" title="' . sprintf( __('follow %s on Facebook', 'boozurk'), $name ) . '" href="'.get_the_author_meta('facebook', $author).'"><img alt="facebook" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>'; ?>
@@ -1105,20 +1142,8 @@ if (!function_exists('boozurk_search_reminder')) {
 				echo '<div class="bz-breadcrumb-reminder">' . category_description() . '</div>';
 			}
 		} elseif (is_author()) {
-			echo '<div class="vcard bz-breadcrumb-reminder">' . __( 'Author','boozurk' ) . ': <span class="fn"><strong>' . wp_title( '',false,'right' ) . '</strong></span>';
-			$bz_author = get_queried_object();
-			// If a user has filled out their description, show a bio on their entries.
-			if ( $bz_author->description ) { ?>
-				<div id="entry-author-info">
-					<?php echo get_avatar( $bz_author->user_email, 32, $default= get_template_directory_uri() . '/images/user.png','user-avatar' ); ?>
-					<?php
-						if ( $bz_author->twitter ) echo '<a class="url" title="' . sprintf( __('follow %s on Twitter', 'boozurk'), $bz_author->display_name ) . '" href="'.$bz_author->twitter.'"><img alt="twitter" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>';
-						if ( $bz_author->facebook ) echo '<a class="url" title="' . sprintf( __('follow %s on Facebook', 'boozurk'), $bz_author->display_name ) . '" href="'.$bz_author->facebook.'"><img alt="facebook" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>';
-					?>
-					<br />
-					<?php echo $bz_author->description; ?>
-				</div><!-- #entry-author-info -->
-			<?php }
+			echo '<div class="bz-breadcrumb-reminder">';
+			boozurk_post_details( true, false, false, false, false, 64, false );
 			echo '</div>';
 		} elseif ( is_page() ) {
 			boozurk_multipages();
@@ -1216,14 +1241,13 @@ function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</d
 			$cat = intval( get_query_var('cat') );
 			$output .= '<span>'.boozurk_get_category_parents($cat, false, " ".$opt['sep']." ").' ('.$wp_query->found_posts.')'.'</span>';
 		} elseif ( is_tag() ) {
-			$output .= '<span>'.$opt['archiveprefix']." ".single_cat_title('',false).' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
 		} elseif ( is_404() ) {
 			$output .= '<span>'.__( 'Page not found','boozurk' ).'</span>';
 		} elseif ( is_date() ) { 
-			$output .= '<span>'.$opt['archiveprefix']." ".single_month_title(' ',false).' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
 		} elseif ( is_author() ) { 
-			$user = get_userdatabylogin($wp_query->query_vars['author_name']);
-			$output .= '<span>'.$opt['archiveprefix']." ".$user->display_name.' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
 		} elseif ( is_search() ) {
 			$output .= '<span>'.$opt['searchprefix'].' "'.stripslashes(strip_tags(get_search_query())).'" ('.$wp_query->found_posts.')'.'</span>';
 		} elseif ( is_attachment() ) {
@@ -1802,7 +1826,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 					</p>
 				</div>
 				<div id="boozurk-infos">
-					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info','boozurk' ); ?><h2>
+					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info','boozurk' ); ?></h2>
 					<?php get_template_part( 'readme' ); ?>
 				</div>
 				<div class="clear"></div>
