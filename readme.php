@@ -41,18 +41,18 @@
 <h3>ADVANCED THEME FEATURES:</h3>
 	<ul>
 		<li><h4>Quick navigation</h4>
-			<p>In every page you can find many links for a fast navigation. Also, the <a href="#bz-cap-navigation">navigation bar</a>, usually fixed on the bottom right of the page, provides even more useful links and functionalities.</p>		</li>
+			<p>In every page you can find many links for a fast navigation. In addiction, the <a href="#bz-cap-navigation">navigation bar</a>, usually fixed on the bottom right of the page, provides even more useful links and functions than the past.</p></li>
 		<li><h4>Print preview</h4>
 			<p>On the <a href="#bz-cap-navigation">navigation bar</a> there's also a button that let's you have a quick print preview.</p>
 		</li>
 		<li><h4>Mobile support</h4>
-			<p>The theme has a built-in feature for mobiles. If a user browse your site with a mobile device, the theme automatically <a href="#bz-cap-mob-detects">detects</a> it and use a dedicated theme. Simple , clear and touch-screen friendly. There's also a link in the footer which lets the user to switch from a style to the other.</p>
+			<p>The theme has a built-in feature for mobiles. If a user browse to your site with a mobile device, the theme automatically <a href="#bz-cap-mob-detects">detects</a> it and use a dedicated theme. Simple , clear and touch-screen friendly. A link to let the user switch between the two styles (mobile and standard), is also provided in the footer.</p>
 		</li>
 		<li><h4><a href="#bz-cap-widgets">Custom widgets</a></h4>
-			<p>Besides the standard Wordpress widgets, Boozurk adds a ton of new widgets, for a super customization!</p>
+			<p>Besides the standard Wordpress widgets, Boozurk adds a ton of new widgets for a super customization!</p>
 		</li>
 		<li><h4>Inline post expander</h4>
-			<p>This feature converts the "more..." link (that usually redirects you to the rest of a post) in an expander, showing the whole post content inline without leaving the current page.</p>
+			<p>This feature converts the "more..." link (that usually redirects user to the complete view of post) in a dinamic expander, that shows the whole post content inline, without leaving the current page.</p>
 		</li>
 		<li><h4>Thickbox images and galleries</h4>
 			<p><a href="http://jquery.com/demo/thickbox/" target="_blank">ThickBox</a> is a webpage UI dialog widget written in JavaScript on top of the jQuery library. Its function is to show a single image, multiple images, inline content and so on. While it is not maintained any longer, it has many advantages: is really lightweight and is already integrated in Wordpress so there's no need to worry about its compatibility.
@@ -65,26 +65,26 @@
 			<p>Fading tooltips everywhere! ;)</p>
 		</li>
 		<li><h4><a href="https://plus.google.com/" target="_blank">Google +1</a></h4>
-			<p>The theme has the +1 feature already buit-in. You only need to activate it in <em>theme options</em>.</p>
+			<p>The theme has the Google +1 feature already buit-in. You only need to activate it in <em>theme options</em>.</p>
 		</li>
 		<li><h4>Custom logo</h4>
-			<p>You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or select it in your media libray by clicking the "select" button.
+			<p>You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or choose it in your media libray by clicking the "select" button.
 			</br><u>Note:</u> while the logo image will fit to its container on the right sidebar, we suggest not to use images larger than 200px.</p>
 		</li>
 		<li><h4>Inline pagination</h4>
-			<p>Append the next page of posts (via AJAX) to your current page. You can decide (in <em>theme options</em>) if this is done automatically (when a user scrolls to the bottom) or manually (by clicking the link at the end of posts).
+			<p>Append the next page of posts (via AJAX) to your current page. You can decide (always in <em>theme options</em>) if this will be done automatically (when a user scrolls to the bottom) or manually (by clicking the link at the end of posts).
 			</br><u>Note:</u> this feature has some disvantages, like:
 				<ul>
 					<li>The "footer" of the page will be impossible to reach if in auto mode.</li>
 					<li>There is no permalink to a given state of the page.</li>
-					<li>Some javascript features will not capture the event (like Google+1).</li>
+					<li>Some javascript features will not capture the event (like Google +1).</li>
 				</ul>
 			</p>
 		</li>
 	</ul>
 	
 <h3 id="bz-cap-widgets">WIDGETS:</h3>
-	<p>Boozurk adds some new widgets. They will appear in the widget page, after the standard ones. You can easily recognize them by their magenta "b" icon.</p>
+	<p>Boozurk adds some new widgets. They can be activated in the widget page, just below the standard ones. You can easily recognize them by their magenta "b" icon.</p>
 	<ul>
 		<li><h4>Popular Posts</h4>
 			<p>A list of the most commented posts on your site.</p>
@@ -96,7 +96,7 @@
 			<p>The authors of the latest comments.</p>
 		</li>
 		<li><h4>Popular Categories</h4>
-			<p>A list of categories, sorted by the number of posts.</p>
+			<p>A list of categories, sorted by the number of related posts.</p>
 		</li>
 		<li><h4>Follow Me</h4>
 			<p>This widget lets visitors of your blog to subscribe to it or follow you on popular social networks like Twitter, FaceBook etc. Remember to insert the <b>full url</b> to your accounts, not only the username!
@@ -106,13 +106,13 @@
 			<p>This widget will show your last "aside" or "status" post (unlike Ephemera in TwentyEleven, that show only aside ones)</p>
 		</li>
 		<li><h4>Recent Posts in Category</h4>
-			<p>The last posts in a single category. If you choose "(current post category)" the widget will be visible only in single posts and the category will be the same of the current post</p>
+			<p>The last posts in a single category. If you choose "(current post category)" the widget will be visible only in single posts view and the category will be the same of the current post</p>
 		</li>
 		<li><h4 id="bz-cap-navigation">Navigation buttons</h4>
 			<p>Some usefull buttons for an easier navigation experience. You can choose which button to show and which not. Normally the navigation bar is fixed and placed on the bottom right corner of the page. You can move the widget in every widget area</p>
 		</li>
 		<li><h4>Post Formats</h4>
-			<p>A list of the supported post formats, which lets the user to show posts by their format</p>
+			<p>A list of the supported post formats, which lets the user call a list of posts by their format</p>
 		</li>
 		<li><h4>Image EXIF details</h4>
 			<p>This widget will display the image details (even EXIF if present). It's visible ONLY in single image attachments</p>
@@ -124,7 +124,7 @@
 			<p>Show archives links in a clean and simple way.</p>
 		</li>
 		<li><h4>Share this</h4>
-			<p>Show some popular sharing services links to publicize your contents. It's visible ONLY in single posts.
+			<p>Show some popular sharing services links to publicize your contents. It's visible ONLY in single post view.
 			The services currently supported are:
 				<ul>
 					<li>Twitter</li>
@@ -144,7 +144,7 @@
 
 <h3>POST FORMATS:</h3>
 	<p>A <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Format</a> is a piece of meta information that can be used by a theme to customize its presentation of a post.</p>
-	<p>The theme uses the customization in lists ( main blog, archives, search and so on ), while, in single posts, the appearance will be ever the same (title + content)</p>
+	<p>The theme uses the customization in lists (main blog, archives, search and so on), while, in single posts, the appearance will be ever the same (title + content)</p>
 	<p>The formats recognized are:</p>
 	<ul>
 		<li><h4>aside</h4>
@@ -181,7 +181,7 @@
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li id="bz-cap-mob-detects">the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 		<li>the secondary menus (one on top of page and one above the footer widget area) are optionals and must be enabled in appearance -&gt; menu. They support only one level of hierarchy</li>
-		<li><h3>this theme is not compatible with Internet Explorer 6 (or less) and never will be!</h3> so don't ask...</li>
+		<li><h3>this theme is not compatible with Internet Explorer 6 (or less), and it will never happen to be!</h3> so don't ask...</li>
 	</ul>
  
 <h3>SUPPORT:</h3>
@@ -189,7 +189,7 @@
 		<li>for any question/problem contact us at
 			<ul>
 				<li><a href="http://www.twobeers.net/annunci/tema-per-wordpress-boozurk" title="Boozurk theme page" target="_blank" >http://www.twobeers.net/annunci/tema-per-wordpress-boozurk</a></li>
-				<li><a href="https://github.com/TwoBeers/boozurk/issues" title="TwoBeers Issues Report" target="_blank" >https://github.com/TwoBeers/boozurk/issues</a></li>
+				<li><a href="https://github.com/TwoBeers/boozurk/issues" title="Boozurk Issues Report" target="_blank" >https://github.com/TwoBeers/boozurk/issues</a></li>
 			</ul>
 		</li>
 		<li>code repository
