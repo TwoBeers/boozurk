@@ -1136,7 +1136,6 @@ if ( !function_exists( 'boozurk_exif_details' ) ) {
 if (!function_exists('boozurk_search_reminder')) {
 	function boozurk_search_reminder(){
 		// search reminder
-		?><div class="fixfloat"></div><?php
 		if ( is_category() ) {
 			if ( category_description() ) {
 				echo '<div class="bz-breadcrumb-reminder">' . category_description() . '</div>';
@@ -1179,14 +1178,14 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 /*
 Based on Yoast Breadcrumbs Plugin (http://yoast.com/wordpress/breadcrumbs/)
 */
-function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</div>') {
+function boozurk_breadcrumb() {
 	global $wp_query, $post;
 	
 	$opt 						= array();
 	$opt['home'] 				= "Home";
 	$opt['sep'] 				= '<span class="bz-breadcrumb-sep">&nbsp;</span>';
-	$opt['archiveprefix'] 		= "Archives for";
-	$opt['searchprefix'] 		= "Search for";
+	$opt['archiveprefix'] 		=  __('Archives for %s', 'boozurk' );
+	$opt['searchprefix'] 		=  __('Search for "%s"', 'boozurk' );
 
 	$nofollow = ' rel="nofollow" ';
 	
@@ -1239,17 +1238,17 @@ function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</d
 		}
 		if ( is_category() ) {
 			$cat = intval( get_query_var('cat') );
-			$output .= '<span>'.boozurk_get_category_parents($cat, false, " ".$opt['sep']." ").' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.boozurk_get_category_parents($cat, false, " ".$opt['sep']." ").'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_tag() ) {
-			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_404() ) {
 			$output .= '<span>'.__( 'Page not found','boozurk' ).'</span>';
 		} elseif ( is_date() ) { 
-			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_author() ) { 
-			$output .= '<span>'.$opt['archiveprefix']." ".wp_title( '', false, 'right' ).' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_search() ) {
-			$output .= '<span>'.$opt['searchprefix'].' "'.stripslashes(strip_tags(get_search_query())).'" ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.sprintf( $opt['searchprefix'], stripslashes(strip_tags(get_search_query())) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_attachment() ) {
 			if ( $post->post_parent ) {
 				$output .= '<a href="'.get_permalink( $post->post_parent ).'">'.get_the_title( $post->post_parent ).'</a> '.$opt['sep'];
@@ -1258,7 +1257,7 @@ function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</d
 		} else if ( is_tax() ) {
 			$taxonomy 	= get_taxonomy ( get_query_var('taxonomy') );
 			$term 		= get_query_var('term');
-			$output .= '<span>'.$taxonomy->label .': '. $term.' ('.$wp_query->found_posts.')'.'</span>';
+			$output .= '<span>'.$taxonomy->label .': '. $term.'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} else {
 			if ( get_query_var('page') ) {
 				$output .= '<a href="'.get_permalink().'">'.get_the_title().'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
@@ -1322,10 +1321,15 @@ function boozurk_breadcrumb($prefix = '<div id="bz-breadcrumb">', $suffix = '</d
 	if ( get_query_var('paged') ) {
 		$output .= ' '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('paged').'</span>';
 	}
-	echo $prefix;
-	echo $output;
-	boozurk_search_reminder();
-	echo $suffix;
+	?>
+	<div id="bz-breadcrumb-wrap">
+		<div id="bz-breadcrumb">
+			<?php echo $output; ?>
+			<div class="fixfloat"></div>
+		</div>
+		<?php boozurk_search_reminder(); ?>
+	</div>
+	<?php
 }
 
 

@@ -81,6 +81,9 @@
 				</ul>
 			</p>
 		</li>
+		<li><h4>WP-PageNavi plugin support</h4>
+			<p>Native support for <a href="http://wordpress.org/extend/plugins/wp-pagenavi/">WP-PageNavi</a>. You just have to install and activate the plugin</p>
+		</li>
 	</ul>
 	
 <h3 id="bz-cap-widgets">WIDGETS:</h3>

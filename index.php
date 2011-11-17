@@ -26,6 +26,9 @@ if ( have_posts() ) {
 	<?php } //end while ?>
 
 	<div id="bz-page-nav">
+	<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
+		<?php wp_pagenavi(); ?>
+	<?php } else { ?>
 		<div id="bz-page-nav-msg"></div>
 		<div id="bz-page-nav-subcont">
 			<?php //num of pages
@@ -42,6 +45,7 @@ if ( have_posts() ) {
 		<div id="bz-next-posts-button" class="hide-if-no-js">
 			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurk_AJAX_paged();" />
 		</div>
+	<?php } ?>
 	</div>
 
 <?php } else { ?>

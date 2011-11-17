@@ -1595,6 +1595,16 @@ msgstr "video"
 msgid "width of the widget area"
 msgstr "larghezza dell&#39;area widget"
 
+#. Text in function
+#: functions.php:2438
+msgid "Archives for %s"
+msgstr "Archivi per %s"
+
+#. Text in function
+#: functions.php:2438
+msgid "Search for \"%s\""
+msgstr "Ricerca per \"%s\""
+
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
