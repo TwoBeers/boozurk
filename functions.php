@@ -357,7 +357,7 @@ function boozurk_get_coa() {
 		'boozurk_post_formats_standard_title'=>	array( 
 													'group'=>'index',
 													'type'=>'sel',
-													'default'=>'none',
+													'default'=>'post title',
 													'description'=>__( 'title','boozurk' ),
 													'info'=>'',
 													'options'=>array('post title', 'post date','none'),
@@ -368,7 +368,7 @@ function boozurk_get_coa() {
 		'boozurk_post_formats_standard_content'=>array( 
 													'group'=>'index',
 													'type'=>'sel',
-													'default'=>'presentation',
+													'default'=>'content',
 													'description'=>__( 'content','boozurk' ),
 													'info'=>'',
 													'options'=>array( 'content', 'excerpt', 'none'),
