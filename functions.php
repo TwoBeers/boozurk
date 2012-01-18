@@ -6,13 +6,13 @@ add_action( 'admin_init', 'boozurk_default_options' );
 // Register sidebars by running boozurk_widget_area_init() on the widgets_init hook
 add_action( 'widgets_init', 'boozurk_widget_area_init' );
 // Add stylesheets
-add_action( 'wp_print_styles', 'boozurk_stylesheet' );
+add_action( 'wp_enqueue_scripts', 'boozurk_stylesheet' );
 add_action( 'wp_head', 'boozurk_custom_style' );
 // Add js scripts
 add_action( 'wp_head', 'boozurk_localize_js' );
 // setup for audio player
 add_action( 'wp_head', 'boozurk_setup_player' );
-add_action( 'template_redirect', 'boozurk_scripts' );
+add_action( 'wp_enqueue_scripts', 'boozurk_scripts' );
 add_action( 'wp_footer', 'boozurk_initialize_scripts' );
 // Add custom category page
 add_action( 'template_redirect', 'boozurk_allcat' );
@@ -38,6 +38,8 @@ add_filter( 'manage_pages_columns', 'boozurk_addthumbcolumn' );
 add_action( 'manage_pages_custom_column', 'boozurk_addthumbvalue', 10, 2 );
 // boozurk_print_date
 add_action( 'boozurk_hook_before_post', 'boozurk_print_date' );
+// add links to admin bar
+add_action('admin_bar_menu', 'boozurk_admin_bar_plus', 999);  
 // Custom filters
 add_filter( 'the_content', 'boozurk_content_replace' );
 add_filter( 'get_comment_author_link', 'boozurk_add_quoted_on' );
@@ -835,6 +837,7 @@ if ( !function_exists( 'boozurk_setup_player' ) ) {
 if ( !function_exists( 'boozurk_stylesheet' ) ) {
 	function boozurk_stylesheet(){
 		global $boozurk_version, $bz_is_mobile_browser, $bz_is_printpreview;
+		if ( is_admin() ) return;
 		// mobile style
 		if ( $bz_is_mobile_browser ) {
 			wp_enqueue_style( 'bz_mobile-style', get_template_directory_uri() . '/mobile/mobile-style.min.css', false, $boozurk_version, 'screen' );
@@ -854,6 +857,7 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 if ( !function_exists( 'boozurk_scripts' ) ) {
 	function boozurk_scripts(){
 		global $boozurk_opt, $boozurk_version, $bz_is_mobile_browser, $bz_is_printpreview;
+		if ( is_admin() ) return;
 		if ( $bz_is_mobile_browser || $bz_is_printpreview ) return; // skip if in print preview or mobile view
 		if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
 		$deps = array('jquery');
@@ -1831,7 +1835,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 				</div>
 				<div id="boozurk-infos">
 					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info','boozurk' ); ?></h2>
-					<?php get_template_part( 'readme' ); ?>
+					<?php locate_template( 'readme.html',true ); ?>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -2443,10 +2447,27 @@ if ( !function_exists( 'boozurk_post_manage_style' ) ) {
 	}
 }
 
-// load the custom widgets module
-if ( $boozurk_opt['boozurk_custom_widgets'] == 1 ) get_template_part('lib/widgets');
+// add links to admin bar
+if ( !function_exists( 'boozurk_admin_bar_plus' ) ) {
+	function boozurk_admin_bar_plus() {
+		global $wp_admin_bar;
+		if (!is_super_admin() || !is_admin_bar_showing() || !current_user_can( 'edit_theme_options' ) )
+			return;
+		$add_menu_meta = array(
+			'target'    => '_blank'
+		);
+		$wp_admin_bar->add_menu(array(
+			'id'        => 'bz_theme_options',
+			'parent'    => 'appearance',
+			'title'     => __( 'Theme Options','boozurk' ),
+			'href'      => get_admin_url() . 'themes.php?page=tb_boozurk_functions',
+			'meta'      => $add_menu_meta
+		));
+	}
+}
 
-// load the custom hooks
-get_template_part('lib/hooks');
+// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
+if ( $boozurk_opt['boozurk_custom_widgets'] == 1 ) require_once('lib/widgets.php'); // load the custom widgets module
+require_once('lib/hooks.php'); // load the custom hooks module
 
 ?>

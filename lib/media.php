@@ -120,7 +120,7 @@ function boozurk_media_library() {
 		<?php boozurk_media_library(); ?>
 		<script type="text/javascript">
 			/* <![CDATA[ */
-			var win = window.dialogArguments || opener || parent || top;
+			var win = window.dialogArguments || parent || opener || top;
 			function bzSendToInput(the_src) {
 				win.document.getElementById('bz_text_boozurk_logo').value=the_src;
 				win.tb_remove();
