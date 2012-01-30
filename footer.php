@@ -23,7 +23,6 @@
 				global $boozurk_version; 
 				echo ' | WP version - ' . get_bloginfo ( 'version' );
 				echo ' | WP language - ' . get_bloginfo ( 'language' );
-				if ( phpversion() ) echo ' | PHP v' . phpversion();
 				foreach ( $boozurk_opt as $key => $val ) { echo ' | ' . $key . ' - ' . $val; };
 			?>
 			
