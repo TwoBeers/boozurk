@@ -721,7 +721,7 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 		});<?php } ?>
 		<?php if ( $boozurk_opt['boozurk_js_tooltips'] == 1 ) { ?>
 		$('.bz-tooltip,.nb_tooltip').boozurk_Tooltips();
-		$('.minibutton,.share-item img,.bz_widget_categories a,#bz-quotethis,.bz_widget_latest_commentators li,.bz-widget-social a,.post-format-item.compact img').boozurk_Cooltips({fade: true});
+		$('.minibutton,.share-item img,.bz_widget_categories a,#bz-quotethis,.bz_widget_latest_commentators li,.bz-widget-social a,.post-format-item.compact img,a.bz-tipped-anchor').boozurk_Cooltips({fade: true});
 		$('.pmb_comm').boozurk_Cooltips({fade: true, fallback: '<?php _e( 'Comments closed','boozurk' ); ?>'});<?php } ?>
 		<?php if ( ( $boozurk_opt['boozurk_infinite_scroll'] == 1 ) && !is_singular() && !is_404() ) { ?>
 		$(window).boozurk_InfiniteScroll('<?php echo $boozurk_opt['boozurk_infinite_scroll_type']; ?>');<?php } ?>
@@ -937,7 +937,7 @@ if ( !function_exists( 'boozurk_multipages' ) ) {
 		if ( $childrens ) {
 			$the_child_list = '';
 			foreach ($childrens as $children) {
-				$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
+				$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . strip_tags( get_the_title( $children ) ) . '</a>';
 			}
 			$the_child_list = implode(' | ' , $the_child_list);
 			echo '<div class="bz-breadcrumb-reminder"><span class="bz-breadcrumb-childs">&nbsp;</span>' . $the_child_list . '</div>'; // echoes the childs
@@ -954,13 +954,15 @@ if ( !function_exists( 'boozurk_single_nav' ) ) {
 		if ( $boozurk_opt['boozurk_browse_links'] == 0 ) return;
 		$next = get_previous_post();
 		$prev = get_next_post();
+		$next_title = get_the_title( $next ) ? get_the_title( $next ) : __( 'Previous Post', 'boozurk' );
+		$prev_title = get_the_title( $prev ) ? get_the_title( $prev ) : __( 'Next Post', 'boozurk' );
 	?>
 		<div class="nav-single fixfloat">
 			<?php if ( $prev ) { ?>
-				<span class="nav-previous"><a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . get_the_title( $prev ) ) ); ?>"><?php echo get_the_title( $prev ); ?><?php echo boozurk_get_the_thumb( $prev->ID, 32, 32, 'bz-thumb-format' ); ?></a></span>
+				<span class="nav-previous"><a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . $prev_title ) ); ?>"><?php echo strip_tags ( $prev_title ); ?><?php echo boozurk_get_the_thumb( $prev->ID, 32, 32, 'bz-thumb-format' ); ?></a></span>
 			<?php } ?>
 			<?php if ( $next ) { ?>
-				<span class="nav-next"><a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . get_the_title( $next ) ) ); ?>"><?php echo boozurk_get_the_thumb( $next->ID, 32, 32, 'bz-thumb-format' ); ?><?php echo get_the_title( $next ); ?></a></span>
+				<span class="nav-next"><a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . $next_title ) ); ?>"><?php echo boozurk_get_the_thumb( $next->ID, 32, 32, 'bz-thumb-format' ); ?><?php echo strip_tags ( $next_title ); ?></a></span>
 			<?php } ?>
 		</div><!-- #nav-single -->
 	<?php
@@ -1217,7 +1219,7 @@ function boozurk_breadcrumb() {
 	$on_front = get_option('show_on_front');
 	if ($on_front == "page") {
 		$homelink = '<a class="bz-breadcrumb-home"'.$nofollow.'href="'.get_permalink(get_option('page_on_front')).'">&nbsp;</a>';
-		$bloglink = $homelink.' '.$opt['sep'].' <a href="'.get_permalink(get_option('page_for_posts')).'">'.get_the_title(get_option('page_for_posts')).'</a>';
+		$bloglink = $homelink.' '.$opt['sep'].' <a href="'.get_permalink(get_option('page_for_posts')).'">'.strip_tags ( get_the_title( get_option( 'page_for_posts' ) ) ).'</a>';
 	} else {
 		$homelink = '<a class="bz-breadcrumb-home"'.$nofollow.'href="'.home_url().'">&nbsp;</a>';
 		$bloglink = $homelink;
@@ -1226,7 +1228,7 @@ function boozurk_breadcrumb() {
 	if ( ($on_front == "page" && is_front_page()) || ($on_front == "posts" && is_home()) ) {
 		$output = $homelink.' '.$opt['sep'].' '.'<span>'.$opt['home'].'</span>';
 	} elseif ( $on_front == "page" && is_home() ) {
-		$output = $homelink.' '.$opt['sep'].' '.'<span>'.get_the_title(get_option('page_for_posts')).'</span>';
+		$output = $homelink.' '.$opt['sep'].' '.'<span>'.strip_tags ( get_the_title( get_option( 'page_for_posts' ) ) ).'</span>';
 	} elseif ( !is_page() ) {
 		$output = $bloglink.' '.$opt['sep'].' ';
 		if ( is_single() && has_category() ) {
@@ -1255,18 +1257,18 @@ function boozurk_breadcrumb() {
 			$output .= '<span>'.sprintf( $opt['searchprefix'], stripslashes(strip_tags(get_search_query())) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} elseif ( is_attachment() ) {
 			if ( $post->post_parent ) {
-				$output .= '<a href="'.get_permalink( $post->post_parent ).'">'.get_the_title( $post->post_parent ).'</a> '.$opt['sep'];
+				$output .= '<a href="'.get_permalink( $post->post_parent ).'">'.strip_tags ( get_the_title( $post->post_parent ) ).'</a> '.$opt['sep'];
 			}
-			$output .= '<span>'.get_the_title().'</span>';
+			$output .= '<span>'.strip_tags( get_the_title() ).'</span>';
 		} else if ( is_tax() ) {
 			$taxonomy 	= get_taxonomy ( get_query_var('taxonomy') );
 			$term 		= get_query_var('term');
 			$output .= '<span>'.$taxonomy->label .': '. $term.'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
 		} else {
 			if ( get_query_var('page') ) {
-				$output .= '<a href="'.get_permalink().'">'.get_the_title().'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
+				$output .= '<a href="'.get_permalink().'">'.strip_tags( get_the_title() ).'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
 			} else {
-				$output .= '<span>'.get_the_title().'</span>';
+				$output .= '<span>'.strip_tags( get_the_title() ).'</span>';
 			}
 		}
 	} else {
@@ -1275,9 +1277,9 @@ function boozurk_breadcrumb() {
 		// If this is a top level Page, it's simple to output the breadcrumb
 		if ( 0 == $post->post_parent ) {
 			if ( get_query_var('page') ) {
-				$output = $homelink.' '.$opt['sep'].' <a href="'.get_permalink().'">'.get_the_title().'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
+				$output = $homelink.' '.$opt['sep'].' <a href="'.get_permalink().'">'.strip_tags( get_the_title() ).'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
 			} else {
-				$output = $homelink." ".$opt['sep']." ".'<span>'.get_the_title().'</span>';
+				$output = $homelink." ".$opt['sep']." ".'<span>'.strip_tags( get_the_title() ).'</span>';
 			}
 		} else {
 			if (isset($post->ancestors)) {
@@ -1409,7 +1411,7 @@ if (!function_exists('boozurk_navbuttons')) {
 
 		<?php if ( $is_image ) { 																			// ------- Back to parent post ------- ?>
 			<?php if ( !empty( $post->post_parent ) ) { ?>
-				<div class="minibutton" title="<?php esc_attr( printf( __( 'Return to %s', 'boozurk' ), get_the_title( $post->post_parent ) ) ); ?>">
+				<div class="minibutton" title="<?php esc_attr( printf( __( 'Return to %s', 'boozurk' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>">
 					<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery">
 						<span class="minib_img minib_backtopost">&nbsp;</span>
 					</a>
@@ -1418,7 +1420,7 @@ if (!function_exists('boozurk_navbuttons')) {
 		<?php } ?>
 
 		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
-			<div class="minibutton" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', get_the_title( get_next_post() ) ) ); ?>">
+			<div class="minibutton" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', strip_tags( get_the_title( get_next_post() ) ) ) ); ?>">
 				<a href="<?php echo get_permalink( get_next_post() ); ?>">
 					<span class="minib_img minib_npage">&nbsp;</span>
 				</a>
@@ -1426,7 +1428,7 @@ if (!function_exists('boozurk_navbuttons')) {
 		<?php } ?>
 
 		<?php if (  $next_prev && $is_post && get_previous_post() ) { 										// ------- Previous post ------- ?>
-			<div class="minibutton" title="<?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', get_the_title( get_previous_post() ) ) ); ?>">
+			<div class="minibutton" title="<?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', strip_tags( get_the_title( get_previous_post() ) ) ) ); ?>">
 				<a href="<?php echo get_permalink( get_previous_post() ); ?>">
 					<span class="minib_img minib_ppage">&nbsp;</span>
 				</a>

@@ -568,9 +568,9 @@ class boozurk_Widget_social extends WP_Widget {
 			}
 			if ($show && !empty($account)) {
 ?>
-        <a target="<?php echo $target; ?>" href="<?php echo $account; ?>"<?php echo $onclick; ?> class="bz-social-icon<?php echo $class; ?>" title="<?php printf( $prefix, $follow_service ); ?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
-        </a>
+<a target="<?php echo $target; ?>" href="<?php echo $account; ?>"<?php echo $onclick; ?> class="bz-social-icon<?php echo $class; ?>" title="<?php printf( $prefix, $follow_service ); ?>">
+	<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
+</a>
 <?php
             }
         }
@@ -1371,15 +1371,11 @@ class boozurk_Widget_clean_archives extends WP_Widget {
 		?>
 		<ul class="bz-clean-archives">
 		<?php foreach ( $years as $year ) {
-			echo '<li><a class="bz-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a> ';
+			echo '<li><a class="bz-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a>';
 			
 			for ( $month = 1; $month <= 12; $month++ ) {
 				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
 					echo '<a class="bz-month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
-				}
-				
-				if ( $month != 12 ) {
-					echo ' ';
 				}
 			}
 			
@@ -1410,8 +1406,8 @@ class boozurk_Widget_clean_archives extends WP_Widget {
 		<p>
             <label for="<?php echo $this->get_field_id('month_style'); ?>"><?php _e('Select month style', 'boozurk'); ?></label>
             <select name="<?php echo $this->get_field_name('month_style'); ?>" id="<?php echo $this->get_field_id('month_style'); ?>" >
-                <option value="number" <?php selected( $month_style, 'number' ); ?>>number</option>
-                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>>acronym</option>
+                <option value="number" <?php selected( $month_style, 'number' ); ?>><?php _e('number','boozurk'); ?></option>
+                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>><?php _e('acronym','boozurk'); ?></option>
             </select>
 		</p>
 <?php
