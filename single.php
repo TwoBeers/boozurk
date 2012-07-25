@@ -15,8 +15,8 @@
 				<?php boozurk_hook_before_post_content(); ?>
 				<div class="storycontent">
 				<?php the_content(); ?>
-				<?php if ( !post_password_required() && isset( $boozurk_opt['boozurk_post_formats_audio' ] ) && $boozurk_opt['boozurk_post_formats_audio' ] == 1 ) boozurk_add_audio_player(); ?>
 				</div>
+				<?php boozurk_hook_after_post_content_single(); ?>
 				<?php boozurk_hook_after_post_content(); ?>
 				<div class="fixfloat" style="padding-top: 20px;">
 						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div>' ); ?>
@@ -37,7 +37,5 @@
 	<?php } ?>
 </div><!-- posts_wide -->
 <?php boozurk_hook_after_posts(); ?>
-
-<?php get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

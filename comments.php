@@ -4,16 +4,16 @@
 		echo '<div id="comments" style="text-align: right;">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
 		return;
 	}
-		global $boozurk_opt, $bz_is_printpreview, $bz_is_mobile_browser;
+		global $boozurk_opt, $boozurk_is_printpreview, $boozurk_is_mobile_browser;
 ?>
 
 <?php if ( comments_open() ) { ?>
-	<div id="comments" style="text-align: right;">
-		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?><span class="hide_if_print"> - <a href="#respond" title="<?php _e( "Leave a comment",'boozurk' ); ?>"><?php _e( "Leave a comment",'boozurk' ); ?></a></span>
+	<div id="comments">
+		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?><span class="hide_if_print"> - <a href="#respond" title="<?php esc_attr_e( "Leave a comment",'boozurk' ); ?>"><?php _e( "Leave a comment",'boozurk' ); ?></a></span>
 	</div>
 	<?php
 } elseif ( have_comments() ) { ?>
-	<div id="comments" style="text-align: right;">
+	<div id="comments">
 		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?>
 	</div>
 	<?php
@@ -38,7 +38,7 @@
 	}
 }
 //if comments are open
-if ( comments_open() && !$bz_is_printpreview ) { 
+if ( comments_open() && !$boozurk_is_printpreview ) { 
 		//define custom argoments for comment form
 		
 		$bz_fields =  array(
@@ -53,7 +53,6 @@ if ( comments_open() && !$bz_is_printpreview ) {
 		$bz_custom_args = array(
 			'fields'               => apply_filters( 'comment_form_default_fields', $bz_fields ),
 			'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
-			'comment_notes_after'  => '<p class="form-allowed-tags"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','boozurk' ), allowed_tags() ) . '</small></p>',
 			'label_submit'         => __( 'Say It!','boozurk' ),
 			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.','boozurk' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 			'cancel_reply_link'    => __( 'Cancel reply','boozurk' ),

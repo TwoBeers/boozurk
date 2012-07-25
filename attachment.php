@@ -28,28 +28,25 @@
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
 				<?php boozurk_hook_before_post_content(); ?>
-				<?php if ( wp_attachment_is_image() ) { ?>
-					<div class="storycontent">
-						<div class="att_content">
-							<a class="bz-view-full-size" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','boozurk' ) ;  // link to Full size image ?>" rel="attachment"><?php
-							$bz_attachment_width  = apply_filters( 'boozurk_attachment_size', 1000 );
-							$bz_attachment_height = apply_filters( 'boozurk_attachment_height', 1000 );
-							echo wp_get_attachment_image( $post->ID, array( $bz_attachment_width, $bz_attachment_height ), false, array( 'class' => 'size-full') ); // filterable image width with, essentially, no limit for image height. 
-							?></a>
-							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
-						</div>
-						<?php if ( !empty( $post->post_content ) ) the_content(); ?>
-					</div>
-				<?php } else { ?>
-					<div class="storycontent">
-						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
-						<p><?php if ( !empty( $post->post_content ) ) the_content(); ?></p>
-					</div>
-				<?php } ?>
-				<?php boozurk_hook_after_post_content(); ?>
-				<div class="fixfloat">
-						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
+				<div class="storycontent">
+					<?php if ( wp_attachment_is_image() ) { ?>
+							<div class="att_content">
+								<a class="bz-view-full-size" href="<?php echo wp_get_attachment_url(); ?>" title="<?php esc_attr_e( 'View full size','boozurk' ) ;  // link to Full size image ?>" rel="attachment"><?php
+								$bz_attachment_width  = apply_filters( 'boozurk_attachment_size', 1000 );
+								$bz_attachment_height = apply_filters( 'boozurk_attachment_height', 1000 );
+								echo wp_get_attachment_image( $post->ID, array( $bz_attachment_width, $bz_attachment_height ), false, array( 'class' => 'size-full') ); // filterable image width with, essentially, no limit for image height. 
+								?></a>
+								<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
+							</div>
+							<?php if ( !empty( $post->post_content ) ) the_content(); ?>
+					<?php } else { ?>
+							<?php echo wp_get_attachment_link( $post->ID,'thumbnail', 0,1 ); ?> 
+							<p><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></p>
+					<?php } ?>
 				</div>
+				<?php boozurk_hook_after_post_content_single(); ?>
+				<?php boozurk_hook_after_post_content(); ?>
+				<div class="fixfloat"></div>
 				<?php $bz_tmptrackback = get_trackback_url(); ?>
 			</div>	
 			<?php boozurk_hook_after_post(); ?>

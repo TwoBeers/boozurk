@@ -15,6 +15,7 @@
 				<div class="storycontent">
 					<?php the_content(); ?>
 				</div>
+				<?php boozurk_hook_after_post_content_single(); ?>
 				<?php boozurk_hook_after_post_content(); ?>
 				<div class="fixfloat" style="padding-top: 20px;">
 						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div>' ); ?>
@@ -34,7 +35,5 @@
 	<?php } //endif ?>
 </div>
 <?php boozurk_hook_after_posts(); ?>
-
-<?php get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

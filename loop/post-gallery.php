@@ -34,7 +34,7 @@
 					?>
 						<p style="float: left; white-space: nowrap;">
 							<em><?php printf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $bz_total_images, 'boozurk' ),
-								'href="' . get_permalink() . '" title="' . __( 'View gallery', 'boozurk' ) . '" rel="bookmark"',
+								'href="' . get_permalink() . '" title="' . esc_attr ( __( 'View gallery', 'boozurk' ) ) . '" rel="bookmark"',
 								number_format_i18n( $bz_total_images )
 								); ?></em>
 						</p>

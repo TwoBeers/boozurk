@@ -1,6 +1,6 @@
 <h3>Boozurk - WordPress theme</h3>
 	<ul>
-		<li>version: 1.05</li>
+		<li>version: 2.00</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -56,7 +56,7 @@
 		</li>
 		<li><h4>Thickbox images and galleries</h4>
 			<p><a href="http://jquery.com/demo/thickbox/" target="_blank">ThickBox</a> is a webpage UI dialog widget written in JavaScript on top of the jQuery library. Its function is to show a single image, multiple images, inline content and so on. While it is not maintained any longer, it has many advantages: is really lightweight and is already integrated in Wordpress so there's no need to worry about its compatibility.
-			</br><u>Note:</u> the javascript code detects only images linked to the images itself, not to the attachment page.</p>
+			</br><u>Note:</u> the javascript code detects only images linked to the image itself, not to the attachment page.</p>
 		</li>
 		<li><h4>MP3 Audio player</h4>
 			<p>A swf MP3 player for listening mp3 files even in browsers that don't support them.</p>
@@ -71,13 +71,13 @@
 			<p>You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or choose it in your media libray by clicking the "select" button.
 			</br><u>Note:</u> while the logo image will fit to its container on the right sidebar, we suggest not to use images larger than 200px.</p>
 		</li>
-		<li><h4>Inline pagination</h4>
+		<li><h4>Infinite pagination</h4>
 			<p>Append the next page of posts (via AJAX) to your current page. You can decide (always in <em>theme options</em>) if this will be done automatically (when a user scrolls to the bottom) or manually (by clicking the link at the end of posts).
 			</br><u>Note:</u> this feature has some disvantages, like:
 				<ul>
-					<li>The "footer" of the page will be impossible to reach if in auto mode.</li>
+					<li>The "footer" of the page may be impossible to reach if in auto mode.</li>
 					<li>There is no permalink to a given state of the page.</li>
-					<li>Some javascript features will not capture the event (like Google +1).</li>
+					<li>Some javascript features may not capture the event</li>
 				</ul>
 			</p>
 		</li>
@@ -103,10 +103,10 @@
 		</li>
 		<li><h4>Follow Me</h4>
 			<p>This widget lets visitors of your blog to subscribe to it or follow you on popular social networks like Twitter, FaceBook etc. Remember to insert the <b>full url</b> to your accounts, not only the username!
-			</br><u>Note:</u> the mail address will be javascript encripted to protect you from span.</p>
+			</br><u>Note:</u> the email address will be javascript encripted to protect you from span.</p>
 		</li>
 		<li><h4>besides...</h4>
-			<p>This widget will show your last "aside" or "status" post (unlike Ephemera in TwentyEleven, that show only aside ones)</p>
+			<p>This widget will show your last "aside" or "status" post</p>
 		</li>
 		<li><h4>Recent Posts in Category</h4>
 			<p>The last posts in a single category. If you choose "(current post category)" the widget will be visible only in single posts view and the category will be the same of the current post</p>
@@ -127,21 +127,7 @@
 			<p>Show archives links in a clean and simple way.</p>
 		</li>
 		<li><h4>Share this</h4>
-			<p>Show some popular sharing services links to publicize your contents. It's visible ONLY in single post view.
-			The services currently supported are:
-				<ul>
-					<li>Twitter</li>
-					<li>Facebook</li>
-					<li>Sina</li>
-					<li>Tencent</li>
-					<li>Qzone</li>
-					<li>Buzz</li>
-					<li>Reddit</li>
-					<li>StumbleUpon</li>
-					<li>Digg</li>
-					<li>Orkut</li>
-				</ul>
-			</p>
+			<p>Show some popular sharing services links to publicize your contents. It's visible ONLY in single post view.</p>
 		</li>
 	</ul>
 
@@ -191,12 +177,26 @@
 Adds:
 	<ul>
 		<li>"bz-tipped-anchor" class for adding tooltips to anchors</li>
+		<li>Google Bookmarks and Blogger services added to "Social Links" and "Share this" widgets</li>
+		<li>Buzz service removed from "Social Links" and "Share this" widgets</li>
+		<li>blank titles handling</li>
+		<li>custom "more" tag</li>
+		<li>excerpt length</li>
+		<li>b&amp;b smilies</li>
+		<li>selectable style for mobile</li>
+		<li>Google web fonts</li>
+		<li>custom css</li>
+		<li>selectable color for comments</li>
+		<li>sidebars position (fixed/scrolling)</li>
+		<li>...and other new cool options</li>
 	</ul>
 Fixes:
 	<ul>
+		<li>full WP3.4 compatible</li>
 		<li>"nofollow" attribute to mobile/desktop switch link</li>
-		<li>Removed php and server version output for security reasons.</li>
-		<li>Post/Pages titles with HTML tags</li>
+		<li>removed php and server version output for security reasons.</li>
+		<li>post/pages titles with HTML tags</li>
+		<li>javascript optimized</li>
 		<li>minor style issues</li>
 	</ul>
 </p>

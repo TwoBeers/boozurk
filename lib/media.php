@@ -1,12 +1,15 @@
 <?php
+
+check_admin_referer( 'logo-nonce' );
+
 if ( !current_user_can( 'edit_theme_options' ) ) {
 	wp_die( 'You do not have sufficient permissions to access this page.' );
 }
 
 function boozurk_media_navi( $paged, $ppp, $count ) {
 
-	$arr_params['bz_media'] = '1';
-	$arr_params_option['bz_media'] = '1';
+	$arr_params['tb_media'] = '1';
+	$arr_params_option['tb_media'] = '1';
 	
 	$navi = '<div class="bz-media-navi">';
 	$navi .= '<span style="font-style:italic;color:#777;font-size:10px;">' . sprintf( __( '%s images', 'boozurk' ), $count ) . '</span>';
@@ -122,7 +125,7 @@ function boozurk_media_library() {
 			/* <![CDATA[ */
 			var win = window.dialogArguments || parent || opener || top;
 			function bzSendToInput(the_src) {
-				win.document.getElementById('bz_text_boozurk_logo').value=the_src;
+				win.document.getElementById('option_field_boozurk_logo').value=the_src;
 				win.tb_remove();
 			}
 			function bzGoTo(the_url) {

@@ -54,11 +54,15 @@ function boozurk_hook_after_post_title() {
 }
 
 function boozurk_hook_before_post_content() {
-	do_action('boozurk_hook_before_postcontent');
+	do_action('boozurk_hook_before_post_content');
 }
 
 function boozurk_hook_after_post_content() {
-	do_action('boozurk_hook_after_postcontent');
+	do_action('boozurk_hook_after_post_content');
+}
+
+function boozurk_hook_after_post_content_single() {
+	do_action('boozurk_hook_after_post_content_single');
 }
 
 function boozurk_hook_before_comments() {

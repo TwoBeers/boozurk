@@ -8,7 +8,7 @@
 class boozurk_widget_popular_posts extends WP_Widget {
 
 	function boozurk_widget_popular_posts() {
-		$widget_ops = array('classname' => 'bz_widget_popular_posts', 'description' => __( 'The most commented posts on your site','boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_popular_posts', 'description' => __( 'The most commented posts on your site','boozurk') );
 		$this->WP_Widget('bz-popular-posts', __('Popular Posts','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_popular_posts';
 
@@ -48,8 +48,7 @@ class boozurk_widget_popular_posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'bz-thumb-format' ); ?>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( get_the_title() ) the_title(); else the_ID(); ?></a> <span>(<?php echo get_comments_number(); ?>)</span>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'tb-thumb-format' ); ?> <?php if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
@@ -115,7 +114,7 @@ class boozurk_widget_popular_posts extends WP_Widget {
 class boozurk_widget_latest_commented_posts extends WP_Widget {
 
 	function boozurk_widget_latest_commented_posts() {
-		$widget_ops = array('classname' => 'bz_widget_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site','boozurk' ) );
+		$widget_ops = array('classname' => 'tb_widget_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site','boozurk' ) );
 		$this->WP_Widget('bz-recent-comments', __('Latest activity','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_latest_commented_posts';
 
@@ -165,11 +164,11 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 					if ( $use_thumbs ) {
-						$the_thumb = boozurk_get_the_thumb( $post->ID, 32, 32, 'bz-thumb-format' );
+						$the_thumb = boozurk_get_the_thumb( $post->ID, 32, 32, 'tb-thumb-format' );
 					} else {
 						$the_thumb = '';
 					}
-					$output .=  '<li>' . $the_thumb . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_html( $post->post_title ) . '">' . $post->post_title . '</a></li>';
+					$output .=  '<li>' . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_attr( get_the_title( $post->ID ) ) . '">' . $the_thumb . get_the_title( $post->ID ) . '</a></li>';
 					$post_array[] = $comment->comment_post_ID;
 					if ( ++$counter >= $number ) break;
 				}
@@ -230,7 +229,7 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
 class boozurk_widget_latest_commentators extends WP_Widget {
 
 	function boozurk_widget_latest_commentators() {
-		$widget_ops = array('classname' => 'bz_widget_latest_commentators', 'description' => __( 'The latest comment authors','boozurk' ) );
+		$widget_ops = array('classname' => 'tb_widget_latest_commentators', 'description' => __( 'The latest comment authors','boozurk' ) );
 		$this->WP_Widget('bz-recent-commentators', __('Latest comment authors','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_latest_commentators';
 
@@ -279,9 +278,9 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 			foreach ( (array) $comments as $comment) {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 					if ( $comment->comment_author_url == '' ) {
-						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</li>';
+						$output .=  '<li title="' .  esc_attr( $comment->comment_author ) . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</li>';
 					} else {
-						$output .=  '<li title="' .  $comment->comment_author . '"><a target="_blank" href="' . $comment->comment_author_url . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
+						$output .=  '<li title="' .  esc_attr ($comment->comment_author ) . '"><a target="_blank" href="' . $comment->comment_author_url . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -353,7 +352,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 class boozurk_Widget_pop_categories extends WP_Widget {
 
 	function boozurk_Widget_pop_categories() {
-		$widget_ops = array( 'classname' => 'bz_widget_categories', 'description' => __( 'A list of popular categories', 'boozurk' ) );
+		$widget_ops = array( 'classname' => 'tb_widget_categories', 'description' => __( 'A list of popular categories', 'boozurk' ) );
 		$this->WP_Widget('bz-categories', __('Popular Categories', 'boozurk'), $widget_ops);
 	}
 
@@ -373,10 +372,11 @@ class boozurk_Widget_pop_categories extends WP_Widget {
 ?>
 		<ul>
 <?php
-		$cat_args = 'number=' . $number . '&title_li=&orderby=count&order=DESC&hierarchical=0&show_count=1';
-		wp_list_categories($cat_args);
+		$cat_args = array( 'orderby' => 'count', 'show_count' => 1, 'hierarchical' => 0, 'order' => 'DESC', 'title_li' => '', 'number' => $number );
+
+		wp_list_categories(apply_filters( 'boozurk_widget_pop_categories_args', $cat_args));
 ?>
-			<li style="text-align: right;margin-top:12px;"><a title="<?php _e('View all categories', 'boozurk'); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e('View all', 'boozurk'); ?></a></li>
+			<li style="text-align: right;margin-top:12px;"><a title="<?php esc_attr_e('View all categories', 'boozurk'); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e('View all', 'boozurk'); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -421,46 +421,48 @@ class boozurk_Widget_pop_categories extends WP_Widget {
 class boozurk_Widget_social extends WP_Widget {
 	function boozurk_Widget_social() {
 		$widget_ops = array(
-            'classname' => 'bz-widget-social',
+            'classname' => 'tb_widget_social',
             'description' => __("This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "boozurk"));
 		$control_ops = array('width' => 650);
 
 		$this->WP_Widget("bz-social", __("Follow Me", "boozurk"), $widget_ops, $control_ops);
         $this->follow_urls = array(
-			'Buzz',
-			'Delicious',
-			'Deviantart',
-			'Digg',
-			'Dropbox',
-			'Facebook',
-			'Flickr',
-			'Github',
-			'GooglePlus',
-			'Hi5',
-			'LinkedIn',
-			'Myspace',
-			'Odnoklassniki',
-			'Orkut',
-			'Qzone',
-			'Reddit',
-			'Sina',
-			'StumbleUpon',
-			'Technorati',
-			'Tencent',
-			'Twitter',
-			'Vimeo',
-			'VKontakte',
-			'WindowsLive',
-			'Youtube',
-			'Mail',
-			'RSS');
+			'Blogger' => 'Blogger',
+			'Delicious' => 'Delicious',
+			'Deviantart' => 'deviantART',
+			'Digg' => 'Digg',
+			'Dropbox' => 'Dropbox',
+			'Facebook' => 'Facebook',
+			'Flickr' => 'Flickr',
+			'Github' => 'GitHub',
+			'GooglePlus' => 'Google+',
+			'Hi5' => 'Hi5',
+			'LinkedIn' => 'LinkedIn',
+			'Myspace' => 'Myspace',
+			'Odnoklassniki' => 'Odnoklassniki',
+			'Orkut' => 'Orkut',
+			'Picasa' => 'Picasa',
+			'pinterest' => 'Pinterest',
+			'Qzone' => 'Qzone',
+			'Reddit' => 'Reddit',
+			'StumbleUpon' => 'StumbleUpon',
+			'Technorati' => 'Technorati',
+			'Tencent' => 'Tencent',
+			'Twitter' => 'Twitter',
+			'Vimeo' => 'Vimeo',
+			'VKontakte' => 'VKontakte',
+			'Sina' => 'Weibo',
+			'WindowsLive' => 'Windows Live',
+			'Youtube' => 'Youtube',
+			'Mail' => 'mail',
+			'RSS' => 'RSS' );
 	}
 
     function form($instance) {
         $defaults = array("title" => __("Follow Me", "boozurk"),
             "icon_size" => 48,
         );
-        foreach ($this->follow_urls as $follow_service ) {
+        foreach ($this->follow_urls as $follow_service => $service_name ) {
             $defaults[$follow_service."_icon"] = $follow_service;
             $defaults["show_".$follow_service] = false;
         }
@@ -469,15 +471,16 @@ class boozurk_Widget_social extends WP_Widget {
 	<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'boozurk' ); ?></label>
 	<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title']); ?>" /></p>
     <div style="padding: 10px 0; border-top: 1px solid #DFDFDF;">
+		<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'boozurk' ); ?></p>
 
 <?php
-        foreach($this->follow_urls as $follow_service ) {
+        foreach($this->follow_urls as $follow_service => $service_name ) {
 ?>
         <div style="float: left; width: 40%; margin: 0pt 5%;">
 			<h2>
 				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
-				<?php echo $follow_service; ?>
+				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
+				<?php echo $service_name; ?>
 			</h2>
 <?php
             if ( ( $follow_service != 'RSS' ) && ( $follow_service != 'Mail') ) {
@@ -485,10 +488,10 @@ class boozurk_Widget_social extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
 <?php
-				printf(__('Enter your %1$s <b>full link</b>', 'boozurk'), $follow_service);
+				printf(__('Enter your %1$s account link', 'boozurk'), $service_name);
 ?>
             </label>
-            <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
+            <input type="text" id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
         </p>
 
 <?php
@@ -497,7 +500,7 @@ class boozurk_Widget_social extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
 <?php
-				printf(__('Enter mail address', 'boozurk'), $follow_service);
+				printf(__('Enter email address', 'boozurk'), $follow_service);
 ?>
             </label>
             <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
@@ -533,7 +536,7 @@ class boozurk_Widget_social extends WP_Widget {
         $instance["title"] = strip_tags($new_instance["title"]);
         $instance["icon_size"] = in_array( $new_instance["icon_size"], array ('16', '24', '32', '48', '64') ) ? $new_instance["icon_size"] : '16' ;
 
-        foreach ($this->follow_urls as $follow_service ) {
+        foreach ($this->follow_urls as $follow_service => $service_name ) {
             $instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
             $instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
         }
@@ -547,7 +550,7 @@ class boozurk_Widget_social extends WP_Widget {
 		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
-		foreach ($this->follow_urls as $follow_service ) {
+        foreach ($this->follow_urls as $follow_service => $service_name ) {
 			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
 			$prefix = __('Follow us on %s','boozurk');
@@ -556,7 +559,7 @@ class boozurk_Widget_social extends WP_Widget {
 			$target = '_blank';
 			if ($follow_service == 'RSS') {
 				$account = get_bloginfo( 'rss2_url' );
-				$prefix = __('Keep updated with our %s feed','boozurk');
+				$prefix = __('Keep updated with our RSS feed','boozurk');
 			}
 			if ($follow_service == 'Mail') {
 				$account = preg_replace('/(.)(.)/', '$2$1', 'mailto:'.$account);
@@ -568,8 +571,8 @@ class boozurk_Widget_social extends WP_Widget {
 			}
 			if ($show && !empty($account)) {
 ?>
-<a target="<?php echo $target; ?>" href="<?php echo $account; ?>"<?php echo $onclick; ?> class="bz-social-icon<?php echo $class; ?>" title="<?php printf( $prefix, $follow_service ); ?>">
-	<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
+<a target="<?php echo $target; ?>" href="<?php echo $account; ?>"<?php echo $onclick; ?> class="tb-social-icon<?php echo $class; ?>" title="<?php printf( $prefix, $service_name ); ?>">
+	<img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo $follow_service;?>" style="width: <?php echo $icon_size;?>px; height: <?php echo $icon_size;?>px;" />
 </a>
 <?php
             }
@@ -594,7 +597,7 @@ class boozurk_Widget_besides extends WP_Widget {
 	 * @return void
 	 **/
 	function boozurk_Widget_besides() {
-		$widget_ops = array( 'classname' => 'bz_widget_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'boozurk' ) );
+		$widget_ops = array( 'classname' => 'tb_widget_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'boozurk' ) );
 		$this->WP_Widget( 'bz-widget-besides', __( 'besides...', 'boozurk' ), $widget_ops );
 		$this->alt_option_name = 'bz_widget_besides';
 
@@ -733,7 +736,7 @@ class boozurk_Widget_besides extends WP_Widget {
 class boozurk_Widget_recent_posts extends WP_Widget {
 
 	function boozurk_Widget_recent_posts() {
-		$widget_ops = array('classname' => 'bz_widget_recent_entries', 'description' => __( "The most recent posts in a single category", 'boozurk' ) );
+		$widget_ops = array('classname' => 'tb_widget_recent_entries', 'description' => __( "The most recent posts in a single category", 'boozurk' ) );
 		$this->WP_Widget('bz-recent-posts', __('Recent Posts in Category', 'boozurk' ), $widget_ops);
 		$this->alt_option_name = 'bz_widget_recent_entries';
 
@@ -776,12 +779,11 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php if ( $description && category_description( $category ) ) echo '<div class="bz-cat-descr">' . category_description( $category ) . '</div>'; ?>
+		<?php if ( $description && category_description( $category ) ) echo '<div class="cat-descr">' . category_description( $category ) . '</div>'; ?>
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'bz-thumb-format' ); ?>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'tb-thumb-format' ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
@@ -875,7 +877,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 class boozurk_Widget_navbuttons extends WP_Widget {
 
 	function boozurk_Widget_navbuttons() {
-		$widget_ops = array('classname' => 'bz_Widget_navbuttons', 'description' => __( 'Some usefull buttons for an easier navigation experience','boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_navbuttons', 'description' => __( 'Some usefull buttons for an easier navigation experience','boozurk') );
 		$this->WP_Widget('bz-navbuttons', __('Navigation buttons','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_navbuttons';
 
@@ -953,7 +955,7 @@ class boozurk_Widget_navbuttons extends WP_Widget {
 class boozurk_Widget_post_details extends WP_Widget {
 
 	function boozurk_Widget_post_details() {
-		$widget_ops = array('classname' => 'bz_Widget_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'boozurk') );
 		$this->WP_Widget('bz-post-details', __('Post details','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_post_details';
 
@@ -968,7 +970,7 @@ class boozurk_Widget_post_details extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
-		boozurk_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size, $instance['featured'] );
+		boozurk_post_details( array( 'author' => $instance['author'], 'date' => $instance['date'], 'tags' => $instance['tags'], 'categories' => $instance['categories'], 'avatar_size' => $avatar_size, 'featured' => $instance['featured'] ) );
 		echo $after_widget;
 	}
 
@@ -1041,7 +1043,7 @@ class boozurk_Widget_post_details extends WP_Widget {
 class boozurk_Widget_post_formats extends WP_Widget {
 
 	function boozurk_Widget_post_formats() {
-		$widget_ops = array( 'classname' => 'bz_widget_post_formats', 'description' => __( 'A list of Post Formats','boozurk' ) );
+		$widget_ops = array( 'classname' => 'tb_widget_post_formats', 'description' => __( 'A list of Post Formats','boozurk' ) );
 		$this->WP_Widget('bz-widget-post-formats', __('Post Formats','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_post_formats';
 
@@ -1085,7 +1087,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 				if ( $post_format->count > 0 ) {
 					$count = $c ? ' (' . $post_format->count . ')' : '';
 					$text = ( $i != '2' ) ? $string : '';
-					$icon = ( $i != '1' ) ? '<img title="' . $string . '" class="bz-thumb-format ' . $slug . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />' : '';
+					$icon = ( $i != '1' ) ? '<img title="' . $string . '" class="tb-thumb-format ' . $slug . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />' : '';
 					$class = ( $i == '2' ) ? ' compact' : '';
 					echo '<li class="post-format-item' . $class . '"><a href="' . get_post_format_link($slug) . '">' . $icon . $text . '</a>' . $count . '</li>';
 				}
@@ -1146,7 +1148,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 class boozurk_Widget_image_EXIF extends WP_Widget {
 
 	function boozurk_Widget_image_EXIF() {
-		$widget_ops = array('classname' => 'bz_Widget_exif_details', 'description' => __( "Display image EXIF details. It's visible ONLY in single attachments",'boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_exif_details', 'description' => __( "Display image EXIF details. It's visible ONLY in single attachments",'boozurk') );
 		$this->WP_Widget('bz-exif-details', __('Image EXIF details','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_exif_details';
 
@@ -1191,7 +1193,7 @@ class boozurk_Widget_image_EXIF extends WP_Widget {
 class boozurk_Widget_user_quick_links extends WP_Widget {
 
 	function boozurk_Widget_user_quick_links() {
-		$widget_ops = array('classname' => 'bz_widget_user_quick_links', 'description' => __( "Some useful links for users. It's a kind of enhanced meta widget",'boozurk' ) );
+		$widget_ops = array('classname' => 'tb_widget_user_quick_links', 'description' => __( "Some useful links for users. It's a kind of enhanced meta widget",'boozurk' ) );
 		$this->WP_Widget('bz-user-quick-links', __('User quick links','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_widget_user_quick_links';
 	}
@@ -1225,14 +1227,14 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 				<?php if ( current_user_can( 'read' ) ) { ?>
 					<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'boozurk' ); ?></a></li>
 					<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-						<li><a title="<?php _e( 'Add New Post', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'boozurk' ); ?></a></li>
+						<li><a title="<?php esc_attr_e( 'Add New Post', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'boozurk' ); ?></a></li>
 					<?php } ?>
 					<?php if ( current_user_can( 'moderate_comments' ) ) {
 						$awaiting_mod = wp_count_comments();
 						$awaiting_mod = $awaiting_mod->moderated;
 						$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
 					?>
-						<li><a title="<?php _e( 'Comments', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'boozurk' ); ?></a><?php echo $awaiting_mod; ?></li>
+						<li><a title="<?php esc_attr_e( 'Comments', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'boozurk' ); ?></a><?php echo $awaiting_mod; ?></li>
 					<?php } ?>
 				<?php } ?>
 			<?php } ?>
@@ -1279,7 +1281,7 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 class boozurk_Widget_share_this extends WP_Widget {
 
 	function boozurk_Widget_share_this() {
-		$widget_ops = array('classname' => 'bz_Widget_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'boozurk') );
 		$this->WP_Widget('bz-share-this', __('Share this','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_share_this';
 
@@ -1295,7 +1297,7 @@ class boozurk_Widget_share_this extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php boozurk_share_this( $icon_size ); ?>
+		<?php boozurk_share_this( 'size=' . $icon_size ); ?>
 		<?php echo $after_widget; ?>
 <?php
 	}
@@ -1340,7 +1342,7 @@ class boozurk_Widget_share_this extends WP_Widget {
 class boozurk_Widget_clean_archives extends WP_Widget {
 
 	function boozurk_Widget_clean_archives() {
-		$widget_ops = array('classname' => 'bz_Widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'boozurk') );
+		$widget_ops = array('classname' => 'tb_widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'boozurk') );
 		$this->WP_Widget('bz-clean-archives', __('Clean Archives','boozurk'), $widget_ops);
 		$this->alt_option_name = 'bz_Widget_clean_archives';
 
@@ -1369,13 +1371,13 @@ class boozurk_Widget_clean_archives extends WP_Widget {
 				$months_short = array( '', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' );
 			
 		?>
-		<ul class="bz-clean-archives">
+		<ul class="tb-clean-archives">
 		<?php foreach ( $years as $year ) {
-			echo '<li><a class="bz-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a>';
+			echo '<li><a class="year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a>';
 			
 			for ( $month = 1; $month <= 12; $month++ ) {
 				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
-					echo '<a class="bz-month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
+					echo '<a class="month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
 				}
 			}
 			

@@ -43,7 +43,7 @@ if ( have_posts() ) {
 		</div>
 		<div class="w_title"></div>
 		<div id="bz-next-posts-button" class="hide-if-no-js">
-			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurk_AJAX_paged();" />
+			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurkScripts.AJAX_paged();" />
 		</div>
 	<?php } ?>
 	</div>

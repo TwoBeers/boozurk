@@ -1,66 +1,81 @@
 var farbtastic;
+var boozurkOptions;
 
-// display the color picker
-function showMeColorPicker(domid) {
-	placeholder = '#bz_colorpicker_' + domid;
-	jQuery(placeholder).fadeIn();
-	farbtastic = jQuery.farbtastic(placeholder, function(color) { pickColor(domid,color); });
-	farbtastic.setColor(jQuery('#bz_input_' + domid).val());
-}
+(function($) {
 
-//update inputs value
-function pickColor(domid,color) {
-	boxid = '#bz_box_' + domid;
-	inputid = '#bz_input_' + domid;
-	jQuery(boxid).css('background-color', color );
-	jQuery(inputid).val(color);
-}
+boozurkOptions = {
 
-jQuery(document).ready(function(){
-	boozurkSwitchTab.set('colors');
-	
-	jQuery('.bz_input').keyup(function() {
-		var _hex = jQuery(this).val();
-		var hex = _hex;
-		if ( hex.substr(0,1) != '#' )
-			hex = '#' + hex;
-		hex = hex.replace(/[^#a-fA-F0-9]+/, '');
-		hex = hex.substring(0,7);
-		if ( hex != _hex )
-			jQuery(this).val(hex);
-		if ( hex.length == 4 || hex.length == 7 )
-			pickColor( jQuery(this).attr("id").replace('bz_input_', '') , hex );
-	});
-
-	jQuery(document).mousedown(function(){
-		jQuery('.bz_cp').each( function() {
-			var display = jQuery(this).css('display');
-			if (display == 'block')
-				jQuery(this).fadeOut(200);
+	//initialize
+	init : function() {
+		
+		boozurkOptions.switchTab('colors');
+		
+		$('.boozurk_input').keyup(function() {
+			var _hex = $(this).val();
+			var hex = _hex;
+			if ( hex.substr(0,1) != '#' )
+				hex = '#' + hex;
+			hex = hex.replace(/[^#a-fA-F0-9]+/, '');
+			hex = hex.substring(0,7);
+			if ( hex != _hex )
+				$(this).val(hex);
+			if ( hex.length == 4 || hex.length == 7 )
+				boozurkOptions.updateColor( $(this).attr("id").replace('boozurk_input_', '') , hex );
 		});
-	});
-	jQuery('.fade').each( function() {
-		jQuery(this).delay(2000).fadeOut(600);
-	});
 
-});
+		$(document).mousedown(function(){
+			$('.boozurk_cp').each( function() {
+				var display = $(this).css('display');
+				if (display == 'block')
+					$(this).fadeOut(200);
+			});
+		});
+		$('#to-defaults').click (function () {
+			var answer = confirm(tb_l10n.confirm_to_defaults)
+			if (!answer){
+				return false;
+			}
+		});
 
-boozurkSwitchTab = {
-	set : function (thisset) { //show only a set of rows
+	},
+
+	//update inputs value
+	updateColor : function (domid,color,txtcolor) {
+		boxid = '#boozurk_box_' + domid;
+		inputid = '#boozurk_input_' + domid;
+		$(boxid).css('background-color', color );
+		$(inputid).val(color);
+	},
+
+	// display the color picker
+	showColorPicker : function (domid) {
+		placeholder = '#boozurk_colorpicker_' + domid;
+		$(placeholder).fadeIn();
+		farbtastic = $.farbtastic(placeholder, function(color) { boozurkOptions.updateColor(domid,color); });
+		farbtastic.setColor($('#boozurk_input_' + domid).val());
+	},
+
+	//show only a set of rows
+	switchTab : function (thisset) {
 		if ( thisset != 'info' ) {
-			jQuery('#boozurk-infos').css({ 'display' : 'none' });
-			jQuery('#boozurk-options').css({ 'display' : '' });
-			thisclass = '.bz-tabgroup-' + thisset;
-			thissel = '#bz-selgroup-' + thisset;
-			jQuery('.bz-tab-opt').css({ 'display' : 'none' });
-			jQuery(thisclass).css({ 'display' : '' });
-			jQuery('#bz-tabselector li').removeClass("sel-active");
-			jQuery(thissel).addClass("sel-active");
+			$('#theme-infos').css({ 'display' : 'none' });
+			$('#theme-options').css({ 'display' : '' });
+			thisclass = '.tabgroup-' + thisset;
+			thissel = '#selgroup-' + thisset;
+			$('.tab-opt').css({ 'display' : 'none' });
+			$(thisclass).css({ 'display' : '' });
+			$('#tabselector li').removeClass("sel-active");
+			$(thissel).addClass("sel-active");
 		} else {
-			jQuery('#boozurk-infos').css({ 'display' : '' });
-			jQuery('#boozurk-options').css({ 'display' : 'none' });
-			jQuery('#bz-tabselector li').removeClass("sel-active");
-			jQuery('#bz-selgroup-info').addClass("sel-active");
+			$('#theme-infos').css({ 'display' : '' });
+			$('#theme-options').css({ 'display' : 'none' });
+			$('#tabselector li').removeClass("sel-active");
+			$('#selgroup-info').addClass("sel-active");
 		}
 	}
-}
+
+};
+
+$(document).ready(function($){ boozurkOptions.init(); });
+
+})(jQuery);

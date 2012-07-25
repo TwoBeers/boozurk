@@ -1,17 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?>>
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?> itemscope itemtype="http://schema.org/Blog">
 
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width" />
-		<title><?php
-			if ( is_front_page() ) {
-				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
-			} else {
-				wp_title( '&laquo;', true, 'right' );
-				bloginfo( 'name' );
-			}
-			?></title>
+		<title><?php boozurk_wp_title(); ?></title>
 		<?php global $boozurk_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
@@ -28,19 +21,21 @@
 		<div id="main">
 
 		<div id="content">
-			<div id="pages">
-				<div id="pages_c">
-					<?php if ( isset( $boozurk_opt['boozurk_logo'] ) && ( $boozurk_opt['boozurk_logo'] != '' ) ) echo '<img class="bz-logo" alt="logo" src="' . $boozurk_opt['boozurk_logo'] . '" />';?>
-					<?php if ( isset( $boozurk_opt['boozurk_logo_description'] ) && ( $boozurk_opt['boozurk_logo_description'] ) ) echo '<div class="bz-description">' . get_bloginfo( 'description' ) . '</div>';?>
-					<?php get_sidebar( 'fixed' ); // show header widgets area ?>
-				</div>
-			</div>
-			<?php if ( ! is_active_widget(false, false, 'bz-navbuttons', true) ) { boozurk_navbuttons(); } ?>
+
+			<?php get_sidebar(); // show sidebar ?>
+
+			<?php get_sidebar( 'secondary' ); // show header widgets area ?>
+
 			<?php boozurk_hook_before_header(); ?>
+			<div id="culo">
 			<div id="head">
-				<?php boozurk_hook_before_site_title(); ?>
-				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php boozurk_hook_after_site_title(); ?>
+				<?php if ( get_header_image() ) { ?>
+					<a href="<?php echo home_url(); ?>/"><img alt="<?php echo home_url(); ?>" src="<?php header_image(); ?>" /></a>
+				<?php } else { ?>
+					<?php boozurk_hook_before_site_title(); ?>
+					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php boozurk_hook_after_site_title(); ?>
+				<?php } ?>
 			</div>
 			<?php boozurk_hook_after_header(); ?>
 			
@@ -51,4 +46,4 @@
 			</div>
 			<?php boozurk_hook_after_pages(); ?>
 			<?php get_sidebar( 'header' ); // show header widgets area ?>
-			<?php boozurk_breadcrumb(); ?>
+			<?php boozurk_breadcrumb(); ?></div>

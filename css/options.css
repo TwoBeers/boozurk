@@ -1,34 +1,34 @@
 /* Boozurk - Theme options stylesheet */
 
-#bz-icon {
+#theme-icon {
 	background: url('../images/boozurk.png') no-repeat scroll center transparent;
 }
-#boozurk-infos ul {
+#theme-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
 }
-#boozurk-options,
-#boozurk-infos {
+#theme-options,
+#theme-infos {
 	padding: 20px 10px;
 }
 #tabs-container {
 	margin: 20px 20px 20px 150px;
 }
-#boozurk-options select {
+#theme-options select {
 	max-width: 160px;
 }
-#bz-tabselector,
+#tabselector,
 #selector {
 	position: absolute;
 	top: 100px;
 	left: 0;
 }
-#bz-tabselector li,
+#tabselector li,
 #selector li {
 	width: 130px;
 	padding: 3px 16px 3px 4px;
 }
-#bz-tabselector li a,
+#tabselector li a,
 #selector li a {
 	text-decoration: none;
 }
@@ -40,40 +40,36 @@
 	font-weight: bold;
 	background: url("../images/litem_rtl.png") no-repeat 135px center transparent;
 }
-#bz-main-wrap {
+#main-wrap {
 	position: relative;
 }
-.bz-tab-opt {
+.tab-opt {
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	margin-bottom: 20px;
 	padding: 10px;
 }
-.bz-tab-opt:hover {
-	background-color: #EAF2FA;
+.tab-opt:hover {
+	background-color: #f2f7fc;
 	border-color: transparent;
 }
-.bz-tab-opt input {
+.tab-opt input {
 	margin-left: 10px;
 }
-.bz_text {
+.boozurk_text {
 	width: 50%;
-}
-.bz-col-tools {
-	position: relative;
-	margin-bottom: 10px;
 }
 .column-nam {
 	font-weight: bold;
 }
-.bz-tabgroup-colors .column-nam {
+.tabgroup-colors .column-nam {
 	margin-bottom: 10px;
 	display: block;
 }
 .column-des {
 	font-style:italic;
 	border-top: 1px solid #eee;
-	font-size: 10px;
+	font-size: 11px;
 	margin-top: 10px;
 }
 .column-req {
@@ -85,7 +81,7 @@
 	border:1px solid #262626;
 	cursor: crosshair;
 }
-.bz_cp {
+.boozurk_cp {
 	background:#eee;
 	position:absolute;
 	display:none;
@@ -99,7 +95,44 @@
     left: 0;
     top: 0;
 }
-.bz-sub-opt {
-	font-size: 10px;
+.sub-opt-wrap {
+	font-size: 11px;
 	margin-top: 10px;
+}
+.sub-opt-wrap br.clear {
+	display: none;
+}
+.tabgroup-colors br.clear {
+	display: block;
+}
+.tabgroup-colors .col-tools {
+	border: 1px solid #DFDFDF;
+	float: left;
+	margin: 0 20px 20px 0;
+	padding: 10px;
+	width: 240px;
+	position: relative;
+	background-color: #fff;
+}
+.col-tools span {
+	font-weight: bold;
+}
+.tabgroup-colors .color_preview_box {
+	width:80px;
+	height:80px;
+	float: left;
+}
+.tabgroup-colors input {
+	margin: 0 10px 0 0;
+}
+
+.tab-opt textarea {
+	vertical-align: middle;
+	height: 10em;
+	width: 50%;
+}
+#buttons a {
+	font-size: 10px; 
+	text-decoration: none; 
+	margin: 0 10px; 
 }
