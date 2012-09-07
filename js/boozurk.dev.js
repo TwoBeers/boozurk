@@ -228,6 +228,39 @@ boozurkScripts = {
 			$('#comment').addClass( $('input', this).val() );
 			$('input', this).attr('checked',true);
 		});
+	},
+
+
+	init_quote_this : function() {
+		if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
+			bz_qdiv = document.createElement('small');
+			bz_qdiv.innerHTML = ' - <a id="bz-quotethis" href="#" onclick="boozurkScripts.quote_this(); return false" title="' + bz_quote_tip_text + '" >' + bz_quote_text + '</a>';
+			bz_replink = document.getElementById('reply-title');
+			bz_replink.appendChild(bz_qdiv);
+		}
+	},
+
+
+	quote_this : function() {
+		var posttext = '';
+		if (window.getSelection){
+			posttext = window.getSelection();
+		}
+		else if (document.getSelection){
+			posttext = document.getSelection();
+		}
+		else if (document.selection){
+			posttext = document.selection.createRange().text;
+		}
+		else {
+			return true;
+		}
+		posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+		if ( posttext.length !== 0 ) {
+			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
+		} else {
+			alert( bz_quote_alert_text );
+		}
 	}
 
 

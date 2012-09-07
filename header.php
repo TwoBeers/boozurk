@@ -4,7 +4,7 @@
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width" />
-		<title><?php boozurk_wp_title(); ?></title>
+		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 		<?php global $boozurk_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
@@ -27,10 +27,10 @@
 			<?php get_sidebar( 'secondary' ); // show header widgets area ?>
 
 			<?php boozurk_hook_before_header(); ?>
-			<div id="culo">
 			<div id="head">
 				<?php if ( get_header_image() ) { ?>
 					<a href="<?php echo home_url(); ?>/"><img alt="<?php echo home_url(); ?>" src="<?php header_image(); ?>" /></a>
+					<h1 class="hide_if_no_print"><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php } else { ?>
 					<?php boozurk_hook_before_site_title(); ?>
 					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
@@ -46,4 +46,4 @@
 			</div>
 			<?php boozurk_hook_after_pages(); ?>
 			<?php get_sidebar( 'header' ); // show header widgets area ?>
-			<?php boozurk_breadcrumb(); ?></div>
+			<?php boozurk_breadcrumb(); ?>

@@ -67,8 +67,14 @@ blockquote {
 #sidebarsx,
 #fixedfoot,
 #print-links,
+#sidebar-primary,
+#sidebar-secondary,
+#head img,
 body #wpadminbar {
 	display: none;
+}
+.fixfloat {
+	clear: both;
 }
 .meta,
 .comment-meta,

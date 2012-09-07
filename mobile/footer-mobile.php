@@ -10,7 +10,7 @@
 			<?php locate_template( array( 'mobile/sidebar-mobile.php' ), true, false ); ?>
 			<?php echo boozurk_mobile_seztitle( 'before' ) . '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) . boozurk_mobile_seztitle( 'after' ); ?>
 			<p id="themecredits">
-				Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>Boozurk</strong></a>
+				<?php echo sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit authors homepage','boozurk' ) ) . ' @ twobeers.net">Boozurk</a>', '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>') ; ?>
 				<br/>
 				<br/>
 				<?php wp_loginout(); wp_register( ' | ', '' ); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __( 'Desktop View', 'boozurk' ) .'</a>'; ?>

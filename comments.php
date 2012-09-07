@@ -1,7 +1,7 @@
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) {
-		echo '<div id="comments" style="text-align: right;">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
+		echo '<div id="comments">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
 		return;
 	}
 		global $boozurk_opt, $boozurk_is_printpreview, $boozurk_is_mobile_browser;

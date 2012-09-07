@@ -21,7 +21,6 @@
 				<div class="fixfloat" style="padding-top: 20px;">
 						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div>' ); ?>
 				</div>
-				<?php $bz_tmptrackback = get_trackback_url(); ?>
 			</div>	
 			<?php boozurk_hook_after_post(); ?>
 			<?php if ( is_active_sidebar( 'single-widgets-area' ) ) { ?>

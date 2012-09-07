@@ -4,7 +4,6 @@
 add_action( 'admin_init', 'boozurk_default_options' ); // tell WordPress to run boozurk_default_options()
 add_action( 'template_redirect', 'boozurk_allcat' ); // Add custom category page
 add_action( 'template_redirect', 'boozurk_media' ); // media select
-add_action( 'wp_footer', 'boozurk_quote_scripts' ); // Add the "quote" link
 add_action( 'admin_head', 'boozurk_post_manage_style' ); // column-thumbnail style
 add_action( 'manage_posts_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for posts
 add_action( 'manage_pages_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for pages
@@ -18,6 +17,8 @@ add_filter( 'the_title', 'boozurk_title_tags_filter' );
 add_filter( 'excerpt_length', 'boozurk_excerpt_length' );
 add_filter( 'excerpt_more', 'boozurk_excerpt_more' );
 add_filter( 'the_content_more_link', 'boozurk_more_link', 10, 2 );
+add_filter( 'wp_title', 'boozurk_filter_wp_title' );
+
 
 // get theme version
 if ( function_exists( 'wp_get_theme' ) ) {
@@ -85,82 +86,41 @@ if ( current_user_can( 'manage_options' ) && ( $boozurk_opt['version'] < $boozur
 	add_action( 'admin_notices', 'boozurk_setopt_admin_notice' );
 }
 
-// add "quote" link
-if ( !function_exists( 'boozurk_quote_scripts' ) ) {
-	function boozurk_quote_scripts(){
-		global $boozurk_opt, $boozurk_is_mobile_browser, $boozurk_is_printpreview;
-		if ( is_admin() || ( $boozurk_opt['boozurk_quotethis'] == 0 ) || $boozurk_is_mobile_browser || $boozurk_is_printpreview || !is_singular() ) return;
-		?>
-<script type="text/javascript">
-	/* <![CDATA[ */
-	if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
-		bz_qdiv = document.createElement('small');
-		bz_qdiv.innerHTML = ' - <a id="bz-quotethis" href="#" onclick="bz_quotethis(); return false" title="<?php esc_attr_e( 'Add selected text as a quote', 'boozurk' ); ?>" ><?php _e( 'Quote', 'boozurk' ); ?></a>';
-		bz_replink = document.getElementById('reply-title');
-		bz_replink.appendChild(bz_qdiv);
-	}
-	function bz_quotethis() {
-		var posttext = '';
-		if (window.getSelection){
-			posttext = window.getSelection();
-		}
-		else if (document.getSelection){
-			posttext = document.getSelection();
-		}
-		else if (document.selection){
-			posttext = document.selection.createRange().text;
-		}
-		else {
-			return true;
-		}
-		posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-		if ( posttext.length !== 0 ) {
-			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
-		} else {
-			alert("<?php _e( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ?>");
-		}
-	}
-	/* ]]> */
-</script>
-		<?php
-	}
-}
-
 //Image EXIF details
 if ( !function_exists( 'boozurk_exif_details' ) ) {
 	function boozurk_exif_details(){
 		global $post; ?>
 		<div class="exif-attachment-info">
 			<?php
-			$bz_imgmeta = wp_get_attachment_metadata();
+			$imgmeta = wp_get_attachment_metadata();
 
 			// Convert the shutter speed retrieve from database to fraction
-			if ( $bz_imgmeta['image_meta']['shutter_speed'] && (1 / $bz_imgmeta['image_meta']['shutter_speed']) > 1) {
-				if ((number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 1)) == 1.3
-				or number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 1) == 1.5
-				or number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 1) == 1.6
-				or number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 1) == 2.5){
-					$bz_pshutter = "1/" . number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 1, '.', '');
+			if ( $imgmeta['image_meta']['shutter_speed'] && (1 / $imgmeta['image_meta']['shutter_speed']) > 1) {
+				if ((number_format((1 / $imgmeta['image_meta']['shutter_speed']), 1)) == 1.3
+				or number_format((1 / $imgmeta['image_meta']['shutter_speed']), 1) == 1.5
+				or number_format((1 / $imgmeta['image_meta']['shutter_speed']), 1) == 1.6
+				or number_format((1 / $imgmeta['image_meta']['shutter_speed']), 1) == 2.5){
+					$pshutter = "1/" . number_format((1 / $imgmeta['image_meta']['shutter_speed']), 1, '.', '');
 				} else {
-					$bz_pshutter = "1/" . number_format((1 / $bz_imgmeta['image_meta']['shutter_speed']), 0, '.', '');
+					$pshutter = "1/" . number_format((1 / $imgmeta['image_meta']['shutter_speed']), 0, '.', '');
 				}
 			} else {
-				$bz_pshutter = $bz_imgmeta['image_meta']['shutter_speed'];
+				$pshutter = $imgmeta['image_meta']['shutter_speed'];
 			}
 
 			// Start to display EXIF and IPTC data of digital photograph
-			echo __("Width", "boozurk" ) . ": " . $bz_imgmeta['width']."px<br />";
-			echo __("Height", "boozurk" ) . ": " . $bz_imgmeta['height']."px<br />";
-			if ( $bz_imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "boozurk" ) . ": " . date("d-M-Y H:i:s", $bz_imgmeta['image_meta']['created_timestamp'])."<br />";
-			if ( $bz_imgmeta['image_meta']['copyright'] ) echo __("Copyright", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['copyright']."<br />";
-			if ( $bz_imgmeta['image_meta']['credit'] ) echo __("Credit", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['credit']."<br />";
-			if ( $bz_imgmeta['image_meta']['title'] ) echo __("Title", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['title']."<br />";
-			if ( $bz_imgmeta['image_meta']['caption'] ) echo __("Caption", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['caption']."<br />";
-			if ( $bz_imgmeta['image_meta']['camera'] ) echo __("Camera", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['camera']."<br />";
-			if ( $bz_imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['focal_length']."mm<br />";
-			if ( $bz_imgmeta['image_meta']['aperture'] ) echo __("Aperture", "boozurk" ) . ": f/" . $bz_imgmeta['image_meta']['aperture']."<br />";
-			if ( $bz_imgmeta['image_meta']['iso'] ) echo __("ISO", "boozurk" ) . ": " . $bz_imgmeta['image_meta']['iso']."<br />";
-			if ( $bz_pshutter ) echo __("Shutter Speed", "boozurk" ) . ": " . sprintf( '%s seconds', $bz_pshutter) . "<br />"
+			echo __("Width", "boozurk" ) . ": " . $imgmeta['width']."px<br />";
+			echo __("Height", "boozurk" ) . ": " . $imgmeta['height']."px<br />";
+			if ( $imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "boozurk" ) . ": " . date("d-M-Y H:i:s", $imgmeta['image_meta']['created_timestamp'])."<br />";
+			if ( $imgmeta['image_meta']['copyright'] ) echo __("Copyright", "boozurk" ) . ": " . $imgmeta['image_meta']['copyright']."<br />";
+			if ( $imgmeta['image_meta']['credit'] ) echo __("Credit", "boozurk" ) . ": " . $imgmeta['image_meta']['credit']."<br />";
+			if ( $imgmeta['image_meta']['title'] ) echo __("Title", "boozurk" ) . ": " . $imgmeta['image_meta']['title']."<br />";
+			if ( $imgmeta['image_meta']['caption'] ) echo __("Caption", "boozurk" ) . ": " . $imgmeta['image_meta']['caption']."<br />";
+			if ( $imgmeta['image_meta']['camera'] ) echo __("Camera", "boozurk" ) . ": " . $imgmeta['image_meta']['camera']."<br />";
+			if ( $imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "boozurk" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br />";
+			if ( $imgmeta['image_meta']['aperture'] ) echo __("Aperture", "boozurk" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br />";
+			if ( $imgmeta['image_meta']['iso'] ) echo __("ISO", "boozurk" ) . ": " . $imgmeta['image_meta']['iso']."<br />";
+			if ( $pshutter ) echo __("Shutter Speed", "boozurk" ) . ": " . sprintf( '%s seconds', $pshutter) . "<br />"
 			?>
 		</div>
 		<?php
@@ -223,7 +183,7 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 			<?php } ?>
 			<?php if ( $args['categories'] ) { echo '<span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': ' . '</span>'; the_category( ', ' ); echo '<br/>'; } ?>
 			<?php if ( $args['tags'] ) { echo '<span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . '</span>'; if ( !get_the_tags() ) { _e( 'No Tags', 'boozurk' ); } else { the_tags('', ', ', ''); } echo '<br/>'; } ?>
-			<?php if ( $args['date'] ) { echo '<span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': ' . '</span>'; echo '<b>' . get_the_time( get_option( 'date_format' ) ) . '</b>'; } ?>
+			<?php if ( $args['date'] ) { echo '<span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': ' . '</span>'; echo '<b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></b>'; } ?>
 		<?php
 	}
 }
@@ -266,156 +226,6 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 		$outer .= '</div>';
 		if ( $args['echo'] ) echo $outer; else return $outer;
 	}
-}
-
-/*
-Based on Yoast Breadcrumbs Plugin (http://yoast.com/wordpress/breadcrumbs/)
-*/
-function boozurk_get_the_breadcrumb() {
-	global $wp_query, $post;
-	
-	$opt 						= array();
-	$opt['home'] 				= "Home";
-	$opt['sep'] 				= '<span class="bz-breadcrumb-sep">&nbsp;</span>';
-	$opt['archiveprefix'] 		=  __('Archives for %s', 'boozurk' );
-	$opt['searchprefix'] 		=  __('Search for "%s"', 'boozurk' );
-
-	$nofollow = ' rel="nofollow" ';
-	
-	if (!function_exists('boozurk_get_category_parents')) {
-		// Copied and adapted from WP source
-		function boozurk_get_category_parents($id, $link = FALSE, $separator = '/', $nicename = FALSE){
-			$chain = '';
-			$parent = &get_category($id);
-			if ( is_wp_error( $parent ) )
-			   return $parent;
-
-			if ( $nicename )
-			   $name = $parent->slug;
-			else
-			   $name = $parent->cat_name;
-
-			if ( $parent->parent && ($parent->parent != $parent->term_id) )
-			   $chain .= get_category_parents($parent->parent, true, $separator, $nicename);
-
-			$chain .= $name;
-			return $chain;
-		}
-	}
-	
-	$on_front = get_option('show_on_front');
-	if ($on_front == "page") {
-		$homelink = '<a class="bz-breadcrumb-home"'.$nofollow.'href="'.get_permalink(get_option('page_on_front')).'">&nbsp;</a>';
-		$bloglink = $homelink.' '.$opt['sep'].' <a href="'.get_permalink(get_option('page_for_posts')).'">'.get_the_title( get_option( 'page_for_posts' ) ).'</a>';
-	} else {
-		$homelink = '<a class="bz-breadcrumb-home"'.$nofollow.'href="'.home_url().'">&nbsp;</a>';
-		$bloglink = $homelink;
-	}
-		
-	if ( ($on_front == "page" && is_front_page()) || ($on_front == "posts" && is_home()) ) {
-		$output = $homelink.' '.$opt['sep'].' '.'<span>'.$opt['home'].'</span>';
-	} elseif ( $on_front == "page" && is_home() ) {
-		$output = $homelink.' '.$opt['sep'].' '.'<span>'.get_the_title( get_option( 'page_for_posts' ) ).'</span>';
-	} elseif ( !is_page() ) {
-		$output = $bloglink.' '.$opt['sep'].' ';
-		if ( is_single() && has_category() ) {
-			$cats = get_the_category();
-			$cat = $cats[0];
-			if ( is_object($cat) ) {
-				if ($cat->parent != 0) {
-					$output .= get_category_parents($cat->term_id, true, " ".$opt['sep']." ");
-				} else {
-					$output .= '<a href="'.get_category_link($cat->term_id).'">'.$cat->name.'</a> '.$opt['sep'].' '; 
-				}
-			}
-		}
-		if ( is_category() ) {
-			$cat = intval( get_query_var('cat') );
-			$output .= '<span>'.boozurk_get_category_parents($cat, false, " ".$opt['sep']." ").'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} elseif ( is_tag() ) {
-			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} elseif ( is_404() ) {
-			$output .= '<span>'.__( 'Page not found', 'boozurk' ).'</span>';
-		} elseif ( is_date() ) { 
-			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} elseif ( is_author() ) { 
-			$output .= '<span>'.sprintf( $opt['archiveprefix'], wp_title( '', false, 'right' ) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} elseif ( is_search() ) {
-			$output .= '<span>'.sprintf( $opt['searchprefix'], stripslashes(strip_tags(get_search_query())) ).'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} elseif ( is_attachment() ) {
-			if ( $post->post_parent ) {
-				$output .= '<a href="'.get_permalink( $post->post_parent ).'">'.get_the_title( $post->post_parent ).'</a> '.$opt['sep'];
-			}
-			$output .= '<span>'.get_the_title().'</span>';
-		} else if ( is_tax() ) {
-			$taxonomy 	= get_taxonomy ( get_query_var('taxonomy') );
-			$term 		= get_query_var('term');
-			$output .= '<span>'.$taxonomy->label .': '. $term.'</span>'.' <span class="bz-breadcrumb-found">('.$wp_query->found_posts.')</span>';
-		} else {
-			if ( get_query_var('page') ) {
-				$output .= '<a href="'.get_permalink().'">'.get_the_title().'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
-			} else {
-				$output .= '<span>'.get_the_title().'</span>';
-			}
-		}
-	} else {
-		$post = $wp_query->get_queried_object();
-
-		// If this is a top level Page, it's simple to output the breadcrumb
-		if ( 0 == $post->post_parent ) {
-			if ( get_query_var('page') ) {
-				$output = $homelink.' '.$opt['sep'].' <a href="'.get_permalink().'">'.get_the_title().'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
-			} else {
-				$output = $homelink." ".$opt['sep']." ".'<span>'.get_the_title().'</span>';
-			}
-		} else {
-			if (isset($post->ancestors)) {
-				if (is_array($post->ancestors))
-					$ancestors = array_values($post->ancestors);
-				else 
-					$ancestors = array($post->ancestors);				
-			} else {
-				$ancestors = array($post->post_parent);
-			}
-
-			// Reverse the order so it's oldest to newest
-			$ancestors = array_reverse($ancestors);
-
-			// Add the current Page to the ancestors list (as we need it's title too)
-			$ancestors[] = $post->ID;
-
-			$links = array();			
-			foreach ( $ancestors as $ancestor ) {
-				$tmp  = array();
-				$tmp['title'] 	= get_the_title( $ancestor );
-				$tmp['url'] 	= get_permalink($ancestor);
-				$tmp['cur'] = false;
-				if ($ancestor == $post->ID) {
-					$tmp['cur'] = true;
-				}
-				$links[] = $tmp;
-			}
-
-			$output = $homelink;
-			foreach ( $links as $link ) {
-				$output .= ' '.$opt['sep'].' ';
-				if (!$link['cur']) {
-					$output .= '<a href="'.$link['url'].'">'.$link['title'].'</a>';
-				} else {
-					if ( get_query_var('page') ) {
-						$output .= '<a href="'.$link['url'].'">'.$link['title'].'</a> '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('page').'</span>';
-					} else {
-						$output .= '<span>'.$link['title'].'</span>';
-					}
-				}
-			}
-		}
-	}
-	if ( get_query_var('paged') ) {
-		$output .= ' '.$opt['sep'].' '.'<span>'.__('Page','boozurk').' '.get_query_var('paged').'</span>';
-	}
-
-	return $output;
 }
 
 // Get first image of a post
@@ -499,7 +309,7 @@ if ( !function_exists( 'boozurk_theme_admin_scripts' ) ) {
 		$data = array(
 			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'boozurk' )
 		);
-		wp_localize_script( 'boozurk-options-script', 'tb_l10n', $data );
+		wp_localize_script( 'boozurk-options-script', 'bz_l10n', $data );
 	}
 }
 
@@ -656,7 +466,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 				<div id="theme-options">
 					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','boozurk' ); ?></h2>
 					<form method="post" action="options.php">
-						<?php settings_fields( 'bz_settings_group' ); ?>
+						<?php settings_fields( 'boozurk_settings_group' ); ?>
 						<div id="stylediv">
 							<?php foreach ($the_coa as $key => $val) { ?>
 								<?php if ( isset( $the_coa[$key]['sub'] ) && !$the_coa[$key]['sub'] ) continue; ?>
@@ -748,7 +558,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 														foreach($categories as $category) {
 															$hexnumber = '#';
 															for ($i2=1; $i2<=3; $i2++) {
-																$hexnumber .= dechex( rand(64,256) );
+																$hexnumber .= dechex( rand(64,255) );
 															}
 															$catcolor = isset($the_opt[$subval][$category->term_id]) ? $the_opt[$subval][$category->term_id] : $hexnumber;
 													?>
@@ -965,16 +775,6 @@ if ( !function_exists( 'boozurk_post_manage_style' ) ) {
 	}
 }
 
-//filters wp_title()
-if ( !function_exists( 'boozurk_wp_title' ) ) {
-	function boozurk_wp_title () {
-		add_filter( 'wp_title', 'boozurk_filter_wp_title' );// Hook into 'wp_title'
-		$the_title = wp_title( '&laquo;', false, 'right' );
-		remove_filter( 'wp_title', 'boozurk_filter_wp_title' );// Hook into 'wp_title'
-		echo $the_title;
-		}
-	}
-
 function boozurk_filter_wp_title( $title ) {
 	if ( is_single() && empty( $title ) ) {
 		$_post = get_queried_object();
@@ -996,16 +796,16 @@ function boozurk_filter_wp_title( $title ) {
 }
 
 // check if in media preview mode
-$bz_is_media = false;
+$boozurk_is_media = false;
 if ( isset( $_GET['tb_media'] ) ) {
-	$bz_is_media = true;
+	$boozurk_is_media = true;
 }
 
 // media preview
 if ( !function_exists( 'boozurk_media' ) ) {
 	function boozurk_media () {
-		global $bz_is_media;
-		if ( $bz_is_media ) {
+		global $boozurk_is_media;
+		if ( $boozurk_is_media ) {
 			get_template_part( 'lib/media' ); 
 			exit;
 		}

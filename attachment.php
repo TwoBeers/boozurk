@@ -47,7 +47,6 @@
 				<?php boozurk_hook_after_post_content_single(); ?>
 				<?php boozurk_hook_after_post_content(); ?>
 				<div class="fixfloat"></div>
-				<?php $bz_tmptrackback = get_trackback_url(); ?>
 			</div>	
 			<?php boozurk_hook_after_post(); ?>
 			<?php if ( is_active_sidebar( 'single-widgets-area' ) ) { ?>
@@ -57,7 +56,6 @@
 				</div>
 			<?php } ?>
 			<?php comments_template(); // Get wp-comments.php template ?>
-			
 		<?php	} //end while
 	} else {?>
 		

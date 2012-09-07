@@ -1,8 +1,8 @@
 /*
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
-Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars (the right one is fixed), up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.00
+Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
+Version: 2.00.1
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -585,6 +585,18 @@ input[type=password]:focus {
 	margin:20px 0 -20px;
 	text-align:right;
 }
+.format-aside .storycontent .details {
+	font-size: 11px;
+	font-style: italic;
+	color: #404040;
+}
+.format-status .details  {
+	font-size: 11px;
+	color: #aaa;
+}
+.format-status .details  a {
+	font-weight: bold;
+}
 /* Audio player
 ----------------------------------------------------------*/
 .bz-player-container {
@@ -1119,8 +1131,7 @@ img.tb-thumb-format {
 	background: url('images/bc-sep.png') no-repeat center;
 	margin-left:4px;
 }
-.bz-breadcrumb-home
-{
+.bz-breadcrumb-home {
 	background:url('images/details.png') no-repeat center -500px;
     height:16px;
     margin:7px;
@@ -1132,8 +1143,7 @@ img.tb-thumb-format {
 .bz-breadcrumb-found {
 	color: #aaa;
 }
-.bz-breadcrumb-home:hover
-{
+.bz-breadcrumb-home:hover {
 	background-position: center -516px;
 }
 .bz-breadcrumb-reminder {
@@ -1630,4 +1640,14 @@ body.js .comment-variants input {
 	background: -ms-linear-gradient(left,  #ffffff 0%,#ededed 100%); /* IE10+ */
 	background: linear-gradient(to right,  #ffffff 0%,#ededed 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 */
+}
+
+/* Breadcrumb NavXT
+----------------------------------------------------------*/
+#navxt-crumbs > a:first-child {
+	background:url('images/details.png') no-repeat left -500px;
+	padding-left: 22px;
+}
+#navxt-crumbs > a:first-child:hover {
+	background-position: left -516px;
 }

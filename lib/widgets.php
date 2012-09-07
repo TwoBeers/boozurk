@@ -168,7 +168,7 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
 					} else {
 						$the_thumb = '';
 					}
-					$output .=  '<li>' . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_attr( get_the_title( $post->ID ) ) . '">' . $the_thumb . get_the_title( $post->ID ) . '</a></li>';
+					$output .=  '<li>' . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_attr( get_the_title( $post->ID ) ) . '">' . $the_thumb . ' ' . get_the_title( $post->ID ) . '</a></li>';
 					$post_array[] = $comment->comment_post_ID;
 					if ( ++$counter >= $number ) break;
 				}
@@ -783,7 +783,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 		<ul<?php if ( $use_thumbs ) echo ' class="with-thumbs"'; ?>>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'tb-thumb-format' ); ?><?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
+				<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_date()); ?>"><?php if ( $use_thumbs ) echo boozurk_get_the_thumb( get_the_ID(), 32, 32, 'tb-thumb-format' ); ?> <?php if ( get_the_title() ) the_title(); else echo get_the_date(); ?></a>
 			</li>
 		<?php endwhile; ?>
 		</ul>
