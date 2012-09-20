@@ -1416,6 +1416,21 @@ class boozurk_Widget_clean_archives extends WP_Widget {
 	}
 }
 
+/**
+ * simple font resize widget
+ */
+function boozurk_widget_font_resize($args) {
+	extract($args);
+	echo $before_widget;
+	echo '<a class="fontresizer_minus" href="javascript:void(0)" title="' . esc_attr( __('Decrease font size','boozurk') ) . '">A</a>';
+	echo '<span class="fontresizer_sep"></span>';
+	echo '<a class="fontresizer_reset" href="javascript:void(0)" title="' . esc_attr( __('Reset font size','boozurk') ) . '">A</a>';
+	echo '<span class="fontresizer_sep"></span>';
+	echo '<a class="fontresizer_plus" href="javascript:void(0)" title="' . esc_attr( __('Increase font size','boozurk') ) . '">A</a>';
+	echo $after_widget;
+	wp_enqueue_script( 'boozurk-fontresize', get_template_directory_uri() . '/js/font-resize.min.js', array( 'jquery' ), '', true  );
+
+}
 
 /**
  * Register all of the default WordPress widgets on startup.
@@ -1427,30 +1442,32 @@ function boozurk_widgets_init() {
 	register_widget('boozurk_widget_popular_posts');
 
 	register_widget('boozurk_Widget_latest_Commented_Posts');
-	
+
 	register_widget('boozurk_widget_latest_commentators');
-	
+
 	register_widget('boozurk_Widget_pop_categories');
-	
+
 	register_widget('boozurk_Widget_social');
-	
+
 	register_widget('boozurk_Widget_besides');
-	
+
 	register_widget('boozurk_Widget_recent_posts');
-	
+
 	register_widget('boozurk_Widget_navbuttons');
-	
+
 	register_widget('boozurk_Widget_post_details');
-	
+
 	register_widget('boozurk_Widget_post_formats');
-	
+
 	register_widget('boozurk_Widget_image_EXIF');
-	
+
 	register_widget('boozurk_Widget_user_quick_links');
-	
+
 	register_widget('boozurk_Widget_share_this');
-	
+
 	register_widget('boozurk_Widget_clean_archives');
+
+	wp_register_sidebar_widget('bz-font-resize', 'Font Resize', 'boozurk_widget_font_resize', array( 'description' => __('Simple javascript-based font resizer','boozurk' ) ) );
 }
 
 add_action('widgets_init', 'boozurk_widgets_init');

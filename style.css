@@ -28,6 +28,7 @@ body {
 	font-family: monospace;
 	background: transparent url('images/bg.png') 256px 0px repeat-y;
 	font-size: 15px;
+	line-height: 1.8em;
 }
 a img {
 	border: none;
@@ -165,7 +166,6 @@ input[type=password]:focus {
 	max-width: 99%;
 }
 .storycontent p {
-	line-height: 1.3em;
 	margin: 0 0 1em 0;
 }
 .storycontent ul li,
@@ -767,6 +767,10 @@ div.tb_widget_post_details ul {
 .widget .cat-item  a, #posts_content .cat-item a {
 	padding-left: 5px;
 }
+.widget .cat-item  a, #posts_content .cat-item a {
+	border-left-width: 1em;
+	border-left-style: solid;
+}
 .tb-social-icon {
 	display: inline-block;
 }
@@ -789,6 +793,29 @@ div.tb_widget_post_details ul {
 }
 .tb-clean-archives .month-link {
 	padding-left: 4px;
+}
+.boozurk_widget_font_resize {
+	font-size: 1.18em;
+	text-align: center;
+}
+.boozurk_widget_font_resize a {
+	background: #F5F5F5;
+	border: 1px solid #ddd;
+	padding: 0 3px;
+	vertical-align: middle;
+}
+.boozurk_widget_font_resize a:hover {
+	border: 1px solid #aaa;
+}
+.fontresizer_minus {
+	font-size: 0.7em;
+}
+.fontresizer_plus {
+	font-size: 1.2em;
+}
+.fontresizer_sep {
+	padding: 0 8px;
+	background: url("images/bc-sep.png") no-repeat scroll right center transparent;
 }
 
 /* Post Format icons

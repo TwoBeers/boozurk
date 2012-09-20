@@ -192,6 +192,9 @@ div.bz_widget_post_formats ul li.compact {
 .widget .cat-item  a, #posts_content .cat-item a {
 	padding-right: 5px;
 	padding-left: 0;
+	border-right-width: 1em;
+	border-right-style: solid;
+	border-left: none;
 }
 
 /* Main menu 

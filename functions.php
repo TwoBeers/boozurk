@@ -48,6 +48,7 @@ function boozurk_get_coa( $option = false ) {
 							'mobile' => __( 'Mobile' , 'boozurk' ),
 							'other' => __( 'Other' , 'boozurk' )
 	);
+	$boozurk_groups = apply_filters( 'boozurk_options_groups', $boozurk_groups );
 
 	$boozurk_coa = array(
 		'boozurk_jsani'=>	array( 
@@ -551,6 +552,7 @@ function boozurk_get_coa( $option = false ) {
 		'boozurk_tbcred'=>	array( 								'group'=>'other',								'type'=>'chk',								'default'=>1,								'description'=>__( 'theme credits','boozurk' ),								'info'=>__( "please, don't hide theme credits",'boozurk' ),								'req'=>'' 
 							)
 	);
+	$boozurk_coa = apply_filters( 'boozurk_options_array', $boozurk_coa );
 
 	if ( $option == 'groups' )
 		return $boozurk_groups;
@@ -720,7 +722,7 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 		$cat_color = isset($boozurk_opt['boozurk_cat_colors'][$category->term_id]) ? $boozurk_opt['boozurk_cat_colors'][$category->term_id] : '#87CEEB';
 		$cat_class = '.category-' . sanitize_html_class($category->slug, $category->term_id);
 		echo '#posts_content ' . $cat_class . ' { border-color:' . $cat_color . ' ;}' . "\n";
-		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-left: 1em solid ' . $cat_color . ' ; }' . "\n";
+		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-color: ' . $cat_color . ' ; }' . "\n";
 	}
 ?>
 </style>

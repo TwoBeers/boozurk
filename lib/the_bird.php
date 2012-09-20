@@ -12,9 +12,9 @@ add_filter( 'get_comment_author_link', 'boozurk_add_quoted_on' );
 add_filter( 'user_contactmethods','boozurk_new_contactmethods',10,1 );
 add_filter( 'manage_posts_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for posts
 add_filter( 'manage_pages_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for pages
-if ( $boozurk_opt['boozurk_blank_title'] ) add_filter( 'the_title', 'boozurk_empty_titles_filter', 9, 2 );
-add_filter( 'the_title', 'boozurk_title_tags_filter' );
+add_filter( 'the_title', 'boozurk_titles_filter', 10, 2 );
 add_filter( 'excerpt_length', 'boozurk_excerpt_length' );
+add_filter( 'excerpt_mblength' , 'boozurk_excerpt_length' ); //WP Multibyte Patch support
 add_filter( 'excerpt_more', 'boozurk_excerpt_more' );
 add_filter( 'the_content_more_link', 'boozurk_more_link', 10, 2 );
 add_filter( 'wp_title', 'boozurk_filter_wp_title' );
@@ -670,22 +670,18 @@ if ( !function_exists( 'boozurk_add_quoted_on' ) ) {
 	}
 }
 
-// strip tags from titles
-function boozurk_title_tags_filter( $title ) {
+// strip tags and apply title format for blank titles
+function boozurk_titles_filter( $title, $id = null ) {
+	global $boozurk_opt;
 
 	if ( is_admin() ) return $title;
 
 	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
-	return $title;
 
-}
+	if ( $id == null ) return $title;
 
-// apply title format for blank titles
-function boozurk_empty_titles_filter( $title, $id ) {
-	global $boozurk_opt;
-	
-	if ( is_admin() ) return $title;
-	
+	if ( !$boozurk_opt['boozurk_blank_title'] ) return $title;
+
 	if ( empty( $title ) ) {
 		if ( !isset( $boozurk_opt['boozurk_blank_title_text'] ) || empty( $boozurk_opt['boozurk_blank_title_text'] ) ) return __( '(no title)', 'boozurk' );
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'boozurk' ), get_the_time( get_option( 'date_format' ), $id ) );
