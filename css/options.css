@@ -82,14 +82,16 @@
 	cursor: crosshair;
 }
 .boozurk_cp {
-	background:#eee;
+	background:#828c95;
+	background: -moz-linear-gradient(-45deg, #c6c6c6 0%, #828c95 36%, #3a3a3a 100%); /* FF3.6+ */
+	background: linear-gradient(135deg, #c6c6c6 0%, #828c95 36%, #3a3a3a 100%); /* W3C */
+	border-radius: 0 100px 100px 100px;	
 	position:absolute;
 	display:none;
-	top: 25px;
-	left: 0;
+	top: 50px;
+	left: 52px;
 	z-index: 500;
-	border:1px solid #fff;
-	box-shadow:0 0 4px #404040;
+	box-shadow: 0 0 2px #000;
 }
 .farbtastic .wheel {
     left: 0;

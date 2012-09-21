@@ -1,9 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Boozurk v2.00.1\n"
+"Project-Id-Version: Boozurk v2.01\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2012-09-07 10:13:27+0000\n"
+"PO-Revision-Date: 2012-09-21 12:59:00+0000\n"
+"Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +64,7 @@ msgid "(current post category)"
 msgstr ""
 
 #: functions.php:266
-#: lib/the_bird.php:690
+#: lib/the_bird.php:686
 #@ boozurk
 msgid "(no title)"
 msgstr ""
@@ -90,7 +91,7 @@ msgstr ""
 msgid "Add New Post"
 msgstr ""
 
-#: functions.php:755
+#: functions.php:848
 #@ boozurk
 msgid "Add selected text as a quote"
 msgstr ""
@@ -122,7 +123,7 @@ msgstr ""
 msgid "Blogroll"
 msgstr ""
 
-#: functions.php:1108
+#: functions.php:1098
 #@ boozurk
 msgid "Bottom of page"
 msgstr ""
@@ -167,7 +168,7 @@ msgstr ""
 msgid "Click an image to select"
 msgstr ""
 
-#: functions.php:752
+#: functions.php:844
 #@ boozurk
 msgid "Click on thumbnails"
 msgstr ""
@@ -177,7 +178,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: functions.php:43
+#: functions.php:42
 #@ boozurk
 msgid "Colors"
 msgstr ""
@@ -193,7 +194,7 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: functions.php:796
+#: functions.php:851
 #@ boozurk
 msgid "Comments closed"
 msgstr ""
@@ -239,7 +240,7 @@ msgstr ""
 msgid "Display image EXIF details. It's visible ONLY in single attachments"
 msgstr ""
 
-#: functions.php:1005
+#: functions.php:995
 #@ boozurk
 msgid "Edit"
 msgstr ""
@@ -250,7 +251,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: functions.php:636
+#: functions.php:637
 #@ boozurk
 msgid "Enrich the page 404 with some useful widgets"
 msgstr ""
@@ -266,12 +267,12 @@ msgstr ""
 msgid "Feed for comments"
 msgstr ""
 
-#: functions.php:1038
+#: functions.php:1028
 #@ boozurk
 msgid "Feed for comments on this post"
 msgstr ""
 
-#: functions.php:601
+#: functions.php:602
 #@ boozurk
 msgid "First Footer Widget Area"
 msgstr ""
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Here is something that might help:"
 msgstr ""
 
-#: functions.php:1054
+#: functions.php:1044
 #: lib/widgets.php:935
 #@ boozurk
 msgid "Home"
@@ -330,7 +331,7 @@ msgstr ""
 msgid "Image EXIF details"
 msgstr ""
 
-#: functions.php:47
+#: functions.php:46
 #@ boozurk
 msgid "Javascript"
 msgstr ""
@@ -355,7 +356,7 @@ msgstr ""
 
 #: comments.php:12
 #: comments.php:59
-#: functions.php:1030
+#: functions.php:1020
 #: lib/widgets.php:926
 #: mobile/comments-mobile.php:40
 #@ boozurk
@@ -379,12 +380,12 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: functions.php:1167
+#: functions.php:1157
 #@ boozurk
 msgid "Main Navigation Menu"
 msgstr ""
 
-#: functions.php:590
+#: functions.php:591
 #@ boozurk
 msgid "Menu Widget Area"
 msgstr ""
@@ -405,18 +406,18 @@ msgstr ""
 msgid "Navigation buttons"
 msgstr ""
 
-#: functions.php:1088
+#: functions.php:1078
 #@ boozurk
 msgid "Newer Posts"
 msgstr ""
 
-#: functions.php:1600
+#: functions.php:1590
 #: index.php:46
 #@ boozurk
 msgid "Next Page"
 msgstr ""
 
-#: functions.php:1072
+#: functions.php:1062
 #: lib/the_bird.php:138
 #: lib/the_bird.php:142
 #@ boozurk
@@ -441,12 +442,12 @@ msgstr ""
 msgid "No Tags"
 msgstr ""
 
-#: functions.php:754
+#: functions.php:846
 #@ boozurk
 msgid "No more posts beyond this line"
 msgstr ""
 
-#: functions.php:757
+#: functions.php:850
 #@ boozurk
 msgid "Nothing to quote. First of all you should select some text..."
 msgstr ""
@@ -469,7 +470,7 @@ msgstr ""
 msgid "Number of users to show"
 msgstr ""
 
-#: functions.php:1094
+#: functions.php:1084
 #@ boozurk
 msgid "Older Posts"
 msgstr ""
@@ -485,7 +486,7 @@ msgstr ""
 msgid "Options saved."
 msgstr ""
 
-#: functions.php:49
+#: functions.php:48
 #@ boozurk
 msgid "Other"
 msgstr ""
@@ -498,18 +499,18 @@ msgstr ""
 msgid "Page"
 msgstr ""
 
-#: functions.php:1562
+#: functions.php:1552
 #, php-format
 #@ boozurk
 msgid "Page %s"
 msgstr ""
 
-#: functions.php:634
+#: functions.php:635
 #@ boozurk
 msgid "Page 404"
 msgstr ""
 
-#: functions.php:753
+#: functions.php:845
 #@ boozurk
 msgid "Page is loading, please wait..."
 msgstr ""
@@ -520,7 +521,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: functions.php:1584
+#: functions.php:1574
 #: loop/post.php:31
 #: mobile/loop-front-page-mobile.php:7
 #: mobile/loop-page-mobile.php:8
@@ -555,7 +556,7 @@ msgstr ""
 msgid "Post Formats"
 msgstr ""
 
-#: functions.php:644
+#: functions.php:645
 #@ boozurk
 msgid "Post Widget Area"
 msgstr ""
@@ -566,7 +567,7 @@ msgstr ""
 msgid "Post details"
 msgstr ""
 
-#: functions.php:750
+#: functions.php:842
 #@ boozurk
 msgid "Post loading, please wait..."
 msgstr ""
@@ -582,12 +583,12 @@ msgstr ""
 msgid "Posts by %s"
 msgstr ""
 
-#: functions.php:751
+#: functions.php:843
 #@ boozurk
 msgid "Preview"
 msgstr ""
 
-#: functions.php:1080
+#: functions.php:1070
 #: lib/the_bird.php:137
 #: lib/the_bird.php:145
 #@ boozurk
@@ -605,7 +606,7 @@ msgid "Previous/Next"
 msgstr ""
 
 #: footer.php:19
-#: functions.php:1013
+#: functions.php:1003
 #@ boozurk
 msgid "Print"
 msgstr ""
@@ -620,7 +621,7 @@ msgstr ""
 msgid "Published on"
 msgstr ""
 
-#: functions.php:756
+#: functions.php:849
 #@ boozurk
 msgid "Quote"
 msgstr ""
@@ -636,7 +637,7 @@ msgstr ""
 msgid "Recent Posts in Category"
 msgstr ""
 
-#: functions.php:1063
+#: functions.php:1053
 #, php-format
 #@ boozurk
 msgid "Return to %s"
@@ -654,17 +655,17 @@ msgstr ""
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: functions.php:612
+#: functions.php:613
 #@ boozurk
 msgid "Second Footer Widget Area"
 msgstr ""
 
-#: functions.php:1168
+#: functions.php:1158
 #@ boozurk
 msgid "Secondary Navigation Menu #1"
 msgstr ""
 
-#: functions.php:1169
+#: functions.php:1159
 #@ boozurk
 msgid "Secondary Navigation Menu #2"
 msgstr ""
@@ -799,7 +800,7 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: functions.php:603
+#: functions.php:604
 #@ boozurk
 msgid "The first footer widget area"
 msgstr ""
@@ -824,17 +825,17 @@ msgstr ""
 msgid "The most recent posts in a single category"
 msgstr ""
 
-#: functions.php:614
+#: functions.php:615
 #@ boozurk
 msgid "The second footer widget area"
 msgstr ""
 
-#: functions.php:625
+#: functions.php:626
 #@ boozurk
 msgid "The third footer widget area"
 msgstr ""
 
-#: functions.php:592
+#: functions.php:593
 #@ boozurk
 msgid "The widget area under the main menu"
 msgstr ""
@@ -846,8 +847,8 @@ msgstr ""
 msgid "Theme Info"
 msgstr ""
 
-#: functions.php:1141
-#: functions.php:1637
+#: functions.php:1131
+#: functions.php:1627
 #: lib/the_bird.php:449
 #@ boozurk
 msgid "Theme Options"
@@ -858,7 +859,7 @@ msgstr ""
 msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
 msgstr ""
 
-#: functions.php:623
+#: functions.php:624
 #@ boozurk
 msgid "Third Footer Widget Area"
 msgstr ""
@@ -886,7 +887,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: functions.php:1100
+#: functions.php:1090
 #@ boozurk
 msgid "Top of page"
 msgstr ""
@@ -896,7 +897,7 @@ msgstr ""
 msgid "Top/Bottom"
 msgstr ""
 
-#: functions.php:1046
+#: functions.php:1036
 #: lib/widgets.php:932
 #@ boozurk
 msgid "Trackback URL"
@@ -991,7 +992,7 @@ msgstr ""
 msgid "a month ago"
 msgstr ""
 
-#: functions.php:646
+#: functions.php:647
 #@ boozurk
 msgid "a widget area located after the post body"
 msgstr ""
@@ -1062,7 +1063,7 @@ msgstr ""
 msgid "besides..."
 msgstr ""
 
-#: functions.php:1218
+#: functions.php:1208
 #@ boozurk
 msgid "boozurk Default Gravatar"
 msgstr ""
@@ -1280,7 +1281,7 @@ msgstr ""
 msgid "jun"
 msgstr ""
 
-#: functions.php:973
+#: functions.php:963
 #@ boozurk
 msgid "last comments"
 msgstr ""
@@ -1369,7 +1370,7 @@ msgstr ""
 msgid "over a year ago"
 msgstr ""
 
-#: functions.php:1594
+#: functions.php:1584
 #: index.php:40
 #: mobile/loop-index-mobile.php:31
 #, php-format
@@ -1553,7 +1554,7 @@ msgstr ""
 
 #: functions.php:384
 #: functions.php:399
-#: lib/the_bird.php:745
+#: lib/the_bird.php:741
 #: lib/widgets.php:1005
 #@ boozurk
 msgid "thumbnail"
@@ -1626,22 +1627,22 @@ msgstr[1] ""
 msgid "Mobile View"
 msgstr ""
 
-#: functions.php:44
+#: functions.php:43
 #@ boozurk
 msgid "Posts archives"
 msgstr ""
 
-#: functions.php:45
+#: functions.php:44
 #@ boozurk
 msgid "Contents"
 msgstr ""
 
-#: functions.php:46
+#: functions.php:45
 #@ boozurk
 msgid "Sidebars and Widgets"
 msgstr ""
 
-#: functions.php:48
+#: functions.php:47
 #@ boozurk
 msgid "Mobile"
 msgstr ""
@@ -1691,12 +1692,6 @@ msgstr ""
 #: functions.php:267
 #@ boozurk
 msgid "default text"
-msgstr ""
-
-#: functions.php:268
-#, php-format
-#@ boozurk
-msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)"
 msgstr ""
 
 #: functions.php:285
@@ -1790,22 +1785,22 @@ msgstr ""
 msgid "colors"
 msgstr ""
 
-#: functions.php:568
+#: functions.php:569
 #@ boozurk
 msgid "Primary idebar"
 msgstr ""
 
-#: functions.php:570
+#: functions.php:571
 #@ boozurk
 msgid "The primary sidebar widget area"
 msgstr ""
 
-#: functions.php:579
+#: functions.php:580
 #@ boozurk
 msgid "Secondary sidebar"
 msgstr ""
 
-#: functions.php:581
+#: functions.php:582
 #@ boozurk
 msgid "The secondary sidebar widget area"
 msgstr ""
@@ -1898,12 +1893,12 @@ msgstr ""
 msgid "Parent page"
 msgstr ""
 
-#: functions.php:1656
+#: functions.php:1646
 #@ boozurk
 msgid "read me!"
 msgstr ""
 
-#: lib/the_bird.php:691
+#: lib/the_bird.php:687
 #@ boozurk
 msgid "Post"
 msgstr ""
@@ -1913,5 +1908,31 @@ msgstr ""
 #, php-format
 #@ boozurk
 msgid "Powered by %s and %s"
+msgstr ""
+
+#: functions.php:268
+#, php-format
+#@ boozurk
+msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id"
+msgstr ""
+
+#: lib/widgets.php:1425
+#@ boozurk
+msgid "Decrease font size"
+msgstr ""
+
+#: lib/widgets.php:1427
+#@ boozurk
+msgid "Reset font size"
+msgstr ""
+
+#: lib/widgets.php:1429
+#@ boozurk
+msgid "Increase font size"
+msgstr ""
+
+#: lib/widgets.php:1470
+#@ boozurk
+msgid "Simple javascript-based font resizer"
 msgstr ""
 

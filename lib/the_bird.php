@@ -684,8 +684,8 @@ function boozurk_titles_filter( $title, $id = null ) {
 
 	if ( empty( $title ) ) {
 		if ( !isset( $boozurk_opt['boozurk_blank_title_text'] ) || empty( $boozurk_opt['boozurk_blank_title_text'] ) ) return __( '(no title)', 'boozurk' );
-		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'boozurk' ), get_the_time( get_option( 'date_format' ), $id ) );
-		$codes = array( '%f', '%d' );
+		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'boozurk' ), get_the_time( get_option( 'date_format' ), $id ), $id );
+		$codes = array( '%f', '%d', '%n' );
 		return str_replace( $codes, $postdata, $boozurk_opt['boozurk_blank_title_text'] );
 	} else
 		return $title;
@@ -774,7 +774,7 @@ if ( !function_exists( 'boozurk_post_manage_style' ) ) {
 function boozurk_filter_wp_title( $title ) {
 	if ( is_single() && empty( $title ) ) {
 		$_post = get_queried_object();
-		$title = boozurk_empty_titles_filter( '', $_post->ID ) . ' &laquo; ';
+		$title = boozurk_titles_filter( '', $_post->ID ) . ' &laquo; ';
 	}
     // Get the Site Name
     $site_name = get_bloginfo( 'name' );

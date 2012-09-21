@@ -4,6 +4,62 @@ var boozurkScripts;
 
 boozurkScripts = {
 
+	init : function( in_modules ) {
+
+		var modules = in_modules.split(',');
+
+		for (i in modules) {
+
+			switch(modules[i]) {
+
+				case 'postexpander':
+					boozurkScripts.post_expander();
+					break;
+
+				case 'thickbox':
+					boozurkScripts.init_thickbox();
+					break;
+
+				case 'tooltips':
+					boozurkScripts.tooltips();
+					boozurkScripts.cooltips('.minibutton,.share-item img,.tb_widget_categories a,#bz-quotethis,.tb_widget_latest_commentators li,.tb_widget_social a,.post-format-item.compact img,a.bz-tipped-anchor',true,'');
+					boozurkScripts.cooltips('.pmb_comm',true,boozurk_l10n.comments_closed);
+					break;
+
+				case 'plusone':
+					gapi.plusone.go("posts_content");
+					break;
+
+				case 'quotethis':
+					boozurkScripts.init_quote_this();
+					break;
+
+				case 'infinitescroll':
+					boozurkScripts.infinite_scroll(boozurk_l10n.infinite_scroll_type);
+					break;
+
+				case 'animatemenu':
+					boozurkScripts.animate_menu();
+					break;
+
+				case 'scrolltopbottom':
+					boozurkScripts.scroll_top_bottom();
+					break;
+
+				case 'commentvariants':
+					boozurkScripts.comment_variants();
+					break;
+
+				default :
+					alert(arguments[i]);
+					break;
+
+			}
+
+		}
+
+    },
+
 
 	post_expander : function() {
 
@@ -16,7 +72,7 @@ boozurkScripts = {
 				$.ajax({
 					type: 'POST',
 					url: link.attr("href"),
-					beforeSend: function(XMLHttpRequest) { link.html(bz_post_expander_text).addClass('ajaxed'); },
+					beforeSend: function(XMLHttpRequest) { link.html(boozurk_l10n.post_expander).addClass('ajaxed'); },
 					data: 'bz_post_expander=1',
 					success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
 				});
@@ -50,7 +106,7 @@ boozurkScripts = {
 
 					} else {
 
-						$('#bz-next-posts-button').html(bz_infinite_scroll_text_end).fadeIn();
+						$('#bz-next-posts-button').html(boozurk_l10n.infinite_scroll_end).fadeIn();
 
 						return false;
 					}
@@ -176,9 +232,15 @@ boozurkScripts = {
 		$.ajax({
 			type: 'POST',
 			url: next_href,
-			beforeSend: function(XMLHttpRequest) { $('#bz-page-nav-msg').addClass('loading').html(bz_infinite_scroll_text).animate( { 'opacity' : 1 } ); },
+			beforeSend: function(XMLHttpRequest) { $('#bz-page-nav-msg').addClass('loading').html(boozurk_l10n.infinite_scroll).animate( { 'opacity' : 1 } ); },
 			data: 'bz_infinite_scroll=1',
-			success: function(data) { nav.replaceWith( $(data) ); boozurk_Init(1); }
+			success: function(data) {
+				nav.replaceWith( $(data) );
+				boozurkScripts.init(boozurk_l10n.script_modules_afterajax);
+				$('#bz-next-posts-button input').click(function() {
+					boozurkScripts.AJAX_paged();
+				});
+			}
 		});
 		
 		return false;
@@ -234,7 +296,7 @@ boozurkScripts = {
 	init_quote_this : function() {
 		if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
 			bz_qdiv = document.createElement('small');
-			bz_qdiv.innerHTML = ' - <a id="bz-quotethis" href="#" onclick="boozurkScripts.quote_this(); return false" title="' + bz_quote_tip_text + '" >' + bz_quote_text + '</a>';
+			bz_qdiv.innerHTML = ' - <a id="bz-quotethis" href="#" onclick="boozurkScripts.quote_this(); return false" title="' + boozurk_l10n.quote_tip + '" >' + boozurk_l10n.quote + '</a>';
 			bz_replink = document.getElementById('reply-title');
 			bz_replink.appendChild(bz_qdiv);
 		}
@@ -259,11 +321,13 @@ boozurkScripts = {
 		if ( posttext.length !== 0 ) {
 			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
 		} else {
-			alert( bz_quote_alert_text );
+			alert( boozurk_l10n.quote_alert );
 		}
 	}
 
 
 };
+
+$(document).ready(function($){ boozurkScripts.init(boozurk_l10n.script_modules); });
 
 })(jQuery);
