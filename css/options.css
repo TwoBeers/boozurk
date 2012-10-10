@@ -35,10 +35,8 @@
 .sel-active a {
 	color: #000;
 }
-
 .sel-active {
 	font-weight: bold;
-	background: url("../images/litem_rtl.png") no-repeat 135px center transparent;
 }
 #main-wrap {
 	position: relative;

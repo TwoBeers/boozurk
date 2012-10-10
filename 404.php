@@ -3,7 +3,7 @@
 <?php boozurk_hook_before_posts(); ?>
 <div id="posts_content" class="posts_wide">
 	<div class="post" id="post-404-not-found">
-		<h2 class="storytitle">Error 404 - <?php _e( 'Page not found','boozurk' ); ?></h2>
+		<h2 class="storytitle"><?php _e( 'Error 404','boozurk' ); ?> - <?php _e( 'Page not found','boozurk' ); ?></h2>
 		<p><?php _e( "Sorry, you're looking for something that isn't here" ,'boozurk' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p><br/>
 		<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
 			<p><?php _e( 'Here is something that might help:','boozurk' ); ?></p>

@@ -12,6 +12,8 @@ add_action( 'template_redirect', 'boozurk_mobile' );
 add_action( 'after_setup_theme', 'boozurk_mobile_setup' );
 // Register sidebars by running boozurk_mobile_widget_area_init() on the widgets_init hook
 add_action( 'widgets_init', 'boozurk_mobile_widget_area_init' );
+// Enqueue comment-reply.js
+add_action( 'comment_form_before', 'boozurk_mobile_enqueue_comments_reply' );
 
 if ( !function_exists( 'boozurk_mobile_device_detect' ) ) {
 	function boozurk_mobile_device_detect() {
@@ -107,14 +109,21 @@ if ( !function_exists( 'boozurk_mobile_widget_area_init' ) ) {
 	}
 }
 
-
-
 // Add stylesheets to page
 if ( !function_exists( 'boozurk_mobile_stylesheet' ) ) {
 	function boozurk_mobile_stylesheet(){
 		global $boozurk_version;
 		if ( is_admin() ) return;
 		wp_enqueue_style( 'tbm-mobile-style', get_template_directory_uri() . '/mobile/style-mobile.css', false, $boozurk_version, 'screen' );
+	}
+}
+
+// comment-reply.js
+if ( !function_exists( 'boozurk_mobile_enqueue_comments_reply' ) ) {
+	function boozurk_mobile_enqueue_comments_reply() {
+		if( get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
 	}
 }
 

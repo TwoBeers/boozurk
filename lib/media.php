@@ -59,7 +59,7 @@ function boozurk_media_library() {
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-		<title><?php echo bloginfo( 'name' ); ?> - Media Library</title>
+		<title><?php echo bloginfo( 'name' ); ?> - <?php _e( 'Media Library','boozurk' ); ?></title>
 	</head>
 	<style type="text/css">
 		body {

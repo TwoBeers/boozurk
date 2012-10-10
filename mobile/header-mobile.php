@@ -4,17 +4,9 @@
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width">
-		<title><?php
-			if ( is_front_page() ) {
-				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
-			} else {
-				wp_title( '&laquo;', true, 'right' );
-				bloginfo( 'name' );
-			}
-			?></title>
+		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php wp_get_archives( 'type=monthly&format=link' ); ?>
-		<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?> 
+		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
 		<?php wp_head(); ?>
 	</head>
 

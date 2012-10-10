@@ -8,7 +8,7 @@ add_action( 'wp_footer', 'boozurk_initialize_scripts' ); // start js scripts
 add_action( 'admin_menu', 'boozurk_create_menu' ); // Add admin menus
 add_action( 'init', 'boozurk_post_expander_activate' ); // post expander ajax request
 add_action( 'init', 'boozurk_infinite_scroll_activate' ); // infinite scroll ajax request
-add_action( 'boozurk_hook_before_post', 'boozurk_print_date' ); // boozurk_print_date
+add_action( 'boozurk_hook_before_post', 'boozurk_print_details' ); // boozurk_print_details
 add_action( 'admin_bar_menu', 'boozurk_admin_bar_plus', 999 ); // add links to admin bar
 add_action( 'wp_head', 'boozurk_plus_snippet' ); // localize js scripts
 
@@ -371,7 +371,35 @@ function boozurk_get_coa( $option = false ) {
 		),
 		'boozurk_browse_links'=> array(							'group'=>'content',							'type'=>'chk',							'default'=>1,							'description'=>__( 'quick browsing links', 'boozurk' ),							'info'=>__( 'show navigation links before post content', 'boozurk' ),							'req'=>'' 
 		),
-		'boozurk_post_date'=> array(							'group'=>'content',							'type'=>'chk',							'default'=>1,							'description'=>__( 'post date', 'boozurk' ),							'info'=>__( 'show date right before post content (only in posts index)', 'boozurk' ),							'req'=>'' 
+		'boozurk_post_info'=> array(
+							'group' => 'content',
+							'type' => '',
+							'default' => '',
+							'description' => __( 'Post details', 'boozurk' ),
+							'info' => __( 'show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget', 'boozurk' ),
+							'req' => '',
+							'sub' => array( 'boozurk_post_date', 'boozurk_post_cat', 'boozurk_post_tag' )
+		),
+		'boozurk_post_date'=> array(							'group'=>'content',							'type'=>'chk',							'default'=>1,							'description'=>__( 'date', 'boozurk' ),							'info'=>'',							'req'=>'',
+							'sub' => false
+		),
+		'boozurk_post_cat'=> array(
+							'group'=>'content',
+							'type'=>'chk',
+							'default'=>0,
+							'description'=>__( 'categories', 'boozurk' ),
+							'info'=>'',
+							'req'=>'',
+							'sub' => false
+		),
+		'boozurk_post_tag'=> array(
+							'group'=>'content',
+							'type'=>'chk',
+							'default'=>0,
+							'description'=>__( 'tags', 'boozurk' ),
+							'info'=>'',
+							'req'=>'',
+							'sub' => false
 		),
 		'boozurk_featured_title'=> array(							'group'=>'content',							'type'=>'sel',							'default'=>'lists',							'description'=>__( 'enhanced post title','boozurk' ),							'info'=>__( 'use the featured image as background for the post title','boozurk' ),							'options'=>array('lists','single','both','none'),							'options_l10n'=>array(__('in lists','boozurk'),__('in single posts/pages','boozurk'),__('both','boozurk'),__('none','boozurk')),
 							'req'=>'',
@@ -548,7 +576,7 @@ function boozurk_get_coa( $option = false ) {
 		'boozurk_post_formats_video'=> array(							'group'=>'index',							'type'=>'chk',							'default'=>1,							'description'=>__( 'video','boozurk' ),							'info'=>sprintf( __( '%s format posts', 'boozurk' ), __( 'video','boozurk' ) ),
 							'req'=>'boozurk_post_formats' 
 		),
-		'boozurk_tbcred'=> array(							'group'=>'other',							'type'=>'chk',							'default'=>1,							'description'=>__( 'theme credits','boozurk' ),							'info'=>__( "please, don't hide theme credits",'boozurk' ),							'req'=>'' 
+		'boozurk_tbcred'=> array(							'group'=>'other',							'type'=>'chk',							'default'=>1,							'description'=>__( 'theme credits','boozurk' ),							'info'=>__( 'It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom','boozurk' ),							'req'=>'' 
 		)
 	);
 	$boozurk_coa = apply_filters( 'boozurk_options_array', $boozurk_coa );
@@ -566,7 +594,7 @@ if ( !function_exists( 'boozurk_widget_area_init' ) ) {
 
 		// Area 0, in the left sidebar.
 		register_sidebar( array(
-			'name' => __( 'Primary idebar', 'boozurk' ),
+			'name' => __( 'Primary Sidebar', 'boozurk' ),
 			'id' => 'primary-widget-area',
 			'description' => __( 'The primary sidebar widget area', 'boozurk' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -720,7 +748,7 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 	foreach($categories as $category) {
 		$cat_color = isset($boozurk_opt['boozurk_cat_colors'][$category->term_id]) ? $boozurk_opt['boozurk_cat_colors'][$category->term_id] : '#87CEEB';
 		$cat_class = '.category-' . sanitize_html_class($category->slug, $category->term_id);
-		echo '#posts_content ' . $cat_class . ' { border-color:' . $cat_color . ' ;}' . "\n";
+		echo '#posts_content .hentry' . $cat_class . ' { border-left-color:' . $cat_color . ' ;}' . "\n";
 		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-color: ' . $cat_color . ' ; }' . "\n";
 	}
 ?>
@@ -816,7 +844,7 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 		}
 
 		//google font
-		if ( $boozurk_opt['boozurk_google_font_family'] ) wp_enqueue_style( 'bz-google-fonts', 'http://fonts.googleapis.com/css?family=' . str_replace( ' ', '+' , $boozurk_opt['boozurk_google_font_family'] ) );
+		if ( $boozurk_opt['boozurk_google_font_family'] ) wp_enqueue_style( 'bz-google-fonts', 'http://fonts.googleapis.com/css?family=' . urlencode( $boozurk_opt['boozurk_google_font_family'] ) );
 
 		wp_enqueue_style( 'bz_print-style', get_template_directory_uri() . '/css/print.css', false, $boozurk_version, 'print' );
 
@@ -856,10 +884,26 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 }
 
 // post-top-date
-if ( !function_exists( 'boozurk_print_date' ) ) {
-	function boozurk_print_date() {
+if ( !function_exists( 'boozurk_print_details' ) ) {
+	function boozurk_print_details() {
 		global $boozurk_opt;
-		if ( $boozurk_opt['boozurk_post_date'] == 1 && !is_singular() ) echo '<div class="bz-post-top-date fixfloat">' . get_the_time( get_option( 'date_format' ) ) . '</div>';
+
+		if ( is_singular() ) return;
+
+		if ( $boozurk_opt['boozurk_post_date'] == 1 )
+			echo '<div class="bz-post-top-date fixfloat">' . get_the_time( get_option( 'date_format' ) ) . '</div>';
+
+		if ( $boozurk_opt['boozurk_post_cat'] == 1 ) {
+			echo '<div class="bz-post-top-cat fixfloat">';
+			the_category(', ');
+			echo '</div>';
+		}
+
+		if ( $boozurk_opt['boozurk_post_tag'] == 1 ) {
+			echo '<div class="bz-post-top-tag fixfloat">';
+			the_tags(' ');
+			echo '</div>';
+		}
 	}
 }
 
@@ -993,7 +1037,7 @@ if (!function_exists('boozurk_navbuttons')) {
 
 		<?php if ( $is_singular && get_edit_post_link() ) { 												// ------- Edit ------- ?>
 			<div class="minibutton" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
-				<a href="<?php echo get_edit_post_link(); ?>">
+				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>">
 					<span class="minib_img minib_edit">&nbsp;</span>
 				</a>
 			</div>
@@ -1001,7 +1045,7 @@ if (!function_exists('boozurk_navbuttons')) {
 		
 		<?php if ( $print && $is_singular ) { 																// ------- Print ------- ?>
 			<div class="minibutton" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
-				<a href="<?php
+				<a rel="nofollow" href="<?php
 					$arr_params['style'] = 'printme';
 					if ( get_query_var('page') ) {
 						$arr_params['page'] = esc_html( get_query_var( 'page' ) );
@@ -1058,31 +1102,31 @@ if (!function_exists('boozurk_navbuttons')) {
 			<?php } ?>
 		<?php } ?>
 
-		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
-			<div class="minibutton" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', strip_tags( get_the_title( get_next_post() ) ) ) ); ?>">
-				<a href="<?php echo get_permalink( get_next_post() ); ?>">
-					<span class="minib_img minib_npage">&nbsp;</span>
-				</a>
-			</div>
-		<?php } ?>
-
 		<?php if (  $next_prev && $is_post && get_previous_post() ) { 										// ------- Previous post ------- ?>
 			<div class="minibutton" title="<?php esc_attr( printf( __( 'Previous Post', 'boozurk' ) . ': %s', strip_tags( get_the_title( get_previous_post() ) ) ) ); ?>">
-				<a href="<?php echo get_permalink( get_previous_post() ); ?>">
+				<a rel="prev" href="<?php echo get_permalink( get_previous_post() ); ?>">
 					<span class="minib_img minib_ppage">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
-		<?php if ( $next_prev && !$is_singular && !$boozurk_is_allcat_page && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
-			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
-				<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
+		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
+			<div class="minibutton" title="<?php esc_attr( printf( __( 'Next Post', 'boozurk' ) . ': %s', strip_tags( get_the_title( get_next_post() ) ) ) ); ?>">
+				<a rel="next" href="<?php echo get_permalink( get_next_post() ); ?>">
+					<span class="minib_img minib_npage">&nbsp;</span>
+				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $next_prev && !$is_singular && !$boozurk_is_allcat_page && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
 			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
 				<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
+			</div>
+		<?php } ?>
+
+		<?php if ( $next_prev && !$is_singular && !$boozurk_is_allcat_page && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
+			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
+				<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
 			</div>
 		<?php } ?>
 

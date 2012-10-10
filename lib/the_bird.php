@@ -132,17 +132,17 @@ if ( !function_exists( 'boozurk_single_nav' ) ) {
 	function boozurk_single_nav() {
 		global $post, $boozurk_opt;
 		if ( $boozurk_opt['boozurk_browse_links'] == 0 ) return;
-		$next = get_previous_post();
-		$prev = get_next_post();
-		$next_title = get_the_title( $next ) ? get_the_title( $next ) : __( 'Previous Post', 'boozurk' );
-		$prev_title = get_the_title( $prev ) ? get_the_title( $prev ) : __( 'Next Post', 'boozurk' );
+		$next = get_next_post();
+		$prev = get_previous_post();
+		$next_title = get_the_title( $next ) ? get_the_title( $next ) : __( 'Next Post', 'boozurk' );
+		$prev_title = get_the_title( $prev ) ? get_the_title( $prev ) : __( 'Previous Post', 'boozurk' );
 	?>
 		<div class="nav-single fixfloat">
 			<?php if ( $prev ) { ?>
-				<span class="nav-previous"><a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . $prev_title ) ); ?>"><?php echo $prev_title; ?><?php echo boozurk_get_the_thumb( $prev->ID, 32, 32, 'tb-thumb-format' ); ?></a></span>
+				<span class="nav-previous"><a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . $prev_title ) ); ?>"><?php echo $prev_title; ?><?php echo boozurk_get_the_thumb( $prev->ID, 32, 32, 'tb-thumb-format' ); ?></a></span>
 			<?php } ?>
 			<?php if ( $next ) { ?>
-				<span class="nav-next"><a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . $next_title ) ); ?>"><?php echo boozurk_get_the_thumb( $next->ID, 32, 32, 'tb-thumb-format' ); ?><?php echo $next_title; ?></a></span>
+				<span class="nav-next"><a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . $next_title ) ); ?>"><?php echo boozurk_get_the_thumb( $next->ID, 32, 32, 'tb-thumb-format' ); ?><?php echo $next_title; ?></a></span>
 			<?php } ?>
 		</div><!-- #nav-single -->
 	<?php
@@ -475,14 +475,12 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 								<?php if ( !isset ( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default']; ?>
 								<?php if ( $the_coa[$key]['type'] == 'chk' ) { ?>
 										<input name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $the_opt[$key] ); ?> />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'sel' ) { ?>
 										<select name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]">
 										<?php foreach($the_coa[$key]['options'] as $optionkey => $option) { ?>
 											<option value="<?php echo $option; ?>" <?php selected( $the_opt[$key], $option ); ?>><?php echo $the_coa[$key]['options_l10n'][$optionkey]; ?></option>
 										<?php } ?>
 										</select>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'opt' ) { ?>
 									<?php foreach( $the_coa[$key]['options'] as $optionkey => $option ) { ?>
 										<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></span></label>
@@ -495,17 +493,14 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											?>
 											<input class="hide-if-no-js button" type="button" value="<?php echo __( 'Select', 'boozurk' ); ?>" onClick="tb_show( '<?php echo __( 'Click an image to select', 'boozurk' ); ?>', '<?php echo add_query_arg( $boozurk_arr_params, home_url() ); ?>&amp;TB_iframe=true'); return false;" />
 										<?php } ?>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'txt' ) { ?>
 										<input class="boozurk_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'int' ) { ?>
 										<input class="boozurk_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'txtarea' ) { ?>
 										<textarea name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"><?php echo $the_opt[$key]; ?></textarea>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php }	?>
+								<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
 								<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
 										<div class="sub-opt-wrap">
 									<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>

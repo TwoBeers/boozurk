@@ -445,6 +445,8 @@ class boozurk_Widget_social extends WP_Widget {
 			'pinterest' => 'Pinterest',
 			'Qzone' => 'Qzone',
 			'Reddit' => 'Reddit',
+			'scribd' => 'Scribd',
+			'slideshare' => 'SlideShare',
 			'StumbleUpon' => 'StumbleUpon',
 			'Technorati' => 'Technorati',
 			'Tencent' => 'Tencent',

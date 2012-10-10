@@ -20,6 +20,20 @@
 } ?>
 
 <?php if ( have_comments() ) { ?>
+
+	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
+
+		<div class="bz-navigate navigate_comments">
+			<?php if(function_exists('wp_paginate_comments')) {
+				wp_paginate_comments();
+			} else {
+				paginate_comments_links();
+			} ?>
+			<div class="fixfloat"> </div>
+		</div>
+
+	<?php } ?>
+ 
 	<?php boozurk_hook_before_comments(); ?>
 	<ol id="commentlist">
 		<?php //wp_list_comments(array('avatar_size' => 96)); ?>
@@ -29,8 +43,12 @@
 
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 
-		<div class="navigate_comments">
-			<?php paginate_comments_links(); ?>
+		<div class="bz-navigate navigate_comments">
+			<?php if(function_exists('wp_paginate_comments')) {
+				wp_paginate_comments();
+			} else {
+				paginate_comments_links();
+			} ?>
 			<div class="fixfloat"> </div>
 		</div>
 

@@ -2,8 +2,8 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.01
-Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support
+Version: 2.02
+Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -126,7 +126,7 @@ input[type=reset] {
     border-radius: 2px 2px 2px 2px;
     color: #eee;
     cursor: pointer;
-    font-size: 11px;
+    font-size: .9em;
     font-weight: bold;
     height: 29px;
     line-height: 27px;
@@ -405,9 +405,7 @@ input[type=password]:focus {
 }
 
 #bz-page-nav {
-    padding-bottom: 10px;
-    text-align: center;
-    margin: 20px 0;
+	margin: 20px 0;
 	min-height: 20px;
 	line-height: 20px;
 }
@@ -427,9 +425,6 @@ input[type=password]:focus {
 #bz-page-nav.ajaxed #bz-page-nav-subcont {
 	display: none;
 }
-#bz-page-nav a {
-    margin: 0 10px;
-}
 #bz-next-posts-button {
 	display: none;
     margin-bottom: 0;
@@ -443,24 +438,17 @@ input[type=password]:focus {
 }
 /* Posts/Pages/Attachments
 ----------------------------------------------------------*/
-#posts_content .post, #posts_content .page, #posts_content .attachment {
-    border: 1px solid #ddd;
-    border-left: 40px solid #555;
-    margin-left: -40px;
-    padding: 0 10px 10px 11px;
-    clear: both;
-    margin-top: 20px;
+#posts_content .hentry.post,
+#posts_content .hentry.page,
+#posts_content .hentry.attachment {
+	border: 1px solid #ddd;
+	border-left: 40px solid #87ceeb;
+	margin-left: -40px;
+	padding: 0 10px 10px 11px;
+	clear: both;
+	margin-top: 20px;
 	position: relative;
 	min-height: 80px;
-}
-#posts_content .post {
-    border-left: 40px solid #87CEEB;
-}
-#posts_content .page {
-    border-left: 40px solid #87CEEB;
-}
-#posts_content .attachment {
-    border-left: 40px solid #87CEEB;
 }
 .att_content {
 	text-align: center;
@@ -556,12 +544,6 @@ input[type=password]:focus {
 	padding-left: 20px;
 	background: url('images/loading.gif') no-repeat scroll left center transparent;
 }
-.comment_tools {
-	border-top: 1px solid #ddd;
-	text-align: center;
-	margin-top: 20px;
-	padding:5px 0;
-}
 .post-edit-link {
 	background:url("images/details.png") no-repeat center -700px transparent;
 	border:1px solid #ddd;
@@ -579,19 +561,31 @@ input[type=password]:focus {
 #posts_content .post:hover .post-edit-link {
 	display: block;
 }
-.bz-post-top-date {
+.bz-post-top-date,
+.bz-post-top-tag,
+.bz-post-top-cat {
 	color:#aaa;
-	font-size:11px;
+	font-size:.8em;
 	margin:20px 0 -20px;
 	text-align:right;
 }
+.bz-post-top-cat a:before{
+	content: '*';
+}
+.bz-post-top-tag a:before {
+	content: '#';
+}
+.bz-post-top-cat a,
+.bz-post-top-tag a {
+	color:#aaa;
+}
 .format-aside .storycontent .details {
-	font-size: 11px;
+	font-size: .8em;
 	font-style: italic;
 	color: #404040;
 }
 .format-status .details  {
-	font-size: 11px;
+	font-size: .8em;
 	color: #aaa;
 }
 .format-status .details  a {
@@ -614,7 +608,7 @@ input[type=password]:focus {
 }
 .bz-player-notice {
     color:#aaa;
-    font-size:.8em;
+    font-size: .8em;
 }
 /* Last comments on post (last-cop)
 ----------------------------------------------------------*/
@@ -633,7 +627,7 @@ input[type=password]:focus {
 .bz-last-cop .item-label {
 	float: left;
 	line-height: 40px;
-	font-size: 11px;
+	font-size: .8em;
 	padding: 5px;
 }
 .bz-last-cop .bz-tooltip {
@@ -645,7 +639,7 @@ input[type=password]:focus {
 	filter: alpha(opacity=90);
 	z-index: 300;
 	background: transparent url(images/cooltips.gif) 0 top no-repeat;
-	font-size: 11px;
+	font-size: .8em;
 	margin-left : 25px;
 }
 .bz-tooltip.bz-300 {
@@ -760,6 +754,10 @@ div.tb_widget_post_details ul {
 }
 .bz-article-share img {
 	margin: 0 3px 3px 0;
+}
+.bz-article-share img:hover {
+	opacity: 0.7;
+	filter: alpha(opacity=70);
 }
 .widget .cat-item , #posts_content .cat-item  {
 	margin-top: 5px;
@@ -999,7 +997,7 @@ img.tb-thumb-format {
 ----------------------------------------------------------*/
 .cooltips {
 	padding: 5px 0;
-	font-size: 11px;
+	font-size: .8em;
 	opacity: 0.9;
 	filter: alpha(opacity=90);
 	background: transparent url(images/cooltips.gif) 0 bottom no-repeat;
@@ -1048,40 +1046,40 @@ img.tb-thumb-format {
 	margin:3px;
 	position: relative;
 }
-.minib_print{
+.minib_print {
 	background-position: left 0;
 }
-.minib_comment{
+.minib_comment {
 	background-position: left -32px;
 }
-.minib_rss{
+.minib_rss {
 	background-position: left -64px;
 }
-.minib_track{
+.minib_track {
 	background-position: left -96px;
 }
-.minib_home{
+.minib_home {
 	background-position: left -128px;
 }
-.minib_ppage{
+.minib_npage {
 	background-position: left -192px;
 }
-.minib_npage{
+.minib_ppage {
 	background-position: left -160px;
 }
-.minib_ppages{
+.minib_npages {
 	background-position: left -160px;
 }
-.minib_npages{
+.minib_ppages {
 	background-position: left -192px;
 }
-.minib_top{
+.minib_top {
 	background-position: left -224px;
 }
-.minib_bottom{
+.minib_bottom {
 	background-position: left -256px;
 }
-.minib_backtopost{
+.minib_backtopost {
 	background-position: left -160px;
 }
 .minib_edit {
@@ -1102,16 +1100,16 @@ img.tb-thumb-format {
 .minib_home:hover {
 	background-position: right -128px;
 }
-.minib_ppage:hover {
+.minib_npage:hover {
 	background-position: right -192px;
 }
-.minib_npage:hover {
-	background-position: right -160px;
-}
-.minib_ppages:hover {
+.minib_ppage:hover {
 	background-position: right -160px;
 }
 .minib_npages:hover {
+	background-position: right -160px;
+}
+.minib_ppages:hover {
 	background-position: right -192px;
 }
 .minib_top:hover {
@@ -1240,7 +1238,7 @@ img.tb-thumb-format {
 	left: -36px;
 }
 .comment .reply {
-	font-size: 10px;
+	font-size: .8em;
 	text-align: right;
 }
 .comment-reply-link {
@@ -1248,11 +1246,6 @@ img.tb-thumb-format {
 }
 .comment-body:hover .comment-reply-link {
 	visibility: visible;
-}
-.navigate_comments {
-	border-top: 1px solid #ddd;
-	padding: 10px;
-	text-align: center;
 }
 #respond {
 	border: 1px solid #ddd;
@@ -1275,21 +1268,21 @@ img.tb-thumb-format {
 	margin-left: -1px;
 }
 .comment-edit-link {
-    display: none;
-	font-size: 10px;
+	visibility: hidden;
+	font-size: .8em;
 }
 .comment-body:hover .comment-edit-link {
-    display: inline;
+	visibility: visible;
 }
 #cancel-comment-reply-link {
-    display: block;
-    height: 12px;
-    overflow: hidden;
-    position: absolute;
-    right: 10px;
+	display: block;
+	height: 12px;
+	overflow: hidden;
+	position: absolute;
+	right: 10px;
 	top: 10px;
-    text-indent: -1000px;
-    width: 13px;
+	text-indent: -1000px;
+	width: 13px;
 	background: url('images/details.png') no-repeat left -600px;
 }
 #cancel-comment-reply-link:hover {
@@ -1433,7 +1426,7 @@ img.thumbsel {
 	position: relative;
 }
 .wp-caption .wp-caption-text {
-	font-size: 11px;
+	font-size: .8em;
 	line-height: 17px;
 	margin: 0;
 	width: 100%;
@@ -1477,91 +1470,102 @@ img.aligncenter {
 	margin-bottom: 12px;
 }
 
-/* Thickbox
+/* Navigation
 ----------------------------------------------------------*/
-
-#TB_closeWindow a,
-#TB_next a,
-#TB_prev a {
-	display: block;
-	width: 42px;
-	height: 42px;
-	opacity: 0.5;
-	filter: alpha(opacity=50);
-}
-#TB_next a:hover,
-#TB_prev a:hover,
-#TB_closeWindow a:hover {
-	opacity: 1;
-	filter: alpha(opacity=100);
-}
-#TB_next a,
-#TB_prev a {
-	position: fixed;
-	top: 50%;
-	text-indent: -1000px;
-	overflow: hidden;
-	margin-top: -24px;
-}
-#TB_closeWindow a {
-	background: url('images/thickbox-navi.png') no-repeat -84px top transparent;
-}
-#TB_next a {
-	right: 20px;
-	background: url('images/thickbox-navi.png') no-repeat -42px top transparent;
-}
-#TB_prev a {
-	left: 20px;
-	background: url('images/thickbox-navi.png') no-repeat left top transparent;
-}
-#TB_window img#TB_Image {
-	border: 1px solid #ddd;
-}
-#TB_closeWindow {
-	float: none;
-	width: 42px;
-	height: 42px;
-	position: fixed;
-	top: 35px;
-	right: 20px;
-	padding: 0;
-}
-#TB_closeWindow a img {
-	display: none;
-}
-.TB_overlayBG {
-	opacity: 0.90;
-	filter: alpha(opacity=90);
-}
-#TB_window {
-	background: #000;
-	background: rgba(0,0,0,0.7);
-	color: #fff;
-	border: 1px solid #333;
-}
-
-/* WP-PageNavi
-----------------------------------------------------------*/
-
-#bz-page-nav .wp-pagenavi {
-	clear: both;
+.bz-navigate {
 	border-top: 1px solid #ddd;
-	padding-top: 10px;
+	text-align: center;
+	margin: 0;
+	padding: 10px;
+	color: #646464;
 }
-#bz-page-nav .wp-pagenavi a, #bz-page-nav .wp-pagenavi span {
-	text-decoration: none;
-	border: 1px solid #ddd;
-	padding: 3px 5px;
-	margin: 2px;
+.navigate_comments {
 }
-#bz-page-nav .wp-pagenavi span.pages {
+.navigate_page {
+	padding: 10px 0 0;
+}
+.navigate_archives {
 	border: none;
 }
-#bz-page-nav .wp-pagenavi a:hover, #bz-page-nav .wp-pagenavi span.current {
-	border-color: #777;
+#main .bz-navigate span,
+#main .bz-navigate a {
+	margin: 0 4px 0 0;
+	padding: 3px 6px;
 }
-#bz-page-nav .wp-pagenavi span.current {
-	font-weight: bold;
+#main .bz-navigate span {
+	color: #646464;
+	border: none;
+	padding: 0;
+}
+#main .bz-navigate a {
+	background: #fff;
+	border: 1px solid #ddd;
+	margin: 0 4px 0 0;
+}
+#main .bz-navigate a:hover,
+#main .bz-navigate a:active {
+	background: #eee;
+}
+#main .bz-navigate .current {
+	font-weight: normal;
+	background: #eee;
+	border: 1px solid #aaa;
+	padding: 3px 6px;
+}
+
+/* Thickbox 
+----------------------------------------------------------*/
+#TB_overlay {
+	z-index: 310;
+}
+.TB_overlayBG {
+	opacity: 0.85;
+	filter: alpha(opacity=85);
+}
+#TB_window {
+	z-index: 312;
+	border-color: transparent;
+}
+#TB_window img#TB_Image {
+	border-color: transparent;
+}
+#TB_prev a,
+#TB_next a {
+    display: block;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100px;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	color: transparent;
+}
+#TB_next a:hover,
+#TB_prev a:hover {
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+}
+
+#TB_prev a {
+	background: url('images/arrows.png') no-repeat left center #000;
+    left: 0;
+}
+#TB_next a {
+	background: url('images/arrows.png') no-repeat right center #000;
+    right: 0;
+}
+#TB_closeWindow {
+	display: none;
+}
+#TB_load {
+	border: none;
+	z-index: 313;
+	padding: 5px 15px;
+	box-shadow: 0 4px 30px #000;
+}
+#TB_caption {
+	float: none;
+	text-align: center;
 }
 
 /* Comment Variants
@@ -1677,4 +1681,28 @@ body.js .comment-variants input {
 }
 #navxt-crumbs > a:first-child:hover {
 	background-position: left -516px;
+}
+
+/* TB Chat Post
+----------------------------------------------------------*/
+.chatter-1 {
+	background: #fffacd;
+}
+.chatter-2 {
+	background: #d8eef4;
+}
+.tb-chat .chat-transcript li {
+    border: 1px solid #ddd;
+	margin: 0 100px 20px 0;
+	padding: 0 10px;
+}
+.tb-chat .chat-select li,
+.tb-chat .chat-transcript li:first-child {
+	border: 1px solid #ddd;
+}
+.tb-chat .chat-select .rightalign {
+	margin: 0 0 0 10px;
+}
+.tb-chat .chat-transcript .rightalign {
+	margin: 0 0 20px 100px;
 }

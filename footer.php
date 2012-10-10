@@ -17,15 +17,6 @@
 
 		</div><!-- close main -->
 		<div id="print-links" class="hide_if_no_print"><a href="<?php the_permalink(); ?>"><?php echo __('Close','boozurk'); ?></a><span class="hide-if-no-js"> | <a href="javascript:window.print()"><?php _e( 'Print','boozurk' ); ?></a></span></div>
-		<!-- info: 
-			<?php 
-				global $boozurk_version; 
-				echo ' | WP version - ' . get_bloginfo ( 'version' );
-				echo ' | WP language - ' . get_bloginfo ( 'language' );
-				foreach ( $boozurk_opt as $key => $val ) { echo esc_attr( ' | ' . $key . ' - ' . $val ); };
-			?>
-			
-		-->
 
 		<?php wp_footer(); ?>
 	</body>

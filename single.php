@@ -18,8 +18,8 @@
 				</div>
 				<?php boozurk_hook_after_post_content_single(); ?>
 				<?php boozurk_hook_after_post_content(); ?>
-				<div class="fixfloat" style="padding-top: 20px;">
-						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','boozurk' ) . ':&after=</div>' ); ?>
+				<div class="fixfloat">
+					<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page">' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div>&echo=0' ) ); ?>
 				</div>
 			</div>	
 			<?php boozurk_hook_after_post(); ?>

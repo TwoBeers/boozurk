@@ -25,23 +25,22 @@ if ( have_posts() ) {
 	
 	<?php } //end while ?>
 
-	<div id="bz-page-nav">
+	<div id="bz-page-nav" class="bz-navigate navigate_archives">
 	<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
 		<?php wp_pagenavi(); ?>
+	<?php } elseif ( function_exists( 'wp_paginate' ) ) { ?>
+		<?php wp_paginate(); ?>
 	<?php } else { ?>
 		<div id="bz-page-nav-msg"></div>
 		<div id="bz-page-nav-subcont">
 			<?php //num of pages
-			global $paged;
-			if ( !$paged ) {
-				$paged = 1;
-			}
-			previous_posts_link( '&laquo;' );
-			printf( __( 'page %1$s of %2$s','boozurk' ), $paged, $wp_query->max_num_pages );
+				global $paged;
+				if ( !$paged ) $paged = 1;
 			?>
-			<span id="bz-next-posts-link"><?php next_posts_link( '&raquo;' ); ?></span>
+			<span id="bz-next-posts-link"><?php next_posts_link( '&laquo;' ); ?></span>
+			<?php printf( '<span>' . __( 'page %1$s of %2$s','boozurk' ) . '</span>', $paged, $wp_query->max_num_pages ); ?>
+			<?php previous_posts_link( '&raquo;' ); ?>
 		</div>
-		<div class="w_title"></div>
 		<div id="bz-next-posts-button" class="hide-if-no-js">
 			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurkScripts.AJAX_paged();" />
 		</div>

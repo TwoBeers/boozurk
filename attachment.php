@@ -18,10 +18,10 @@
 				?>
 				<div class="img-navi">
 					<?php if ( isset( $bz_attachments[ $bz_prevk ] ) ) { ?>
-						<a class="img-navi-prev" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_prevk ]->ID, array( 70, 70 ) ); ?></a>
+						<a class="img-navi-prev" rel="prev" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_prevk ]->ID, array( 70, 70 ) ); ?></a>
 					<?php } ?>
 					<?php if ( isset( $bz_attachments[ $bz_nextk ] ) ) { ?>
-						<a class="img-navi-next" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_nextk ]->ID, array( 70, 70 ) ); ?></a>
+						<a class="img-navi-next" rel="next" title="" href="<?php echo get_attachment_link( $bz_attachments[ $bz_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $bz_attachments[ $bz_nextk ]->ID, array( 70, 70 ) ); ?></a>
 					<?php } ?>
 				</div>
 			<?php } ?>

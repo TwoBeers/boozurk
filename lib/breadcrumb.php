@@ -71,7 +71,7 @@ if ( !function_exists( 'boozurk_get_the_breadcrumb' ) ) {
 		global $wp_query, $post;
 		
 		$opt 						= array();
-		$opt['home'] 				= "Home";
+		$opt['home'] 				= __('Home', 'boozurk' );
 		$opt['sep'] 				= '<span class="bz-breadcrumb-sep">&nbsp;</span>';
 		$opt['archiveprefix'] 		=  __('Archives for %s', 'boozurk' );
 		$opt['searchprefix'] 		=  __('Search for "%s"', 'boozurk' );
