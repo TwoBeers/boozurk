@@ -207,6 +207,7 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 			'reddit' => array( 'Reddit', 'http://reddit.com/submit?url=%2$s&title=%1$s' ),
 			'stumbleupon' => array( 'StumbleUpon', 'http://www.stumbleupon.com/submit?url=%2$s&title=%1$s' ),
 			'digg' => array( 'Digg', 'http://digg.com/submit?url=%2$s' ),
+			'orkut' => array( 'Orkut', 'http://promote.orkut.com/preview?nt=orkut.com&tt=%1$s&du=%2$s&tn=%3$s' ),
 			'bookmarks' => array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=%2$s&title=%1$s' ),
 			'blogger' => array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=%2$s&n=%1$s&pli=1' ),
 			'delicious' => array( 'Delicious', 'http://delicious.com/save?v=5&noui&jump=close&url=%2$s&title=%1$s' ),

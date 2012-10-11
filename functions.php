@@ -14,7 +14,7 @@ add_action( 'wp_head', 'boozurk_plus_snippet' ); // localize js scripts
 
 // Custom filters
 add_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
-add_filter( 'the_content', 'boozurk_content_replace', 100 );
+add_filter( 'embed_oembed_html', 'boozurk_wmode_transparent', 10, 3);
 add_filter( 'img_caption_shortcode', 'boozurk_img_caption_shortcode', 10, 3 );
 
 $boozurk_opt = get_option( 'boozurk_options' );
@@ -1647,12 +1647,17 @@ function boozurk_infinite_scroll_activate ( ) {
 	}
 }
 
-//add a "wmode" fix for embed videos
-if ( !function_exists( 'boozurk_content_replace' ) ) {
-	function boozurk_content_replace( $content ){
-		$content = str_replace( '</object>', '<param name="wmode" value="transparent"></object>', $content );
-		$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
-		return $content;
+// add a fix for embed videos
+if ( !function_exists( 'boozurk_wmode_transparent' ) ) {
+	function boozurk_wmode_transparent($html, $url, $attr) {
+		if ( strpos( $html, '<embed ' ) !== false ) {
+			$html = str_replace('</param><embed', '</param><param name="wmode" value="transparent"></param><embed', $html);
+			$html = str_replace('<embed ', '<embed wmode="transparent" ', $html);
+			return $html;
+		} elseif ( strpos ( $html, 'feature=oembed' ) !== false )
+			return str_replace( 'feature=oembed', 'feature=oembed&wmode=transparent', $html );
+		else
+			return $html;
 	}
 }
 

@@ -451,6 +451,7 @@ class boozurk_Widget_social extends WP_Widget {
 			'Technorati' => 'Technorati',
 			'Tencent' => 'Tencent',
 			'Twitter' => 'Twitter',
+			'ubuntuone' => 'Ubuntu One',
 			'Vimeo' => 'Vimeo',
 			'VKontakte' => 'VKontakte',
 			'Sina' => 'Weibo',
