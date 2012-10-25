@@ -8,7 +8,7 @@ class BoozurkCommentStyle {
 	var $variants = array();
 
 	function BoozurkCommentStyle() {
-		global $boozurk_opt, $boozurk_is_mobile_browser, $boozurk_is_printpreview;
+		global $boozurk_is_mobile_browser, $boozurk_is_printpreview;
 
 		if ( is_admin() || $boozurk_is_mobile_browser || $boozurk_is_printpreview ) return;
 

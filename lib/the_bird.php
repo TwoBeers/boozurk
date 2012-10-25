@@ -130,8 +130,8 @@ if ( !function_exists( 'boozurk_exif_details' ) ) {
 //Display navigation to next/previous post when applicable
 if ( !function_exists( 'boozurk_single_nav' ) ) {
 	function boozurk_single_nav() {
-		global $post, $boozurk_opt;
-		if ( $boozurk_opt['boozurk_browse_links'] == 0 ) return;
+		global $post;
+		if ( ! boozurk_get_opt( 'boozurk_browse_links' ) ) return;
 		$next = get_next_post();
 		$prev = get_previous_post();
 		$next_title = get_the_title( $next ) ? get_the_title( $next ) : __( 'Next Post', 'boozurk' );
@@ -192,38 +192,64 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 if ( !function_exists( 'boozurk_share_this' ) ) {
 	function boozurk_share_this( $args = array() ){
 		global $post;
-		
-		$defaults = array( 'size' => 24, 'echo' => true );
-		$args = wp_parse_args( $args, $defaults );
-		
-		$share = array(
-			//'ID' => array( 'NAME', 'LINK' ),
-			// LINK -> %1$s: title, %2$s: url, %3$s: image/thumbnail
-			'twitter' => array( 'Twitter', 'http://twitter.com/home?status=%1$s - %2$s' ),
-			'facebook' => array( 'Facebook', 'http://www.facebook.com/sharer.php?u=%2$s&t=%1$s' ),
-			'sina' => array( 'Weibo', 'http://v.t.sina.com.cn/share/share.php?url=%2$s' ),
-			'tencent' => array( 'Tencent', 'http://v.t.qq.com/share/share.php?url=%2$s&title=%1$s&pic=%3$s' ),
-			'qzone' => array( 'Qzone', 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=%2$s' ),
-			'reddit' => array( 'Reddit', 'http://reddit.com/submit?url=%2$s&title=%1$s' ),
-			'stumbleupon' => array( 'StumbleUpon', 'http://www.stumbleupon.com/submit?url=%2$s&title=%1$s' ),
-			'digg' => array( 'Digg', 'http://digg.com/submit?url=%2$s' ),
-			'orkut' => array( 'Orkut', 'http://promote.orkut.com/preview?nt=orkut.com&tt=%1$s&du=%2$s&tn=%3$s' ),
-			'bookmarks' => array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=%2$s&title=%1$s' ),
-			'blogger' => array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=%2$s&n=%1$s&pli=1' ),
-			'delicious' => array( 'Delicious', 'http://delicious.com/save?v=5&noui&jump=close&url=%2$s&title=%1$s' ),
+
+		$defaults = array(
+			'size' => 24, 
+			'echo' => true,
+			'compact' => false,
+			'twitter' => 1,
+			'facebook' => 1,
+			'sina' => 1,
+			'tencent' => 1,
+			'qzone' => 1,
+			'reddit' => 1,
+			'stumbleupon' => 1,
+			'digg' => 1,
+			'orkut' => 1,
+			'bookmarks' => 1,
+			'blogger' => 1,
+			'delicious' => 1,
+			'linkedin' => 1,
+			'tumblr' => 1,
+			'mail' => 1
 		);
+		$args = wp_parse_args( $args, $defaults );
 
-		$pName = rawurlencode($post->post_title);
-		$pHref = rawurlencode(get_permalink($post->ID));
-		$pPict = rawurlencode(wp_get_attachment_url(get_post_thumbnail_id($post->ID)));
+		$share = array();
+		$pName = rawurlencode( get_the_title( $post->ID ) );
+		$pHref = rawurlencode( home_url() . '/?p=' . $post->ID );
+		$pLongHref = rawurlencode( get_permalink( $post->ID ) );
+		$pPict = rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
+		$pSource = rawurlencode( get_bloginfo( 'name' ) );
+		if ( !empty( $post->post_password ) )
+			$pSum = '';
+		elseif ( has_excerpt() )
+			$pSum = rawurlencode( get_the_excerpt() );
+		else
+			$pSum = rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
 
+		$share['twitter'] = array( 'Twitter', 'http://twitter.com/home?status=' . $pName . '%20-%20' . $pHref );
+		$share['facebook'] = array( 'Facebook', 'http://www.facebook.com/sharer.php?u=' . $pHref. '&t=' . $pName );
+		$share['sina'] = array( 'Weibo', 'http://v.t.sina.com.cn/share/share.php?url=' . $pHref );
+		$share['tencent'] = array( 'Tencent', 'http://v.t.qq.com/share/share.php?url=' . $pHref . '&title=' . $pName . '&pic=' . $pPict );
+		$share['qzone'] = array( 'Qzone', 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $pHref );
+		$share['reddit'] = array( 'Reddit', 'http://reddit.com/submit?url=' . $pHref . '&title=' . $pName );
+		$share['stumbleupon'] = array( 'StumbleUpon', 'http://www.stumbleupon.com/submit?url=' . $pHref . '&title=' . $pName );
+		$share['digg'] = array( 'Digg', 'http://digg.com/submit?url=' . $pHref . '&title=' . $pName );
+		$share['orkut'] = array( 'Orkut', 'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $pName . '&du=' . $pHref . '&tn=' . $pPict );
+		$share['bookmarks'] = array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName . '&annotation=' . $pSum );
+		$share['blogger'] = array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=' . $pHref . '&n=' . $pName . '&pli=1' );
+		$share['delicious'] = array( 'Delicious', 'http://delicious.com/post?url=' . $pHref . '&title=' . $pName . '&notes=' . $pSum );
+		$share['linkedin'] = array( 'LinkedIn', 'http://www.linkedin.com/shareArticle?mini=true&url=' . $pHref . '&title=' . $pName . '&source=' . $pSource . '&summary=' . $pSum );
+		$share['tumblr'] = array( 'Tumblr', 'http://www.tumblr.com/share?v=3&u=' . $pHref . '&t=' . $pName . '&s=' . $pSum );
+		$share['mail'] = array( 'e-mail', 'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'boozurk' ) ) . '&body=' . $pName . '%20-%20' . $pLongHref . '%0D%0A' . $pSum );
 
 		$outer = '<div class="bz-article-share fixfloat">';
-		foreach( $share as $key => $service ){
-			$href = sprintf( $service[1], $pName, $pHref, $pPict );
-			$outer .= '<a class="bz-share-item" rel="nofollow" target="_blank" id="bz-' . $key . '" href="' . $href . '"><img src="' . get_template_directory_uri() . '/images/follow/' . $key . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $service[0] . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s','boozurk' ), $service[0] ) ) . '" /></a>';
+		foreach( $share as $key => $btn ){
+			if ( $args[$key] )
+				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
+				$outer .= '<a class="bz-share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) . '" /></a>';
 		}
-
 		$outer .= '</div>';
 		if ( $args['echo'] ) echo $outer; else return $outer;
 	}
@@ -548,7 +574,8 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 													<?php
 														$args=array(
 															'orderby' => 'name',
-															'order' => 'ASC'
+															'order' => 'ASC',
+															'hide_empty' => 0
 														);
 														$categories=get_categories($args);
 														foreach($categories as $category) {
@@ -668,7 +695,6 @@ if ( !function_exists( 'boozurk_add_quoted_on' ) ) {
 
 // strip tags and apply title format for blank titles
 function boozurk_titles_filter( $title, $id = null ) {
-	global $boozurk_opt;
 
 	if ( is_admin() ) return $title;
 
@@ -676,13 +702,13 @@ function boozurk_titles_filter( $title, $id = null ) {
 
 	if ( $id == null ) return $title;
 
-	if ( !$boozurk_opt['boozurk_blank_title'] ) return $title;
+	if ( ! boozurk_get_opt( 'boozurk_blank_title' ) ) return $title;
 
 	if ( empty( $title ) ) {
-		if ( !isset( $boozurk_opt['boozurk_blank_title_text'] ) || empty( $boozurk_opt['boozurk_blank_title_text'] ) ) return __( '(no title)', 'boozurk' );
+		if ( ! boozurk_get_opt( 'boozurk_blank_title_text' ) ) return __( '(no title)', 'boozurk' );
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'boozurk' ), get_the_time( get_option( 'date_format' ), $id ), $id );
 		$codes = array( '%f', '%d', '%n' );
-		return str_replace( $codes, $postdata, $boozurk_opt['boozurk_blank_title_text'] );
+		return str_replace( $codes, $postdata, boozurk_get_opt( 'boozurk_blank_title_text' ) );
 	} else
 		return $title;
 }
@@ -690,31 +716,29 @@ function boozurk_titles_filter( $title, $id = null ) {
 //set the excerpt length
 if ( !function_exists( 'boozurk_excerpt_length' ) ) {
 	function boozurk_excerpt_length( $length ) {
-		global $boozurk_opt;
-		return (int) $boozurk_opt['boozurk_excerpt_length'];
+		return (int) boozurk_get_opt( 'boozurk_excerpt_length' );
 	}
 }
 
 // use the "excerpt more" string as a link to the post
 function boozurk_excerpt_more( $more ) {
-	global $boozurk_opt, $post;
+	global $post;
 	if ( is_admin() ) return $more;
-	if ( isset( $boozurk_opt['boozurk_excerpt_more_txt'] ) && isset( $boozurk_opt['boozurk_excerpt_more_link'] ) ) {
-		if ( $boozurk_opt['boozurk_excerpt_more_link'] ) {
-			return '<a href="' . get_permalink() . '">' . $boozurk_opt['boozurk_excerpt_more_txt'] . '</a>';
-		} else {
-			return $boozurk_opt['boozurk_excerpt_more_txt'];
-		}
-	}
+
+	if ( boozurk_get_opt( 'boozurk_excerpt_more_txt' ) )
+		$more = boozurk_get_opt( 'boozurk_excerpt_more_txt' );
+
+	if ( boozurk_get_opt( 'boozurk_excerpt_more_link' ) )
+		$more = '<a href="' . get_permalink() . '">' . $more . '</a>';
+
 	return $more;
 }
 
 // custom text for the "more" tag
 function boozurk_more_link( $more_link, $more_link_text ) {
-	global $boozurk_opt;
 	
-	if ( isset( $boozurk_opt['boozurk_more_tag'] ) && !is_admin() ) {
-		$text = str_replace ( '%t', get_the_title(), $boozurk_opt['boozurk_more_tag'] );
+	if ( boozurk_get_opt( 'boozurk_more_tag' ) && !is_admin() ) {
+		$text = str_replace ( '%t', get_the_title(), boozurk_get_opt( 'boozurk_more_tag' ) );
 		return str_replace( $more_link_text, $text, $more_link );
 	}
 	return $more_link;

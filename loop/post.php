@@ -1,9 +1,8 @@
-<?php global $boozurk_opt; ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php
-		switch ( $boozurk_opt['boozurk_post_formats_standard_title'] ) {
+		switch ( boozurk_get_opt( 'boozurk_post_formats_standard_title' ) ) {
 			case 'post title':
 				boozurk_featured_title();
 				break;
@@ -16,7 +15,7 @@
 	<?php boozurk_hook_before_post_content(); ?>
 	<div class="storycontent">
 		<?php
-			switch ( $boozurk_opt['boozurk_post_formats_standard_content'] ) {
+			switch ( boozurk_get_opt( 'boozurk_post_formats_standard_content' ) ) {
 				case 'content':
 					the_content();
 					break;

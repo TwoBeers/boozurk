@@ -427,7 +427,9 @@ class boozurk_Widget_social extends WP_Widget {
 
 		$this->WP_Widget("bz-social", __("Follow Me", "boozurk"), $widget_ops, $control_ops);
         $this->follow_urls = array(
+			// SLUG => NAME
 			'Blogger' => 'Blogger',
+			'blurb' => 'Blurb',
 			'Delicious' => 'Delicious',
 			'Deviantart' => 'deviantART',
 			'Digg' => 'Digg',
@@ -448,14 +450,18 @@ class boozurk_Widget_social extends WP_Widget {
 			'scribd' => 'Scribd',
 			'slideshare' => 'SlideShare',
 			'StumbleUpon' => 'StumbleUpon',
+			'soundcloud' => 'SoundCloud',
 			'Technorati' => 'Technorati',
 			'Tencent' => 'Tencent',
 			'Twitter' => 'Twitter',
+			'tumblr' => 'Tumblr',
 			'ubuntuone' => 'Ubuntu One',
 			'Vimeo' => 'Vimeo',
 			'VKontakte' => 'VKontakte',
 			'Sina' => 'Weibo',
 			'WindowsLive' => 'Windows Live',
+			'xing' => 'Xing',
+			'yfrog' => 'YFrog',
 			'Youtube' => 'Youtube',
 			'Mail' => 'mail',
 			'RSS' => 'RSS' );

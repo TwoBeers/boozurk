@@ -1,10 +1,9 @@
-<?php global $boozurk_opt; ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php $bz_first_link = boozurk_get_first_link(); ?>
 	<?php
-		switch ( $boozurk_opt['boozurk_post_formats_audio_title'] ) {
+		switch ( boozurk_get_opt( 'boozurk_post_formats_audio_title' ) ) {
 			case 'post title':
 				boozurk_featured_title();
 				break;
@@ -19,7 +18,7 @@
 	<?php boozurk_hook_after_post_title(); ?>
 	<div class="storycontent">
 		<?php
-			switch ( $boozurk_opt['boozurk_post_formats_audio_content'] ) {
+			switch ( boozurk_get_opt( 'boozurk_post_formats_audio_content' ) ) {
 				case 'audio player':
 					( $bz_first_link ) ? boozurk_add_audio_player( $bz_first_link['anchor'] ) : the_content();
 					break;

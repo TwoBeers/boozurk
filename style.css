@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.02
+Version: 2.03
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -223,6 +223,7 @@ input[type=password]:focus {
 #head h1 {
 	font-size: 3.5em;
 	margin:0;
+	line-height: 1.5em;
 }
 #head img {
 	max-width: 100%;
@@ -887,13 +888,11 @@ img.tb-thumb-format {
 }
 /* Main menu 
 ----------------------------------------------------------*/
-#mainmenu_container {
-    margin-bottom: 20px;
-	max-width: 100%;
-}
 #mainmenu {
-	margin: 0;
+	margin: 0 0 20px 0;
 	padding: 0 10px;
+	max-width: 100%;
+	overflow: hidden;
 }
 #mainmenu > li {
 	float: left;
@@ -917,6 +916,9 @@ img.tb-thumb-format {
 }
 #mainmenu > li:hover > ul {
 	display: block;
+}
+#mainmenu .sub-menu {
+	list-style: square inside none;
 }
 .bz-menu-thumb {
 	vertical-align: middle;
@@ -1068,10 +1070,10 @@ img.tb-thumb-format {
 	background-position: left -160px;
 }
 .minib_npages {
-	background-position: left -160px;
+	background-position: left -352px;
 }
 .minib_ppages {
-	background-position: left -192px;
+	background-position: left -320px;
 }
 .minib_top {
 	background-position: left -224px;
@@ -1107,10 +1109,10 @@ img.tb-thumb-format {
 	background-position: right -160px;
 }
 .minib_npages:hover {
-	background-position: right -160px;
+	background-position: right -352px;
 }
 .minib_ppages:hover {
-	background-position: right -192px;
+	background-position: right -320px;
 }
 .minib_top:hover {
 	background-position: right -224px;
@@ -1685,20 +1687,24 @@ body.js .comment-variants input {
 
 /* TB Chat Post
 ----------------------------------------------------------*/
-.chatter-1 {
+.tb-chat .chat-select li,
+.tb-chat .chat-transcript li {
+	border: 1px solid #ddd;
+	background: #ffdab9;
+}
+.tb-chat li.speaker-1 {
 	background: #fffacd;
 }
-.chatter-2 {
+.tb-chat li.speaker-2 {
 	background: #d8eef4;
 }
-.tb-chat .chat-transcript li {
-    border: 1px solid #ddd;
-	margin: 0 100px 20px 0;
-	padding: 0 10px;
+.tb-chat li.aside-text {
+	border: none;
+	background: transparent;
 }
-.tb-chat .chat-select li,
-.tb-chat .chat-transcript li:first-child {
-	border: 1px solid #ddd;
+.tb-chat .chat-transcript li {
+	margin: 0 100px 20px 0;
+	padding: 0 5px;
 }
 .tb-chat .chat-select .rightalign {
 	margin: 0 0 0 10px;

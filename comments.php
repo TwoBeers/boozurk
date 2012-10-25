@@ -4,7 +4,7 @@
 		echo '<div id="comments">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
 		return;
 	}
-		global $boozurk_opt, $boozurk_is_printpreview, $boozurk_is_mobile_browser;
+		global $boozurk_is_printpreview, $boozurk_is_mobile_browser;
 ?>
 
 <?php if ( comments_open() ) { ?>

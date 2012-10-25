@@ -1,9 +1,8 @@
-<?php global $boozurk_opt; ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
 	<?php boozurk_hook_before_post_title(); ?>
 	<?php
-		switch ( $boozurk_opt['boozurk_post_formats_gallery_title'] ) {
+		switch ( boozurk_get_opt( 'boozurk_post_formats_gallery_title' ) ) {
 			case 'post title':
 				boozurk_featured_title();
 				break;
@@ -15,7 +14,7 @@
 	<?php boozurk_hook_after_post_title(); ?>
 	<div class="storycontent">
 		<?php
-			switch ( $boozurk_opt['boozurk_post_formats_gallery_content'] ) {
+			switch ( boozurk_get_opt( 'boozurk_post_formats_gallery_content' ) ) {
 				case 'presentation':
 					$bz_images = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
 					if ( $bz_images ) {

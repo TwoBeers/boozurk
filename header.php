@@ -5,7 +5,6 @@
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width" />
 		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
-		<?php global $boozurk_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
 		<?php wp_head(); ?>
@@ -28,22 +27,21 @@
 
 			<?php boozurk_hook_before_header(); ?>
 			<div id="head">
-				<?php if ( get_header_image() ) { ?>
-					<a href="<?php echo home_url(); ?>/"><img alt="<?php echo home_url(); ?>" src="<?php header_image(); ?>" /></a>
-					<h1 class="hide_if_no_print"><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php } else { ?>
-					<?php boozurk_hook_before_site_title(); ?>
-					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php boozurk_hook_after_site_title(); ?>
-				<?php } ?>
+				<?php boozurk_hook_before_site_title(); ?>
+				<h1<?php echo display_header_text() ? '' : ' class="hide_if_no_print"'; ?>><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
+				<?php boozurk_hook_after_site_title(); ?>
+<?php if ( get_header_image() ) { ?>
+	<?php if ( display_header_text() ) { ?>
+				<img alt="<?php echo home_url(); ?>" src="<?php header_image(); ?>" />
+	<?php } else { ?>
+				<a href="<?php echo home_url(); ?>/"><img alt="<?php echo home_url(); ?>" src="<?php header_image(); ?>" /></a>
+	<?php } ?>
+<?php } ?>
 			</div>
 			<?php boozurk_hook_after_header(); ?>
 			
 			<?php boozurk_hook_before_pages(); ?>
-			<div id="mainmenu_container">
-				<?php wp_nav_menu( array( 'container' => false, 'menu_id' => 'mainmenu', 'fallback_cb' => 'boozurk_pages_menu', 'theme_location' => 'primary', 'walker' => new boozurk_Thumb_Walker ) ); ?>
-				<div class="fixfloat"></div>
-			</div>
+			<?php wp_nav_menu( array( 'container' => false, 'menu_id' => 'mainmenu', 'fallback_cb' => 'boozurk_pages_menu', 'theme_location' => 'primary', 'walker' => new boozurk_Thumb_Walker ) ); ?>
 			<?php boozurk_hook_after_pages(); ?>
 			<?php get_sidebar( 'header' ); // show header widgets area ?>
 			<?php boozurk_breadcrumb(); ?>

@@ -3,7 +3,6 @@
 <?php boozurk_hook_before_posts(); ?>
 <div id="posts_content">
 	<?php if ( have_posts() ) {
-		global $boozurk_opt;
 		while ( have_posts() ) {
 			the_post(); ?>
 			<?php boozurk_hook_before_post(); ?>

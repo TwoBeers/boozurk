@@ -4,8 +4,6 @@
 <div id="posts_content">
 
 <?php
-global $boozurk_opt;
-
 if ( have_posts() ) {
 	while ( have_posts() ) {
 		the_post(); ?>
@@ -14,8 +12,7 @@ if ( have_posts() ) {
 		} else {
 			$bz_use_format = ( 
 				function_exists( 'get_post_format' ) && 
-				isset( $boozurk_opt['boozurk_post_formats_' . get_post_format( $post->ID ) ] ) && 
-				$boozurk_opt['boozurk_post_formats_' . get_post_format( $post->ID ) ] == 1 
+				boozurk_get_opt( 'boozurk_post_formats_' . get_post_format( $post->ID ) )
 			) ? get_post_format( $post->ID ) : '' ;
 		} ?>
 		

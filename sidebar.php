@@ -1,8 +1,6 @@
-<?php global $boozurk_opt; ?>
-
 <!-- begin primary sidebar -->
 
-<div class="sidebar<?php echo ' ' . $boozurk_opt['boozurk_sidebar_primary'] ?>" id="sidebar-primary">
+<div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>" id="sidebar-primary">
 	<div class="inner">
 		<?php boozurk_hook_before_right_sidebar_content(); ?>
 		<?php 	/* Widgetized sidebar, if you have the plugin installed. */
@@ -36,8 +34,8 @@
 	</div>
 </div>
 
-<div class="primary top-fade<?php echo ' ' . $boozurk_opt['boozurk_sidebar_primary'] ?>"></div>
+<div class="primary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
 
-<div class="primary bottom-fade<?php echo ' ' . $boozurk_opt['boozurk_sidebar_primary'] ?>"></div>
+<div class="primary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
 
 <!-- end primary sidebar -->
