@@ -230,6 +230,7 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )			$modules[] = 'thickbox';
 		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )			$modules[] = 'tooltips';
 		if ( boozurk_get_opt( 'boozurk_plusone' ) )				$modules[] = 'plusone';
+		$modules[] = 'resizevideo';
 
 		if ( !$afterajax ) {
 			$modules[] = 'animatemenu';
