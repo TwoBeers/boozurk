@@ -8,10 +8,16 @@ add_action( 'wp_footer', 'boozurk_initialize_scripts' ); // start js scripts
 add_action( 'admin_menu', 'boozurk_create_menu' ); // Add admin menus
 add_action( 'init', 'boozurk_post_expander_activate' ); // post expander ajax request
 add_action( 'init', 'boozurk_infinite_scroll_activate' ); // infinite scroll ajax request
-add_action( 'boozurk_hook_before_post', 'boozurk_print_details' ); // boozurk_print_details
+add_action( 'tha_entry_before', 'boozurk_print_details' ); // boozurk_print_details
 add_action( 'admin_bar_menu', 'boozurk_admin_bar_plus', 999 ); // add links to admin bar
 add_action( 'wp_head', 'boozurk_plus_snippet' ); // localize js scripts
 add_action( 'created_category', 'boozurk_created_category_color' ); // add a random color to every new category
+add_action( 'comment_form_comments_closed', 'boozurk_comments_closed' ); // comments-are-closed message
+add_action( 'tha_entry_before', 'boozurk_navigate_attachments' ); // boozurk_navigate_attachments
+add_action( 'tha_entry_before', 'boozurk_single_nav' ); // boozurk_single_nav
+add_action( 'tha_entry_after', 'boozurk_single_widgets_area' ); // boozurk_single_widgets_area
+add_action( 'tha_entry_bottom', 'boozurk_link_pages' ); // boozurk_link_pages
+
 
 // Custom filters
 add_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
@@ -19,6 +25,11 @@ add_filter( 'embed_oembed_html', 'boozurk_wmode_transparent', 10, 3);
 add_filter( 'img_caption_shortcode', 'boozurk_img_caption_shortcode', 10, 3 );
 add_filter( 'the_content', 'boozurk_quote_content' );
 add_filter( 'smilies_src', 'boozurk_smiles_replace',10,2 ); //custom smiles
+add_filter( 'body_class' , 'boozurk_body_classes' );
+add_filter( 'comment_form_default_fields', 'boozurk_comments_form_fields');
+add_filter( 'comment_form_defaults', 'boozurk_comment_form_defaults' );
+add_filter( 'wp_get_attachment_link', 'boozurk_get_attachment_link', 10, 6 );
+
 
 $boozurk_opt = get_option( 'boozurk_options' );
 
@@ -27,6 +38,7 @@ $boozurk_is_mobile_browser = false;
 // load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
 require_once( 'lib/options.php' ); // load options
 require_once( 'lib/the_bird.php' ); // load "the bird" core functions
+require_once('tha/tha-theme-hooks.php'); // load the Theme Hook Alliance hook stub list
 require_once('lib/hooks.php'); // load the custom hooks module
 if ( boozurk_get_opt( 'boozurk_mobile_css' ) ) require_once( 'mobile/core-mobile.php' ); // load mobile functions
 if ( boozurk_get_opt( 'boozurk_js_swfplayer' ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
@@ -443,7 +455,11 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 
 // the last commenters of a post
 if ( !function_exists( 'boozurk_last_comments' ) ) {
-	function boozurk_last_comments( $id , $num = 6 ) {
+	function boozurk_last_comments( $id = null ) {
+		global $post;
+
+		$num = apply_filters( 'boozurk_last_comments_number', 6 );
+		if ( !$id ) $id = $post->ID;
 
 		$comments = get_comments( 'status=approve&number=' . $num . '&type=comment&post_id=' . $id ); // valid type values (not documented) : 'pingback','trackback','comment'
 
@@ -605,19 +621,141 @@ if (!function_exists('boozurk_navbuttons')) {
 	}
 }
 
+// the header
+if ( !function_exists( 'boozurk_get_header' ) ) {
+	function boozurk_get_header() {
+
+		if ( display_header_text() ) { 
+			$header = '<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+		} else {
+			$header = '<h1 class="hide_if_no_print"><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+		}
+
+		if ( get_header_image() ) { 
+			if ( display_header_text() ) { 
+				$header .= '<img alt="' . home_url() . '" src="' . get_header_image() . '" />';
+			} else {
+				$header .= '<a href="' . home_url() . '/"><img alt="' . home_url() . '" src="' . get_header_image() . '" /></a>';
+			}
+		}
+		return apply_filters( 'boozurk_filter_header', $header );
+	}
+}
+
+// archives pages navigation
+if ( !function_exists( 'boozurk_navigate_archives' ) ) {
+	function boozurk_navigate_archives() {
+		global $paged;
+
+		if ( !$paged ) $paged = 1;
+
+?>
+	<div id="bz-page-nav" class="bz-navigate navigate_archives">
+	<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
+		<?php wp_pagenavi(); ?>
+	<?php } elseif ( function_exists( 'wp_paginate' ) ) { ?>
+		<?php wp_paginate(); ?>
+	<?php } else { ?>
+		<div id="bz-page-nav-msg"></div>
+		<div id="bz-page-nav-subcont">
+			<span id="bz-next-posts-link"><?php next_posts_link( '&laquo;' ); ?></span>
+			<?php printf( '<span>' . __( 'page %1$s of %2$s','boozurk' ) . '</span>', $paged, $wp_query->max_num_pages ); ?>
+			<?php previous_posts_link( '&raquo;' ); ?>
+		</div>
+		<div id="bz-next-posts-button" class="hide-if-no-js">
+			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurkScripts.AJAX_paged();" />
+		</div>
+	<?php } ?>
+	</div>
+<?php
+
+	}
+}
+
+// attachments navigation
+if ( !function_exists( 'boozurk_navigate_attachments' ) ) {
+	function boozurk_navigate_attachments() {
+		global $post;
+
+		if ( is_attachment() && wp_attachment_is_image() ) {
+			$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+			foreach ( $attachments as $k => $attachment ) {
+				if ( $attachment->ID == $post->ID )
+					break;
+			}
+			$nextk = $k + 1;
+			$prevk = $k - 1;
+
+?>
+	<div class="img-navi">
+		<?php if ( isset( $attachments[ $prevk ] ) ) { ?>
+			<a class="img-navi-prev" rel="prev" title="" href="<?php echo get_attachment_link( $attachments[ $prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 70, 70 ) ); ?></a>
+		<?php } ?>
+		<?php if ( isset( $attachments[ $nextk ] ) ) { ?>
+			<a class="img-navi-next" rel="next" title="" href="<?php echo get_attachment_link( $attachments[ $nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 70, 70 ) ); ?></a>
+		<?php } ?>
+	</div>
+<?php
+
+		} 
+	}
+}
+
+// displays page-links for paginated posts
+function boozurk_link_pages() {
+
+?>
+	<div class="fixfloat">
+		<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page">' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div>&echo=0' ) ); ?>
+	</div>
+<?php
+
+}
+
+// the widget area for single posts/pages
+function boozurk_single_widgets_area() {
+
+	if ( !is_singular() ) return;
+
+	if ( is_active_sidebar( 'single-widgets-area' ) ) {
+
+?>
+	<div id="single-widgets-area" class="ul_swa fixfloat">
+	<?php dynamic_sidebar( 'single-widgets-area' ); ?>
+	<div class="fixfloat"></div>
+	</div>
+<?php
+
+	}
+}
+
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'boozurk_get_the_thumb' ) ) {
 	function boozurk_get_the_thumb( $id, $size_w, $size_h, $class, $default = '' ) {
 		if ( has_post_thumbnail( $id ) ) {
 			return get_the_post_thumbnail( $id, array( $size_w,$size_h ) );
 		} else {
-			if ( function_exists( 'get_post_format' ) && get_post_format( $id ) ) {
+			if ( get_post_format( $id ) ) {
 				$format = get_post_format( $id );
 			} else {
 				$format = 'standard';
 			}
 			return '<img class="' . $class . ' wp-post-image ' . $format . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />';
 		}
+	}
+}
+
+// get the post format string
+if ( !function_exists( 'boozurk_get_post_format' ) ) {
+	function boozurk_get_post_format( $id ) {
+
+		if ( post_password_required() )
+			$format = 'protected';
+		else
+			$format = ( boozurk_get_opt( 'boozurk_post_formats_' . get_post_format( $id ) ) ) ? get_post_format( $id ) : '' ;
+
+		return $format;
+
 	}
 }
 
@@ -1091,6 +1229,64 @@ if ( !function_exists( 'boozurk_plus_snippet' ) ) {
 	}
 }
 
+// comments navigation
+if ( !function_exists( 'boozurk_navigate_comments' ) ) {
+	function boozurk_navigate_comments(){
+
+		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
+
+?>
+		<div class="bz-navigate navigate_comments">
+			<?php if(function_exists('wp_paginate_comments')) {
+				wp_paginate_comments();
+			} else {
+				paginate_comments_links();
+			} ?>
+			<div class="fixfloat"> </div>
+		</div>
+<?php 
+
+		}
+
+	}
+}
+
+// comments-are-closed message when post type supports comments and we're not on a page
+function boozurk_comments_closed() {
+	if ( ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) {
+?>
+		<p class="nocomments"><?php _e( 'Comments are closed.', 'boozurk' ); ?></p>
+<?php
+	}
+}
+
+// Custom form fields for the comment form
+function boozurk_comments_form_fields( $fields ) {
+	$commenter	=	wp_get_current_commenter();
+	$req		=	get_option( 'require_name_email' );
+	$aria_req	=	( $req ? " aria-required='true'" : '' );
+
+	$custom_fields =  array(
+		'author' => '<p class="comment-form-author">' . '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' />' .
+					'<label for="author">' . __( 'Name', 'boozurk' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .'</p>',
+		'email'  => '<p class="comment-form-email">' . '<input id="email" name="email" type="text" value="' . sanitize_email(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' />' .
+					'<label for="email">' . __( 'Email', 'boozurk' ) . '</label> ' . ( $req ? '<span class="required">*</span>' : '' ) .'</p>',
+		'url'    => '<p class="comment-form-url">' . '<input id="url" name="url" type="text" value="' . esc_url( $commenter['comment_author_url'] ) . '" size="30" />' .
+					'<label for="url">' . __( 'Website', 'boozurk' ) . '</label>' .'</p>',
+	);
+	return $custom_fields;
+}
+
+// filters comments_form() default arguments
+function boozurk_comment_form_defaults( $defaults ) {
+
+	$defaults['label_submit'] = __( 'Say It!','boozurk' );
+	$defaults['comment_field'] = '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" aria-required="true"></textarea></p>';
+
+	return $defaults;
+
+}
+
 // add a random color to every new category
 function boozurk_created_category_color( $term_id, $tt_id, $taxonomy ) {
 
@@ -1163,6 +1359,18 @@ function boozurk_quote_content( $content ) {
 	}
 
 	return $content;
+}
+
+// Add specific CSS class by filter
+function boozurk_body_classes($classes) {
+
+	$temp_class = has_nav_menu( 'secondary1' )? 'top-menu' : '';
+
+	$classes[] = 'no-js';
+	if ( $temp_class ) $classes[] = $temp_class;
+
+	return $classes;
+
 }
 
 // custom gallery shortcode function
@@ -1258,6 +1466,45 @@ function boozurk_gallery_shortcode( $output, $attr ) {
 		</div>\n";
 
 	return $output;
+}
+
+function boozurk_get_attachment_link( $markup, $id, $size, $permalink, $icon, $text ) {
+	$id = intval( $id );
+	$_post = get_post( $id );
+
+	if ( empty( $_post ) || ( 'attachment' != $_post->post_type ) || ! $url = wp_get_attachment_url( $_post->ID ) )
+		return __( 'Missing Attachment' );
+
+	if ( $permalink )
+		$url = get_attachment_link( $_post->ID );
+
+	$post_title = esc_attr( $_post->post_excerpt ? $_post->post_excerpt : $_post->post_title );
+
+	if ( $text )
+		$link_text = $text;
+	elseif ( $size && 'none' != $size )
+		$link_text = wp_get_attachment_image( $id, $size, $icon );
+	else
+		$link_text = '';
+
+	if ( trim( $link_text ) == '' )
+		$link_text = $_post->post_title;
+
+	return "<a href='$url' title='$post_title'>$link_text</a>";
+}
+
+function boozurk_get_credits() {
+
+	$credits = apply_filters( 'boozurk_credits', '&copy; ' . date( 'Y' ) . ' <strong>' . get_bloginfo( 'name' ) . '</strong>. ' . __( 'All rights reserved','boozurk' ) );
+
+	if ( boozurk_get_opt('boozurk_tbcred') )
+		$credits .= '<br>' . sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) ) . ' @ twobeers.net">' . esc_attr( __( 'Boozurk theme','boozurk' ) ) . '</a>');
+
+	if ( boozurk_get_opt('boozurk_mobile_css') )
+		$credits .= '<span class="hide_if_print"> - <a rel="nofollow" href="' . home_url() . '?mobile_override=mobile">'. __('Mobile View','boozurk') .'</a></span>';
+
+	return $credits;
+
 }
 
 ?>

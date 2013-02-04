@@ -2,8 +2,8 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.03
-Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header
+Version: 2.04
+Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -121,19 +121,19 @@ input[type=password] {
 input[type=button],
 input[type=submit],
 input[type=reset] {
-    background-color: #404040;
-    border: 1px solid #ddd;
-    border-radius: 2px 2px 2px 2px;
-    color: #eee;
-    cursor: pointer;
-    font-size: .9em;
-    font-weight: bold;
-    height: 29px;
-    line-height: 27px;
-    margin: 10px 4px;
-    min-width: 54px;
-    padding: 0 8px;
-    text-align: center;
+	background-color: #404040;
+	border: 1px solid #ddd;
+	border-radius: 2px 2px 2px 2px;
+	color: #eee;
+	cursor: pointer;
+	font-size: .9em;
+	font-weight: bold;
+	height: 29px;
+	line-height: 27px;
+	margin: 10px 4px;
+	min-width: 54px;
+	padding: 0 8px;
+	text-align: center;
 }
 input[type=button]:hover,
 input[type=submit]:hover,
@@ -156,8 +156,8 @@ input[type=button]:focus,
 input[type=submit]:focus,
 input[type=reset]:focus {
 	cursor: pointer;
-    background-color: #F5F5F5;
-    color: #666;
+	background-color: #F5F5F5;
+	color: #666;
 }
 input[type=password]:focus {
 	background: #fff;
@@ -253,14 +253,11 @@ input[type=password]:focus {
 	padding-bottom: 100px;
 }
 #sidebar-primary.fixed {
-    position: fixed;
+	position: fixed;
 	top: 0;
 	height:90%;
 	overflow: hidden;
 	padding-top: 20px;
-}
-.admin-bar #sidebar-primary.fixed {
-	top: 28px;
 }
 #sidebar-primary.fixed:hover {
 	overflow-y: auto;
@@ -269,14 +266,11 @@ input[type=password]:focus {
 	width: 237px;
 }
 #sidebar-secondary.fixed {
-    position: fixed;
+	position: fixed;
 	top: 0;
 	height:90%;
 	overflow: hidden;
 	padding-top: 20px;
-}
-.admin-bar #sidebar-secondary.fixed {
-	top: 28px;
 }
 #sidebar-secondary.fixed:hover {
 	overflow-y: auto;
@@ -310,15 +304,39 @@ input[type=password]:focus {
 	height: 50px;
 	background: transparent url(images/sidebar-fade.png) left top repeat-x;
 }
-.admin-bar .top-fade {
-	top: 28px;
-}
 .bz-description {
 	margin-bottom: 1.8em;
 }
 .bz-logo {
 	max-width: 200px;
 	height: auto;
+}
+.admin-bar #sidebar-primary.fixed {
+	top: 28px;
+}
+.admin-bar #sidebar-secondary.fixed {
+	top: 28px;
+}
+.admin-bar .top-fade {
+	top: 28px;
+}
+.top-menu #sidebar-primary.fixed {
+	top: 35px;
+}
+.top-menu #sidebar-secondary.fixed {
+	top: 35px;
+}
+.top-menu .top-fade {
+	top: 35px;
+}
+.admin-bar.top-menu #sidebar-primary.fixed {
+	top: 63px;
+}
+.admin-bar.top-menu #sidebar-secondary.fixed {
+	top: 63px;
+}
+.admin-bar.top-menu .top-fade {
+	top: 63px;
 }
 
 /* Main content
@@ -328,17 +346,17 @@ input[type=password]:focus {
 	margin-top: 20px;
 }
 #content {
-    margin-left: 310px;
-    margin-right: 220px;
+	margin-left: 310px;
+	margin-right: 220px;
 }
 
 /* Footer
 ----------------------------------------------------------*/
 #footer {
-    clear: both;
+	clear: both;
 }
 #bz-credits {
-    text-align:center;
+	text-align:center;
 	padding: 50px 5px;
 	font-size: .8em;
 }
@@ -368,12 +386,12 @@ input[type=password]:focus {
 	padding-right: 15px;
 }
 .img-navi img {
-    border: 1px solid #ddd;
+	border: 1px solid #ddd;
 	vertical-align: middle;
 	padding: 5px;
 }
 .img-navi img:hover {
-    border: 1px solid #777;
+	border: 1px solid #777;
 }
 .nav-previous ,
 .nav-next {
@@ -412,10 +430,10 @@ input[type=password]:focus {
 }
 #bz-page-nav.ajaxed {
 	min-height: 74px;
-    margin: 20px 0 0;
+	margin: 20px 0 0;
 }
 .ajaxed #bz-page-nav-msg {
-    padding-top: 15px;
+	padding-top: 15px;
 	height: 20px;
 }
 .ajaxed #bz-page-nav-msg.loading {
@@ -428,13 +446,13 @@ input[type=password]:focus {
 }
 #bz-next-posts-button {
 	display: none;
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 .paged-separator {
-    border-bottom:1px solid #ddd;
-    font-weight:bold;
-    margin:35px 0 50px;
-    text-align:center;
+	border-bottom:1px solid #ddd;
+	font-weight:bold;
+	margin:35px 0 50px;
+	text-align:center;
 	height: 20px;
 }
 /* Posts/Pages/Attachments
@@ -444,12 +462,11 @@ input[type=password]:focus {
 #posts_content .hentry.attachment {
 	border: 1px solid #ddd;
 	border-left: 40px solid #87ceeb;
-	margin-left: -40px;
 	padding: 0 10px 10px 11px;
 	clear: both;
-	margin-top: 20px;
 	position: relative;
 	min-height: 80px;
+	margin: 20px 0 20px -40px
 }
 .att_content {
 	text-align: center;
@@ -485,9 +502,9 @@ input[type=password]:focus {
 	z-index: 300;
 }
 .post_meta_container {
-    left: -40px;
-    position: absolute;
-    top: 2px;
+	left: -40px;
+	position: absolute;
+	top: 2px;
 }
 .storytitle {
 	line-height: 40px;
@@ -535,7 +552,7 @@ input[type=password]:focus {
 }
 .gallery-thumb {
 	float: left;
-    margin: 0 10px 10px 0;
+	margin: 0 10px 10px 0;
 }
 .bz-no-post {
 	padding: 10px;
@@ -608,13 +625,13 @@ input[type=password]:focus {
 	margin-top: 10px;
 }
 .bz-player-notice {
-    color:#aaa;
-    font-size: .8em;
+	color:#aaa;
+	font-size: .8em;
 }
 /* Last comments on post (last-cop)
 ----------------------------------------------------------*/
 .bz-last-cop {
-	margin: 0 10px;
+	margin: -10px 10px 0;
 }
 .bz-last-cop img {
 	border: 1px solid #ddd;
@@ -663,7 +680,7 @@ input[type=password]:focus {
 /* Widgets
 ----------------------------------------------------------*/
 #footer-widget-area{
-    border-bottom:1px solid #ddd;
+	border-bottom:1px solid #ddd;
 }
 #first_fwa, #second_fwa, #third_fwa {
 	float: left;
@@ -671,7 +688,7 @@ input[type=password]:focus {
 	min-height: 1px;
 }
 .widget {
-    margin-bottom: 1.8em;
+	margin-bottom: 1.8em;
 	overflow: hidden;
 }
 #footer-widget-area .widget {
@@ -742,7 +759,7 @@ div.tb_widget_post_details ul {
 	margin: 0;
 }
 #single-widgets-area {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 #single-widgets-area .bz-widget {
 	float: left;
@@ -751,7 +768,7 @@ div.tb_widget_post_details ul {
 	padding: 10px;
 }
 .bz-article-share {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 .bz-article-share img {
 	margin: 0 3px 3px 0;
@@ -824,7 +841,7 @@ img.tb-thumb-format {
 	background-repeat: no-repeat;
 	background-image: url('images/formats.png');
 	vertical-align: middle;
-    margin: 0 0 2px;
+	margin: 0 0 2px;
 }
 .tb-thumb-format.aside,
 .format-aside .pmb_format,
@@ -922,7 +939,7 @@ img.tb-thumb-format {
 }
 .bz-menu-thumb {
 	vertical-align: middle;
-    margin-right: 5px;
+	margin-right: 5px;
 	border: 1px solid #fff;
 }
 .bz-menu-thumb.default {
@@ -936,7 +953,6 @@ img.tb-thumb-format {
 #secondary1 {
 	background: #fff;
 	border-bottom: 5px solid #424242;
-	box-shadow: 0 0 4px #000;
 	text-align: center;
 	line-height: 30px;
 }
@@ -964,23 +980,23 @@ img.tb-thumb-format {
 	margin: 0 0 5px;
 }
 .tbm-author-bio li {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 .tbm-author-bio .author-avatar img {
-    border-radius: 5px;
-    margin-right: 10px;
+	border-radius: 5px;
+	margin-right: 10px;
 }
 .tbm-author-bio .author-avatar {
-    display: inline-block;
-    float: left;
+	display: inline-block;
+	float: left;
 }
 .tbm-author-bio .author-name {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+	font-size: 1.5em;
+	margin-bottom: 10px;
 }
 .tbm-author-bio .author-description {
-    font-size: .8em;
+	font-size: .8em;
 }
 .tbm-author-bio .author-social {
 	border-top:1px solid #ddd;
@@ -1141,7 +1157,7 @@ img.tb-thumb-format {
 }
 #bz-breadcrumb span,
 #bz-breadcrumb a {
-    float:left;
+	float:left;
 }
 
 .bz-breadcrumb-sep {
@@ -1160,10 +1176,10 @@ img.tb-thumb-format {
 }
 .bz-breadcrumb-home {
 	background:url('images/details.png') no-repeat center -500px;
-    height:16px;
-    margin:7px;
-    width:16px;
-    position: absolute;
+	height:16px;
+	margin:7px;
+	width:16px;
+	position: absolute;
 	left: -42px;
 	top: 0;
 }
@@ -1179,7 +1195,7 @@ img.tb-thumb-format {
 }
 #bz-breadcrumb .bz-breadcrumb-reminder span,
 #bz-breadcrumb .bz-breadcrumb-reminder a {
-    float:none;
+	float:none;
 }
 .tb-breadcrumb-term {
 	font-weight: bold;
@@ -1228,7 +1244,7 @@ img.tb-thumb-format {
 .comment-body {
 	border-top: 1px solid #ddd;
 	position: relative;
-    padding: 10px;
+	padding: 10px;
 }
 .bypostauthor > .comment-body {
 	border: 1px solid #ddd;
@@ -1251,7 +1267,7 @@ img.tb-thumb-format {
 }
 #respond {
 	border: 1px solid #ddd;
-	margin: 20px;
+	margin: 20px 0;
 	padding: 10px;
 	position: relative;
 }
@@ -1293,6 +1309,10 @@ img.tb-thumb-format {
 .comment {
 	position: relative;
 }
+#comment {
+	width: 95%;
+	max-width: 95%;
+}
 
 /* Gallery
 ----------------------------------------------------------*/
@@ -1306,7 +1326,7 @@ img.tb-thumb-format {
 }
 .gallery img {
 	border: 1px solid #ddd;
-    padding: 5px;
+	padding: 5px;
 	max-width: 80%;
 	background: #F5F5F5;
 }
@@ -1342,7 +1362,7 @@ img.tb-thumb-format {
 .bzg-slider {
 	margin: 20px 0;
 	padding: 10px;
-    border: 1px solid #ddd;
+	border: 1px solid #ddd;
 	text-align: center;
 }
 .bzg-slider .loading {
@@ -1353,15 +1373,15 @@ img.tb-thumb-format {
 .bzg-preview-link {
 	background: url('images/details.png') no-repeat 3px -396px transparent;
 	padding: 5px 5px 5px 25px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
 }
 .bzg-slideshow {
 	margin: 20px 0;
 }
 img.thumbsel {
 	box-shadow: 0 0 2px #404040;
-    border: 1px solid #777;
+	border: 1px solid #777;
 }
 
 /* =calendar
@@ -1533,11 +1553,11 @@ img.aligncenter {
 }
 #TB_prev a,
 #TB_next a {
-    display: block;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    width: 100px;
+	display: block;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	width: 100px;
 	opacity: 0.3;
 	filter: alpha(opacity=30);
 	color: transparent;
@@ -1550,11 +1570,11 @@ img.aligncenter {
 
 #TB_prev a {
 	background: url('images/arrows.png') no-repeat left center #000;
-    left: 0;
+	left: 0;
 }
 #TB_next a {
 	background: url('images/arrows.png') no-repeat right center #000;
-    right: 0;
+	right: 0;
 }
 #TB_closeWindow {
 	display: none;
@@ -1711,4 +1731,12 @@ body.js .comment-variants input {
 }
 .tb-chat .chat-transcript .rightalign {
 	margin: 0 0 20px 100px;
+}
+
+/* Jetpack
+----------------------------------------------------------*/
+div.sharedaddy li a.sd-button {
+	background: #fff;
+	border-radius: 0;
+	box-shadow: none;
 }

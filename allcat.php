@@ -3,17 +3,19 @@
 ?>
 <?php get_header(); ?>
 
-<?php boozurk_hook_before_posts(); ?>
+<?php tha_content_before(); ?>
 <div id="posts_content">
-	<div class="post">
+	<?php tha_content_top(); ?>
+	<div class="hentry post">
 		<h2 class="storytitle"><?php _e( 'Categories','boozurk' ); ?></h2>
-		<div class="storycontent bz_widget_categories">
+		<div class="storycontent">
 			<ul>
 				<?php wp_list_categories( 'title_li=' ); ?>
 			</ul>
 		</div>
 	</div>
+	<?php tha_content_bottom(); ?>
 </div>
-<?php boozurk_hook_after_posts(); ?>
+<?php tha_content_after(); ?>
 
 <?php get_footer(); ?>

@@ -1,39 +1,33 @@
 <?php get_header(); ?>
 
-<?php boozurk_hook_before_posts(); ?>
+<?php tha_content_before(); ?>
 <div id="posts_content">
+	<?php tha_content_top(); ?>
 	<?php if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post(); ?>
-			<?php boozurk_hook_before_post(); ?>
+			<?php tha_entry_before(); ?>
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php boozurk_extrainfo(); ?>
-				<?php boozurk_hook_before_post_title(); ?>
+				<?php tha_entry_top(); ?>
+				<?php boozurk_hook_post_title_before(); ?>
 				<?php boozurk_featured_title( array( 'featured' => true ) ); ?>
-				<?php boozurk_hook_after_post_title(); ?>
-				<?php boozurk_hook_before_post_content(); ?>
+				<?php boozurk_hook_post_title_after(); ?>
 				<div class="storycontent">
 					<?php the_content(); ?>
 				</div>
-				<?php boozurk_hook_after_post_content_single(); ?>
-				<?php boozurk_hook_after_post_content(); ?>
-				<div class="fixfloat">
-					<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page">' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div>&echo=0' ) ); ?>
-				</div>
+				<?php tha_entry_bottom(); ?>
 			</div>
-			<?php boozurk_hook_after_post(); ?>
-			<?php if ( is_active_sidebar( 'single-widgets-area' ) ) { ?>
-				<div id="single-widgets-area" class="ul_swa fixfloat">
-					<?php dynamic_sidebar( 'single-widgets-area' ); ?>
-					<div class="fixfloat"></div>
-				</div>
-			<?php } ?>
+			<?php tha_entry_after(); ?>
+
 			<?php comments_template(); // Get wp-comments.php template ?>
+
 		<?php	} //end while
 	} else {?>
 		<div class="post"><p><?php _e( 'Sorry, no posts matched your criteria.','boozurk' ); ?></p></div>
 	<?php } //endif ?>
+	<?php tha_content_bottom(); ?>
 </div>
-<?php boozurk_hook_after_posts(); ?>
+<?php tha_content_after(); ?>
 
 <?php get_footer(); ?>

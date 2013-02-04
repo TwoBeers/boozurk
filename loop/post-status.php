@@ -1,5 +1,7 @@
+<?php tha_entry_before(); ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo( false ); ?>
+	<?php tha_entry_top(); ?>
 	<div class="storycontent">
 		<?php echo get_avatar( $post->post_author, 50, $default=get_option('avatar_default'), get_the_author() ); ?>
 		<div class="status-subcont">
@@ -8,5 +10,6 @@
 			<div class="fixfloat"></div>
 		</div>
 	</div>
-	<div class="fixfloat"> </div>
-</div>
+	<?php tha_entry_bottom(); ?>
+</div>	
+<?php tha_entry_after(); ?>

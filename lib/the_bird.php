@@ -131,7 +131,10 @@ if ( !function_exists( 'boozurk_exif_details' ) ) {
 if ( !function_exists( 'boozurk_single_nav' ) ) {
 	function boozurk_single_nav() {
 		global $post;
+
+		if ( ! is_single() || is_attachment() ) return;
 		if ( ! boozurk_get_opt( 'boozurk_browse_links' ) ) return;
+
 		$next = get_next_post();
 		$prev = get_previous_post();
 		$next_title = get_the_title( $next ) ? get_the_title( $next ) : __( 'Next Post', 'boozurk' );

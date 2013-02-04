@@ -1,10 +1,13 @@
 <!-- begin primary sidebar -->
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>" id="sidebar-primary">
+
+	<div class="primary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
+
 	<div class="inner">
-		<?php boozurk_hook_before_right_sidebar_content(); ?>
-		<?php 	/* Widgetized sidebar, if you have the plugin installed. */
-		if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
+		<?php tha_sidebar_top(); ?>
+		<?php boozurk_hook_primary_sidebar_top(); ?>
+		<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 
 			<div id="bz-search">
 				<?php get_search_form(); ?>
@@ -30,12 +33,12 @@
 		<?php } ?>
 
 		<div class="fixfloat"> </div>
-		<?php boozurk_hook_after_right_sidebar_content(); ?>
+		<?php boozurk_hook_primary_sidebar_bottom(); ?>
+		<?php tha_sidebar_bottom(); ?>
 	</div>
+
+	<div class="primary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
+
 </div>
-
-<div class="primary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
-
-<div class="primary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
 
 <!-- end primary sidebar -->

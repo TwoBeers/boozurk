@@ -5,106 +5,68 @@
  * Contains all hook wrappers.
  */
 
-function boozurk_hook_before_header() {
-	do_action('boozurk_hook_before_header');
+// boozurk_hook_before_header() replaced by tha_header_before()
+// boozurk_hook_after_header() replaced by tha_header_after()
+// boozurk_hook_before_site_title() replaced by tha_header_top()
+// boozurk_hook_before_pages() replaced by tha_header_after()
+// boozurk_hook_before_footer() replaced by tha_footer_before()
+// boozurk_hook_footer() replaced by tha_footer_top()
+// boozurk_hook_after_footer() replaced by tha_footer_after()
+// boozurk_hook_before_posts() replaced by tha_content_before()
+// boozurk_hook_after_posts() replaced by tha_content_after()
+// boozurk_hook_before_post() replaced by tha_entry_before()
+// boozurk_hook_after_post() replaced by tha_entry_after()
+// boozurk_hook_before_post_content() replaced by tha_entry_top()
+// boozurk_hook_after_post_content() replaced by tha_entry_bottom()
+
+function boozurk_hook_body_top() {
+	do_action('boozurk_hook_body_top');
 }
 
-function boozurk_hook_after_header() {
-	do_action('boozurk_hook_after_header');
+function boozurk_hook_body_bottom() {
+	do_action('boozurk_hook_body_bottom');
 }
 
-function boozurk_hook_before_site_title() {
-	do_action('boozurk_hook_before_site_title');
+function boozurk_hook_menu_after() {
+	do_action('boozurk_hook_menu_after');
 }
 
-function boozurk_hook_after_site_title() {
-	do_action('boozurk_hook_after_site_title');
+function boozurk_hook_post_title_before() {
+	do_action('boozurk_hook_post_title_before');
 }
 
-function boozurk_hook_before_pages() {
-	do_action('boozurk_hook_before_pages');
+function boozurk_hook_post_title_after() {
+	do_action('boozurk_hook_post_title_after');
 }
 
-function boozurk_hook_after_pages() {
-	do_action('boozurk_hook_after_pages');
+function boozurk_hook_comments_list_before() {
+	do_action('boozurk_hook_comments_list_before');
 }
 
-function boozurk_hook_before_posts() {
-	do_action('boozurk_hook_before_posts');
+function boozurk_hook_comments_list_after() {
+	do_action('boozurk_hook_comments_list_after');
 }
 
-function boozurk_hook_after_posts() {
-	do_action('boozurk_hook_after_posts');
+function boozurk_hook_primary_sidebar_top() {
+	do_action('boozurk_hook_primary_sidebar_top');
 }
 
-function boozurk_hook_before_post() {
-	do_action('boozurk_hook_before_post');
+function boozurk_hook_primary_sidebar_bottom() {
+	do_action('boozurk_hook_primary_sidebar_bottom');
 }
 
-function boozurk_hook_after_post() {
-	do_action('boozurk_hook_after_post');
+function boozurk_hook_404_sidebar_before() {
+	do_action('boozurk_hook_404_sidebar_before');
 }
 
-function boozurk_hook_before_post_title() {
-	do_action('boozurk_hook_before_post_title');
+function boozurk_hook_404_sidebar_after() {
+	do_action('boozurk_hook_404_sidebar_after');
 }
 
-function boozurk_hook_after_post_title() {
-	do_action('boozurk_hook_after_post_title');
+function boozurk_hook_footer_sidebar_top() {
+	do_action('boozurk_hook_footer_sidebar_top');
 }
 
-function boozurk_hook_before_post_content() {
-	do_action('boozurk_hook_before_post_content');
-}
-
-function boozurk_hook_after_post_content() {
-	do_action('boozurk_hook_after_post_content');
-}
-
-function boozurk_hook_after_post_content_single() {
-	do_action('boozurk_hook_after_post_content_single');
-}
-
-function boozurk_hook_before_comments() {
-	do_action('boozurk_hook_before_comments');
-}
-
-function boozurk_hook_after_comments() {
-	do_action('boozurk_hook_after_comments');
-}
-
-function boozurk_hook_before_right_sidebar_content() {
-	do_action('boozurk_hook_before_right_sidebar_content');
-}
-
-function boozurk_hook_after_right_sidebar_content() {
-	do_action('boozurk_hook_after_right_sidebar_content');
-}
-
-function boozurk_hook_before_404_sidebar() {
-	do_action('boozurk_hook_before_404_sidebar');
-}
-
-function boozurk_hook_after_404_sidebar() {
-	do_action('boozurk_hook_after_404_sidebar');
-}
-
-function boozurk_hook_before_footer() {
-	do_action('boozurk_hook_before_footer');
-}
-
-function boozurk_hook_footer() {
-	do_action('boozurk_hook_footer');
-}
-
-function boozurk_hook_after_footer() {
-	do_action('boozurk_hook_after_footer');
-}
-
-function boozurk_hook_before_footer_sidebar_content() {
-	do_action('boozurk_hook_before_footer_sidebar_content');
-}
-
-function boozurk_hook_after_footer_sidebar_content() {
-	do_action('boozurk_hook_after_footer_sidebar_content');
+function boozurk_hook_footer_sidebar_bottom() {
+	do_action('boozurk_hook_footer_sidebar_bottom');
 }

@@ -6,7 +6,11 @@
 	}
 ?>
 
+<?php tha_sidebars_before(); ?>
 <div id="header-widget-area">
+	<?php tha_sidebar_top(); ?>
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
+	<?php tha_sidebar_bottom(); ?>
 	<div class="fixfloat"></div> 
 </div><!-- #header-widget-area -->
+<?php tha_sidebars_after(); ?>

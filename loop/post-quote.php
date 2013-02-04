@@ -1,7 +1,9 @@
+<?php tha_entry_before(); ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
+	<?php tha_entry_top(); ?>
 	<?php $bz_first_quote = boozurk_get_blockquote(); ?>
-	<?php boozurk_hook_before_post_title(); ?>
+	<?php boozurk_hook_post_title_before(); ?>
 	<?php
 		switch ( boozurk_get_opt( 'boozurk_post_formats_quote_title' ) ) {
 			case 'post title':
@@ -15,7 +17,7 @@
 				break;
 		}
 	?>
-	<?php boozurk_hook_after_post_title(); ?>
+	<?php boozurk_hook_post_title_after(); ?>
 	<div class="storycontent">
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_quote_content' ) ) {
@@ -28,6 +30,7 @@
 			}
 		?>
 	</div>
-	<div class="fixfloat"> </div>
-</div>
+	<?php tha_entry_bottom(); ?>
+</div>	
+<?php tha_entry_after(); ?>
 <?php boozurk_last_comments( get_the_ID() ); ?>

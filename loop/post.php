@@ -1,6 +1,8 @@
+<?php tha_entry_before(); ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
-	<?php boozurk_hook_before_post_title(); ?>
+	<?php tha_entry_top(); ?>
+	<?php boozurk_hook_post_title_before(); ?>
 	<?php
 		switch ( boozurk_get_opt( 'boozurk_post_formats_standard_title' ) ) {
 			case 'post title':
@@ -11,8 +13,7 @@
 				break;
 		}
 	?>
-	<?php boozurk_hook_after_post_title(); ?>
-	<?php boozurk_hook_before_post_content(); ?>
+	<?php boozurk_hook_post_title_after(); ?>
 	<div class="storycontent">
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_standard_content' ) ) {
@@ -25,9 +26,7 @@
 			}
 		?>
 	</div>
-	<?php boozurk_hook_after_post_content(); ?>
-	<div class="fixfloat">
-		<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page">' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div>&echo=0' ) ); ?>
-	</div>
-</div>
+	<?php tha_entry_bottom(); ?>
+</div>	
+<?php tha_entry_after(); ?>
 <?php boozurk_last_comments( get_the_ID() ); ?>
