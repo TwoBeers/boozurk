@@ -1,4 +1,12 @@
 <?php
+/**
+ * custom_comments.php
+ *
+ * adds some style to comments
+ *
+ * @package boozurk
+ * @since boozurk 2.00
+ */
 
 
 $boozurk_comment_style = new BoozurkCommentStyle;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * audio-player.php
+ *
+ * the swf audio player code
+ *
+ * @package boozurk
+ * @since boozurk 2.00
+ */
+
 
 add_action( 'template_redirect', 'boozurk_init_audio_player' );
 

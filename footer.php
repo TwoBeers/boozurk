@@ -1,7 +1,19 @@
+<?php
+/**
+ * footer.php
+ *
+ * Template part file that contains the site footer and
+ * closing HTML body elements
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <!-- begin footer -->
-			<?php tha_footer_before(); ?>
+			<?php boozurk_hook_footer_before(); ?>
 			<div id="footer">
-				<?php tha_footer_top(); ?>
+				<?php boozurk_hook_footer_top(); ?>
 
 				<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 
@@ -10,9 +22,9 @@
 				<div id="bz-credits"><?php echo boozurk_get_credits(); ?></div>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
-				<?php tha_footer_bottom(); ?>
+				<?php boozurk_hook_footer_bottom(); ?>
 			</div><!-- close footer -->
-			<?php tha_footer_after(); ?>
+			<?php boozurk_hook_footer_after(); ?>
 
 			<?php get_sidebar(); // show sidebar ?>
 

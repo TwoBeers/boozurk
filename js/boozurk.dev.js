@@ -77,7 +77,7 @@ boozurkScripts = {
 					type: 'POST',
 					url: link.attr("href"),
 					beforeSend: function(XMLHttpRequest) { link.html(boozurk_l10n.post_expander).addClass('ajaxed'); },
-					data: 'bz_post_expander=1',
+					data: 'boozurk_post_expander=1',
 					success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
 				});
 
@@ -237,7 +237,7 @@ boozurkScripts = {
 			type: 'POST',
 			url: next_href,
 			beforeSend: function(XMLHttpRequest) { $('#bz-page-nav-msg').addClass('loading').html(boozurk_l10n.infinite_scroll).animate( { 'opacity' : 1 } ); },
-			data: 'bz_infinite_scroll=1',
+			data: 'boozurk_infinite_scroll=1',
 			success: function(data) {
 				nav.replaceWith( $(data) );
 				boozurkScripts.init(boozurk_l10n.script_modules_afterajax);

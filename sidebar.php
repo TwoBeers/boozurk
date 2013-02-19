@@ -1,3 +1,14 @@
+<?php
+/**
+ * sidebar.php
+ *
+ * Template part file that contains the default sidebar content
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <!-- begin primary sidebar -->
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>" id="sidebar-primary">
@@ -5,7 +16,7 @@
 	<div class="primary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
 
 	<div class="inner">
-		<?php tha_sidebar_top(); ?>
+		<?php boozurk_hook_sidebar_top(); ?>
 		<?php boozurk_hook_primary_sidebar_top(); ?>
 		<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 
@@ -34,7 +45,7 @@
 
 		<div class="fixfloat"> </div>
 		<?php boozurk_hook_primary_sidebar_bottom(); ?>
-		<?php tha_sidebar_bottom(); ?>
+		<?php boozurk_hook_sidebar_bottom(); ?>
 	</div>
 
 	<div class="primary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>

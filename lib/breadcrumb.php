@@ -1,4 +1,14 @@
 <?php
+/**
+ * breadcrumb.php
+ *
+ * The breadcrumb code.
+ * Supports Breadcrumb NavXT plugin.
+ *
+ * @package boozurk
+ * @since boozurk 2.00.1
+ */
+
 
 // the breadcrumb
 if (!function_exists('boozurk_breadcrumb')) {
@@ -19,18 +29,18 @@ if (!function_exists('boozurk_breadcrumb')) {
 	}
 }
 
+// search reminder
 if (!function_exists('boozurk_search_reminder')) {
 	function boozurk_search_reminder(){
-		// search reminder
-		if ( is_category() ) {
+		if ( is_category() ) { //prints category description
 			if ( category_description() ) {
 				echo '<div class="bz-breadcrumb-reminder">' . category_description() . '</div>';
 			}
-		} elseif (is_author()) {
+		} elseif (is_author()) { //prints author details
 			echo '<div class="bz-breadcrumb-reminder">';
 			boozurk_post_details( array( 'date' => 0, 'tags' => 0, 'categories' => 0, 'avatar_size' => 64 ) );
 			echo '</div>';
-		} elseif ( is_page() ) {
+		} elseif ( is_page() ) { //prints subpages list
 			boozurk_multipages();
 		}
 	}

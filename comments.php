@@ -1,5 +1,17 @@
+<?php
+/**
+ * comments.php
+ *
+ * This template file includes both the comments list and
+ * the comment form
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <!-- begin comments -->
-<?php tha_comments_before(); ?>
+<?php boozurk_hook_comments_before(); ?>
 
 <?php
 	global $boozurk_is_printpreview;
@@ -45,4 +57,4 @@ if ( comments_open() && !$boozurk_is_printpreview ) {
 <?php } ?>
 <!-- end comments -->
 
-<?php tha_comments_after(); ?>
+<?php boozurk_hook_comments_after(); ?>

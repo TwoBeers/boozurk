@@ -1,3 +1,13 @@
+<?php
+/**
+ * The mobile theme - Comments template
+ *
+ * @package boozurk
+ * @subpackage mobile
+ * @since boozurk 1.05
+ */
+?>
+
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) { ?>

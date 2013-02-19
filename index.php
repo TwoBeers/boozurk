@@ -1,8 +1,19 @@
+<?php
+/**
+ * index.php
+ *
+ * This file is the master/default template file, used for Inedx/Archives/Search
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <?php get_header(); ?>
 
-<?php tha_content_before(); ?>
+<?php boozurk_hook_content_before(); ?>
 <div id="posts_content">
-	<?php tha_content_top(); ?>
+	<?php boozurk_hook_content_top(); ?>
 
 <?php
 if ( have_posts() ) {
@@ -20,8 +31,8 @@ if ( have_posts() ) {
 
 <?php } //endif ?>
 
-	<?php tha_content_bottom(); ?>
+	<?php boozurk_hook_content_bottom(); ?>
 </div>
-<?php tha_content_after(); ?>
+<?php boozurk_hook_content_after(); ?>
 
 <?php get_footer(); ?>

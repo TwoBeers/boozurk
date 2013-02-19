@@ -1,3 +1,13 @@
+<?php
+/**
+ * The mobile theme - Page template
+ *
+ * @package boozurk
+ * @subpackage mobile
+ * @since boozurk 1.05
+ */
+?>
+
 <?php locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 <?php if ( have_posts() ) { ?>
 	<?php while ( have_posts() ) { 

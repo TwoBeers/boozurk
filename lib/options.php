@@ -1,4 +1,13 @@
 <?php
+/**
+ * options.php
+ *
+ * the options array
+ *
+ * @package boozurk
+ * @since boozurk 2.03
+ */
+
 
 // Complete Options Array, with type, defaults values, description, infos and required option
 function boozurk_get_coa( $option = false ) {

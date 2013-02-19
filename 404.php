@@ -1,11 +1,23 @@
+<?php
+/**
+ * 404.php
+ *
+ * This file is the Error 404 Page template file, which is output whenever
+ * the server encounters a "404 - file not found" error.
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <?php get_header(); ?>
 
-<?php tha_content_before(); ?>
+<?php boozurk_hook_content_before(); ?>
 <div id="posts_content">
-	<?php tha_content_top(); ?>
-	<?php tha_entry_before(); ?>
+	<?php boozurk_hook_content_top(); ?>
+	<?php boozurk_hook_entry_before(); ?>
 	<div class="post" id="post-404-not-found">
-		<?php tha_entry_top(); ?>
+		<?php boozurk_hook_entry_top(); ?>
 		<h2 class="storytitle"><?php _e( 'Error 404','boozurk' ); ?> - <?php _e( 'Page not found','boozurk' ); ?></h2>
 		<p><?php _e( "Sorry, you're looking for something that isn't here" ,'boozurk' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p><br/>
 		<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
@@ -21,11 +33,11 @@
 			<?php get_search_form(); ?>
 		<?php } ?>
 		<div class="fixfloat"> </div>
-		<?php tha_entry_bottom(); ?>
+		<?php boozurk_hook_entry_bottom(); ?>
 	</div>	
-	<?php tha_entry_after(); ?>
-	<?php tha_content_bottom(); ?>
+	<?php boozurk_hook_entry_after(); ?>
+	<?php boozurk_hook_content_bottom(); ?>
 </div>
-<?php tha_content_after(); ?>
+<?php boozurk_hook_content_after(); ?>
 
 <?php get_footer(); ?>

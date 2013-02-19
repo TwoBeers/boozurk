@@ -1,24 +1,138 @@
 <?php
-/* Boozurk - Hooks */
-
 /**
- * Contains all hook wrappers.
+ * hooks.php
+ *
+ * defines every wrapping function for the theme hooks
+ *
+ * Includes The Hook Alliance support file (https://github.com/zamoose/themehookalliance)
+ *
+ * @package boozurk
+ * @since boozurk 2.00
  */
 
-// boozurk_hook_before_header() replaced by tha_header_before()
-// boozurk_hook_after_header() replaced by tha_header_after()
-// boozurk_hook_before_site_title() replaced by tha_header_top()
-// boozurk_hook_before_pages() replaced by tha_header_after()
-// boozurk_hook_before_footer() replaced by tha_footer_before()
-// boozurk_hook_footer() replaced by tha_footer_top()
-// boozurk_hook_after_footer() replaced by tha_footer_after()
-// boozurk_hook_before_posts() replaced by tha_content_before()
-// boozurk_hook_after_posts() replaced by tha_content_after()
-// boozurk_hook_before_post() replaced by tha_entry_before()
-// boozurk_hook_after_post() replaced by tha_entry_after()
-// boozurk_hook_before_post_content() replaced by tha_entry_top()
-// boozurk_hook_after_post_content() replaced by tha_entry_bottom()
 
+/** Grab the THA theme hooks file */
+require_once( get_template_directory() . '/tha/tha-theme-hooks.php' );
+
+function boozurk_hook_head_top() {
+	tha_head_top();
+	do_action( 'boozurk_hook_head_top' );
+}
+
+function boozurk_hook_head_bottom() {
+	do_action( 'boozurk_hook_head_bottom' );
+	tha_head_bottom();
+}
+
+function boozurk_hook_header_before() {
+	tha_header_before();
+	do_action( 'boozurk_hook_header_before' );
+}
+
+function boozurk_hook_header_after() {
+	do_action( 'boozurk_hook_header_after' );
+	tha_header_after();
+}
+
+function boozurk_hook_header_top() {
+	tha_header_top();
+	do_action( 'boozurk_hook_header_top' );
+}
+
+function boozurk_hook_header_bottom() {
+	do_action( 'boozurk_hook_header_bottom' );
+	tha_header_bottom();
+}
+
+function boozurk_hook_content_before() {
+	tha_content_before();
+	do_action( 'boozurk_hook_content_before' );
+}
+
+function boozurk_hook_content_after() {
+	do_action( 'boozurk_hook_content_after' );
+	tha_content_after();
+}
+
+function boozurk_hook_content_top() {
+	tha_content_top();
+	do_action( 'boozurk_hook_content_top' );
+}
+
+function boozurk_hook_content_bottom() {
+	do_action( 'boozurk_hook_content_bottom' );
+	tha_content_bottom();
+}
+
+function boozurk_hook_entry_before() {
+	tha_entry_before();
+	do_action( 'boozurk_hook_entry_before' );
+}
+
+function boozurk_hook_entry_after() {
+	do_action( 'boozurk_hook_entry_after' );
+	tha_entry_after();
+}
+
+function boozurk_hook_entry_top() {
+	tha_entry_top();
+	do_action( 'boozurk_hook_entry_top' );
+}
+
+function boozurk_hook_entry_bottom() {
+	do_action( 'boozurk_hook_entry_bottom' );
+	tha_entry_bottom();
+}
+
+function boozurk_hook_comments_before() {
+	tha_comments_before();
+	do_action( 'boozurk_hook_comments_before' );
+}
+
+function boozurk_hook_comments_after() {
+	do_action( 'boozurk_hook_comments_after' );
+	tha_comments_after();
+}
+
+function boozurk_hook_sidebars_before() {
+	tha_sidebars_before();
+	do_action( 'boozurk_hook_sidebars_before' );
+}
+
+function boozurk_hook_sidebars_after() {
+	do_action( 'boozurk_hook_sidebars_after' );
+	tha_sidebars_after();
+}
+
+function boozurk_hook_sidebar_top() {
+	tha_sidebar_top();
+	do_action( 'boozurk_hook_sidebar_top' );
+}
+
+function boozurk_hook_sidebar_bottom() {
+	do_action( 'boozurk_hook_sidebar_bottom' );
+	tha_sidebar_bottom();
+}
+
+function boozurk_hook_footer_before() {
+	tha_footer_before();
+	do_action( 'boozurk_hook_footer_before' );
+}
+
+function boozurk_hook_footer_after() {
+	do_action( 'boozurk_hook_footer_after' );
+	tha_footer_after();
+}
+
+function boozurk_hook_footer_top() {
+	tha_footer_top();
+	do_action( 'boozurk_hook_footer_top' );
+}
+
+function boozurk_hook_footer_bottom() {
+	do_action( 'boozurk_hook_footer_bottom' );
+	tha_footer_bottom();
+}
 function boozurk_hook_body_top() {
 	do_action('boozurk_hook_body_top');
 }

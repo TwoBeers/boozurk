@@ -31,7 +31,7 @@ boozurkOptions = {
 			});
 		});
 		$('#to-defaults').click (function () {
-			var answer = confirm(bz_l10n.confirm_to_defaults)
+			var answer = confirm(boozurk_options_l10n.confirm_to_defaults)
 			if (!answer){
 				return false;
 			}

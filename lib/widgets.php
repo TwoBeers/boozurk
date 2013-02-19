@@ -1,6 +1,28 @@
 <?php
+/**
+ * widgets.php
+ *
+ * custom widgets:
+ * - Popular Posts
+ * - Latest activity
+ * - Latest comment authors
+ * - Popular Categories
+ * - Follow Me
+ * - besides...
+ * - Recent Posts in Category
+ * - Navigation buttons
+ * - Post details
+ * - Post Formats
+ * - Image EXIF details
+ * - User quick links
+ * - Share this
+ * - Clean Archives
+ * - Font Resize
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
 
-/* Boozurk - Widgets */
 
 /**
  * Popular_Posts widget class
@@ -479,47 +501,32 @@ class boozurk_Widget_social extends WP_Widget {
 ?>
 	<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'boozurk' ); ?></label>
 	<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title']); ?>" /></p>
-    <div style="padding: 10px 0; border-top: 1px solid #DFDFDF;">
+	<div style="padding: 10px 0; border-top: 1px solid #DFDFDF;">
 		<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'boozurk' ); ?></p>
 
 <?php
-        foreach($this->follow_urls as $follow_service => $service_name ) {
+		foreach($this->follow_urls as $follow_service => $service_name ) {
 ?>
-        <div style="float: left; width: 40%; margin: 0pt 5%;">
+		<div style="float: left; width: 40%; margin: 0pt 5%;">
 			<h2>
 				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
 				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
 				<?php echo $service_name; ?>
 			</h2>
-<?php
-            if ( ( $follow_service != 'RSS' ) && ( $follow_service != 'Mail') ) {
-?>
-        <p>
-            <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
-<?php
-				printf(__('Enter your %1$s account link', 'boozurk'), $service_name);
-?>
-            </label>
-            <input type="text" id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
-        </p>
+			<?php
+				if ( ( $follow_service != 'RSS' ) && ( $follow_service != 'Mail') )
+					$text = __('Enter your %1$s account link', 'boozurk');
+				elseif ($follow_service == 'Mail')
+					$text = __('Enter email address', 'boozurk');
+				elseif ($follow_service == 'RSS')
+					$text = __('Enter your feed service address. Leave it blank for using the default WordPress feed', 'boozurk');
+			?>
+			<p>
+				<label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>"><?php printf( $text, $service_name ) ?></label>
+				<input type="text" id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
+			</p>
 
-<?php
-            } elseif ($follow_service == 'Mail') {
-?>
-        <p>
-            <label for="<?php echo $this->get_field_id($follow_service.'_account'); ?>">
-<?php
-				printf(__('Enter email address', 'boozurk'), $follow_service);
-?>
-            </label>
-            <input id="<?php echo $this->get_field_id($follow_service.'_account'); ?>" name="<?php echo $this->get_field_name($follow_service.'_account'); ?>" value="<?php if (isset($instance[$follow_service.'_account'])) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
-        </p>
-
-<?php
-            } 
-
-?>
-        </div>
+		</div>
 <?php
         }
 ?>
@@ -567,7 +574,7 @@ class boozurk_Widget_social extends WP_Widget {
 			$class = '';
 			$target = '_blank';
 			if ($follow_service == 'RSS') {
-				$account = get_bloginfo( 'rss2_url' );
+				$account = $account? $account : get_bloginfo( 'rss2_url' );
 				$prefix = __('Keep updated with our RSS feed','boozurk');
 			}
 			if ($follow_service == 'Mail') {

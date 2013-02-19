@@ -1,7 +1,7 @@
-<?php tha_entry_before(); ?>
+<?php boozurk_hook_entry_before(); ?>
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php boozurk_extrainfo(); ?>
-	<?php tha_entry_top(); ?>
+	<?php boozurk_hook_entry_top(); ?>
 	<?php boozurk_hook_post_title_before(); ?>
 	<?php $bz_first_link = boozurk_get_first_link(); ?>
 	<?php
@@ -30,7 +30,7 @@
 			}
 		?>
 	</div>
-	<?php tha_entry_bottom(); ?>
+	<?php boozurk_hook_entry_bottom(); ?>
 </div>	
-<?php tha_entry_after(); ?>
+<?php boozurk_hook_entry_after(); ?>
 <?php boozurk_last_comments( get_the_ID() ); ?>

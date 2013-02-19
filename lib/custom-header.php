@@ -1,4 +1,14 @@
 <?php
+/**
+ * custom-header.php
+ *
+ * The custom header support
+ *
+ * @package boozurk
+ * @since boozurk 2.04
+ */
+
+
 add_action( 'after_setup_theme', 'boozurk_custom_header' );
 
 // set up custom colors and header image

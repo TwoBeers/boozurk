@@ -1,3 +1,13 @@
+<?php
+/**
+ * The mobile theme - Index/Arcive/Search template
+ *
+ * @package boozurk
+ * @subpackage mobile
+ * @since boozurk 1.05
+ */
+?>
+
 <?php locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 <?php
 	$sw_strtype = __( 'Posts', 'boozurk' );

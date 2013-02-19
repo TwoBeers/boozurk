@@ -1,6 +1,19 @@
 <?php
+/**
+ * media.php
+ *
+ * This page shows all the images in the upload directory
+ * in order to select the logo.
+ * The page loaded by thickbox in options page
+ *
+ * @package boozurk
+ * @since boozurk 2.00
+ */
+?>
 
-check_admin_referer( 'logo-nonce' );
+<?php
+
+check_admin_referer( 'boozurk-logo-nonce' );
 
 if ( !current_user_can( 'edit_theme_options' ) ) {
 	wp_die( 'You do not have sufficient permissions to access this page.' );
@@ -8,30 +21,31 @@ if ( !current_user_can( 'edit_theme_options' ) ) {
 
 function boozurk_media_navi( $paged, $ppp, $count ) {
 
-	$arr_params['tb_media'] = '1';
-	$arr_params_option['tb_media'] = '1';
+	$arr_params['boozurk_media'] = '1';
+	$arr_params_option['boozurk_media'] = '1';
+	$arr_params['_wpnonce'] = $arr_params_option['_wpnonce'] = wp_create_nonce( 'boozurk-logo-nonce' );
 	
 	$navi = '<div class="bz-media-navi">';
 	$navi .= '<span style="font-style:italic;color:#777;font-size:10px;">' . sprintf( __( '%s images', 'boozurk' ), $count ) . '</span>';
 	if ( $paged == 2 ) { $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&laquo;</a>'; }
-	if ( $paged > 2 ) { $arr_params['bzpaged'] = ( $paged - 1 ); $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&laquo;</a>'; }
+	if ( $paged > 2 ) { $arr_params['boozurk_paged'] = ( $paged - 1 ); $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&laquo;</a>'; }
 	if ( ( $count / $paged ) > 1 ) {
-		$navi .= '<select id="sample" onChange="bzGoTo(this.options[this.selectedIndex].value)">';
+		$navi .= '<select id="sample" onChange="boozurkGoTo(this.options[this.selectedIndex].value)">';
 		for ($i=1; $i<=ceil( $count / $ppp ); $i++) {
 			if ( $i == 1 ) { $navi .= '<option value="' . (add_query_arg( $arr_params_option, home_url() )) . '" ' . selected( $paged, 1 , false) . '>' . $i . '</option>'; }
-			if ( $i > 1 ) { $arr_params_option['bzpaged'] = ( $i ); $navi .= '<option value="' . (add_query_arg( $arr_params_option, home_url() )) . '" ' . selected( $paged, $i , false) . '>' . $i . '</option>'; }
+			if ( $i > 1 ) { $arr_params_option['boozurk_paged'] = ( $i ); $navi .= '<option value="' . (add_query_arg( $arr_params_option, home_url() )) . '" ' . selected( $paged, $i , false) . '>' . $i . '</option>'; }
 		}	
 		$navi .= '</select>';
 		$navi .= '<span>' . sprintf( __( 'of %s', 'boozurk' ), ceil( $count / $ppp ) ) . '</span>';
 	}
-	if ( $count > ( $paged * $ppp ) ) { $arr_params['bzpaged'] = ( $paged + 1 ); $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&raquo;</a>'; }
+	if ( $count > ( $paged * $ppp ) ) { $arr_params['boozurk_paged'] = ( $paged + 1 ); $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&raquo;</a>'; }
 	$navi .= '</div>';
 	return $navi;
 	
 }
 
 function boozurk_media_library() {
-	$paged = isset( $_GET['bzpaged'] ) ? (int)$_GET['bzpaged'] : 1;
+	$paged = isset( $_GET['boozurk_paged'] ) ? (int)$_GET['boozurk_paged'] : 1;
 	$ppp = 21;
 	$args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_mime_type' => 'image', 'post_status' => null, 'post_parent' => null ); 
 	$attachments = get_posts( $args );
@@ -47,7 +61,7 @@ function boozurk_media_library() {
 				setup_postdata($attachment);
 				$details = wp_get_attachment_image_src( $attachment->ID, 'full' ); 
 			?>
-				<div class="thumb"><a href="javascript:void(0)" onClick="bzSendToInput('<?php echo esc_url($details[0]); ?>')"><?php echo wp_get_attachment_image( $attachment->ID ); ?></a></div>
+				<div class="thumb"><a href="javascript:void(0)" onClick="boozurkSendToInput('<?php echo esc_url($details[0]); ?>')"><?php echo wp_get_attachment_image( $attachment->ID ); ?></a></div>
 			<?php } ?>
 		</div>
 		<?php echo $navi; ?>
@@ -124,11 +138,11 @@ function boozurk_media_library() {
 		<script type="text/javascript">
 			/* <![CDATA[ */
 			var win = window.dialogArguments || parent || opener || top;
-			function bzSendToInput(the_src) {
+			function boozurkSendToInput(the_src) {
 				win.document.getElementById('option_field_boozurk_logo').value=the_src;
 				win.tb_remove();
 			}
-			function bzGoTo(the_url) {
+			function boozurkGoTo(the_url) {
 				window.open(the_url,'_self');
 			}
 			/* ]]> */

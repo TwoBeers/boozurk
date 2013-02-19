@@ -1,3 +1,14 @@
+<?php
+/**
+ * sidebar-footer.php
+ *
+ * Template part file that contains the footer widget area
+ *
+ * @package boozurk
+ * @since boozurk 1.00
+ */
+?>
+
 <!-- here should be the footer widget area -->
 <?php
 	/* The footer widget area is triggered if any of the areas have widgets. */
@@ -6,9 +17,9 @@
 	}
 ?>
 
-<?php tha_sidebars_before(); ?>
+<?php boozurk_hook_sidebars_before(); ?>
 <div id="footer-widget-area">
-	<?php tha_sidebar_top(); ?>
+	<?php boozurk_hook_sidebar_top(); ?>
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_top(); ?></div>
 
 	<div id="first_fwa" class="widget-area">
@@ -29,6 +40,6 @@
 
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_bottom(); ?></div>
 
-	<?php tha_sidebar_bottom(); ?>
+	<?php boozurk_hook_sidebar_bottom(); ?>
 </div><!-- #footer-widget-area -->
-<?php tha_sidebars_after(); ?>
+<?php boozurk_hook_sidebars_after(); ?>
