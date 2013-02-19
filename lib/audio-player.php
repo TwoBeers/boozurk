@@ -14,9 +14,8 @@ add_action( 'template_redirect', 'boozurk_init_audio_player' );
 // setup for audio player
 if ( !function_exists( 'boozurk_init_audio_player' ) ) {
 	function boozurk_init_audio_player(){
-		global $boozurk_is_mobile_browser, $boozurk_is_printpreview;
 
-		if ( is_admin() || $boozurk_is_mobile_browser || $boozurk_is_printpreview ) return;
+		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
 
 		add_action( 'wp_head', 'boozurk_localize_audio_player' );
 		add_action( 'boozurk_hook_after_post_content_single', 'boozurk_add_audio_player' );

@@ -9,11 +9,9 @@
  */
 
 
-// Custom actions
+/* Custom actions */
 
 add_action( 'after_setup_theme', 'boozurk_setup' ); // tell WordPress to run boozurk_setup() when the 'after_setup_theme' hook is run.
-
-add_action( 'widgets_init', 'boozurk_widget_area_init' ); // Register sidebars by running boozurk_widget_area_init() on the widgets_init hook
 
 add_action( 'wp_enqueue_scripts', 'boozurk_stylesheet' ); // Add stylesheets
 
@@ -50,7 +48,7 @@ add_action( 'template_redirect', 'boozurk_allcat' ); // Add custom category page
 add_action( 'template_redirect', 'boozurk_media' ); // media select
 
 
-// Custom filters
+/* Custom filters */
 
 add_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
 
@@ -90,147 +88,78 @@ add_filter( 'avatar_defaults', 'boozurk_addgravatar' );
 
 
 
-// get theme version
+/* get theme version */
+
 $boozurk_theme = wp_get_theme( 'boozurk' );
 $boozurk_current_theme = wp_get_theme();
 $boozurk_version = $boozurk_theme? $boozurk_theme['Version'] : '';
 
-// get the theme options
+
+/* get the theme options */
+
 $boozurk_opt = get_option( 'boozurk_options' );
 
-$boozurk_is_mobile_browser = false;
 
-// check if in preview mode or not
-$boozurk_is_printpreview = false;
-if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ) {
-	$boozurk_is_printpreview = true;
-}
+/* load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes) */
 
-// check if in allcat view
-$boozurk_is_allcat_page = false;
-if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
-	$boozurk_is_allcat_page = true;
-}
-
-// check if in media preview mode
-$boozurk_is_media = false;
-if ( isset( $_GET['boozurk_media'] ) ) {
-	$boozurk_is_media = true;
-}
-
-// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
 require_once( 'lib/options.php' ); // load options
-require_once( 'lib/admin.php' ); // load admin functions
-require_once( 'lib/hooks.php' ); // load the custom hooks module
+
+$boozurk_is_mobile = false;
 if ( boozurk_get_opt( 'boozurk_mobile_css' ) ) require_once( 'mobile/core-mobile.php' ); // load mobile functions
-if ( boozurk_get_opt( 'boozurk_js_swfplayer' ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
-if ( boozurk_get_opt( 'boozurk_custom_widgets' ) ) require_once('lib/widgets.php'); // load the custom widgets module
-if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once('lib/custom_comments.php'); // load the comment style module
+
+require_once( 'lib/admin.php' ); // load admin functions
+
+require_once( 'lib/hooks.php' ); // load the custom hooks module
+
+require_once( 'lib/widgets.php' ); // load the custom widgets module
+
 require_once( 'lib/custom-header.php' ); // load the custom header module
+
 require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
+
+if ( boozurk_get_opt( 'boozurk_js_swfplayer' ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
+
+if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
+
+
+/* conditional tags */
+
+function boozurk_is_mobile() { // mobile
+	global $boozurk_is_mobile;
+	return $boozurk_is_mobile;
+}
+
+function boozurk_is_printpreview() { //print preview
+	static $is_printpreview;
+	if ( !isset( $is_printpreview ) ) {
+		$is_printpreview = isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783895e9d9cf1' ? true : false;
+	}
+	return $is_printpreview;
+}
+
+function boozurk_is_allcat() { //is "all category" page
+	static $is_allcat;
+	if ( !isset( $is_allcat ) ) {
+		$is_allcat = isset( $_GET['allcat'] ) && md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ? true : false;
+	}
+	return $is_allcat;
+}
+
+function boozurk_is_media() { //is in media preview mode
+	$is_media = isset( $_GET['boozurk_media'] ) ? true : false;
+	return $is_media;
+}
+
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
 	$content_width = 560;
 }
 
-if ( !function_exists( 'boozurk_widget_area_init' ) ) {
-	function boozurk_widget_area_init() {
-
-		// Area 0, in the left sidebar.
-		register_sidebar( array(
-			'name' => __( 'Primary Sidebar', 'boozurk' ),
-			'id' => 'primary-widget-area',
-			'description' => __( 'The primary sidebar widget area', 'boozurk' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-
-		// Area 1, in the right sidebar.
-		register_sidebar( array(
-			'name' => __( 'Secondary sidebar', 'boozurk' ),
-			'id' => 'fixed-widget-area',
-			'description' => __( 'The secondary sidebar widget area', 'boozurk' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-
-		// Area 2, located under the main menu.
-		register_sidebar( array(
-			'name' => __( 'Menu Widget Area', 'boozurk' ),
-			'id' => 'header-widget-area',
-			'description' => __( 'The widget area under the main menu', 'boozurk' ),
-			'before_widget' => '<div class="bz-widget"><div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div></div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-	
-		// Area 3, located in the footer. Empty by default.
-		register_sidebar( array(
-			'name' => __( 'First Footer Widget Area', 'boozurk' ),
-			'id' => 'first-footer-widget-area',
-			'description' => __( 'The first footer widget area', 'boozurk' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-	
-		// Area 4, located in the footer. Empty by default.
-		register_sidebar( array(
-			'name' => __( 'Second Footer Widget Area', 'boozurk' ),
-			'id' => 'second-footer-widget-area',
-			'description' => __( 'The second footer widget area', 'boozurk' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-	
-		// Area 5, located in the footer. Empty by default.
-		register_sidebar( array(
-			'name' => __( 'Third Footer Widget Area', 'boozurk' ),
-			'id' => 'third-footer-widget-area',
-			'description' => __( 'The third footer widget area', 'boozurk' ),
-			'before_widget' => '<div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-	
-		// Area 6, located in page 404.
-		register_sidebar( array(
-			'name' => __( 'Page 404', 'boozurk' ),
-			'id' => '404-widgets-area',
-			'description' => __( 'Enrich the page 404 with some useful widgets', 'boozurk' ),
-			'before_widget' => '<div class="widget %2$s">',
-			'after_widget' => '</div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-		// Area 7, located after the post body.
-		register_sidebar( array(
-			'name' => __( 'Post Widget Area', 'boozurk' ),
-			'id' => 'single-widgets-area',
-			'description' => __( 'a widget area located after the post body', 'boozurk' ),
-			'before_widget' => '<div class="bz-widget"><div id="%1$s" class="widget %2$s">',
-			'after_widget' => '</div></div>',
-			'before_title' => '<div class="w_title">',
-			'after_title' => '</div>',
-		) );
-	}
-}
-
 // Add style element for custom theme options
 if ( !function_exists( 'boozurk_custom_style' ) ) {
 	function boozurk_custom_style(){
-		global $boozurk_is_mobile_browser;
-		if ( $boozurk_is_mobile_browser ) return; // skip if in mobile view
+		if ( boozurk_is_mobile() ) return; // skip if in mobile view
 ?>
 <style type="text/css">
 	body {
@@ -347,9 +276,8 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 // initialize js
 if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 	function boozurk_initialize_scripts() {
-		global $boozurk_is_mobile_browser, $boozurk_is_printpreview;
 
-		if ( is_admin() || $boozurk_is_mobile_browser ) return;
+		if ( is_admin() || boozurk_is_mobile() ) return;
 ?>
 <script type="text/javascript">
 	/* <![CDATA[ */
@@ -360,7 +288,7 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 	})();
 	/* ]]> */
 </script>
-<?php if ( !boozurk_get_opt( 'boozurk_jsani' ) || $boozurk_is_printpreview ) return; ?>
+<?php if ( ! boozurk_get_opt( 'boozurk_jsani' ) || boozurk_is_printpreview() ) return; ?>
 
 <?php if ( boozurk_get_opt( 'boozurk_plusone' ) ) { ?>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
@@ -375,11 +303,11 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 // Add stylesheets to page
 if ( !function_exists( 'boozurk_stylesheet' ) ) {
 	function boozurk_stylesheet(){
-		global $boozurk_version, $boozurk_is_mobile_browser, $boozurk_is_printpreview;
+		global $boozurk_version;
 
-		if ( is_admin() || $boozurk_is_mobile_browser ) return;
+		if ( is_admin() || boozurk_is_mobile() ) return;
 
-		if ( $boozurk_is_printpreview ) { //print preview
+		if ( boozurk_is_printpreview() ) { //print preview
 
 			wp_enqueue_style( 'boozurk-general-style', get_template_directory_uri() . '/css/print.css', false, $boozurk_version, 'screen' );
 			wp_enqueue_style( 'boozurk-preview-style', get_template_directory_uri() . '/css/print_preview.css', false, $boozurk_version, 'screen' );
@@ -401,9 +329,9 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 // add scripts
 if ( !function_exists( 'boozurk_scripts' ) ) {
 	function boozurk_scripts(){
-		global $boozurk_version, $boozurk_is_mobile_browser, $boozurk_is_printpreview;
+		global $boozurk_version;
 
-		if ( is_admin() || $boozurk_is_mobile_browser || $boozurk_is_printpreview ) return;
+		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
 
 		if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); // comment-reply js
 
@@ -576,12 +504,12 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 
 if (!function_exists('boozurk_navbuttons')) {
 	function boozurk_navbuttons( $print = 1, $comment = 1, $feed = 1, $trackback = 1, $home = 1, $next_prev = 1, $up_down = 1, $fixed = 1 ) {
-		global $post, $boozurk_is_allcat_page;
+		global $post;
 		
-		$is_post = is_single() && !is_attachment() && !$boozurk_is_allcat_page;
-		$is_image = is_attachment() && !$boozurk_is_allcat_page;
-		$is_page = is_singular() && !is_single() && !is_attachment() && !$boozurk_is_allcat_page;
-		$is_singular = is_singular() && !$boozurk_is_allcat_page;
+		$is_post = is_single() && ! is_attachment() && ! boozurk_is_allcat();
+		$is_image = is_attachment() && ! boozurk_is_allcat();
+		$is_page = is_singular() && ! is_single() && ! is_attachment() && ! boozurk_is_allcat();
+		$is_singular = is_singular() && ! boozurk_is_allcat();
 	?>
 
 <div id="navbuttons"<?php if ( $fixed ) echo ' class="fixed"'; ?>>
@@ -669,13 +597,13 @@ if (!function_exists('boozurk_navbuttons')) {
 			</div>
 		<?php } ?>
 
-		<?php if ( $next_prev && !$is_singular && !$boozurk_is_allcat_page && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
+		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
 			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
 				<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
 			</div>
 		<?php } ?>
 
-		<?php if ( $next_prev && !$is_singular && !$boozurk_is_allcat_page && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
+		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
 			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
 				<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
 			</div>
@@ -1944,8 +1872,7 @@ function boozurk_more_link( $more_link, $more_link_text ) {
 // show all categories list (redirect to allcat.php if allcat=y)
 if ( !function_exists( 'boozurk_allcat' ) ) {
 	function boozurk_allcat () {
-		global $boozurk_is_allcat_page;
-		if( $boozurk_is_allcat_page ) {
+		if( boozurk_is_allcat() ) {
 			get_template_part( 'allcat' );
 			exit;
 		}
@@ -1955,8 +1882,7 @@ if ( !function_exists( 'boozurk_allcat' ) ) {
 // media preview
 if ( !function_exists( 'boozurk_media' ) ) {
 	function boozurk_media () {
-		global $boozurk_is_media;
-		if ( $boozurk_is_media ) {
+		if ( boozurk_is_media() ) {
 			get_template_part( 'lib/media' ); 
 			exit;
 		}

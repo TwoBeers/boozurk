@@ -16,9 +16,8 @@ class BoozurkCommentStyle {
 	var $variants = array();
 
 	function BoozurkCommentStyle() {
-		global $boozurk_is_mobile_browser, $boozurk_is_printpreview;
 
-		if ( is_admin() || $boozurk_is_mobile_browser || $boozurk_is_printpreview ) return;
+		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
 
 		add_action( 'comment_form_after_fields', array( &$this, 'comment_variant_field' ) );
 		add_action( 'comment_form_logged_in_after', array( &$this, 'comment_variant_field' ) );

@@ -2,7 +2,10 @@
 /**
  * widgets.php
  *
- * custom widgets:
+ * This file defines the Widget functionality and 
+ * custom widgets.
+ *
+ * Custom widgets:
  * - Popular Posts
  * - Latest activity
  * - Latest comment authors
@@ -22,6 +25,115 @@
  * @package boozurk
  * @since boozurk 1.00
  */
+
+
+/**
+ * Define default Widget arguments
+ */
+
+function boozurk_get_default_widget_args( $extra_wrap_class = '' ) {
+	$widget_args = array(
+		// Widget container opening tag, with classes
+		'before_widget' => $extra_wrap_class ? '<div class="' . $extra_wrap_class . '"><div id="%1$s" class="widget %2$s">' : '<div id="%1$s" class="widget %2$s">',
+		// Widget container closing tag
+		'after_widget' => $extra_wrap_class ? '</div></div>' : '</div>',
+		// Widget Title container opening tag, with classes
+		'before_title' => '<div class="w_title">',
+		// Widget Title container closing tag
+		'after_title' => '</div>'
+	);
+	return $widget_args;
+}
+
+/**
+ * Register all widget areas (sidebars)
+ */
+
+if ( !function_exists( 'boozurk_widget_area_init' ) ) {
+	function boozurk_widget_area_init() {
+
+		// Area 0, in the left sidebar.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Primary Sidebar', 'boozurk' ),
+				'id' => 'primary-widget-area',
+				'description' => __( 'The primary sidebar widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+
+		// Area 1, in the right sidebar.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Secondary sidebar', 'boozurk' ),
+				'id' => 'fixed-widget-area',
+				'description' => __( 'The secondary sidebar widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+
+		// Area 2, located under the main menu.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Menu Widget Area', 'boozurk' ),
+				'id' => 'header-widget-area',
+				'description' => __( 'The widget area under the main menu', 'boozurk' )
+			),
+			boozurk_get_default_widget_args( 'bz-widget' )
+		) );
+
+		// Area 3, located in the footer. Empty by default.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'First Footer Widget Area', 'boozurk' ),
+				'id' => 'first-footer-widget-area',
+				'description' => __( 'The first footer widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+
+		// Area 4, located in the footer. Empty by default.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Second Footer Widget Area', 'boozurk' ),
+				'id' => 'second-footer-widget-area',
+				'description' => __( 'The second footer widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+
+		// Area 5, located in the footer. Empty by default.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Third Footer Widget Area', 'boozurk' ),
+				'id' => 'third-footer-widget-area',
+				'description' => __( 'The third footer widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+
+		// Area 6, located in page 404.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Page 404', 'boozurk' ),
+				'id' => '404-widgets-area',
+				'description' => __( 'Enrich the page 404 with some useful widgets', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
+		// Area 7, located after the post body.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Post Widget Area', 'boozurk' ),
+				'id' => 'single-widgets-area',
+				'description' => __( 'a widget area located after the post body', 'boozurk' ),
+			),
+			boozurk_get_default_widget_args( 'bz-widget' )
+		) );
+	}
+}
+
+add_action( 'widgets_init', 'boozurk_widget_area_init' ); // Register sidebars by running boozurk_widget_area_init() on the widgets_init hook
 
 
 /**
@@ -1452,7 +1564,11 @@ function boozurk_widget_font_resize($args) {
  * Register all of the default WordPress widgets on startup.
  */
 function boozurk_widgets_init() {
+
 	if ( !is_blog_installed() )
+		return;
+
+	if ( ! boozurk_get_opt( 'boozurk_custom_widgets' ) )
 		return;
 
 	register_widget('boozurk_widget_popular_posts');

@@ -57,13 +57,13 @@ if ( !function_exists( 'boozurk_mobile_device_detect' ) ) {
 		}
 	}
 }
-$boozurk_is_mobile_browser = boozurk_mobile_device_detect(); // check if is mobile browser
+$boozurk_is_mobile = boozurk_mobile_device_detect(); // check if is mobile browser
 
 // show mobile version
 if ( !function_exists( 'boozurk_mobile' ) ) {
 	function boozurk_mobile () {
-		global $boozurk_is_mobile_browser;
-		if ( $boozurk_is_mobile_browser ) {
+		global $boozurk_is_mobile;
+		if ( $boozurk_is_mobile ) {
 
 			// Add stylesheets
 			add_action( 'wp_enqueue_scripts', 'boozurk_mobile_stylesheet' );

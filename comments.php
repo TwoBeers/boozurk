@@ -14,8 +14,6 @@
 <?php boozurk_hook_comments_before(); ?>
 
 <?php
-	global $boozurk_is_printpreview;
-
 	if ( post_password_required() ) {
 		echo '<div id="comments">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
 		return;
@@ -51,7 +49,7 @@
 <?php
 }
 //if comments are open
-if ( comments_open() && !$boozurk_is_printpreview ) { 
+if ( comments_open() && ! boozurk_is_printpreview() ) { 
 	comment_form(); ?>
 	<div class="fixfloat"></div>
 <?php } ?>
