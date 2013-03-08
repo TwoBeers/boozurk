@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Post/Attachment template
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 
@@ -15,7 +15,7 @@
 		<div class="tbm-navi halfsep">
 				<?php if ( get_next_post() ) { ?><span class="tbm-halfspan tbm-prev outset"><?php next_post_link( '%link' ); ?></span><?php } ?>
 				<?php if ( get_previous_post() ) { ?><span class="tbm-halfspan tbm-next outset"><?php previous_post_link( '%link' ); ?></span><?php } ?>
-				<div class="fixfloat"> </div>
+				<br class="fixfloat">
 		</div>
 		<div <?php post_class( 'tbm-post tbm-padded' ) ?> id="post-<?php the_ID(); ?>">
 			<h2><?php the_title(); ?></h2>
@@ -33,7 +33,7 @@
 		<div class="tbm-navi halfsep">
 				<?php if ( get_next_post() ) { ?><span class="tbm-halfspan tbm-prev outset"><?php next_post_link( '%link' ); ?></span><?php } ?>
 				<?php if ( get_previous_post() ) { ?><span class="tbm-halfspan tbm-next outset"><?php previous_post_link( '%link' ); ?></span><?php } ?>
-				<div class="fixfloat"> </div>
+				<br class="fixfloat">
 		</div>
 	<?php } ?>
 <?php } else { ?>

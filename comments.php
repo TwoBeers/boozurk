@@ -5,8 +5,8 @@
  * This template file includes both the comments list and
  * the comment form
  *
- * @package boozurk
- * @since boozurk 1.00
+ * @package Boozurk
+ * @since 1.00
  */
 ?>
 
@@ -21,38 +21,38 @@
 ?>
 
 <?php if ( comments_open() ) { ?>
+
 	<div id="comments">
 		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?><span class="hide_if_print"> - <a href="#respond" title="<?php esc_attr_e( "Leave a comment",'boozurk' ); ?>"><?php _e( "Leave a comment",'boozurk' ); ?></a></span>
 	</div>
-	<?php
-} elseif ( have_comments() ) { ?>
+
+<?php } elseif ( have_comments() ) { ?>
+
 	<div id="comments">
 		<?php comments_number( __( 'No Comments','boozurk' ), __( '1 Comment','boozurk' ), __( '% Comments','boozurk' ) ); ?>
 	</div>
-	<?php
-} ?>
+
+<?php } ?>
 
 <?php if ( have_comments() ) { ?>
 
-	<?php boozurk_navigate_comments(); ?> 
-
 	<?php boozurk_hook_comments_list_before(); ?>
+
 	<ol id="commentlist">
-		<?php //wp_list_comments(array('avatar_size' => 96)); ?>
 		<?php wp_list_comments(); ?>
 	</ol>
+
 	<?php boozurk_hook_comments_list_after(); ?>
 
-	<?php boozurk_navigate_comments(); ?> 
-
-
-<?php
-}
-//if comments are open
-if ( comments_open() && ! boozurk_is_printpreview() ) { 
-	comment_form(); ?>
-	<div class="fixfloat"></div>
 <?php } ?>
+
+<?php if ( comments_open() && ! boozurk_is_printpreview() ) {  //if comments are open
+
+	comment_form(); ?>
+	<br class="fixfloat">
+
+<?php } ?>
+
 <!-- end comments -->
 
 <?php boozurk_hook_comments_after(); ?>

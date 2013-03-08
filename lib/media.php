@@ -6,8 +6,8 @@
  * in order to select the logo.
  * The page loaded by thickbox in options page
  *
- * @package boozurk
- * @since boozurk 2.00
+ * @package Boozurk
+ * @since 2.00
  */
 ?>
 

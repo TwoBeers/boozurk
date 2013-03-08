@@ -4,8 +4,8 @@
  *
  * All that affetcs the admin side (options page, styles, scripts, etc)
  *
- * @package boozurk
- * @since boozurk 2.04
+ * @package Boozurk
+ * @since 2.04
  */
 
 
@@ -38,7 +38,7 @@ function boozurk_register_tb_settings() {
 
 // check and set default options 
 function boozurk_default_options() {
-		global $boozurk_version;
+
 		$the_coa = boozurk_get_coa();
 		$the_opt = get_option( 'boozurk_options' );
 
@@ -49,7 +49,7 @@ function boozurk_default_options() {
 			}
 			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'boozurk_options' , $the_opt );
-		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < $boozurk_version ) {
+		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < boozurk_get_info( 'version' ) ) {
 			// check for unset values and set them to default value -> when updated to new version
 			foreach ( $the_coa as $key => $val ) {
 				if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default'];
@@ -57,19 +57,19 @@ function boozurk_default_options() {
 			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'boozurk_options' , $the_opt );
 		}
+
 }
 
 // print a reminder message for set the options after the theme is installed or updated
 function boozurk_setopt_admin_notice() {
-	global $boozurk_opt, $boozurk_version;
-	if ( current_user_can( 'manage_options' ) && ( $boozurk_opt['version'] < $boozurk_version ) )
+	global $boozurk_opt;
+	if ( current_user_can( 'manage_options' ) && ( $boozurk_opt['version'] < boozurk_get_info( 'version' ) ) )
 		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\"", 'boozurk' ), 'Boozurk', get_admin_url() . 'themes.php?page=boozurk_functions' ) . '</strong></p></div>';
 }
 
 //add js script to the options page
 function boozurk_theme_admin_scripts() {
-	global $boozurk_version;
-	wp_enqueue_script( 'boozurk-options-script', get_template_directory_uri().'/js/options.dev.js',array('jquery','farbtastic','thickbox'),$boozurk_version, true ); //thebird js
+	wp_enqueue_script( 'boozurk-options-script', get_template_directory_uri().'/js/options.dev.js', array( 'jquery', 'farbtastic', 'thickbox' ), boozurk_get_info( 'version' ), true ); //thebird js
 	$data = array(
 		'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'boozurk' )
 	);
@@ -83,8 +83,7 @@ function boozurk_widgets_style() {
 
 //add js script to the widgets page
 function boozurk_widgets_scripts() {
-	global $boozurk_version;
-	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery'), $boozurk_version, true );
+	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery'), boozurk_get_info( 'version' ), true );
 }
 
 // the custon header page style
@@ -95,7 +94,6 @@ function boozurk_theme_admin_styles() {
 // sanitize options value
 if ( !function_exists( 'boozurk_sanitize_options' ) ) {
 	function boozurk_sanitize_options($input) {
-		global $boozurk_version;
 
 		$the_coa = boozurk_get_coa();
 
@@ -158,7 +156,7 @@ if ( !function_exists( 'boozurk_sanitize_options' ) ) {
 			if ( $the_coa[$key]['req'] != '' ) { if ( $input[$the_coa[$key]['req']] == ( 0 || '') ) $input[$key] = 0; }
 		}
 
-		$input['version'] = $boozurk_version; // keep version number
+		$input['version'] = boozurk_get_info( 'version' ); // keep version number
 		return $input;
 	}
 }
@@ -169,7 +167,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 
 		if ( !current_user_can( 'edit_theme_options' ) ) wp_die( 'You do not have sufficient permissions to access this page.' );
 
-		global $boozurk_opt, $boozurk_current_theme, $boozurk_version;
+		global $boozurk_opt;
 
 		$the_coa = boozurk_get_coa();
 		$the_groups = boozurk_get_coa( 'groups' );
@@ -183,8 +181,8 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 		}
 
 		// update version value when admin visit options page
-		if ( $boozurk_opt['version'] < $boozurk_version ) {
-			$boozurk_opt['version'] = $boozurk_version;
+		if ( $boozurk_opt['version'] < boozurk_get_info( 'version' ) ) {
+			$boozurk_opt['version'] = boozurk_get_info( 'version' );
 			update_option( $the_option_name , $boozurk_opt );
 		}
 
@@ -204,7 +202,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 	?>
 		<div class="wrap" id="main-wrap">
 			<div class="icon32" id="theme-icon"><br></div>
-			<h2><?php echo $boozurk_current_theme . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
+			<h2><?php echo boozurk_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
 			<ul id="tabselector" class="hide-if-no-js">
 <?php
 				foreach( $the_groups as $key => $name ) {
@@ -262,7 +260,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 								<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
 										<div class="sub-opt-wrap">
 									<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>
-										<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
+										<?php if ( $subval == '' ) { echo '<br>'; continue;} ?>
 											<div class="sub-opt">
 											<?php if ( !isset ($the_opt[$subval]) ) $the_opt[$subval] = $the_coa[$subval]['default']; ?>
 												<?php if ( $the_coa[$subval]['description'] != '' ) { ?><span><?php echo $the_coa[$subval]['description']; ?> : </span><?php } ?>
@@ -295,9 +293,9 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 														<input onclick="boozurkOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="boozurk_box_<?php echo $subval; ?>" value="" readonly="readonly" />
 														<div class="boozurk_cp" id="boozurk_colorpicker_<?php echo $subval; ?>"></div>
 														<input class="boozurk_input" id="boozurk_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-														<br />
+														<br>
 														<a class="hide-if-no-js" href="#" onclick="boozurkOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>
-														<br />
+														<br>
 														<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="boozurkOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
 														<br class="clear" />
 													</div>
@@ -321,9 +319,9 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 															<input onclick="boozurkOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>');" style="background-color:<?php echo $catcolor; ?>;" class="color_preview_box" type="text" id="boozurk_box_<?php echo $subval.'-'.$category->term_id; ?>" value="" readonly="readonly" />
 															<div class="boozurk_cp" id="boozurk_colorpicker_<?php echo $subval.'-'.$category->term_id; ?>"></div>
 															<input class="boozurk_input" id="boozurk_input_<?php echo $subval.'-'.$category->term_id; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" />
-															<br />
+															<br>
 															<a class="hide-if-no-js" href="#" onclick="boozurkOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>
-															<br />
+															<br>
 															<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['defaultcolor']; ?>;" href="#" onclick="boozurkOptions.updateColor('<?php echo $subval.'-'.$category->term_id; ?>','<?php echo $the_coa[$subval]['defaultcolor']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
 															<br class="clear" />
 															<?php if ( $category->description ) { ?><div class="column-des"><?php echo $category->description; ?></div><?php } ?>
@@ -350,7 +348,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 					</form>
 					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
 						<small>
-							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br />
+							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br>
 							<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-boozurk' ); ?>" title="boozurk theme" target="_blank"><?php _e( 'Leave a feedback', 'boozurk' ); ?></a>
 						</small>
 					</p>

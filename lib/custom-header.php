@@ -4,8 +4,8 @@
  *
  * The custom header support
  *
- * @package boozurk
- * @since boozurk 2.04
+ * @package Boozurk
+ * @since 2.04
  */
 
 

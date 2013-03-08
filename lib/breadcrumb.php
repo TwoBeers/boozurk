@@ -5,8 +5,8 @@
  * The breadcrumb code.
  * Supports Breadcrumb NavXT plugin.
  *
- * @package boozurk
- * @since boozurk 2.00.1
+ * @package Boozurk
+ * @since 2.00.1
  */
 
 
@@ -20,7 +20,7 @@ if (!function_exists('boozurk_breadcrumb')) {
 			<?php } else { ?>
 				<div id="bz-breadcrumb">
 				<?php echo boozurk_get_the_breadcrumb(); // show breadcrumb ?>
-				<div class="fixfloat"></div>
+				<br class="fixfloat">
 				</div>
 			<?php } ?>
 			<?php boozurk_search_reminder(); ?>

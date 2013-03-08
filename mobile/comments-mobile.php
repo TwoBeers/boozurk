@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Comments template
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 

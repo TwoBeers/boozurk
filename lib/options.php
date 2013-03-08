@@ -4,8 +4,8 @@
  *
  * the options array
  *
- * @package boozurk
- * @since boozurk 2.03
+ * @package Boozurk
+ * @since 2.03
  */
 
 
@@ -239,7 +239,7 @@ function boozurk_get_coa( $option = false ) {
 							'type' => 'txt',
 							'default' => __( '(no title)', 'boozurk' ),
 							'description' => __( 'default text', 'boozurk' ),
-							'info' => __( '<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id', 'boozurk' ),
+							'info' => __( '<br>you may use these codes:<br><code>%d</code> for post date<br><code>%f</code> for post format (if any)<br><code>%n</code> for post id', 'boozurk' ),
 							'req' => '',
 							'sub'=>false
 		),
@@ -350,7 +350,7 @@ function boozurk_get_coa( $option = false ) {
 							'type' => '',
 							'default' => '',
 							'description' => __( 'Post details', 'boozurk' ),
-							'info' => __( 'show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget', 'boozurk' ),
+							'info' => __( 'show post details in index view, right before the post content<br>in single post view you can use the <strong>Post details</strong> widget', 'boozurk' ),
 							'req' => '',
 							'sub' => array( 'boozurk_post_date', 'boozurk_post_cat', 'boozurk_post_tag' )
 		),
@@ -598,12 +598,12 @@ function boozurk_get_coa( $option = false ) {
 		return $boozurk_coa;
 }
 
-// retrive the required option. I the option ain't set, the default value is returned
+// retrive the required option. If the option ain't set, the default value is returned
 if ( !function_exists( 'boozurk_get_opt' ) ) {
 	function boozurk_get_opt( $opt ) {
 		global $boozurk_opt;
 
-		if ( isset( $boozurk_opt[$opt] ) ) return $boozurk_opt[$opt];
+		if ( isset( $boozurk_opt[$opt] ) ) return apply_filters( 'boozurk_option_override', $boozurk_opt[$opt], $opt );
 
 		$defopt = boozurk_get_coa( $opt );
 		

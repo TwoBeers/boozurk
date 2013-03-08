@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Widget area template
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 
@@ -18,5 +18,5 @@
 
 <div id="tbm-widget-area">
 	<?php dynamic_sidebar( 'tbm-widget-area' ); ?>
-	<div class="fixfloat"></div> 
+	<br class="fixfloat"> 
 </div><!-- #tbm-widget-area -->

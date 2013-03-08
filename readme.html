@@ -1,6 +1,6 @@
 <h3>Boozurk - WordPress theme</h3>
 	<ul>
-		<li>version: 2.04</li>
+		<li>version: 2.05</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -60,7 +60,8 @@
 		</li>
 		<li><h4>Thickbox images and galleries</h4>
 			<p><a href="http://thickbox.net/" target="_blank">ThickBox</a> is a webpage UI dialog widget written in JavaScript on top of the jQuery library. Its function is to show a single image, multiple images, inline content and so on. While it is not maintained any longer, it has many advantages: is really lightweight and is already integrated in Wordpress so there's no need to worry about its compatibility.
-			<br /><u>Note:</u> the javascript code detects only images linked to the image itself, not to the attachment page.</p>
+			<br><u>Note:</u> the javascript code detects only images linked to the image itself, not to the attachment page.<br>
+			If Jetpack Carousel is active, it will override the built-in feature</p>
 		</li>
 		<li><h4>MP3 Audio player</h4>
 			<p>A swf MP3 player for listening mp3 files even in browsers that don't support them.</p>
@@ -69,20 +70,23 @@
 			<p>Fading tooltips everywhere! ;)</p>
 		</li>
 		<li><h4><a href="https://plus.google.com/" target="_blank">Google +1</a></h4>
-			<p>The theme has the Google +1 feature already buit-in. You only need to activate it in <em>theme options</em>.</p>
+			<p>The theme has the Google +1 feature already buit-in. You only need to activate it in <em>theme options</em>.<br>
+			If Jetpack Sharedaddy is active, it will override the built-in feature</p>
 		</li>
 		<li><h4>Custom logo</h4>
 			<p>You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or choose it in your media libray by clicking the "select" button.
-			<br /><u>Note:</u> while the logo image will fit to its container on the right sidebar, we suggest not to use images larger than 200px.</p>
+			<br><u>Note:</u> while the logo image will fit to its container on the right sidebar, we suggest not to use images larger than 200px.</p>
 		</li>
 		<li><h4>Infinite pagination</h4>
 			<p>Append the next page of posts (via AJAX) to your current page. You can decide (always in <em>theme options</em>) if this will be done automatically (when a user scrolls to the bottom) or manually (by clicking the link at the end of posts).
-			<br /><u>Note:</u> this feature has some disvantages, like:
-				<ul>
-					<li>The "footer" of the page may be impossible to reach if in auto mode.</li>
-					<li>There is no permalink to a given state of the page.</li>
-					<li>Some javascript features may not capture the event</li>
-				</ul>
+			<br>
+			<u>Note:</u> this feature has some disvantages, like:
+			<ul>
+				<li>The "footer" of the page may be impossible to reach if in auto mode.</li>
+				<li>There is no permalink to a given state of the page.</li>
+				<li>Some javascript features may not capture the event</li>
+			</ul>
+			If Jetpack Infinite scroll is active, it will override the built-in feature
 			</p>
 		</li>
 		<li><h4>Plug and Play</h4>
@@ -115,7 +119,7 @@
 		</li>
 		<li><h4>Follow Me</h4>
 			<p>This widget lets visitors of your blog to subscribe to it or follow you on popular social networks like Twitter, FaceBook etc. Remember to insert the <b>full url</b> to your accounts, not only the username!
-			<br /><u>Note:</u> the email address will be javascript encripted to protect you from span.</p>
+			<br><u>Note:</u> the email address will be javascript encripted to protect you from span.</p>
 		</li>
 		<li><h4>besides...</h4>
 			<p>This widget will show your last "aside" or "status" post</p>
@@ -159,7 +163,7 @@
 		<li><h4>chat</h4>
 		</li>
 		<li><h4>gallery</h4>
-			<p>the code will search for all the images attached to the post. Make sure there's one, at least.</p>
+			<p>the code will search for all the images attached to the post. If nothing found, it search for all the attached images</p>
 		</li>
 		<li><h4>image</h4>
 			<p>the code will search for the first image (&lt;img&gt;) tag inside the content. Make sure there's one, at least.</p>
@@ -168,7 +172,7 @@
 			<p>the code will search for the first anchor (&lt;a&gt;) tag inside the content. Make sure there's one, at least.</p>
 		</li>
 		<li><h4>quote</h4>
-			<p>the code will search for the first quote (&lt;blockquote&gt;) tag inside the content. Make sure there's one, at least.</p>
+			<p>the code will search for the first quote (&lt;blockquote&gt;) tag inside the content. If nothing found, it converts the content to a blockquote</p>
 		</li>
 		<li><h4>status</h4>
 		</li>
@@ -194,11 +198,13 @@ Adds:
 		<li>new function for printing credits (partially filterable)</li>
 		<li>added TheHookAlliance hooks support</li>
 		<li>display image captions while viewing with thickbox</li>
-		<li>Jetpack increased compatibility</li>
+		<li>Jetpack modules support (Carousel, Likes, Sharedaddy, InfiniteScroll)</li>
 		<li>RSS link in "follow me" widget customizable</li>
+		<li>a lot of filters and hooks for adding/deleting/modifing the theme elements and functions</li>
 	</ul>
 Fixes:
 	<ul>
+		<li>code cleaned</li>
 		<li>sidebars moved after the footer (faster content loading)</li>
 		<li>hooks consistency (names, postions etc)</li>
 		<li>comment form filters defined in functions.php</li>

@@ -62,14 +62,14 @@ boozurkScripts = {
 
 		}
 
-    },
+	},
 
 
 	post_expander : function() {
 
-        return $('a.more-link').each(function() {
-            
-            $(this).click(function() {
+		return $('a.more-link').each(function() {
+			
+			$(this).click(function() {
 
 				var link = $(this);
 
@@ -85,9 +85,9 @@ boozurkScripts = {
 
 			});
 
-        });
+		});
 
-    },
+	},
 
 
 	infinite_scroll : function( behaviour ) {
@@ -124,8 +124,8 @@ boozurkScripts = {
 
 	animate_menu : function() {
 
-        return $('#mainmenu').children('li').each(function() {
-            
+		return $('#mainmenu').children('li').each(function() {
+			
 			var d = $(this).children('ul'); //for each main item, get the sub list
 
 			if(d.size() !== 0){ //if the sub list exists...
@@ -145,15 +145,15 @@ boozurkScripts = {
 				});
 			}
 
-        });
+		});
 
-    },
+	},
 
 
 	tooltips : function() {
 
-        return $('.bz-tooltip,.nb_tooltip').each(function() {
-            
+		return $('.bz-tooltip,.nb_tooltip').each(function() {
+			
 			var p = $(this).parent();
 			var self = $(this);
 			
@@ -166,65 +166,67 @@ boozurkScripts = {
 				self.stop().delay(100).fadeOut();
 
 			});
-            
-        });
-        
-    },
+			
+		});
+		
+	},
 
 
 	cooltips : function(selector,fade,fallback) {
 
-        return $(selector).each(function() {
-            
-            $(this).hover(function() {
+		return $(selector).each(function() {
+			
+			$(this).hover(function() {
 
-                $.data(this, 'cancel.cooltips', true);
+				$this = $(this);
 
-                var tip = $.data(this, 'active.cooltips');
-                if (!tip) {
-                    tip = $('<div class="cooltips"><div class="cooltips-inner"/></div>');
-                    tip.css({position: 'absolute', zIndex: 100000});
-                    $.data(this, 'active.cooltips', tip);
-                }
+				$.data(this, 'cancel.cooltips', true);
 
-                if ($(this).attr('title') || typeof($(this).attr('original-title')) != 'string') {
-                    $(this).attr('original-title', $(this).attr('title') || '').removeAttr('title');
-                }
+				var tip = $.data(this, 'active.cooltips');
+				if (!tip) {
+					tip = $('<div class="cooltips"><div class="cooltips-inner"/></div>');
+					tip.css({position: 'absolute', zIndex: 100000});
+					$.data(this, 'active.cooltips', tip);
+				}
 
-                var title = $(this).attr('original-title');
+				if ($this.attr('title') || typeof($this.attr('original-title')) != 'string') {
+					$this.attr('original-title', $this.attr('title') || '').removeAttr('title');
+				}
 
-                tip.find('.cooltips-inner')['text'](title || fallback);
+				var title = $this.attr('original-title');
 
-                var pos = $.extend({}, $(this).offset(), {width: this.offsetWidth, height: this.offsetHeight});
-                tip.get(0).className = 'cooltips'; // reset classname in case of dynamic gravity
-                tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
-                var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
-				var h_pos = ( $(this).parents('#sidebar-secondary,#navbuttons.fixed').length ) ? 'to_left' : ''; // if in right sidebar, move to left
+				tip.find('.cooltips-inner')['text'](title || fallback);
+
+				var pos = $.extend({}, $this.offset(), {width: this.offsetWidth, height: this.offsetHeight});
+				tip.get(0).className = 'cooltips'; // reset classname in case of dynamic gravity
+				tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
+				var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
+				var h_pos = ( $this.parents('#sidebar-secondary,#navbuttons.fixed').length ) ? 'to_left' : ''; // if in right sidebar, move to left
 				tip.css({top: pos.top - actualHeight, left: pos.left+(pos.width / 2)}).addClass(h_pos);
-                if (fade) {
-                    tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
-                } else {
-                    tip.css({visibility: 'visible'});
-                }
+				if (fade) {
+					tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
+				} else {
+					tip.css({visibility: 'visible'});
+				}
 
-            }, function() {
-                $.data(this, 'cancel.cooltips', false);
-                var self = this;
-                setTimeout(function() {
-                    if ($.data(this, 'cancel.cooltips')) return;
-                    var tip = $.data(self, 'active.cooltips');
-                    if (fade) {
-                        tip.stop().fadeOut(function() { $(this).remove(); });
-                    } else {
-                        tip.remove();
-                    }
-                }, 100);
+			}, function() {
+				$.data(this, 'cancel.cooltips', false);
+				var self = this;
+				setTimeout(function() {
+					if ($.data(this, 'cancel.cooltips')) return;
+					var tip = $.data(self, 'active.cooltips');
+					if (fade) {
+						tip.stop().fadeOut(function() { $(this).remove(); });
+					} else {
+						tip.remove();
+					}
+				}, 100);
 
-            });
-            
-        });
-        
-    },
+			});
+			
+		});
+		
+	},
 
 
 	AJAX_paged : function() {
@@ -357,5 +359,9 @@ boozurkScripts = {
 };
 
 $(document).ready(function($){ boozurkScripts.init(boozurk_l10n.script_modules); });
+
+$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+	boozurkScripts.init(boozurk_l10n.script_modules_afterajax);
+});
 
 })(jQuery);

@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Index/Arcive/Search template
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 
@@ -27,7 +27,7 @@
 			<a href="<?php the_permalink() ?>" rel="bookmark">
 				<span class="tb-thumb-format <?php echo get_post_format( $post->ID ); ?>"></span>
 				<?php the_title(); ?>
-				<br />
+				<br>
 				<span class="tbm-details"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_number('(0)', '(1)','(%)'); ?></span>
 			</a>
 		</li>

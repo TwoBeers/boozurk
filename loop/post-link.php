@@ -1,9 +1,26 @@
+<?php
+/**
+ * post-link.php
+ *
+ * Template part file that contains the Link Format entry
+ * 
+ * @package Boozurk
+ * @since 1.00
+ */
+?>
+
 <?php boozurk_hook_entry_before(); ?>
+
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+
 	<?php boozurk_extrainfo(); ?>
+
 	<?php boozurk_hook_entry_top(); ?>
+
 	<?php boozurk_hook_post_title_before(); ?>
-	<?php $bz_first_link = boozurk_get_first_link(); ?>
+
+	<?php $boozurk_first_link = boozurk_get_first_link(); ?>
+
 	<?php
 		switch ( boozurk_get_opt( 'boozurk_post_formats_link_title' ) ) {
 			case 'post title':
@@ -13,11 +30,13 @@
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'first link text':
-				boozurk_featured_title( $bz_first_link ? array( 'alternative' => $bz_first_link['text'] , 'href' => $bz_first_link['href'], 'target' => '_blank', 'title' => $bz_first_link['text'] ) : '' ) ;
+				boozurk_featured_title( $boozurk_first_link ? array( 'alternative' => $boozurk_first_link['text'] , 'href' => $boozurk_first_link['href'], 'target' => '_blank', 'title' => $boozurk_first_link['text'] ) : '' ) ;
 				break;
 		}
 	?>
+
 	<?php boozurk_hook_post_title_after(); ?>
+
 	<div class="storycontent">
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_link_content' ) ) {
@@ -30,7 +49,11 @@
 			}
 		?>
 	</div>
+
 	<?php boozurk_hook_entry_bottom(); ?>
-</div>	
+
+</div>
+
 <?php boozurk_hook_entry_after(); ?>
+
 <?php boozurk_last_comments( get_the_ID() ); ?>

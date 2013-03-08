@@ -22,8 +22,8 @@
  * - Clean Archives
  * - Font Resize
  *
- * @package boozurk
- * @since boozurk 1.00
+ * @package Boozurk
+ * @since 1.00
  */
 
 
@@ -421,7 +421,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 				}
 			}
  		}
-		$output .= '</ul><div class="fixfloat"></div>';
+		$output .= '</ul><br class="fixfloat">';
 		$output .= $after_widget;
 
 		echo $output;
@@ -463,7 +463,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'boozurk'); ?></label><br />
+            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'boozurk'); ?></label><br>
             <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
 <?php
             $size_array = array ('16', '24', '32', '48', '64');
@@ -643,7 +643,7 @@ class boozurk_Widget_social extends WP_Widget {
         }
 ?>
         <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
-            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'boozurk'); ?></label><br />
+            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select your icon size', 'boozurk'); ?></label><br>
             <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
 <?php
             $size_array = array ('16', '24', '32', '48', '64');
@@ -1223,7 +1223,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 		}
 ?>
 		</ul>
-		<div class="fixfloat"></div>
+		<br class="fixfloat">
 <?php
 		echo $after_widget;
 		$cache[$args['widget_id']] = ob_get_flush();
@@ -1253,7 +1253,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title','boozurk' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 		<p>
-			<label for="<?php echo $this->get_field_id('icon'); ?>"><?php _e( 'Show','boozurk' ); ?></label><br />
+			<label for="<?php echo $this->get_field_id('icon'); ?>"><?php _e( 'Show','boozurk' ); ?></label><br>
 			<select name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" >
 				<option value="3" <?php selected( '3', $icon ); ?>><?php echo __('icons & text','boozurk'); ?></option>
 				<option value="2" <?php selected( '2', $icon ); ?>><?php echo __('icons','boozurk'); ?></option>
@@ -1262,7 +1262,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 		</p>
 		<p>
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count'); ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id('count'); ?>"><?php _e( 'Show posts count','boozurk' ); ?></label><br />
+			<label for="<?php echo $this->get_field_id('count'); ?>"><?php _e( 'Show posts count','boozurk' ); ?></label><br>
 		</p>
 
 <?php

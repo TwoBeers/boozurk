@@ -6,8 +6,8 @@
  *
  * Includes The Hook Alliance support file (https://github.com/zamoose/themehookalliance)
  *
- * @package boozurk
- * @since boozurk 2.00
+ * @package Boozurk
+ * @since 2.00
  */
 
 

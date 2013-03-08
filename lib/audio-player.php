@@ -4,8 +4,8 @@
  *
  * the swf audio player code
  *
- * @package boozurk
- * @since boozurk 2.00
+ * @package Boozurk
+ * @since 2.00
  */
 
 
@@ -26,9 +26,8 @@ if ( !function_exists( 'boozurk_init_audio_player' ) ) {
 // add scripts
 if ( !function_exists( 'boozurk_audioplayer_scripts' ) ) {
 	function boozurk_audioplayer_scripts(){
-		global $boozurk_version;
 
-		wp_enqueue_script( 'bz-swf-audio-player', get_template_directory_uri() . '/js/audio-player.min.js', array( 'jquery', 'swfobject' ), $boozurk_version, true );
+		wp_enqueue_script( 'bz-swf-audio-player', get_template_directory_uri() . '/js/audio-player.min.js', array( 'jquery', 'swfobject' ), boozurk_get_info( 'version' ), true );
 
 	}
 }

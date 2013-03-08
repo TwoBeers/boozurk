@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.04
+Version: 2.05
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -28,7 +28,7 @@ body {
 	font-family: monospace;
 	background: transparent url('images/bg.png') 256px 0px repeat-y;
 	font-size: 15px;
-	line-height: 1.8em;
+	line-height: 1.6em;
 }
 a img {
 	border: none;
@@ -471,6 +471,7 @@ input[type=password]:focus {
 }
 /* Posts/Pages/Attachments
 ----------------------------------------------------------*/
+#posts_content .hentry.not-found,
 #posts_content .hentry.post,
 #posts_content .hentry.page,
 #posts_content .hentry.attachment {
@@ -479,7 +480,7 @@ input[type=password]:focus {
 	padding: 0 10px 10px 11px;
 	clear: both;
 	position: relative;
-	min-height: 80px;
+	min-height: 96px;
 	margin: 20px 0 20px -40px
 }
 .att_content {
@@ -494,6 +495,7 @@ input[type=password]:focus {
 	width: 40px;
 	opacity: 0.5;
 	filter: alpha(opacity=50);
+	margin-bottom: 2px;
 }
 .pmb_format {
 	background-color: #fff;
@@ -564,10 +566,6 @@ input[type=password]:focus {
 .category-status .storycontent {
 	padding-left: 60px;
 }
-.gallery-thumb {
-	float: left;
-	margin: 0 10px 10px 0;
-}
 .bz-no-post {
 	padding: 10px;
 	font-weight: bold;
@@ -577,21 +575,18 @@ input[type=password]:focus {
 	background: url('images/loading.gif') no-repeat scroll left center transparent;
 }
 .post-edit-link {
-	background:url("images/details.png") no-repeat center -700px transparent;
-	border:1px solid #ddd;
-	border-radius:3px;
-	display:none;
-	height:16px;
-	overflow:hidden;
-	position:absolute;
-	right:1px;
-	text-indent:-1000px;
-	top:3px;
-	width:16px;
-	z-index:100;
-}
-#posts_content .post:hover .post-edit-link {
+	background: url("images/details.png") no-repeat scroll center -700px #fff;
 	display: block;
+	height: 16px;
+	overflow: hidden;
+	text-indent: -1000px;
+	width: 40px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.post-edit-link:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }
 .bz-post-top-date,
 .bz-post-top-tag,
@@ -917,6 +912,10 @@ img.tb-thumb-format {
 .sticky .pmb_format {
 	background-position: center -384px;
 }
+.not-found .pmb_format {
+	background-position: center -416px;
+}
+
 /* Main menu 
 ----------------------------------------------------------*/
 #mainmenu {
@@ -1265,6 +1264,7 @@ img.tb-thumb-format {
 	border-top: 1px solid #ddd;
 	position: relative;
 	padding: 10px;
+	left: 1px;
 }
 .bypostauthor > .comment-body {
 	border: 1px solid #ddd;
@@ -1273,17 +1273,7 @@ img.tb-thumb-format {
 }
 .comment-body .avatar {
 	position: absolute;
-	left: -36px;
-}
-.comment .reply {
-	font-size: .8em;
-	text-align: right;
-}
-.comment-reply-link {
-	visibility: hidden;
-}
-.comment-body:hover .comment-reply-link {
-	visibility: visible;
+	left: -37px;
 }
 #respond {
 	border: 1px solid #ddd;
@@ -1291,6 +1281,11 @@ img.tb-thumb-format {
 	padding: 10px;
 	position: relative;
 }
+.comment-body  + #respond {
+	margin-top: 0;
+	margin-right: -2px;
+}
+
 .form-allowed-tags {
 	color: #999;
 }
@@ -1305,26 +1300,54 @@ img.tb-thumb-format {
 	margin-right: 10px;
 	margin-left: -1px;
 }
+.comment-reply-link,
 .comment-edit-link {
 	visibility: hidden;
-	font-size: .8em;
+	background: #fff;
+	display: block;
+	min-width: 50px;
+	text-align: center;
+	border-color : #ddd;
+	border-style: solid;
+	font-size: 0.8em;
+	line-height: 1em;
+	padding: 5px;
+	position: absolute;
 }
-.comment-body:hover .comment-edit-link {
+.comment-edit-link {
+	right: -1px;
+	top: -1px;
+	border-width: 1px;
+}
+.comment-reply-link {
+	bottom: -1px;
+	right: -1px;
+	border-width: 1px;
+}
+.comment-body:hover .comment-edit-link,
+.comment-body:hover .comment-reply-link {
 	visibility: visible;
+}
+.comment-reply-link:hover ,
+.comment-edit-link:hover {
+	background: #eee;
 }
 #cancel-comment-reply-link {
 	display: block;
-	height: 12px;
-	overflow: hidden;
+	height: 20px;
+	width: 20px;
 	position: absolute;
-	right: 10px;
-	top: 10px;
+	right: 0;
+	top: 0;
+	overflow: hidden;
 	text-indent: -1000px;
-	width: 13px;
 	background: url('images/details.png') no-repeat left -600px;
+	border-color : #ddd;
+	border-style: solid;
+	border-width: 0 0 1px 1px;
 }
 #cancel-comment-reply-link:hover {
-	background-position: left -612px;
+	background-position: left -620px;
 }
 .comment {
 	position: relative;
@@ -1341,7 +1364,7 @@ img.tb-thumb-format {
 }
 .gallery-item {
 	float: left;
-	margin-top: 10px;
+	margin-bottom: 10px;
 	text-align: center;
 }
 .gallery img {
@@ -1402,6 +1425,23 @@ img.tb-thumb-format {
 img.thumbsel {
 	box-shadow: 0 0 2px #404040;
 	border: 1px solid #777;
+}
+.gallery-preview .size-medium  {
+	margin: 0 1% 10px 0;
+	width: 300px;
+	max-width: 50%;
+}
+.gallery-preview .thumbnail-wrap {
+	overflow: hidden;
+	text-align: left;
+}
+.gallery-preview .size-thumbnail {
+	margin: 0 1% 10px 0;
+	min-width: 100px;
+	width: 30%;
+}
+.gallery-preview .info {
+	float: left;
 }
 
 /* =calendar
@@ -1759,4 +1799,37 @@ div.sharedaddy li a.sd-button {
 	background: #fff;
 	border-radius: 0;
 	box-shadow: none;
+}
+div.sharedaddy {
+	margin-top: 20px;
+}
+#main div.sd-block {
+	border-top: 1px solid #ddd;
+}
+.sd-block.sd-like {
+	padding-top: 10px;
+}
+span.infinite-loader {
+	margin: 10px auto 35px;
+	width: 28px;
+}
+div#infinite-handle {
+	text-align: center;
+	margin: 20px 0 40px;
+}
+div#infinite-handle span:hover {
+	border: 1px solid #21759B;
+	background: #f5f5f5;
+	color: #666;
+}
+.page-reminder {
+	text-align: center;
+	margin: 20px 0 20px;
+}
+.page-reminder span {
+	background: #333;
+	border-radius: 1px;
+	color: #eee;
+	font-size: 13px;
+	padding: 6px 16px;
 }

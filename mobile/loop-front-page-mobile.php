@@ -4,9 +4,9 @@
  *
  * No title, no comments, just page content.
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 

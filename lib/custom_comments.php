@@ -4,8 +4,8 @@
  *
  * adds some style to comments
  *
- * @package boozurk
- * @since boozurk 2.00
+ * @package Boozurk
+ * @since 2.00
  */
 
 

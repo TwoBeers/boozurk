@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Core functions
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 
 // mobile support
@@ -113,9 +113,8 @@ if ( !function_exists( 'boozurk_mobile_widget_area_init' ) ) {
 // Add stylesheets to page
 if ( !function_exists( 'boozurk_mobile_stylesheet' ) ) {
 	function boozurk_mobile_stylesheet(){
-		global $boozurk_version;
 		if ( is_admin() ) return;
-		wp_enqueue_style( 'tbm-mobile-style', get_template_directory_uri() . '/mobile/style-mobile.css', false, $boozurk_version, 'screen' );
+		wp_enqueue_style( 'tbm-mobile-style', get_template_directory_uri() . '/mobile/style-mobile.css', false, boozurk_get_info( 'version' ), 'screen' );
 	}
 }
 
@@ -166,10 +165,10 @@ if ( !function_exists( 'boozurk_mobile_post_details' ) ) {
 				</div>
 			<?php } ?>
 			<div class="tbm-post-details">
-				<?php if ( $cats ) { echo '<span class="tbm-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': ' . '</span>'; the_category( ' ' ); echo '<br/>'; } ?>
-				<?php if ( $tags ) { echo '<span class="tbm-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': '; if ( !get_the_tags() ) { echo __( 'No Tags', 'boozurk' ) . '</span>'; } else { the_tags('</span>', '', ''); } echo '<br/>'; } ?>
+				<?php if ( $cats ) { echo '<span class="tbm-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': ' . '</span>'; the_category( ' ' ); echo '<br>'; } ?>
+				<?php if ( $tags ) { echo '<span class="tbm-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': '; if ( !get_the_tags() ) { echo __( 'No Tags', 'boozurk' ) . '</span>'; } else { the_tags('</span>', '', ''); } echo '<br>'; } ?>
 				<?php if ( $date ) { echo '<span class="tbm-post-details-date">' . sprintf( __( 'Published on: %1$s', 'boozurk' ), '<b>' . get_the_time( get_option( 'date_format' ) ) . '</b>' ) . '</span>'; } ?>
-				<div class="fixfloat"> </div>
+				<br class="fixfloat">
 			</div>
 		<?php
 	}

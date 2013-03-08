@@ -2,9 +2,9 @@
 /**
  * The mobile theme - Footer template
  *
- * @package boozurk
+ * @package Boozurk
  * @subpackage mobile
- * @since boozurk 1.05
+ * @since 1.05
  */
 ?>
 
@@ -19,8 +19,8 @@
 			<?php echo boozurk_mobile_seztitle( 'before' ) . '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) . boozurk_mobile_seztitle( 'after' ); ?>
 			<p id="themecredits">
 				<?php echo sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) ) . ' @ twobeers.net">Boozurk</a>') ; ?>
-				<br/>
-				<br/>
+				<br>
+				<br>
 				<?php wp_loginout(); wp_register( ' | ', '' ); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __( 'Desktop View', 'boozurk' ) .'</a>'; ?>
 			</p>
 		</div>

@@ -5,37 +5,48 @@
  * Template part file that contains the site footer and
  * closing HTML body elements
  *
- * @package boozurk
- * @since boozurk 1.00
+ * @package Boozurk
+ * @since 1.00
  */
 ?>
 
 <!-- begin footer -->
-			<?php boozurk_hook_footer_before(); ?>
-			<div id="footer">
-				<?php boozurk_hook_footer_top(); ?>
+				<?php boozurk_hook_footer_before(); ?>
 
-				<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
+				<div id="footer">
 
-				<?php get_sidebar( 'footer' ); ?>
+					<?php boozurk_hook_footer_top(); ?>
 
-				<div id="bz-credits"><?php echo boozurk_get_credits(); ?></div>
-				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
+					<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 
-				<?php boozurk_hook_footer_bottom(); ?>
-			</div><!-- close footer -->
-			<?php boozurk_hook_footer_after(); ?>
+					<?php get_sidebar( 'footer' ); ?>
 
-			<?php get_sidebar(); // show sidebar ?>
+					<div id="bz-credits">
+						<?php echo boozurk_get_credits(); ?>
+					</div>
 
-			<?php get_sidebar( 'secondary' ); // show header widgets area ?>
+					<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
-		</div><!-- close content -->
+					<?php boozurk_hook_footer_bottom(); ?>
+
+				</div><!-- close footer -->
+
+				<?php boozurk_hook_footer_after(); ?>
+
+				<?php get_sidebar(); // show sidebar ?>
+
+				<?php get_sidebar( 'secondary' ); // show header widgets area ?>
+
+			</div><!-- close content -->
 
 		</div><!-- close main -->
+
 		<div id="print-links" class="hide_if_no_print"><a href="<?php the_permalink(); ?>"><?php echo __('Close','boozurk'); ?></a><span class="hide-if-no-js"> | <a href="javascript:window.print()"><?php _e( 'Print','boozurk' ); ?></a></span></div>
 
 		<?php boozurk_hook_body_bottom(); ?>
+
 		<?php wp_footer(); ?>
+
 	</body>
+
 </html>
