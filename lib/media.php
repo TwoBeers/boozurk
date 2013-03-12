@@ -9,9 +9,7 @@
  * @package Boozurk
  * @since 2.00
  */
-?>
 
-<?php
 
 check_admin_referer( 'boozurk-logo-nonce' );
 
@@ -24,7 +22,7 @@ function boozurk_media_navi( $paged, $ppp, $count ) {
 	$arr_params['boozurk_media'] = '1';
 	$arr_params_option['boozurk_media'] = '1';
 	$arr_params['_wpnonce'] = $arr_params_option['_wpnonce'] = wp_create_nonce( 'boozurk-logo-nonce' );
-	
+
 	$navi = '<div class="bz-media-navi">';
 	$navi .= '<span style="font-style:italic;color:#777;font-size:10px;">' . sprintf( __( '%s images', 'boozurk' ), $count ) . '</span>';
 	if ( $paged == 2 ) { $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&laquo;</a>'; }
@@ -41,31 +39,36 @@ function boozurk_media_navi( $paged, $ppp, $count ) {
 	if ( $count > ( $paged * $ppp ) ) { $arr_params['boozurk_paged'] = ( $paged + 1 ); $navi .= '<a href="' . add_query_arg( $arr_params, home_url() ) . '">&raquo;</a>'; }
 	$navi .= '</div>';
 	return $navi;
-	
+
 }
 
 function boozurk_media_library() {
+
 	$paged = isset( $_GET['boozurk_paged'] ) ? (int)$_GET['boozurk_paged'] : 1;
 	$ppp = 21;
 	$args = array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_mime_type' => 'image', 'post_status' => null, 'post_parent' => null ); 
 	$attachments = get_posts( $args );
-	
+
 	$navi = boozurk_media_navi( $paged, $ppp, count($attachments) );
-	
+
 	$attachments = array_slice( $attachments, ( ( $paged - 1 ) * $ppp ), $ppp );
-	
-	if ($attachments) { ?>
-		<?php echo $navi; ?>
-		<div id="bz-media-library">
-			<?php foreach ( $attachments as $attachment ) {
-				setup_postdata($attachment);
-				$details = wp_get_attachment_image_src( $attachment->ID, 'full' ); 
-			?>
-				<div class="thumb"><a href="javascript:void(0)" onClick="boozurkSendToInput('<?php echo esc_url($details[0]); ?>')"><?php echo wp_get_attachment_image( $attachment->ID ); ?></a></div>
-			<?php } ?>
-		</div>
-		<?php echo $navi; ?>
-	<?php }
+
+	if ($attachments) {
+
+?>
+	<?php echo $navi; ?>
+	<div id="bz-media-library">
+		<?php foreach ( $attachments as $attachment ) {
+			setup_postdata($attachment);
+			$details = wp_get_attachment_image_src( $attachment->ID, 'full' ); 
+		?>
+			<div class="thumb"><a href="javascript:void(0)" onClick="boozurkSendToInput('<?php echo esc_url($details[0]); ?>')"><?php echo wp_get_attachment_image( $attachment->ID ); ?></a></div>
+		<?php } ?>
+	</div>
+	<?php echo $navi; ?>
+<?php
+
+	}
 
 }
 

@@ -15,9 +15,9 @@
 
 	<head profile="http://gmpg.org/xfn/11">
 
-		<?php boozurk_hook_head_top(); ?>
-
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+
+		<?php boozurk_hook_head_top(); ?>
 
 		<meta name = "viewport" content = "width = device-width" />
 
@@ -75,4 +75,8 @@
 
 				<?php get_sidebar( 'header' ); // show header widgets area ?>
 
-				<?php boozurk_breadcrumb(); ?>
+				<div id="breadcrumb-wrap">
+
+					<?php boozurk_hook_breadcrumb_navigation(); ?>
+
+				</div>

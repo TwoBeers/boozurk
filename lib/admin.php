@@ -10,31 +10,47 @@
 
 
 add_action( 'admin_menu', 'boozurk_create_menu' ); // Add admin menus
+
 add_action( 'admin_notices', 'boozurk_setopt_admin_notice' );
+
 add_action( 'manage_posts_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for posts
+
 add_action( 'manage_pages_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for pages
+
 add_action( 'admin_head', 'boozurk_post_manage_style' ); // column-thumbnail style
+
 add_action( 'admin_init', 'boozurk_default_options' ); // tell WordPress to run boozurk_default_options()
 
 add_filter( 'manage_posts_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for posts
+
 add_filter( 'manage_pages_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for pages
+
 
 // create theme option page
 function boozurk_create_menu() {
-	//create new top-level menu
-	$pageopt = add_theme_page( __( 'Theme Options','boozurk' ), __( 'Theme Options','boozurk' ), 'edit_theme_options', 'boozurk_functions', 'boozurk_edit_options' );
-	//call register settings function
-	add_action( 'admin_init', 'boozurk_register_tb_settings' );
+
+	$pageopt = add_theme_page( __( 'Theme Options','boozurk' ), __( 'Theme Options','boozurk' ), 'edit_theme_options', 'boozurk_functions', 'boozurk_edit_options' ); //create new top-level menu
+
+	add_action( 'admin_init', 'boozurk_register_tb_settings' ); //call register settings function
+
 	add_action( 'admin_print_styles-' . $pageopt, 'boozurk_theme_admin_styles' );
+
 	add_action( 'admin_print_scripts-' . $pageopt, 'boozurk_theme_admin_scripts' );
+
 	add_action( 'admin_print_styles-widgets.php', 'boozurk_widgets_style' );
+
 	add_action( 'admin_print_scripts-widgets.php', 'boozurk_widgets_scripts' );
+
 }
+
 
 //register boozurk settings
 function boozurk_register_tb_settings() {
+
 	register_setting( 'boozurk_settings_group', 'boozurk_options', 'boozurk_sanitize_options' );
+
 }
+
 
 // check and set default options 
 function boozurk_default_options() {
@@ -44,52 +60,72 @@ function boozurk_default_options() {
 
 		// if options are empty, sets the default values
 		if ( empty( $the_opt ) || !isset( $the_opt ) ) {
+
 			foreach ( $the_coa as $key => $val ) {
 				$the_opt[$key] = $the_coa[$key]['default'];
 			}
 			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'boozurk_options' , $the_opt );
+
 		} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < boozurk_get_info( 'version' ) ) {
+
 			// check for unset values and set them to default value -> when updated to new version
 			foreach ( $the_coa as $key => $val ) {
 				if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default'];
 			}
 			$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'boozurk_options' , $the_opt );
+
 		}
 
 }
 
+
 // print a reminder message for set the options after the theme is installed or updated
 function boozurk_setopt_admin_notice() {
-	global $boozurk_opt;
-	if ( current_user_can( 'manage_options' ) && ( $boozurk_opt['version'] < boozurk_get_info( 'version' ) ) )
+
+	if ( current_user_can( 'manage_options' ) && ( boozurk_get_opt( 'version' ) < boozurk_get_info( 'version' ) ) )
 		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\"", 'boozurk' ), 'Boozurk', get_admin_url() . 'themes.php?page=boozurk_functions' ) . '</strong></p></div>';
+
 }
+
 
 //add js script to the options page
 function boozurk_theme_admin_scripts() {
+
 	wp_enqueue_script( 'boozurk-options-script', get_template_directory_uri().'/js/options.dev.js', array( 'jquery', 'farbtastic', 'thickbox' ), boozurk_get_info( 'version' ), true ); //thebird js
+
 	$data = array(
 		'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'boozurk' )
 	);
 	wp_localize_script( 'boozurk-options-script', 'boozurk_options_l10n', $data );
+
 }
+
 
 //add custom stylesheet
 function boozurk_widgets_style() {
+
 	wp_enqueue_style( 'boozurk-widgets-style', get_template_directory_uri() . '/css/widgets.css', false, '', 'screen' );
+
 }
+
 
 //add js script to the widgets page
 function boozurk_widgets_scripts() {
+
 	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery'), boozurk_get_info( 'version' ), true );
+
 }
+
 
 // the custon header page style
 function boozurk_theme_admin_styles() {
+
 	wp_enqueue_style( 'boozurk-options-style', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
+
 }
+
 
 // sanitize options value
 if ( !function_exists( 'boozurk_sanitize_options' ) ) {
@@ -157,9 +193,12 @@ if ( !function_exists( 'boozurk_sanitize_options' ) ) {
 		}
 
 		$input['version'] = boozurk_get_info( 'version' ); // keep version number
+
 		return $input;
+
 	}
 }
+
 
 // the theme option page
 if ( !function_exists( 'boozurk_edit_options' ) ) {
@@ -367,18 +406,23 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 	}
 }
 
+
 // Add Thumbnail Column in Manage Posts/Pages List
 function boozurk_addthumbcolumn($cols) {
+
 	$cols['thumbnail'] = ucwords( __('thumbnail', 'boozurk') );
 	return $cols;
+
 }
+
 
 // Add Thumbnails in Manage Posts/Pages List
 function boozurk_addthumbvalue($column_name, $post_id) {
+
 		$width = (int) 60;
 		$height = (int) 60;
+
 		if ( 'thumbnail' == $column_name ) {
-			// thumbnail of WP 2.9
 			$thumbnail_id = get_post_meta( $post_id, '_thumbnail_id', true );
 			if ($thumbnail_id) $thumb = wp_get_attachment_image( $thumbnail_id, array($width, $height), true );
 			if ( isset($thumb) && $thumb ) {
@@ -387,17 +431,19 @@ function boozurk_addthumbvalue($column_name, $post_id) {
 				echo '';
 			}
 		}
+
 }
 
+
 // Add Thumbnail Column style in Manage Posts/Pages List
-if ( !function_exists( 'boozurk_post_manage_style' ) ) {
-	function boozurk_post_manage_style(){
+function boozurk_post_manage_style(){
+
 ?>
-<style type="text/css">
-	.fixed .column-thumbnail {
-		width: 70px;
-	}
-</style>
+	<style type="text/css">
+		.fixed .column-thumbnail {
+			width: 70px;
+		}
+	</style>
 <?php
-	}
+
 }

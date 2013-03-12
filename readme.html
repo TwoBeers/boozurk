@@ -16,15 +16,16 @@
 <h3>Licensed under GPL</h3>
 	<ul>
 		<li><a href="http://www.gnu.org/licenses/gpl-2.0.html" title="GNU General Public License, version 2" target="_blank" >http://www.gnu.org/licenses/gpl-2.0.html</a></li>
-		<li>Custom Icons #1 by StudioPress - http://www.studiopress.com/graphics/custom-icons-1 - License: GPLv2</li>
 		<li>MP3 audio player: see license in <em>resources/audio-player/license.txt</em></li>
 		<li>Unless otherwise specified, all images are original creations and licensed under GPL</li>
 	</ul>
- 
-<h3 style="border-top:2px groove #fff; padding-top:10px">REQUIREMENTS:</h3>
+
+<hr>
+
+<h3>REQUIREMENTS:</h3>
 	<ul>
 		<li>PHP 5+</li>
-		<li>Wordpress 3.1+ (REQUIRED)</li>
+		<li>Wordpress 3.4+ (REQUIRED)</li>
 	</ul>
  
 <h3>STANDARD THEME FEATURES:</h3>
@@ -61,17 +62,17 @@
 		<li><h4>Thickbox images and galleries</h4>
 			<p><a href="http://thickbox.net/" target="_blank">ThickBox</a> is a webpage UI dialog widget written in JavaScript on top of the jQuery library. Its function is to show a single image, multiple images, inline content and so on. While it is not maintained any longer, it has many advantages: is really lightweight and is already integrated in Wordpress so there's no need to worry about its compatibility.
 			<br><u>Note:</u> the javascript code detects only images linked to the image itself, not to the attachment page.<br>
-			If Jetpack Carousel is active, it will override the built-in feature</p>
+			If Jetpack Carousel is active, this will override the built-in feature</p>
 		</li>
 		<li><h4>MP3 Audio player</h4>
-			<p>A swf MP3 player for listening mp3 files even in browsers that don't support them.</p>
+			<p>A swf MP3 player for listening mp3 files even in browsers that don't support them. Based on <a href="http://wpaudioplayer.com/standalone/">WordPress Audio Player</a></p>
 		</li>
 		<li><h4>Cool tooltips</h4>
 			<p>Fading tooltips everywhere! ;)</p>
 		</li>
 		<li><h4><a href="https://plus.google.com/" target="_blank">Google +1</a></h4>
 			<p>The theme has the Google +1 feature already buit-in. You only need to activate it in <em>theme options</em>.<br>
-			If Jetpack Sharedaddy is active, it will override the built-in feature</p>
+			If Jetpack Sharedaddy is active, it will override this built-in feature</p>
 		</li>
 		<li><h4>Custom logo</h4>
 			<p>You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or choose it in your media libray by clicking the "select" button.
@@ -86,7 +87,7 @@
 				<li>There is no permalink to a given state of the page.</li>
 				<li>Some javascript features may not capture the event</li>
 			</ul>
-			If Jetpack Infinite scroll is active, it will override the built-in feature
+			If Jetpack Infinite scroll is active, it will override this built-in feature
 			</p>
 		</li>
 		<li><h4>Plug and Play</h4>
@@ -98,6 +99,7 @@
 				<li><a href="http://wordpress.org/extend/plugins/wp-multibyte-patch/">WP Multibyte Patch</a></li>
 				<li><a href="https://github.com/TwoBeers/tb-chat-post">TB Chat Post</a></li>
 				<li><a href="http://wordpress.org/extend/plugins/breadcrumb-navxt/">Breadcrumb NavXT</a></li>
+				<li><a href="http://wordpress.org/extend/plugins/breadcrumbs/">Yoast Breadcrumbs</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -201,6 +203,8 @@ Adds:
 		<li>Jetpack modules support (Carousel, Likes, Sharedaddy, InfiniteScroll)</li>
 		<li>RSS link in "follow me" widget customizable</li>
 		<li>a lot of filters and hooks for adding/deleting/modifing the theme elements and functions</li>
+		<li>low resolution monitors ( max width 960px ) compatibility</li>
+		<li>Yoast Breadcrumbs support</li>
 	</ul>
 Fixes:
 	<ul>

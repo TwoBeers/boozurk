@@ -360,7 +360,7 @@ function boozurk_get_coa( $option = false ) {
 		'boozurk_post_cat'=> array(
 							'group'=>'content',
 							'type'=>'chk',
-							'default'=>0,
+							'default'=>1,
 							'description'=>__( 'categories', 'boozurk' ),
 							'info'=>'',
 							'req'=>'',
@@ -369,7 +369,7 @@ function boozurk_get_coa( $option = false ) {
 		'boozurk_post_tag'=> array(
 							'group'=>'content',
 							'type'=>'chk',
-							'default'=>0,
+							'default'=>1,
 							'description'=>__( 'tags', 'boozurk' ),
 							'info'=>'',
 							'req'=>'',
@@ -598,6 +598,7 @@ function boozurk_get_coa( $option = false ) {
 		return $boozurk_coa;
 }
 
+
 // retrive the required option. If the option ain't set, the default value is returned
 if ( !function_exists( 'boozurk_get_opt' ) ) {
 	function boozurk_get_opt( $opt ) {
@@ -613,5 +614,6 @@ if ( !function_exists( 'boozurk_get_opt' ) ) {
 			return $defopt['default'];
 		else
 			return null;
+
 	}
 }

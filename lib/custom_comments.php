@@ -9,8 +9,6 @@
  */
 
 
-$boozurk_comment_style = new BoozurkCommentStyle;
-
 class BoozurkCommentStyle {
 
 	var $variants = array();
@@ -25,6 +23,7 @@ class BoozurkCommentStyle {
 		add_filter( 'comment_class', array( &$this, 'add_comment_class' ) );
 		
 		$this->variants = array( 'style-default', 'style-blue', 'style-pink', 'style-orange', 'style-yellow', 'style-green', 'style-gray', 'style-white');
+
 	}
 
 	function comment_variant_field() {
@@ -42,8 +41,10 @@ class BoozurkCommentStyle {
 	}
 
 	function save_comment_meta_data( $comment_id ) {
+
 		if( in_array( $_POST[ 'style-variant' ], $this->variants ) )
 			add_comment_meta( $comment_id, 'style-variant', $_POST[ 'style-variant' ] );
+
 	}
 
 	function add_comment_class ( $classes ){
@@ -54,23 +55,9 @@ class BoozurkCommentStyle {
 
 		//send the array back
 		return $classes;
+
 	}
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+new BoozurkCommentStyle;

@@ -982,6 +982,7 @@ img.tb-thumb-format {
 #secondary2 li {
 	display: inline;
 	margin: 10px;
+	white-space: nowrap;
 }
 
 /* author bio
@@ -1016,6 +1017,9 @@ img.tb-thumb-format {
 	margin-top:5px;
 	padding-top:5px;
 	clear: both;
+}
+.tbm-author-bio .author-social img {
+	margin: 0 5px 5px 0;
 }
 .tbm-author-bio .author-description a {
 	text-decoration: underline;
@@ -1083,88 +1087,88 @@ img.tb-thumb-format {
 	margin:3px;
 	position: relative;
 }
-.minib_print {
+.minib_print .minib_img {
 	background-position: left 0;
 }
-.minib_comment {
+.minib_comment .minib_img {
 	background-position: left -32px;
 }
-.minib_rss {
+.minib_rss .minib_img {
 	background-position: left -64px;
 }
-.minib_track {
+.minib_track .minib_img {
 	background-position: left -96px;
 }
-.minib_home {
+.minib_home .minib_img {
 	background-position: left -128px;
 }
-.minib_npage {
+.minib_npage .minib_img {
 	background-position: left -192px;
 }
-.minib_ppage {
+.minib_ppage .minib_img {
 	background-position: left -160px;
 }
-.minib_npages {
+.minib_npages .minib_img {
 	background-position: left -352px;
 }
-.minib_ppages {
+.minib_ppages .minib_img {
 	background-position: left -320px;
 }
-.minib_top {
+.minib_top .minib_img {
 	background-position: left -224px;
 }
-.minib_bottom {
+.minib_bottom .minib_img {
 	background-position: left -256px;
 }
-.minib_backtopost {
+.minib_backtopost .minib_img {
 	background-position: left -160px;
 }
-.minib_edit {
+.minib_edit .minib_img {
 	background-position: left -288px;
 }
-.minib_print:hover {
+.minib_print:hover .minib_img {
 	background-position: right 0;
 }
-.minib_comment:hover {
+.minib_comment:hover .minib_img {
 	background-position: right -32px;
 }
-.minib_rss:hover {
+.minib_rss:hover .minib_img {
 	background-position: right -64px;
 }
-.minib_track:hover {
+.minib_track:hover .minib_img {
 	background-position: right -96px;
 }
-.minib_home:hover {
+.minib_home:hover .minib_img {
 	background-position: right -128px;
 }
-.minib_npage:hover {
+.minib_npage:hover .minib_img {
 	background-position: right -192px;
 }
-.minib_ppage:hover {
+.minib_ppage:hover .minib_img {
 	background-position: right -160px;
 }
-.minib_npages:hover {
+.minib_npages:hover .minib_img {
 	background-position: right -352px;
 }
-.minib_ppages:hover {
+.minib_ppages:hover .minib_img {
 	background-position: right -320px;
 }
-.minib_top:hover {
+.minib_top:hover .minib_img {
 	background-position: right -224px;
 }
-.minib_bottom:hover {
+.minib_bottom:hover .minib_img {
 	background-position: right -256px;
 }
-.minib_backtopost:hover {
+.minib_backtopost:hover .minib_img {
 	background-position: right -160px;
 }
-.minib_edit:hover {
+.minib_edit:hover .minib_img {
 	background-position: right -288px;
 }
 
 /* BreadCrumb 
 ----------------------------------------------------------*/
-#bz-breadcrumb-wrap {
+#breadcrumb-wrap {
 	margin: 0;
 	border:solid 1px #ddd;
 	line-height: 30px;
@@ -1757,11 +1761,11 @@ body.js .comment-variants input {
 
 /* Breadcrumb NavXT
 ----------------------------------------------------------*/
-#navxt-crumbs > a:first-child {
+#navxt-breadcrumb > a:first-child {
 	background:url('images/details.png') no-repeat left -500px;
 	padding-left: 22px;
 }
-#navxt-crumbs > a:first-child:hover {
+#navxt-breadcrumb > a:first-child:hover {
 	background-position: left -516px;
 }
 
@@ -1832,4 +1836,56 @@ div#infinite-handle span:hover {
 	color: #eee;
 	font-size: 13px;
 	padding: 6px 16px;
+}
+.infinite-scroll .navigate_archives,
+.infinite-scroll .nb-nextprev {
+	display: none;
+}
+
+/* Low Resolutions
+----------------------------------------------------------*/
+@media screen and (max-width: 960px) {
+	#content {
+		margin: 0 40px;
+	}
+	#sidebar-primary ,
+	#sidebar-secondary ,
+	#sidebar-primary.fixed ,
+	#sidebar-secondary.fixed {
+		position: static;
+		width: 49.5%;
+		height: auto;
+		overflow: auto;
+		float: left;
+		padding: 0;
+		margin: 0;
+	}
+	#sidebar-primary .inner ,
+	#sidebar-secondary .inner ,
+	#sidebar-primary.fixed .inner ,
+	#sidebar-secondary.fixed .inner {
+		width: auto;
+		padding: 10px;
+	}
+	body {
+		background-position: -14px 0;
+	}
+	.bz-post-top-date,
+	.bz-post-top-tag,
+	.bz-post-top-cat {
+		margin-right: 10px;
+	}
+	.top-fade {
+		display: none;
+	}
+	#navbuttons.fixed {
+		width: 40px;
+		background: transparent;
+	}
+	.minib_edit ,
+	.minib_print ,
+	.minib_track ,
+	.minib_home {
+		display: none;
+	}
 }

@@ -184,3 +184,7 @@ function boozurk_hook_footer_sidebar_top() {
 function boozurk_hook_footer_sidebar_bottom() {
 	do_action('boozurk_hook_footer_sidebar_bottom');
 }
+
+function  boozurk_hook_breadcrumb_navigation () {
+	do_action('boozurk_hook_breadcrumb_navigation');
+}

@@ -51,8 +51,6 @@ add_action( 'boozurk_hook_comments_list_before', 'boozurk_navigate_comments' ); 
 
 add_action( 'boozurk_hook_comments_list_after', 'boozurk_navigate_comments' ); // media select
 
-add_action( 'init', 'boozurk_for_jetpack_init' ); //Jetpack support
-
 
 /* Custom filters */
 
@@ -133,7 +131,9 @@ require_once( 'lib/custom-header.php' ); // load the custom header module
 
 require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
-if ( boozurk_get_opt( 'boozurk_js_swfplayer' ) ) require_once( 'lib/audio-player.php' ); // load the audio player module
+require_once( 'lib/audio-player.php' ); // load the audio player module
+
+require_once( 'lib/jetpack.php' ); // load the audio player module
 
 if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
 
@@ -383,16 +383,16 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 			$data = array(
 				'script_modules' => boozurk_get_js_modules(),
 				'script_modules_afterajax' => boozurk_get_js_modules(1),
-				'post_expander' => __( 'Post loading, please wait...','boozurk' ),
-				'gallery_preview' => __( 'Preview','boozurk' ),
-				'gallery_click' => __( 'Click on thumbnails','boozurk' ),
-				'infinite_scroll' => __( 'Page is loading, please wait...','boozurk' ),
-				'infinite_scroll_end' => __( 'No more posts beyond this line','boozurk' ),
+				'post_expander' => esc_js( __( 'Post loading, please wait...','boozurk' ) ),
+				'gallery_preview' => esc_js( __( 'Preview','boozurk' ) ),
+				'gallery_click' => esc_js( __( 'Click on thumbnails','boozurk' ) ),
+				'infinite_scroll' => esc_js( __( 'Page is loading, please wait...','boozurk' ) ),
+				'infinite_scroll_end' => esc_js( __( 'No more posts beyond this line','boozurk' ) ),
 				'infinite_scroll_type' => boozurk_get_opt( 'boozurk_infinite_scroll_type' ),
-				'quote_tip' => esc_attr( __( 'Add selected text as a quote', 'boozurk' ) ),
-				'quote' => __( 'Quote', 'boozurk' ),
-				'quote_alert' => __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ),
-				'comments_closed' => __( 'Comments closed', 'boozurk' )
+				'quote_tip' => esc_js( __( 'Add selected text as a quote', 'boozurk' ) ),
+				'quote' => esc_js( __( 'Quote', 'boozurk' ) ),
+				'quote_alert' => esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
+				'comments_closed' => esc_js( __( 'Comments closed', 'boozurk' ) )
 			);
 
 			wp_localize_script( 'boozurk-script', 'boozurk_l10n', $data );
@@ -584,15 +584,15 @@ if (!function_exists('boozurk_navbuttons')) {
 	<div id="navbuttons"<?php if ( $fixed ) echo ' class="fixed"'; ?>>
 
 		<?php if ( $is_singular && get_edit_post_link() ) { 												// ------- Edit ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
+			<div class="minibutton minib_edit" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
 				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>">
-					<span class="minib_img minib_edit">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 		
 		<?php if ( $print && $is_singular ) { 																// ------- Print ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
+			<div class="minibutton minib_print" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
 				<a rel="nofollow" href="<?php
 					$arr_params['style'] = 'printme';
 					if ( get_query_var('page') ) {
@@ -603,93 +603,93 @@ if (!function_exists('boozurk_navbuttons')) {
 					}
 					echo add_query_arg( $arr_params, get_permalink() );
 					?>">
-					<span class="minib_img minib_print">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $comment && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- Leave a comment ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Leave a comment','boozurk' ); ?>">
+			<div class="minibutton minib_comment" title="<?php esc_attr_e( 'Leave a comment','boozurk' ); ?>">
 				<a href="#respond">
-					<span class="minib_img minib_comment">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- RSS feed ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Feed for comments on this post', 'boozurk' ); ?>">
+			<div class="minibutton minib_rss" title="<?php esc_attr_e( 'Feed for comments on this post', 'boozurk' ); ?>">
 				<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> ">
-					<span class="minib_img minib_rss">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $trackback && $is_singular && pings_open() ) { 											// ------- Trackback ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Trackback URL','boozurk' ); ?>">
+			<div class="minibutton minib_track" title="<?php esc_attr_e( 'Trackback URL','boozurk' ); ?>">
 				<a href="<?php echo get_trackback_url(); ?>" rel="trackback">
-					<span class="minib_img minib_track">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $home ) { 																				// ------- Home ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Home','boozurk' ); ?>">
+			<div class="minibutton minib_home" title="<?php esc_attr_e( 'Home','boozurk' ); ?>">
 				<a href="<?php echo home_url(); ?>">
-					<span class="minib_img minib_home">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $is_image ) { 																			// ------- Back to parent post ------- ?>
 			<?php if ( !empty( $post->post_parent ) ) { ?>
-				<div class="minibutton" title="<?php echo esc_attr( sprintf( __( 'Return to %s', 'boozurk' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>">
+				<div class="minibutton minib_backtopost" title="<?php echo esc_attr( sprintf( __( 'Return to %s', 'boozurk' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>">
 					<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery">
-						<span class="minib_img minib_backtopost">&nbsp;</span>
+						<span class="minib_img">&nbsp;</span>
 					</a>
 				</div>
 			<?php } ?>
 		<?php } ?>
 
 		<?php if (  $next_prev && $is_post && get_previous_post() ) { 										// ------- Previous post ------- ?>
-			<div class="minibutton" title="<?php echo esc_attr( __( 'Previous Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_previous_post() ) ) ); ?>">
+			<div class="minibutton minib_ppage" title="<?php echo esc_attr( __( 'Previous Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_previous_post() ) ) ); ?>">
 				<a rel="prev" href="<?php echo get_permalink( get_previous_post() ); ?>">
-					<span class="minib_img minib_ppage">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
-			<div class="minibutton" title="<?php echo esc_attr( __( 'Next Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_next_post() ) ) ); ?>">
+			<div class="minibutton minib_npage" title="<?php echo esc_attr( __( 'Next Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_next_post() ) ) ); ?>">
 				<a rel="next" href="<?php echo get_permalink( get_next_post() ); ?>">
-					<span class="minib_img minib_npage">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
-		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_next_posts_link() && apply_filters( 'boozurk_navigate_archives' , true ) ) { 			// ------- Older Posts ------- ?>
-			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
-				<?php next_posts_link( '<span class="minib_img minib_npages">&nbsp;</span>' ); ?>
+		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
+			<div class="minibutton nb-nextprev minib_npages" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
+				<?php next_posts_link( '<span class="minib_img">&nbsp;</span>' ); ?>
 			</div>
 		<?php } ?>
 
-		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_previous_posts_link() && apply_filters( 'boozurk_navigate_archives' , true ) ) { 		// ------- Newer Posts ------- ?>
-			<div class="minibutton nb-nextprev" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
-				<?php previous_posts_link( '<span class="minib_img minib_ppages">&nbsp;</span>' ); ?>
+		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
+			<div class="minibutton nb-nextprev minib_ppages" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
+				<?php previous_posts_link( '<span class="minib_img">&nbsp;</span>' ); ?>
 			</div>
 		<?php } ?>
 
 		<?php if ( $up_down ) { 																			// ------- Top ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Top of page', 'boozurk' ); ?>">
+			<div class="minibutton minib_top" title="<?php esc_attr_e( 'Top of page', 'boozurk' ); ?>">
 				<a href="#">
-					<span class="minib_img minib_top">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
 
 		<?php if ( $up_down ) { 																			// ------- Bottom ------- ?>
-			<div class="minibutton" title="<?php esc_attr_e( 'Bottom of page', 'boozurk' ); ?>">
+			<div class="minibutton minib_bottom" title="<?php esc_attr_e( 'Bottom of page', 'boozurk' ); ?>">
 				<a href="#footer">
-					<span class="minib_img minib_bottom">&nbsp;</span>
+					<span class="minib_img">&nbsp;</span>
 				</a>
 			</div>
 		<?php } ?>
@@ -729,8 +729,6 @@ if ( !function_exists( 'boozurk_get_header' ) ) {
 if ( !function_exists( 'boozurk_navigate_archives' ) ) {
 	function boozurk_navigate_archives() {
 		global $paged, $wp_query;
-
-		if ( ! apply_filters( 'boozurk_navigate_archives' , true ) ) return;
 
 		if ( !$paged ) $paged = 1;
 
@@ -1374,7 +1372,7 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 		foreach( $share as $key => $btn ){
 			if ( $args[$key] )
 				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
-				$outer .= '<a class="bz-share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) . '" /></a>';
+				$outer .= '<a class="bz-share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) ) . '" /></a>';
 		}
 		$outer .= '</div>';
 
@@ -1466,47 +1464,66 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 			'tags' => 1,
 			'categories' => 1,
 			'avatar_size' => 48,
-			'featured' => 0
+			'featured' => 0,
+			'echo' => 1
 		);
 
 		$args = wp_parse_args( $args, $defaults );
 
-		?>
+		$output = '';
 
-		<?php if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) ) { echo '<div class="bz-post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>'; } ?>
+		if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) )
+			$output .= '<div class="bz-post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>';
 
-		<?php if ( $args['author'] ) {
-			$author = $post->post_author;
-			
-			$name = get_the_author_meta('nickname', $author);
-			$alt_name = get_the_author_meta('user_nicename', $author);
-			$avatar = get_avatar($author, $args['avatar_size'], 'Gravatar Logo', $alt_name.'-photo');
-			$description = get_the_author_meta('description', $author);
-			$author_link = get_author_posts_url($author);
+		if ( $args['author'] )
+			$output .= boozurk_author_badge( $post->post_author, $args['avatar_size'] );
 
-			?>
-			<div class="tbm-author-bio vcard">
-				<ul>
-					<li class="author-avatar"><?php echo $avatar; ?></li>
-					<li class="author-name"><a class="fn" href="<?php echo $author_link; ?>" ><?php echo $name; ?></a></li>
-					<li class="author-description note"><?php echo $description; ?> </li>
-					<li class="author-social">
-						<?php if ( get_the_author_meta('twitter', $author) ) echo '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('follow %s on Twitter', 'boozurk'), $name ) ) . '" href="'.get_the_author_meta('twitter', $author).'"><img alt="twitter" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/twitter.png" /></a>'; ?>
-						<?php if ( get_the_author_meta('facebook', $author) ) echo '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('follow %s on Facebook', 'boozurk'), $name ) ) . '" href="'.get_the_author_meta('facebook', $author).'"><img alt="facebook" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/facebook.png" /></a>'; ?>
-					</li>
-				</ul>
-			</div>
-		<?php } ?>
+		if ( $args['categories'] )
+			$output .= '<span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( ', ' ) . '<br>';
 
-		<?php if ( $args['categories'] ) { echo '<span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': ' . '</span>'; the_category( ', ' ); echo '<br>'; } ?>
+		if ( $args['tags'] )
+			$tags = get_the_tags() ? get_the_tag_list( '', ', ', '' ) : __( 'No Tags', 'boozurk' );
+			$output .= '<span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': </span>' . $tags . '<br>';
 
-		<?php if ( $args['tags'] ) { echo '<span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . '</span>'; if ( !get_the_tags() ) { _e( 'No Tags', 'boozurk' ); } else { the_tags('', ', ', ''); } echo '<br>'; } ?>
+		if ( $args['date'] )
+			$output .= '<span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></b>';
 
-		<?php if ( $args['date'] ) { echo '<span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': ' . '</span>'; echo '<b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></b>'; } ?>
+		if ( ! $args['echo'] )
+			return $output;
 
-		<?php
+		echo $output;
 
 	}
+}
+
+
+// get the author badge
+function boozurk_author_badge( $author = '', $size ) {
+
+	if ( ! $author ) return;
+
+	$name = get_the_author_meta( 'nickname', $author ); // nickname
+
+	$avatar = get_avatar( $author, $size, 'Gravatar Logo', get_the_author_meta( 'user_nicename', $author ) . '-photo' ); // gravatar
+
+	$description = get_the_author_meta( 'description', $author ); // bio
+
+	$author_link = get_author_posts_url($author); // link to author posts
+
+	$author_net = ''; // author social networks
+	foreach ( array( 'twitter' => 'Twitter', 'facebook' => 'Facebook', 'googleplus' => 'Google+' ) as $s_key => $s_name ) {
+		if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'boozurk'), $name, $s_name ) ) . '" href="'.get_the_author_meta( $s_key, $author ).'"><img alt="' . $s_key . '" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $s_key . '.png" /></a>';
+	}
+
+	$output = '<li class="author-avatar">' . $avatar . '</li>';
+	$output .= '<li class="author-name"><a class="fn" href="' . $author_link . '" >' . $name . '</a></li>';
+	$output .= $description ? '<li class="author-description note">' . $description . '</li>' : '';
+	$output .= $author_net ? '<li class="author-social">' . $author_net . '</li>' : '';
+
+	$output = '<div class="tbm-author-bio vcard"><ul>' . $output . '</ul></div>';
+
+	return apply_filters( 'boozurk_filter_author_badge', $output );
+
 }
 
 
@@ -2027,7 +2044,7 @@ function boozurk_gallery_shortcode( $output, $attr ) {
 }
 
 
-//DUNNO? forse robe x il thickbox
+//add attachment description to thickbox
 function boozurk_get_attachment_link( $markup = '', $id = 0, $size = 'thumbnail', $permalink = false, $icon = false, $text = false ) {
 
 	$id = intval( $id );
@@ -2062,7 +2079,7 @@ function boozurk_get_credits() {
 	$credits = apply_filters( 'boozurk_credits', '&copy; ' . date( 'Y' ) . ' <strong>' . get_bloginfo( 'name' ) . '</strong>. ' . __( 'All rights reserved','boozurk' ) );
 
 	if ( boozurk_get_opt('boozurk_tbcred') )
-		$credits .= '<br>' . sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) ) . ' @ twobeers.net">' . esc_attr( __( 'Boozurk theme','boozurk' ) ) . '</a>');
+		$credits .= '<br>' . sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) . ' @ twobeers.net' ) . '">' . esc_attr( __( 'Boozurk theme','boozurk' ) ) . '</a>');
 
 	if ( boozurk_get_opt('boozurk_mobile_css') )
 		$credits .= '<span class="hide_if_print"> - <a rel="nofollow" href="' . home_url() . '?mobile_override=mobile">'. __('Mobile View','boozurk') .'</a></span>';
@@ -2231,88 +2248,3 @@ if ( !function_exists( 'boozurk_media' ) ) {
 	}
 }
 
-
-/* Jetpack support */
-function boozurk_for_jetpack_init() {
-
-	//Infinite Scroll
-	add_theme_support( 'infinite-scroll', array(
-		'type'		=> 'click',
-		'container'	=> 'posts_content',
-		'render'	=> 'boozurk_for_jetpack_infinite_scroll',
-	) );
-
-	if ( class_exists( 'The_Neverending_Home_Page' ) ) {
-		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_infinite_scroll_set', 10, 2 );
-		add_filter( 'boozurk_navigate_archives', '__return_false' );
-	}
-
-	//Sharedaddy
-	if ( function_exists( 'sharing_display' ) ) {
-		remove_filter( 'the_content', 'sharing_display', 19 );
-		remove_filter( 'the_excerpt', 'sharing_display', 19 );
-		add_action( 'boozurk_hook_entry_bottom', 'boozurk_for_jetpack_sharedaddy_display' );
-		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_sharedaddy_set', 10, 2 );
-	}
-
-	//Carousel
-	if ( class_exists( 'Jetpack_Carousel' ) ) {
-		remove_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
-		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_carousel_set', 10, 2 );
-	}
-
-	//Likes
-	if ( class_exists( 'Jetpack_Likes' ) ) {
-		add_filter( 'wpl_is_index_disabled', '__return_false' );
-	}
-
-}
-
-
-//Set the code to be rendered on for calling posts,
-function boozurk_for_jetpack_infinite_scroll() {
-
-	if ( isset( $_GET['page'] ) && $page = (int) $_GET['page'] )
-		echo '<div class="page-reminder"><span>' . sprintf( __('Page %s','boozurk'), $page ) . '</span></div>';
-
-	get_template_part( 'loop' );
-}
-
-
-//skip the Google+ option
-function boozurk_for_jetpack_sharedaddy_set( $value, $name ) {
-
-	if ( 'boozurk_plusone' === $name ) return false;
-
-	return $value;
-
-}
-
-
-//print the sharedaddy buttons after post content
-function boozurk_for_jetpack_sharedaddy_display() {
-
-	echo sharing_display();
-
-}
-
-
-//skip the thickbox js module
-function boozurk_for_jetpack_carousel_set( $value, $name ) {
-
-	if ( 'boozurk_js_thickbox' === $name ) return false;
-
-	return $value;
-
-}
-
-//skip the built-in infinite-scroll feature
-function boozurk_for_jetpack_infinite_scroll_set( $value, $name ) {
-
-	if ( 'boozurk_infinite_scroll' === $name ) return false;
-
-	return $value;
-
-}
-
-?>

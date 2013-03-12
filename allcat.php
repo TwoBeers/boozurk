@@ -10,9 +10,9 @@
  * @package Boozurk
  * @since 1.00
  */
-?>
 
-<?php get_header(); ?>
+
+get_header(); ?>
 
 <?php boozurk_hook_content_before(); ?>
 

@@ -13,13 +13,17 @@
 <!-- begin footer -->
 				<?php boozurk_hook_footer_before(); ?>
 
+				<?php get_sidebar(); // show primary widgets area ?>
+
+				<?php get_sidebar( 'secondary' ); // show secondary widgets area ?>
+
 				<div id="footer">
 
 					<?php boozurk_hook_footer_top(); ?>
 
 					<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 
-					<?php get_sidebar( 'footer' ); ?>
+					<?php get_sidebar( 'footer' ); // show footer widgets area ?>
 
 					<div id="bz-credits">
 						<?php echo boozurk_get_credits(); ?>
@@ -32,10 +36,6 @@
 				</div><!-- close footer -->
 
 				<?php boozurk_hook_footer_after(); ?>
-
-				<?php get_sidebar(); // show sidebar ?>
-
-				<?php get_sidebar( 'secondary' ); // show header widgets area ?>
 
 			</div><!-- close content -->
 

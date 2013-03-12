@@ -2,54 +2,74 @@
 /**
  * breadcrumb.php
  *
- * The breadcrumb code.
- * Supports Breadcrumb NavXT plugin.
+ * The breadcrumb class.
+ * Supports Breadcrumb NavXT and Yoast Breadcrumbs plugins.
  *
  * @package Boozurk
  * @since 2.00.1
  */
 
 
-// the breadcrumb
-if (!function_exists('boozurk_breadcrumb')) {
-	function boozurk_breadcrumb(){
-		?>
-		<div id="bz-breadcrumb-wrap">
-			<?php if(function_exists('bcn_display_list')) {?>
-				<div id="navxt-crumbs"><?php bcn_display(); ?></div>
-			<?php } else { ?>
-				<div id="bz-breadcrumb">
-				<?php echo boozurk_get_the_breadcrumb(); // show breadcrumb ?>
-				<br class="fixfloat">
-				</div>
-			<?php } ?>
-			<?php boozurk_search_reminder(); ?>
-		</div>
-		<?php
-	}
-}
+class Boozurk_Breadcrumb {
 
-// search reminder
-if (!function_exists('boozurk_search_reminder')) {
-	function boozurk_search_reminder(){
-		if ( is_category() ) { //prints category description
-			if ( category_description() ) {
-				echo '<div class="bz-breadcrumb-reminder">' . category_description() . '</div>';
-			}
-		} elseif (is_author()) { //prints author details
-			echo '<div class="bz-breadcrumb-reminder">';
-			boozurk_post_details( array( 'date' => 0, 'tags' => 0, 'categories' => 0, 'avatar_size' => 64 ) );
-			echo '</div>';
-		} elseif ( is_page() ) { //prints subpages list
-			boozurk_multipages();
+	function __construct() {
+
+		if ( function_exists( 'bcn_display' ) ) { // Breadcrumb NavXT
+
+			add_action( 'boozurk_hook_breadcrumb_navigation', 'bcn_display' );
+
+		} elseif ( function_exists( 'yoast_breadcrumb' ) ) { // Yoast Breadcrumbs
+
+			add_action( 'boozurk_hook_breadcrumb_navigation', 'yoast_breadcrumb' );
+
+		} else {
+
+			add_action( 'boozurk_hook_breadcrumb_navigation', array( $this, 'display' ) );
+
 		}
-	}
-}
 
-// page hierarchy
-if ( !function_exists( 'boozurk_multipages' ) ) {
-	function boozurk_multipages(){
+		add_action( 'boozurk_hook_breadcrumb_navigation', array( $this, 'search_reminder' ) );
+
+	}
+
+	function display(){
+
+		$output = apply_filters( 'boozurk_filter_breadcrumb', '' );
+
+		if ( empty ( $output ) )
+			$output = '<div id="bz-breadcrumb">' . $this->get_the_breadcrumb() . '<br class="fixfloat"></div>';
+
+		echo $output;
+
+	}
+
+	function search_reminder(){
 		global $post;
+
+		$output = '';
+
+		if ( is_category() && category_description() ) { //prints category description
+
+			$output = '<div class="bz-breadcrumb-reminder">' . category_description() . '</div>';
+
+		} elseif (is_author()) { //prints author details
+
+			$output = boozurk_author_badge( $post->post_author, 64 );
+
+		} elseif ( is_page() ) { //prints subpages list
+
+			$output = '<div class="bz-breadcrumb-reminder">' . $this->multipages() . '</div>';
+
+		}
+
+		echo $output;
+
+	}
+
+	// page hierarchy
+	function multipages(){
+		global $post;
+
 		$args = array(
 			'post_type' => 'page',
 			'post_parent' => $post->ID,
@@ -57,27 +77,26 @@ if ( !function_exists( 'boozurk_multipages' ) ) {
 			'orderby' => 'menu_order',
 			'numberposts' => 0,
 			'no_found_rows' => true
-			);
+		);
+
 		$childrens = get_posts( $args ); // retrieve the child pages
-		$has_herarchy = false;
+
+		$the_child_list = '';
 		if ( $childrens ) {
-			$the_child_list = '';
 			foreach ($childrens as $children) {
 				$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a>';
 			}
 			$the_child_list = implode(' | ' , $the_child_list);
-			echo '<div class="bz-breadcrumb-reminder"><span class="bz-breadcrumb-childs">&nbsp;</span>' . $the_child_list . '</div>'; // echoes the childs
-			$has_herarchy = true;
+			$the_child_list = '<span class="bz-breadcrumb-childs">&nbsp;</span>' . $the_child_list;
 		}
-		return $has_herarchy;
+		return $the_child_list;
 	}
-}
 
-/*
-Based on Yoast Breadcrumbs Plugin (http://yoast.com/wordpress/breadcrumbs/)
-*/
-if ( !function_exists( 'boozurk_get_the_breadcrumb' ) ) {
-	function boozurk_get_the_breadcrumb() {
+	/*
+	the breadcrumb walker
+	Based on Yoast Breadcrumbs Plugin (http://yoast.com/wordpress/breadcrumbs/)
+	*/
+	function get_the_breadcrumb() {
 		global $wp_query, $post;
 		
 		$opt 						= array();
@@ -233,4 +252,7 @@ if ( !function_exists( 'boozurk_get_the_breadcrumb' ) ) {
 
 		return $output;
 	}
+
 }
+
+new Boozurk_Breadcrumb;

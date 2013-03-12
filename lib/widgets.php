@@ -27,6 +27,11 @@
  */
 
 
+add_action( 'widgets_init', 'boozurk_widget_area_init' ); // Register sidebars by running boozurk_widget_area_init() on the widgets_init hook
+
+add_action( 'widgets_init', 'boozurk_widgets_init' );
+
+
 /**
  * Define default Widget arguments
  */
@@ -45,95 +50,92 @@ function boozurk_get_default_widget_args( $extra_wrap_class = '' ) {
 	return $widget_args;
 }
 
+
 /**
  * Register all widget areas (sidebars)
  */
 
-if ( !function_exists( 'boozurk_widget_area_init' ) ) {
-	function boozurk_widget_area_init() {
+function boozurk_widget_area_init() {
 
-		// Area 0, in the left sidebar.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Primary Sidebar', 'boozurk' ),
-				'id' => 'primary-widget-area',
-				'description' => __( 'The primary sidebar widget area', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
+	// Area 0, in the left sidebar.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Primary Sidebar', 'boozurk' ),
+			'id' => 'primary-widget-area',
+			'description' => __( 'The primary sidebar widget area', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
 
-		// Area 1, in the right sidebar.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Secondary sidebar', 'boozurk' ),
-				'id' => 'fixed-widget-area',
-				'description' => __( 'The secondary sidebar widget area', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
+	// Area 1, in the right sidebar.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Secondary sidebar', 'boozurk' ),
+			'id' => 'fixed-widget-area',
+			'description' => __( 'The secondary sidebar widget area', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
 
-		// Area 2, located under the main menu.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Menu Widget Area', 'boozurk' ),
-				'id' => 'header-widget-area',
-				'description' => __( 'The widget area under the main menu', 'boozurk' )
-			),
-			boozurk_get_default_widget_args( 'bz-widget' )
-		) );
+	// Area 2, located under the main menu.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Menu Widget Area', 'boozurk' ),
+			'id' => 'header-widget-area',
+			'description' => __( 'The widget area under the main menu', 'boozurk' )
+		),
+		boozurk_get_default_widget_args( 'bz-widget' )
+	) );
 
-		// Area 3, located in the footer. Empty by default.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'First Footer Widget Area', 'boozurk' ),
-				'id' => 'first-footer-widget-area',
-				'description' => __( 'The first footer widget area', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
+	// Area 3, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'First Footer Widget Area', 'boozurk' ),
+			'id' => 'first-footer-widget-area',
+			'description' => __( 'The first footer widget area', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
 
-		// Area 4, located in the footer. Empty by default.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Second Footer Widget Area', 'boozurk' ),
-				'id' => 'second-footer-widget-area',
-				'description' => __( 'The second footer widget area', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
+	// Area 4, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Second Footer Widget Area', 'boozurk' ),
+			'id' => 'second-footer-widget-area',
+			'description' => __( 'The second footer widget area', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
 
-		// Area 5, located in the footer. Empty by default.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Third Footer Widget Area', 'boozurk' ),
-				'id' => 'third-footer-widget-area',
-				'description' => __( 'The third footer widget area', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
+	// Area 5, located in the footer. Empty by default.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Third Footer Widget Area', 'boozurk' ),
+			'id' => 'third-footer-widget-area',
+			'description' => __( 'The third footer widget area', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
 
-		// Area 6, located in page 404.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Page 404', 'boozurk' ),
-				'id' => '404-widgets-area',
-				'description' => __( 'Enrich the page 404 with some useful widgets', 'boozurk' )
-			),
-			boozurk_get_default_widget_args()
-		) );
-		// Area 7, located after the post body.
-		register_sidebar( array_merge( 
-			array(
-				'name' => __( 'Post Widget Area', 'boozurk' ),
-				'id' => 'single-widgets-area',
-				'description' => __( 'a widget area located after the post body', 'boozurk' ),
-			),
-			boozurk_get_default_widget_args( 'bz-widget' )
-		) );
-	}
+	// Area 6, located in page 404.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Page 404', 'boozurk' ),
+			'id' => '404-widgets-area',
+			'description' => __( 'Enrich the page 404 with some useful widgets', 'boozurk' )
+		),
+		boozurk_get_default_widget_args()
+	) );
+	// Area 7, located after the post body.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Post Widget Area', 'boozurk' ),
+			'id' => 'single-widgets-area',
+			'description' => __( 'a widget area located after the post body', 'boozurk' ),
+		),
+		boozurk_get_default_widget_args( 'bz-widget' )
+	) );
 }
-
-add_action( 'widgets_init', 'boozurk_widget_area_init' ); // Register sidebars by running boozurk_widget_area_init() on the widgets_init hook
 
 
 /**
@@ -240,6 +242,7 @@ class boozurk_widget_popular_posts extends WP_Widget {
 <?php
 	}
 }
+
 
 /**
  * latest_Commented_Posts widget class
@@ -479,6 +482,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 	}
 }
 
+
 /**
  * Popular Categories widget class
  *
@@ -544,6 +548,7 @@ class boozurk_Widget_pop_categories extends WP_Widget {
 	}
 
 }
+
 
 /**
  * Social network widget class.
@@ -857,6 +862,7 @@ class boozurk_Widget_besides extends WP_Widget {
 	}
 }
 
+
 /**
  * Recent Posts in Category widget class
  *
@@ -999,6 +1005,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 	}
 }
 
+
 /**
  * Navigation buttons widget class
  */
@@ -1076,6 +1083,7 @@ class boozurk_Widget_navbuttons extends WP_Widget {
 <?php
 	}
 }
+
 
 /**
  * Post details widget class
@@ -1164,6 +1172,7 @@ class boozurk_Widget_post_details extends WP_Widget {
 <?php
 	}
 }
+
 
 /**
  * Post Format list
@@ -1270,6 +1279,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 
 }
 
+
 /**
  * Image EXIF widget class
  */
@@ -1313,6 +1323,7 @@ class boozurk_Widget_image_EXIF extends WP_Widget {
 <?php
 	}
 }
+
 
 /**
  * User_quick_links widget class
@@ -1403,6 +1414,7 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 	}
 }
 
+
 /**
  * Post share links
  */
@@ -1463,6 +1475,7 @@ class boozurk_Widget_share_this extends WP_Widget {
 <?php
 	}
 }
+
 
 /**
  * Clean Archives Widget
@@ -1544,6 +1557,7 @@ class boozurk_Widget_clean_archives extends WP_Widget {
 	}
 }
 
+
 /**
  * simple font resize widget
  */
@@ -1559,6 +1573,7 @@ function boozurk_widget_font_resize($args) {
 	wp_enqueue_script( 'boozurk-fontresize', get_template_directory_uri() . '/js/font-resize.min.js', array( 'jquery' ), '', true  );
 
 }
+
 
 /**
  * Register all of the default WordPress widgets on startup.
@@ -1600,6 +1615,6 @@ function boozurk_widgets_init() {
 	register_widget('boozurk_Widget_clean_archives');
 
 	wp_register_sidebar_widget('bz-font-resize', 'Font Resize', 'boozurk_widget_font_resize', array( 'description' => __('Simple javascript-based font resizer','boozurk' ) ) );
+
 }
 
-add_action('widgets_init', 'boozurk_widgets_init');
