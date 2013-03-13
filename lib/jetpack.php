@@ -9,7 +9,7 @@
  */
 
 
-add_action( 'after_setup_theme', 'boozurk_for_jetpack_init' );
+add_action( 'init', 'boozurk_for_jetpack_init' );
 
 
 function boozurk_for_jetpack_init() {
