@@ -14,6 +14,21 @@ add_action( 'after_setup_theme', 'boozurk_for_jetpack_init' );
 
 function boozurk_for_jetpack_init() {
 
+	if ( boozurk_is_mobile() ) return;
+
+	//Sharedaddy
+	if ( function_exists( 'sharing_display' ) ) {
+		remove_filter( 'the_content', 'sharing_display', 19 );
+		remove_filter( 'the_excerpt', 'sharing_display', 19 );
+		add_action( 'boozurk_hook_entry_bottom', 'boozurk_for_jetpack_sharedaddy_display' );
+		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_sharedaddy_set', 10, 2 );
+	}
+
+	//Likes
+	if ( class_exists( 'Jetpack_Likes' ) ) {
+		add_filter( 'wpl_is_index_disabled', '__return_false' );
+	}
+
 	//Infinite Scroll
 	$type = boozurk_get_opt( 'boozurk_infinite_scroll_type' ) == 'auto' ? 'scroll' : 'click';
 	add_theme_support( 'infinite-scroll', array(
@@ -27,23 +42,10 @@ function boozurk_for_jetpack_init() {
 		add_filter( 'infinite_scroll_results', 'boozurk_for_jetpack_infinite_scroll_encode', 11, 1 );
 	}
 
-	//Sharedaddy
-	if ( function_exists( 'sharing_display' ) ) {
-		remove_filter( 'the_content', 'sharing_display', 19 );
-		remove_filter( 'the_excerpt', 'sharing_display', 19 );
-		add_action( 'boozurk_hook_entry_bottom', 'boozurk_for_jetpack_sharedaddy_display' );
-		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_sharedaddy_set', 10, 2 );
-	}
-
 	//Carousel
 	if ( class_exists( 'Jetpack_Carousel' ) ) {
 		remove_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
 		add_filter( 'boozurk_option_override', 'boozurk_for_jetpack_carousel_set', 10, 2 );
-	}
-
-	//Likes
-	if ( class_exists( 'Jetpack_Likes' ) ) {
-		add_filter( 'wpl_is_index_disabled', '__return_false' );
 	}
 
 }

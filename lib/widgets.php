@@ -514,7 +514,7 @@ class boozurk_Widget_pop_categories extends WP_Widget {
 
 		wp_list_categories(apply_filters( 'boozurk_widget_pop_categories_args', $cat_args));
 ?>
-			<li style="text-align: right;margin-top:12px;"><a title="<?php esc_attr_e('View all categories', 'boozurk'); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e('View all', 'boozurk'); ?></a></li>
+			<li class="allcat" style="text-align: right;margin-top:12px;"><a rel="nofollow" title="<?php esc_attr_e('View all categories', 'boozurk'); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e('View all', 'boozurk'); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;

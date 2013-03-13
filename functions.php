@@ -1470,6 +1470,8 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 
 		$args = wp_parse_args( $args, $defaults );
 
+		$tax_separator = apply_filters( 'boozurk_filter_taxomony_separator', ', ' );
+
 		$output = '';
 
 		if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) )
@@ -1479,14 +1481,14 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 			$output .= boozurk_author_badge( $post->post_author, $args['avatar_size'] );
 
 		if ( $args['categories'] )
-			$output .= '<span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( ', ' ) . '<br>';
+			$output .= '<div class="tbm-post-details"><span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div><br>';
 
 		if ( $args['tags'] )
-			$tags = get_the_tags() ? get_the_tag_list( '', ', ', '' ) : __( 'No Tags', 'boozurk' );
-			$output .= '<span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': </span>' . $tags . '<br>';
+			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'boozurk' ) . '</span>';
+			$output .= '<div class="tbm-post-details"><span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</div><br>';
 
 		if ( $args['date'] )
-			$output .= '<span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></b>';
+			$output .= '<div class="tbm-post-details"><span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div></b>';
 
 		if ( ! $args['echo'] )
 			return $output;

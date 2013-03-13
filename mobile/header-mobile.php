@@ -14,14 +14,10 @@
 		<meta name = "viewport" content = "width = device-width">
 		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
 		<?php wp_head(); ?>
 	</head>
 
-	<?php global $boozurk_opt; ?>
-	<?php $variant = isset( $boozurk_opt['boozurk_mobile_css_color'] )? $boozurk_opt['boozurk_mobile_css_color']: 'dark'; ?>
-
-	<body <?php body_class( $variant ); ?>>
+	<body <?php body_class(); ?>>
 		<div id="main">
 			<div id="head">
 				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
