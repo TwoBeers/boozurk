@@ -848,7 +848,7 @@ if ( !function_exists( 'boozurk_default_widgets' ) ) {
 
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'boozurk_get_the_thumb' ) ) {
-	function boozurk_get_the_thumb( $id, $size_w, $size_h, $class, $default = '' ) {
+	function boozurk_get_the_thumb( $id, $size_w, $size_h, $class = '', $default = '' ) {
 
 		if ( has_post_thumbnail( $id ) ) {
 
@@ -1475,20 +1475,20 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 		$output = '';
 
 		if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) )
-			$output .= '<div class="bz-post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>';
+			$output .= '<div class="tb-post-details post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>';
 
 		if ( $args['author'] )
 			$output .= boozurk_author_badge( $post->post_author, $args['avatar_size'] );
 
 		if ( $args['categories'] )
-			$output .= '<div class="tbm-post-details"><span class="bz-post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div><br>';
+			$output .= '<div class="tb-post-details"><span class="post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div>';
 
 		if ( $args['tags'] )
 			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'boozurk' ) . '</span>';
-			$output .= '<div class="tbm-post-details"><span class="bz-post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</div><br>';
+			$output .= '<div class="tb-post-details"><span class="post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</div>';
 
 		if ( $args['date'] )
-			$output .= '<div class="tbm-post-details"><span class="bz-post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><b><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div></b>';
+			$output .= '<div class="tb-post-details"><span class="post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div>';
 
 		if ( ! $args['echo'] )
 			return $output;
@@ -1522,7 +1522,7 @@ function boozurk_author_badge( $author = '', $size ) {
 	$output .= $description ? '<li class="author-description note">' . $description . '</li>' : '';
 	$output .= $author_net ? '<li class="author-social">' . $author_net . '</li>' : '';
 
-	$output = '<div class="tbm-author-bio vcard"><ul>' . $output . '</ul></div>';
+	$output = '<div class="tb-post-details tb-author-bio vcard"><ul>' . $output . '</ul></div>';
 
 	return apply_filters( 'boozurk_filter_author_badge', $output );
 

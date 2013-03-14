@@ -1,4 +1,10 @@
-﻿/* boozurk - stylesheet for login */
+﻿/**
+ * The mobile theme - stylesheet for login
+ *
+ * @package Boozurk
+ * @subpackage mobile
+ * @since 3.03
+*/
 
 body { 
 	background: #fff !important; 

@@ -4,9 +4,11 @@
  *
  * @package Boozurk
  * @subpackage mobile
- * @since 1.05
+ * @since 3.03
  */
 ?>
+
+			<?php locate_template( array( 'mobile/sidebar-mobile.php' ), true, false ); ?>
 
 			<?php if ( has_nav_menu( 'mobile' ) ) { ?>
 
@@ -16,19 +18,16 @@
 
 			<?php } ?>
 
-			<?php locate_template( array( 'mobile/sidebar-mobile.php' ), true, false ); ?>
-
 			<?php echo apply_filters( 'boozurk_mobile_filter_seztitle', '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) ); ?>
 
-			<p id="themecredits">
-				<?php echo sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) ) . ' @ twobeers.net">Boozurk</a>') ; ?>
-				<br>
-				<br>
-				<?php wp_loginout(); wp_register( ' | ', '' ); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __( 'Desktop View', 'boozurk' ) .'</a>'; ?>
-			</p>
 
 		</div>
-
+		<div id="footer">
+			<p id="themecredits">
+				<?php echo sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) ) . ' @ twobeers.net">boozurk</a>') ; ?>
+			</p>
+			<?php wp_loginout(); wp_register( ' | ', '' ); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __( 'Desktop View', 'boozurk' ) .'</a>'; ?>
+</div>
 		<?php wp_footer(); ?>
 
 	</body>

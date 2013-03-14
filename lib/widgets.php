@@ -141,12 +141,12 @@ function boozurk_widget_area_init() {
 /**
  * Popular_Posts widget class
  */
-class boozurk_widget_popular_posts extends WP_Widget {
+class Boozurk_Widget_Popular_Posts extends WP_Widget {
 
-	function boozurk_widget_popular_posts() {
-		$widget_ops = array('classname' => 'tb_widget_popular_posts', 'description' => __( 'The most commented posts on your site','boozurk') );
+	function Boozurk_Widget_Popular_Posts() {
+		$widget_ops = array('classname' => 'tb_popular_posts', 'description' => __( 'The most commented posts on your site','boozurk') );
 		$this->WP_Widget('bz-popular-posts', __('Popular Posts','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_widget_popular_posts';
+		$this->alt_option_name = 'tb_popular_posts';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
@@ -154,7 +154,7 @@ class boozurk_widget_popular_posts extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		$cache = wp_cache_get('bz_widget_popular_posts', 'widget');
+		$cache = wp_cache_get('tb_popular_posts', 'widget');
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -196,7 +196,7 @@ class boozurk_widget_popular_posts extends WP_Widget {
 		endif;
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set('bz_widget_popular_posts', $cache, 'widget');
+		wp_cache_set('tb_popular_posts', $cache, 'widget');
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -207,14 +207,14 @@ class boozurk_widget_popular_posts extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['bz_widget_popular_posts']) )
-			delete_option('bz_widget_popular_posts');
+		if ( isset($alloptions['tb_popular_posts']) )
+			delete_option('tb_popular_posts');
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('bz_widget_popular_posts', 'widget');
+		wp_cache_delete('tb_popular_posts', 'widget');
 	}
 
 	function form( $instance ) {
@@ -248,25 +248,25 @@ class boozurk_widget_popular_posts extends WP_Widget {
  * latest_Commented_Posts widget class
  *
  */
-class boozurk_widget_latest_commented_posts extends WP_Widget {
+class Boozurk_Widget_Latest_Commented_Posts extends WP_Widget {
 
-	function boozurk_widget_latest_commented_posts() {
-		$widget_ops = array('classname' => 'tb_widget_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site','boozurk' ) );
+	function Boozurk_Widget_Latest_Commented_Posts() {
+		$widget_ops = array('classname' => 'tb_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site','boozurk' ) );
 		$this->WP_Widget('bz-recent-comments', __('Latest activity','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_widget_latest_commented_posts';
+		$this->alt_option_name = 'tb_latest_commented_posts';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('bz_widget_latest_commented_posts', 'widget');
+		wp_cache_delete('tb_latest_commented_posts', 'widget');
 	}
 
 	function widget( $args, $instance ) {
 		global $comments, $comment;
 
-		$cache = wp_cache_get('bz_widget_latest_commented_posts', 'widget');
+		$cache = wp_cache_get('tb_latest_commented_posts', 'widget');
 
 		if ( ! is_array( $cache ) )
 			$cache = array();
@@ -316,7 +316,7 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
-		wp_cache_set('bz_widget_latest_commented_posts', $cache, 'widget');
+		wp_cache_set('tb_latest_commented_posts', $cache, 'widget');
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -327,8 +327,8 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['bz_widget_latest_commented_posts']) )
-			delete_option('bz_widget_latest_commented_posts');
+		if ( isset($alloptions['tb_latest_commented_posts']) )
+			delete_option('tb_latest_commented_posts');
 
 		return $instance;
 	}
@@ -363,19 +363,19 @@ class boozurk_widget_latest_commented_posts extends WP_Widget {
  * latest_Comment_Authors widget class
  *
  */
-class boozurk_widget_latest_commentators extends WP_Widget {
+class Boozurk_Widget_Latest_Commentators extends WP_Widget {
 
-	function boozurk_widget_latest_commentators() {
-		$widget_ops = array('classname' => 'tb_widget_latest_commentators', 'description' => __( 'The latest comment authors','boozurk' ) );
+	function Boozurk_Widget_Latest_Commentators() {
+		$widget_ops = array('classname' => 'tb_latest_commentators', 'description' => __( 'The latest comment authors','boozurk' ) );
 		$this->WP_Widget('bz-recent-commentators', __('Latest comment authors','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_widget_latest_commentators';
+		$this->alt_option_name = 'tb_latest_commentators';
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'transition_comment_status', array(&$this, 'flush_widget_cache') );
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('bz_widget_latest_commentators', 'widget');
+		wp_cache_delete('tb_latest_commentators', 'widget');
 	}
 
 	function widget( $args, $instance ) {
@@ -383,7 +383,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 
 		if ( get_option('require_name_email') != '1' ) return; //commentors must be identifiable
 		
-		$cache = wp_cache_get('bz_widget_latest_commentators', 'widget');
+		$cache = wp_cache_get('tb_latest_commentators', 'widget');
 
 		if ( ! is_array( $cache ) )
 			$cache = array();
@@ -429,7 +429,7 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 
 		echo $output;
 		$cache[$args['widget_id']] = $output;
-		wp_cache_set('bz_widget_latest_commentators', $cache, 'widget');
+		wp_cache_set('tb_latest_commentators', $cache, 'widget');
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -440,8 +440,8 @@ class boozurk_widget_latest_commentators extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['bz_widget_latest_commentators']) )
-			delete_option('bz_widget_latest_commentators');
+		if ( isset($alloptions['tb_latest_commentators']) )
+			delete_option('tb_latest_commentators');
 
 		return $instance;
 	}
@@ -487,10 +487,10 @@ class boozurk_widget_latest_commentators extends WP_Widget {
  * Popular Categories widget class
  *
  */
-class boozurk_Widget_pop_categories extends WP_Widget {
+class Boozurk_Widget_Pop_Categories extends WP_Widget {
 
-	function boozurk_Widget_pop_categories() {
-		$widget_ops = array( 'classname' => 'tb_widget_categories', 'description' => __( 'A list of popular categories', 'boozurk' ) );
+	function Boozurk_Widget_Pop_Categories() {
+		$widget_ops = array( 'classname' => 'tb_categories', 'description' => __( 'A list of popular categories', 'boozurk' ) );
 		$this->WP_Widget('bz-categories', __('Popular Categories', 'boozurk'), $widget_ops);
 	}
 
@@ -557,10 +557,10 @@ class boozurk_Widget_pop_categories extends WP_Widget {
  *
  */
 
-class boozurk_Widget_social extends WP_Widget {
-	function boozurk_Widget_social() {
+class Boozurk_Widget_Social extends WP_Widget {
+	function Boozurk_Widget_Social() {
 		$widget_ops = array(
-            'classname' => 'tb_widget_social',
+            'classname' => 'tb_social',
             'description' => __("This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "boozurk"));
 		$control_ops = array('width' => 650);
 
@@ -722,24 +722,24 @@ class boozurk_Widget_social extends WP_Widget {
  *
  */
 
-class boozurk_Widget_besides extends WP_Widget {
+class Boozurk_Widget_Besides extends WP_Widget {
 
 	/**
 	 * Constructor
 	 *
 	 * @return void
 	 **/
-	function boozurk_Widget_besides() {
-		$widget_ops = array( 'classname' => 'tb_widget_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'boozurk' ) );
+	function Boozurk_Widget_Besides() {
+		$widget_ops = array( 'classname' => 'tb_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'boozurk' ) );
 		$this->WP_Widget( 'bz-widget-besides', __( 'besides...', 'boozurk' ), $widget_ops );
-		$this->alt_option_name = 'bz_widget_besides';
+		$this->alt_option_name = 'tb_besides';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache' ) );
 		add_action( 'switch_theme', array(&$this, 'flush_widget_cache' ) );
 	}
 	function widget( $args, $instance ) {
-		$cache = wp_cache_get( 'bz_widget_besides', 'widget' );
+		$cache = wp_cache_get( 'tb_besides', 'widget' );
 
 		if ( !is_array( $cache ) )
 			$cache = array();
@@ -815,7 +815,7 @@ class boozurk_Widget_besides extends WP_Widget {
 		endif;
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set( 'bz_widget_besides', $cache, 'widget' );
+		wp_cache_set( 'tb_besides', $cache, 'widget' );
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -826,14 +826,14 @@ class boozurk_Widget_besides extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset( $alloptions['bz_widget_besides'] ) )
-			delete_option( 'bz_widget_besides' );
+		if ( isset( $alloptions['tb_besides'] ) )
+			delete_option( 'tb_besides' );
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete( 'bz_widget_besides', 'widget' );
+		wp_cache_delete( 'tb_besides', 'widget' );
 	}
 
 	function form( $instance ) {
@@ -867,12 +867,12 @@ class boozurk_Widget_besides extends WP_Widget {
  * Recent Posts in Category widget class
  *
  */
-class boozurk_Widget_recent_posts extends WP_Widget {
+class Boozurk_Widget_Recent_Posts extends WP_Widget {
 
-	function boozurk_Widget_recent_posts() {
-		$widget_ops = array('classname' => 'tb_widget_recent_entries', 'description' => __( "The most recent posts in a single category", 'boozurk' ) );
+	function Boozurk_Widget_Recent_Posts() {
+		$widget_ops = array('classname' => 'tb_recent_entries', 'description' => __( "The most recent posts in a single category", 'boozurk' ) );
 		$this->WP_Widget('bz-recent-posts', __('Recent Posts in Category', 'boozurk' ), $widget_ops);
-		$this->alt_option_name = 'bz_widget_recent_entries';
+		$this->alt_option_name = 'tb_recent_entries';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
@@ -880,7 +880,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		$cache = wp_cache_get('bz_widget_recent_posts', 'widget');
+		$cache = wp_cache_get('tb_recent_posts', 'widget');
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -929,7 +929,7 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 		endif;
 
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set('bz_widget_recent_posts', $cache, 'widget');
+		wp_cache_set('tb_recent_posts', $cache, 'widget');
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -942,14 +942,14 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['bz_widget_recent_entries']) )
-			delete_option('bz_widget_recent_entries');
+		if ( isset($alloptions['tb_recent_entries']) )
+			delete_option('tb_recent_entries');
 
 		return $instance;
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('bz_widget_recent_posts', 'widget');
+		wp_cache_delete('tb_recent_posts', 'widget');
 	}
 
 	function form( $instance ) {
@@ -1009,12 +1009,12 @@ class boozurk_Widget_recent_posts extends WP_Widget {
 /**
  * Navigation buttons widget class
  */
-class boozurk_Widget_navbuttons extends WP_Widget {
+class Boozurk_Widget_Navbuttons extends WP_Widget {
 
-	function boozurk_Widget_navbuttons() {
-		$widget_ops = array('classname' => 'tb_widget_navbuttons', 'description' => __( 'Some usefull buttons for an easier navigation experience','boozurk') );
+	function Boozurk_Widget_Navbuttons() {
+		$widget_ops = array('classname' => 'tb_navbuttons', 'description' => __( 'Some usefull buttons for an easier navigation experience','boozurk') );
 		$this->WP_Widget('bz-navbuttons', __('Navigation buttons','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_Widget_navbuttons';
+		$this->alt_option_name = 'tb_navbuttons';
 
 	}
 
@@ -1088,12 +1088,12 @@ class boozurk_Widget_navbuttons extends WP_Widget {
 /**
  * Post details widget class
  */
-class boozurk_Widget_post_details extends WP_Widget {
+class Boozurk_Widget_Post_Details extends WP_Widget {
 
-	function boozurk_Widget_post_details() {
-		$widget_ops = array('classname' => 'tb_widget_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'boozurk') );
+	function Boozurk_Widget_Post_Details() {
+		$widget_ops = array('classname' => 'tb_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'boozurk') );
 		$this->WP_Widget('bz-post-details', __('Post details','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_Widget_post_details';
+		$this->alt_option_name = 'tb_post_details';
 
 	}
 
@@ -1177,12 +1177,12 @@ class boozurk_Widget_post_details extends WP_Widget {
 /**
  * Post Format list
  */
-class boozurk_Widget_post_formats extends WP_Widget {
+class Boozurk_Widget_Post_Formats extends WP_Widget {
 
-	function boozurk_Widget_post_formats() {
-		$widget_ops = array( 'classname' => 'tb_widget_post_formats', 'description' => __( 'A list of Post Formats','boozurk' ) );
+	function Boozurk_Widget_Post_Formats() {
+		$widget_ops = array( 'classname' => 'tb_post_formats', 'description' => __( 'A list of Post Formats','boozurk' ) );
 		$this->WP_Widget('bz-widget-post-formats', __('Post Formats','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_widget_post_formats';
+		$this->alt_option_name = 'tb_post_formats';
 
 		add_action( 'save_post', array(&$this, 'flush_widget_cache') );
 		add_action( 'deleted_post', array(&$this, 'flush_widget_cache') );
@@ -1190,11 +1190,11 @@ class boozurk_Widget_post_formats extends WP_Widget {
 	}
 
 	function flush_widget_cache() {
-		wp_cache_delete('bz_widget_post_formats', 'widget');
+		wp_cache_delete('tb_post_formats', 'widget');
 	}
 
 	function widget( $args, $instance ) {
-		$cache = wp_cache_get('bz_widget_post_formats', 'widget');
+		$cache = wp_cache_get('tb_post_formats', 'widget');
 
 		if ( !is_array($cache) )
 			$cache = array();
@@ -1236,7 +1236,7 @@ class boozurk_Widget_post_formats extends WP_Widget {
 <?php
 		echo $after_widget;
 		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set('bz_widget_post_formats', $cache, 'widget');
+		wp_cache_set('tb_post_formats', $cache, 'widget');
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -1247,8 +1247,8 @@ class boozurk_Widget_post_formats extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['bz_widget_post_formats']) )
-			delete_option('bz_widget_post_formats');
+		if ( isset($alloptions['tb_post_formats']) )
+			delete_option('tb_post_formats');
 
 		return $instance;
 	}
@@ -1283,12 +1283,12 @@ class boozurk_Widget_post_formats extends WP_Widget {
 /**
  * Image EXIF widget class
  */
-class boozurk_Widget_image_EXIF extends WP_Widget {
+class Boozurk_Widget_Image_Exif extends WP_Widget {
 
-	function boozurk_Widget_image_EXIF() {
-		$widget_ops = array('classname' => 'tb_widget_exif_details', 'description' => __( "Display image EXIF details. It's visible ONLY in single attachments",'boozurk') );
+	function Boozurk_Widget_Image_Exif() {
+		$widget_ops = array('classname' => 'tb_exif_details', 'description' => __( "Display image EXIF details. It's visible ONLY in single attachments",'boozurk') );
 		$this->WP_Widget('bz-exif-details', __('Image EXIF details','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_Widget_exif_details';
+		$this->alt_option_name = 'tb_exif_details';
 
 	}
 
@@ -1329,12 +1329,12 @@ class boozurk_Widget_image_EXIF extends WP_Widget {
  * User_quick_links widget class
  *
  */
-class boozurk_Widget_user_quick_links extends WP_Widget {
+class Boozurk_Widget_User_Quick_Links extends WP_Widget {
 
-	function boozurk_Widget_user_quick_links() {
-		$widget_ops = array('classname' => 'tb_widget_user_quick_links', 'description' => __( "Some useful links for users. It's a kind of enhanced meta widget",'boozurk' ) );
+	function Boozurk_Widget_User_Quick_Links() {
+		$widget_ops = array('classname' => 'tb_user_quick_links', 'description' => __( "Some useful links for users. It's a kind of enhanced meta widget",'boozurk' ) );
 		$this->WP_Widget('bz-user-quick-links', __('User quick links','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_widget_user_quick_links';
+		$this->alt_option_name = 'tb_user_quick_links';
 	}
 
 	function widget( $args, $instance ) {
@@ -1371,9 +1371,9 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 					<?php if ( current_user_can( 'moderate_comments' ) ) {
 						$awaiting_mod = wp_count_comments();
 						$awaiting_mod = $awaiting_mod->moderated;
-						$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+						$awaiting_mod = $awaiting_mod ? ' <span class="details">(' . number_format_i18n( $awaiting_mod ) . ')</span>' : '';
 					?>
-						<li><a title="<?php esc_attr_e( 'Comments', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'boozurk' ); ?></a><?php echo $awaiting_mod; ?></li>
+						<li><a title="<?php esc_attr_e( 'Comments', 'boozurk' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'boozurk' ); ?><?php echo $awaiting_mod; ?></a></li>
 					<?php } ?>
 				<?php } ?>
 			<?php } ?>
@@ -1418,12 +1418,12 @@ class boozurk_Widget_user_quick_links extends WP_Widget {
 /**
  * Post share links
  */
-class boozurk_Widget_share_this extends WP_Widget {
+class Boozurk_Widget_Share_This extends WP_Widget {
 
-	function boozurk_Widget_share_this() {
-		$widget_ops = array('classname' => 'tb_widget_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'boozurk') );
+	function Boozurk_Widget_Share_This() {
+		$widget_ops = array('classname' => 'tb_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'boozurk') );
 		$this->WP_Widget('bz-share-this', __('Share this','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_Widget_share_this';
+		$this->alt_option_name = 'tb_share_this';
 
 	}
 
@@ -1480,12 +1480,12 @@ class boozurk_Widget_share_this extends WP_Widget {
 /**
  * Clean Archives Widget
  */
-class boozurk_Widget_clean_archives extends WP_Widget {
+class Boozurk_Widget_Clean_Archives extends WP_Widget {
 
-	function boozurk_Widget_clean_archives() {
-		$widget_ops = array('classname' => 'tb_widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'boozurk') );
+	function Boozurk_Widget_Clean_Archives() {
+		$widget_ops = array('classname' => 'tb_clean_archives', 'description' => __( "Show archives in a cleaner way",'boozurk') );
 		$this->WP_Widget('bz-clean-archives', __('Clean Archives','boozurk'), $widget_ops);
-		$this->alt_option_name = 'bz_Widget_clean_archives';
+		$this->alt_option_name = 'tb_clean_archives';
 
 	}
 
@@ -1586,35 +1586,38 @@ function boozurk_widgets_init() {
 	if ( ! boozurk_get_opt( 'boozurk_custom_widgets' ) )
 		return;
 
-	register_widget('boozurk_widget_popular_posts');
+	register_widget('Boozurk_Widget_Popular_Posts');
 
-	register_widget('boozurk_Widget_latest_Commented_Posts');
+	register_widget('Boozurk_Widget_Latest_Commented_Posts');
 
-	register_widget('boozurk_widget_latest_commentators');
+	register_widget('Boozurk_Widget_Latest_Commentators');
 
-	register_widget('boozurk_Widget_pop_categories');
+	register_widget('Boozurk_Widget_Pop_Categories');
 
-	register_widget('boozurk_Widget_social');
+	register_widget('Boozurk_Widget_Social');
 
-	register_widget('boozurk_Widget_besides');
+	register_widget('Boozurk_Widget_Besides');
 
-	register_widget('boozurk_Widget_recent_posts');
+	register_widget('Boozurk_Widget_Recent_Posts');
 
-	register_widget('boozurk_Widget_navbuttons');
+	register_widget('Boozurk_Widget_User_Quick_Links');
 
-	register_widget('boozurk_Widget_post_details');
+	register_widget('Boozurk_Widget_Post_Details');
 
-	register_widget('boozurk_Widget_post_formats');
+	register_widget('Boozurk_Widget_Post_Formats');
 
-	register_widget('boozurk_Widget_image_EXIF');
+	register_widget('Boozurk_Widget_Image_Exif');
 
-	register_widget('boozurk_Widget_user_quick_links');
+	register_widget('Boozurk_Widget_Share_This');
 
-	register_widget('boozurk_Widget_share_this');
+	register_widget('Boozurk_Widget_Clean_Archives');
 
-	register_widget('boozurk_Widget_clean_archives');
+	if ( boozurk_is_mobile() )
+		return;
 
-	wp_register_sidebar_widget('bz-font-resize', 'Font Resize', 'boozurk_widget_font_resize', array( 'description' => __('Simple javascript-based font resizer','boozurk' ) ) );
+	register_widget('Boozurk_Widget_Navbuttons');
+
+	wp_register_sidebar_widget('bz-font-resize', 'Font Resize', 'boozurk_widget_font_resize', array( 'classname' => 'tb_font_resize', 'description' => __('Simple javascript-based font resizer','boozurk' ) ) );
 
 }
 

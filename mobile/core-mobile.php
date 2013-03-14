@@ -4,23 +4,22 @@
  *
  * @package Boozurk
  * @subpackage mobile
- * @since 1.05
+ * @since 3.03
  */
 
 
 class Boozurk_Mobile {
 
+	var $is_mobile = false;
+
 	function __construct () {
 		global $boozurk_is_mobile;
 
-		$boozurk_is_mobile = $this->device_detect(); // check if is mobile browser
+		$boozurk_is_mobile = $this->is_mobile = apply_filters( 'boozurk_filter_is_mobile', $this->device_detect() ); // check if is mobile browser
 
 		add_action( 'template_redirect',	array( $this, 'init' ) ); // mobile support
-
-		add_action( 'after_setup_theme',	array( $this, 'setup' ) ); // Tell WordPress to run boozurk_setup() when the 'after_setup_theme' hook is run.
-
-		add_action( 'widgets_init',			array( $this, 'widget_area_init' ) ); // Register sidebars by running boozurk_mobile_widget_area_init() on the widgets_init hook
-
+		add_action( 'after_setup_theme',	array( $this, 'setup' ) ); // Tell WordPress to run setup() when the 'after_setup_theme' hook is run.
+		add_action( 'widgets_init',			array( $this, 'widget_area_init' ) ); // Register sidebars by running widget_area_init() on the widgets_init hook
 		add_action( 'comment_form_before',	array( $this, 'enqueue_comments_reply' ) ); // Enqueue comment-reply.js
 
 	}
@@ -29,14 +28,6 @@ class Boozurk_Mobile {
 	function get_option ( $option ) {
 
 		return boozurk_get_opt( $option );
-
-	}
-
-
-	function is_mobile () {
-		global $boozurk_is_mobile;
-
-		return $boozurk_is_mobile;
 
 	}
 
@@ -86,7 +77,7 @@ class Boozurk_Mobile {
 	function init () {
 		global $content_width;
 
-		if ( ! $this->is_mobile() ) return;
+		if ( ! $this->is_mobile ) return;
 
 		add_action( 'wp_enqueue_scripts',					array( $this, 'stylesheet' ) );
 		add_action( 'boozurk_mobile_hook_comments_before',	array( $this, 'comments_navigation' ) );
@@ -99,9 +90,9 @@ class Boozurk_Mobile {
 		add_filter( 'user_contactmethods',					array( $this, 'new_contactmethods' ),10,1 );
 		add_filter( 'widget_tag_cloud_args',				array( $this, 'tag_cloud_filter' ), 90 );
 		add_filter( 'widget_categories_args',				array( $this, 'widget_categories_filter' ), 90 );
+		add_filter( 'wp_list_categories',					array( $this, 'list_categories_filter' ), 90 );
 		add_filter( 'widget_archives_args',					array( $this, 'widget_archives_filter' ), 90 );
 		add_filter( 'widget_pages_args',					array( $this, 'widget_pages_filter' ), 90 );
-		add_filter( 'boozurk_widget_pop_categories_args',	array( $this, 'widget_pop_categories_filter' ), 90 );
 		add_filter( 'body_class' ,							array( $this, 'body_classes' ) );
 		add_filter( 'post_class' ,							array( $this, 'post_classes' ) );
 		add_filter( 'boozurk_mobile_filter_seztitle' ,		array( $this, 'get_seztitle' ) );
@@ -204,9 +195,9 @@ class Boozurk_Mobile {
 		if ( ! get_next_post() && ! get_previous_post() ) return;
 
 		?>
-			<div class="tbm-navi halfsep">
-					<?php if ( get_next_post() ) { ?><span class="tbm-halfspan tbm-prev outset"><?php next_post_link( '%link' ); ?></span><?php } ?>
-					<?php if ( get_previous_post() ) { ?><span class="tbm-halfspan tbm-next outset"><?php previous_post_link( '%link' ); ?></span><?php } ?>
+			<div class="tbm-navi">
+					<?php if ( get_next_post() ) { ?><span class="tbm-halfspan tbm-prev"><?php next_post_link( '%link', '&#60;&#60;' ); ?></span><?php } ?>
+					<?php if ( get_previous_post() ) { ?><span class="tbm-halfspan tbm-next"><?php previous_post_link( '%link', '&#62;&#62;' ); ?></span><?php } ?>
 					<br class="fixfloat">
 			</div>
 		<?php
@@ -378,8 +369,14 @@ class Boozurk_Mobile {
 
 	function widget_categories_filter( $args = array() ) {
 		$args['hierarchical'] = 0;
-		$args['show_count'] = 0;
 		return $args;
+	}
+
+
+	function list_categories_filter( $output ) {
+		$pattern = '/<\/a>\s(\(\d+\))/i';
+		$replacement = ' <span class="details">$1</span></a>';
+		return preg_replace( $pattern, $replacement, $output );
 	}
 
 
@@ -391,12 +388,6 @@ class Boozurk_Mobile {
 
 	function widget_pages_filter( $args = array() ) {
 		$args['depth'] = 1;
-		return $args;
-	}
-
-
-	function widget_pop_categories_filter( $args = array() ) {
-		$args['show_count'] = 0;
 		return $args;
 	}
 
@@ -424,7 +415,3 @@ class Boozurk_Mobile {
 }
 
 new Boozurk_Mobile;
-
-
-
-
