@@ -4,95 +4,83 @@
  *
  * Contains almost all of the Theme's setup functions and custom functions.
  *
+ * Sets up the theme and provides some helper functions, which are used
+ * in the theme as custom template tags. Others are attached to action and
+ * filter hooks in WordPress to change core functionality.
+ *
+ * When using a child theme (see http://codex.wordpress.org/Theme_Development and
+ * http://codex.wordpress.org/Child_Themes), you can override certain functions
+ * (those wrapped in a function_exists() call) by defining them first in your child theme's
+ * functions.php file. The child theme's functions.php file is included before the parent
+ * theme's file, so the child theme functions would be used.
+ *
+ * Functions that are not pluggable (not wrapped in function_exists()) are instead attached
+ * to a filter or action hook.
+ *
+ * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
+ *
  * @package Boozurk
  * @since 1.00
  */
 
 
-/* Custom actions */
+/* Custom actions - WP hooks */
 
-add_action( 'after_setup_theme', 'boozurk_setup' ); // tell WordPress to run boozurk_setup() when the 'after_setup_theme' hook is run.
-
-add_action( 'wp_enqueue_scripts', 'boozurk_stylesheet' ); // Add stylesheets
-
-add_action( 'wp_head', 'boozurk_custom_style' ); // Add custom style
-
-add_action( 'wp_enqueue_scripts', 'boozurk_scripts' ); // Add js scripts
-
-add_action( 'wp_footer', 'boozurk_initialize_scripts' ); // start js scripts
-
-add_action( 'init', 'boozurk_post_expander_activate' ); // post expander ajax request
-
-add_action( 'init', 'boozurk_infinite_scroll_activate' ); // infinite scroll ajax request
-
-add_action( 'boozurk_hook_entry_before', 'boozurk_print_details' ); // boozurk_print_details
-
-add_action( 'admin_bar_menu', 'boozurk_admin_bar_plus', 999 ); // add links to admin bar
-
-add_action( 'wp_head', 'boozurk_plus_snippet' ); // localize js scripts
-
-add_action( 'created_category', 'boozurk_created_category_color' ); // add a random color to every new category
-
-add_action( 'comment_form_comments_closed', 'boozurk_comments_closed' ); // comments-are-closed message
-
-add_action( 'boozurk_hook_entry_before', 'boozurk_navigate_attachments' ); // boozurk_navigate_attachments
-
-add_action( 'boozurk_hook_entry_before', 'boozurk_single_nav' ); // boozurk_single_nav
-
-add_action( 'boozurk_hook_entry_after', 'boozurk_single_widgets_area' ); // boozurk_single_widgets_area
-
-add_action( 'boozurk_hook_entry_bottom', 'boozurk_link_pages' ); // boozurk_link_pages
-
-add_action( 'template_redirect', 'boozurk_allcat' ); // Add custom category page
-
-add_action( 'template_redirect', 'boozurk_media' ); // media select
-
-add_action( 'boozurk_hook_comments_list_before', 'boozurk_navigate_comments' ); // media select
-
-add_action( 'boozurk_hook_comments_list_after', 'boozurk_navigate_comments' ); // media select
+add_action( 'after_setup_theme'						, 'boozurk_setup' ); // tell WordPress to run boozurk_setup() when the 'after_setup_theme' hook is run.
+add_action( 'wp_enqueue_scripts'					, 'boozurk_stylesheet' ); // Add stylesheets
+add_action( 'wp_head'								, 'boozurk_custom_style' ); // Add custom style
+add_action( 'wp_enqueue_scripts'					, 'boozurk_scripts' ); // Add js scripts
+add_action( 'wp_footer'								, 'boozurk_initialize_scripts' ); // start js scripts
+add_action( 'init'									, 'boozurk_post_expander_activate' ); // post expander ajax request
+add_action( 'init'									, 'boozurk_infinite_scroll_activate' ); // infinite scroll ajax request
+add_action( 'admin_bar_menu'						, 'boozurk_admin_bar_plus', 999 ); // add links to admin bar
+add_action( 'wp_head'								, 'boozurk_plus_snippet' ); // localize js scripts
+add_action( 'created_category'						, 'boozurk_created_category_color' ); // add a random color to every new category
+add_action( 'comment_form_comments_closed'			, 'boozurk_comments_closed' ); // comments-are-closed message
+add_action( 'template_redirect'						, 'boozurk_allcat' ); // Add custom category page
+add_action( 'template_redirect'						, 'boozurk_media' ); // media select
 
 
-/* Custom filters */
+/* Custom actions - theme hooks */
 
-add_filter( 'post_gallery', 'boozurk_gallery_shortcode', 10, 2 );
+add_action( 'boozurk_hook_body_top'					, 'boozurk_1st_secondary_menu' );
+add_action( 'boozurk_hook_header_after'				, 'boozurk_2nd_secondary_menu' );
+add_action( 'boozurk_hook_header_after'				, 'boozurk_header_widget_area' );
+add_action( 'boozurk_hook_entry_before'				, 'boozurk_print_details' );
+add_action( 'boozurk_hook_entry_before'				, 'boozurk_navigate_attachments' );
+add_action( 'boozurk_hook_entry_before'				, 'boozurk_single_nav' );
+add_action( 'boozurk_hook_entry_after'				, 'boozurk_single_widgets_area' );
+add_action( 'boozurk_hook_entry_bottom'				, 'boozurk_link_pages' );
+add_action( 'boozurk_hook_comments_list_before'		, 'boozurk_navigate_comments' );
+add_action( 'boozurk_hook_comments_list_after'		, 'boozurk_navigate_comments' );
+add_action( 'boozurk_hook_secondary_sidebar_top'	, 'boozurk_secondary_sidebar_top' );
 
-add_filter( 'use_default_gallery_style', '__return_false' );
 
-add_filter( 'embed_oembed_html', 'boozurk_wmode_transparent', 10, 3);
+/* Custom filters - WP hooks */
 
-add_filter( 'img_caption_shortcode', 'boozurk_img_caption_shortcode', 10, 3 );
-
-add_filter( 'the_content', 'boozurk_quote_content' );
-
-add_filter( 'smilies_src', 'boozurk_smiles_replace',10,2 ); //custom smiles
-
-add_filter( 'body_class' , 'boozurk_body_classes' );
-
-add_filter( 'comment_form_default_fields', 'boozurk_comments_form_fields');
-
-add_filter( 'comment_form_defaults', 'boozurk_comment_form_defaults' );
-
-add_filter( 'wp_get_attachment_link', 'boozurk_get_attachment_link', 10, 6 );
-
-add_filter( 'get_comment_author_link', 'boozurk_add_quoted_on' );
-
-add_filter( 'user_contactmethods','boozurk_new_contactmethods',10,1 );
-
-add_filter( 'the_title', 'boozurk_titles_filter', 10, 2 );
-
-add_filter( 'excerpt_length', 'boozurk_excerpt_length' );
-
-add_filter( 'excerpt_mblength' , 'boozurk_excerpt_length' ); //WP Multibyte Patch support
-
-add_filter( 'excerpt_more', 'boozurk_excerpt_more' );
-
-add_filter( 'the_content_more_link', 'boozurk_more_link', 10, 2 );
-
-add_filter( 'wp_title', 'boozurk_filter_wp_title' );
-
-add_filter( 'avatar_defaults', 'boozurk_addgravatar' );
-
-add_filter( 'edit_comment_link', 'boozurk_edit_comment_link' );
+add_filter( 'post_gallery'							, 'boozurk_gallery_shortcode', 10, 2 );
+add_filter( 'use_default_gallery_style'				, '__return_false' );
+add_filter( 'embed_oembed_html'						, 'boozurk_wmode_transparent', 10, 3);
+add_filter( 'img_caption_shortcode'					, 'boozurk_img_caption_shortcode', 10, 3 );
+add_filter( 'the_content'							, 'boozurk_quote_content' );
+add_filter( 'smilies_src'							, 'boozurk_smiles_replace',10,2 );
+add_filter( 'body_class'							, 'boozurk_body_classes' );
+add_filter( 'comment_form_default_fields'			, 'boozurk_comments_form_fields');
+add_filter( 'comment_form_defaults'					, 'boozurk_comment_form_defaults' );
+add_filter( 'wp_get_attachment_link'				, 'boozurk_get_attachment_link', 10, 6 );
+add_filter( 'get_comment_author_link'				, 'boozurk_add_quoted_on' );
+add_filter( 'user_contactmethods'					, 'boozurk_new_contactmethods', 10, 1 );
+add_filter( 'the_title'								, 'boozurk_titles_filter', 10, 2 );
+add_filter( 'excerpt_length'						, 'boozurk_excerpt_length' );
+add_filter( 'excerpt_mblength'						, 'boozurk_excerpt_length' );
+add_filter( 'excerpt_more'							, 'boozurk_excerpt_more' );
+add_filter( 'the_content_more_link'					, 'boozurk_more_link', 10, 2 );
+add_filter( 'wp_title'								, 'boozurk_filter_wp_title' );
+add_filter( 'avatar_defaults'						, 'boozurk_addgravatar' );
+add_filter( 'edit_comment_link'						, 'boozurk_edit_comment_link' );
+add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
+add_filter( 'wp_list_categories'					, 'boozurk_wrap_categories_count' );
+add_filter( 'comment_reply_link'					, 'boozurk_comment_reply_link' );
 
 
 /* get the theme options */
@@ -170,13 +158,6 @@ function boozurk_is_allcat() { //is "all category" page
 
 }
 
-function boozurk_is_media() { //is in media preview mode
-
-	$is_media = isset( $_GET['boozurk_media'] ) ? true : false;
-	return $is_media;
-
-}
-
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
@@ -214,18 +195,24 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 		color: <?php echo boozurk_get_opt( 'boozurk_colors_link' ); ?>;
 	}
 	a:hover,
-	ul li:hover .hiraquo,
+	.menu-item-parent:hover > a:after,
 	.current-menu-item a:hover,
 	.current_page_item a:hover,
 	.current-cat a:hover {
 		color: <?php echo boozurk_get_opt( 'boozurk_colors_link_hover' ); ?>;
 	}
+	.current-menu-ancestor > a:after,
+	.current-menu-parent > a:after,
+	.current_page_parent > a:after,
+	.current_page_ancestor > a:after,
 	.current-menu-item > a,
 	.current_page_item > a,
-	.current-cat > a,
-	li.current_page_ancestor .hiraquo {
+	.current-cat > a {
 		color: <?php echo boozurk_get_opt( 'boozurk_colors_link_sel' ); ?>;
 	}	
+	div.tb_latest_commentators a:hover img {
+		border-color: <?php echo boozurk_get_opt( 'boozurk_colors_link_hover' ); ?>;
+	}
 	#header-widget-area .bz-widget {
 		width:<?php echo round ( 99 / intval( boozurk_get_opt( 'boozurk_sidebar_head_split' ) ), 1 ); ?>%;
 	}
@@ -282,11 +269,6 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 	function boozurk_get_js_modules( $afterajax = 0 ) {
 
 		$modules = array();
-		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )	$modules[] = 'postexpander';
-		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )			$modules[] = 'thickbox';
-		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )			$modules[] = 'tooltips';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) )				$modules[] = 'plusone';
-		$modules[] = 'resizevideo';
 
 		if ( !$afterajax ) {
 			$modules[] = 'animatemenu';
@@ -298,6 +280,13 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 			if ( ( boozurk_get_opt( 'boozurk_infinite_scroll' ) ) && !is_singular() && !is_404() )
 				$modules[] = 'infinitescroll';
 		}
+
+		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )	$modules[] = 'postexpander';
+		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )			$modules[] = 'thickbox';
+		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )			$modules[] = 'tooltips';
+		if ( boozurk_get_opt( 'boozurk_plusone' ) )				$modules[] = 'plusone';
+		$modules[] = 'resizevideo';
+
 
 		$modules = implode(',', $modules);
 
@@ -353,11 +342,13 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 		} else { //normal view
 
 			wp_enqueue_style( 'boozurk-general-style', get_stylesheet_uri(), array('thickbox'), boozurk_get_info( 'version' ), 'screen' );
+			wp_enqueue_style( 'boozurk-font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
 
 		}
 
 		//google font
-		if ( boozurk_get_opt( 'boozurk_google_font_family' ) ) wp_enqueue_style( 'boozurk-google-fonts', '//fonts.googleapis.com/css?family=' . urlencode( boozurk_get_opt( 'boozurk_google_font_family' ) ) );
+		if ( boozurk_get_opt( 'boozurk_google_font_family' ) )
+			wp_enqueue_style( 'boozurk-google-fonts', '//fonts.googleapis.com/css?family=' . urlencode( boozurk_get_opt( 'boozurk_google_font_family' ) ) );
 
 		wp_enqueue_style( 'boozurk-print-style', get_template_directory_uri() . '/css/print.css', false, boozurk_get_info( 'version' ), 'print' );
 
@@ -408,20 +399,20 @@ function boozurk_print_details() {
 
 	if ( is_singular() ) return;
 
+	echo '<ul class="post-top-details fixfloat">';
 	if ( boozurk_get_opt( 'boozurk_post_date' ) )
-		echo '<div class="bz-post-top-date fixfloat">' . get_the_time( get_option( 'date_format' ) ) . '</div>';
+		echo '<li class="post-top-date"><i class="icon-time"></i> ' . get_the_time( get_option( 'date_format' ) ) . '</li>';
 
 	if ( boozurk_get_opt( 'boozurk_post_cat' ) ) {
-		echo '<div class="bz-post-top-cat fixfloat">';
+		echo '<li class="post-top-cat"><i class="icon-folder-close"></i> ';
 		the_category(', ');
-		echo '</div>';
+		echo '</li>';
 	}
 
-	if ( boozurk_get_opt( 'boozurk_post_tag' ) ) {
-		echo '<div class="bz-post-top-tag fixfloat">';
-		the_tags(' ');
-		echo '</div>';
+	if ( boozurk_get_opt( 'boozurk_post_tag' ) && $the_tag_list = get_the_tag_list( '', ', ', '' ) ) {
+		echo '<li class="post-top-tag"><i class="icon-tags"></i> ' . $the_tag_list . '</li>';
 	}
+	echo '</ul>';
 }
 
 
@@ -441,7 +432,7 @@ if ( !function_exists( 'boozurk_pages_menu' ) ) {
 if ( !function_exists( 'boozurk_featured_title' ) ) {
 	function boozurk_featured_title( $args = '' ) {
 		global $post;
-		
+
 		$defaults = array(
 			'alternative' => '',
 			'fallback' => '',
@@ -468,7 +459,7 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 				if ( !is_singular() ) $args['featured'] = false;
 				break;
 		}
-		
+
 		$thumb = false;
 		if ( $args['featured'] && has_post_thumbnail( $post->ID ) ) {
 			if ( boozurk_get_opt( 'boozurk_featured_title_thumb' ) == 'large') {
@@ -478,7 +469,7 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 				$thumb = get_the_post_thumbnail( $post->ID, 'thumbnail' );
 			}
 		}
-		
+
 		// Check if this is a post or page, if it has a thumbnail, and if it's a big one
 		if ( $thumb ) {
 
@@ -498,26 +489,41 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 
 // print extra info for posts/pages
 if ( !function_exists( 'boozurk_extrainfo' ) ) {
-	function boozurk_extrainfo( $comm = true ) {
+	function boozurk_extrainfo( $args = '' ) {
 		global $post;
+
+		$defaults = array(
+			'icon' => 1,
+			'comments' => 1,
+			'plusone' => 1,
+		);
+		$args = wp_parse_args( $args, $defaults );
 
 ?>
 	<div class="post_meta_container">
 
-		<a class="pmb_format tb-thumb-format" href="<?php the_permalink(); ?>" rel="bookmark">&nbsp;</a>
+		<?php if ( $args['icon'] ) { ?>
+			<a class="pmb_format btn" href="<?php the_permalink(); ?>" rel="bookmark"><i class="icon-placeholder"></i></a>
+		<?php } ?>
 
 		<?php
 			$page_cd_nc = ( is_page() && !comments_open() && !have_comments() ); //true if page with comments disabled and no comments
 			if ( !$page_cd_nc ) {
-				if( $comm && !post_password_required() ) comments_popup_link( '0', '1', '%', 'pmb_comm', '-'); // number of comments
+				if( $args['comments'] && !post_password_required() ) comments_popup_link( '0', '1', '%', 'pmb_comm', '-'); // number of comments
 			}
 		?>
 
-		<?php if ( boozurk_get_opt( 'boozurk_plusone' ) ) { ?>
-			<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php the_permalink(); ?>"></div></div>
+		<?php if ( boozurk_get_opt( 'boozurk_plusone' ) && !post_password_required() && $args['plusone'] ) { ?>
+			<?php if ( boozurk_get_opt( 'boozurk_plusone_official' ) ) { ?>
+				<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php echo rawurlencode( get_permalink() ); ?>"></div></div>
+			<?php } else { ?>
+				<a class="btn plusone pmb_comm" title="<?php _e( 'recommend this with Google+', 'boozurk' ); ?>" href="https://plus.google.com/share?url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<i class="icon-google-plus"></i>
+				</a>
+			<?php } ?>
 		<?php } ?>
 
-		<?php if ( !is_singular() ) edit_post_link(); ?>
+		<?php if ( !is_singular() ) edit_post_link( '<i class="icon-pencil"></i>' ); ?>
 
 	</div>
 <?php
@@ -549,7 +555,7 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 ?>
 	<div class="bz-last-cop fixfloat">
 		<span class="item-label"><?php _e('last comments','boozurk'); ?></span>
-		<span class="bz-breadcrumb-sep item-label">&nbsp;</span>
+		<span class="item-label"><i class="icon-angle-right"></i></span>
 		<?php echo $ellipsis; ?>
 		<?php foreach ( $comments as $comment ) { ?>
 			<div class="item no-grav">
@@ -583,16 +589,16 @@ if (!function_exists('boozurk_navbuttons')) {
 ?>
 	<div id="navbuttons"<?php if ( $fixed ) echo ' class="fixed"'; ?>>
 
+		<ul>
+
 		<?php if ( $is_singular && get_edit_post_link() ) { 												// ------- Edit ------- ?>
-			<div class="minibutton minib_edit" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
-				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_edit btn" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
+				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>"><i class="icon-edit"></i></a>
+			</li>
 		<?php } ?>
-		
+
 		<?php if ( $print && $is_singular ) { 																// ------- Print ------- ?>
-			<div class="minibutton minib_print" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
+			<li class="minibutton minib_print btn" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
 				<a rel="nofollow" href="<?php
 					$arr_params['style'] = 'printme';
 					if ( get_query_var('page') ) {
@@ -602,98 +608,80 @@ if (!function_exists('boozurk_navbuttons')) {
 						$arr_params['cpage'] = esc_html( get_query_var( 'cpage' ) );
 					}
 					echo add_query_arg( $arr_params, get_permalink() );
-					?>">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+					?>"><i class="icon-print"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $comment && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- Leave a comment ------- ?>
-			<div class="minibutton minib_comment" title="<?php esc_attr_e( 'Leave a comment','boozurk' ); ?>">
-				<a href="#respond">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_comment btn" title="<?php esc_attr_e( 'Leave a comment','boozurk' ); ?>">
+				<a href="#respond"><i class="icon-comment"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $feed && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { 	// ------- RSS feed ------- ?>
-			<div class="minibutton minib_rss" title="<?php esc_attr_e( 'Feed for comments on this post', 'boozurk' ); ?>">
-				<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> ">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_rss btn" title="<?php esc_attr_e( 'Feed for comments on this post', 'boozurk' ); ?>">
+				<a href="<?php echo get_post_comments_feed_link( $post->ID, 'rss2' ); ?> "><i class="icon-rss"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $trackback && $is_singular && pings_open() ) { 											// ------- Trackback ------- ?>
-			<div class="minibutton minib_track" title="<?php esc_attr_e( 'Trackback URL','boozurk' ); ?>">
-				<a href="<?php echo get_trackback_url(); ?>" rel="trackback">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_track btn" title="<?php esc_attr_e( 'Trackback URL','boozurk' ); ?>">
+				<a href="<?php echo get_trackback_url(); ?>" rel="trackback"><i class="icon-reply"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $home ) { 																				// ------- Home ------- ?>
-			<div class="minibutton minib_home" title="<?php esc_attr_e( 'Home','boozurk' ); ?>">
-				<a href="<?php echo home_url(); ?>">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_home btn" title="<?php esc_attr_e( 'Home','boozurk' ); ?>">
+				<a href="<?php echo home_url(); ?>"><i class="icon-home"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $is_image ) { 																			// ------- Back to parent post ------- ?>
 			<?php if ( !empty( $post->post_parent ) ) { ?>
-				<div class="minibutton minib_backtopost" title="<?php echo esc_attr( sprintf( __( 'Return to %s', 'boozurk' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>">
-					<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery">
-						<span class="minib_img">&nbsp;</span>
-					</a>
-				</div>
+				<li class="minibutton minib_backtopost btn" title="<?php echo esc_attr( sprintf( __( 'Return to %s', 'boozurk' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>">
+					<a href="<?php echo get_permalink( $post->post_parent ); ?>" rel="gallery"><i class="icon-chevron-left"></i></a>
+				</li>
 			<?php } ?>
 		<?php } ?>
 
 		<?php if (  $next_prev && $is_post && get_previous_post() ) { 										// ------- Previous post ------- ?>
-			<div class="minibutton minib_ppage" title="<?php echo esc_attr( __( 'Previous Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_previous_post() ) ) ); ?>">
-				<a rel="prev" href="<?php echo get_permalink( get_previous_post() ); ?>">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_ppage btn" title="<?php echo esc_attr( __( 'Previous Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_previous_post() ) ) ); ?>">
+				<a rel="prev" href="<?php echo get_permalink( get_previous_post() ); ?>"><i class="icon-chevron-left"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $next_prev && $is_post && get_next_post() ) { 											// ------- Next post ------- ?>
-			<div class="minibutton minib_npage" title="<?php echo esc_attr( __( 'Next Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_next_post() ) ) ); ?>">
-				<a rel="next" href="<?php echo get_permalink( get_next_post() ); ?>">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_npage btn" title="<?php echo esc_attr( __( 'Next Post', 'boozurk' ) . ': ' . strip_tags( get_the_title( get_next_post() ) ) ); ?>">
+				<a rel="next" href="<?php echo get_permalink( get_next_post() ); ?>"><i class="icon-chevron-right"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_next_posts_link() ) { 			// ------- Older Posts ------- ?>
-			<div class="minibutton nb-nextprev minib_npages" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
-				<?php next_posts_link( '<span class="minib_img">&nbsp;</span>' ); ?>
-			</div>
+			<li class="minibutton nb-nextprev minib_npages btn" title="<?php esc_attr_e( 'Older Posts', 'boozurk' ); ?>">
+				<?php next_posts_link( '<i class="icon-chevron-left"></i>' ); ?>
+			</li>
 		<?php } ?>
 
 		<?php if ( $next_prev && !$is_singular && ! boozurk_is_allcat() && get_previous_posts_link() ) { 		// ------- Newer Posts ------- ?>
-			<div class="minibutton nb-nextprev minib_ppages" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
-				<?php previous_posts_link( '<span class="minib_img">&nbsp;</span>' ); ?>
-			</div>
+			<li class="minibutton nb-nextprev minib_ppages btn" title="<?php esc_attr_e( 'Newer Posts', 'boozurk' ); ?>">
+				<?php previous_posts_link( '<i class="icon-chevron-right"></i>' ); ?>
+			</li>
 		<?php } ?>
 
 		<?php if ( $up_down ) { 																			// ------- Top ------- ?>
-			<div class="minibutton minib_top" title="<?php esc_attr_e( 'Top of page', 'boozurk' ); ?>">
-				<a href="#">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_top btn" title="<?php esc_attr_e( 'Top of page', 'boozurk' ); ?>">
+				<a href="#"><i class="icon-chevron-up"></i></a>
+			</li>
 		<?php } ?>
 
 		<?php if ( $up_down ) { 																			// ------- Bottom ------- ?>
-			<div class="minibutton minib_bottom" title="<?php esc_attr_e( 'Bottom of page', 'boozurk' ); ?>">
-				<a href="#footer">
-					<span class="minib_img">&nbsp;</span>
-				</a>
-			</div>
+			<li class="minibutton minib_bottom btn" title="<?php esc_attr_e( 'Bottom of page', 'boozurk' ); ?>">
+				<a href="#footer"><i class="icon-chevron-down"></i></a>
+			</li>
 		<?php } ?>
-		<br class="fixfloat">
+
+		</ul>
+
 	</div>
 <?php
 
@@ -777,17 +765,23 @@ if ( !function_exists( 'boozurk_navigate_attachments' ) ) {
 			$prevk = $k - 1;
 
 ?>
-	<div class="img-navi">
+	<div class="nav-single">
 
 		<?php if ( isset( $attachments[ $prevk ] ) ) { ?>
-			<a class="img-navi-prev" rel="prev" title="" href="<?php echo get_attachment_link( $attachments[ $prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 70, 70 ) ); ?></a>
+			<span class="nav-previous ">
+				<i class="icon-angle-left"></i>
+				<a rel="prev" title="" href="<?php echo get_attachment_link( $attachments[ $prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 70, 70 ) ); ?></a>
+			</span>
 		<?php } ?>
 
 		<?php if ( isset( $attachments[ $nextk ] ) ) { ?>
-			<a class="img-navi-next" rel="next" title="" href="<?php echo get_attachment_link( $attachments[ $nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 70, 70 ) ); ?></a>
+			<span class="nav-next">
+				<a rel="next" title="" href="<?php echo get_attachment_link( $attachments[ $nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 70, 70 ) ); ?></a>
+				<i class="icon-angle-right"></i>
+			</span>
 		<?php } ?>
 
-	</div>
+	</div><!-- #nav-single -->
 <?php
 
 		} 
@@ -848,21 +842,35 @@ if ( !function_exists( 'boozurk_default_widgets' ) ) {
 
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'boozurk_get_the_thumb' ) ) {
-	function boozurk_get_the_thumb( $id, $size_w, $size_h, $class = '', $default = '' ) {
+	function boozurk_get_the_thumb( $args ) {
 
-		if ( has_post_thumbnail( $id ) ) {
+		$defaults = array(
+			'id' => 0,
+			'size_w' => 32,
+			'size_h' => 0,
+			'class' => '',
+			'default' => '',
+		);
 
-			return get_the_post_thumbnail( $id, array( $size_w,$size_h ) );
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( ! $args['size_h'] ) $args['size_h'] = $args['size_w'];
+
+		if ( $args['id'] && has_post_thumbnail( $args['id'] ) ) {
+
+			return get_the_post_thumbnail( $args['id'], array( $args['size_w'],$args['size_h'] ) );
 
 		} else {
 
-			if ( get_post_format( $id ) ) {
-				$format = get_post_format( $id );
-			} else {
-				$format = 'standard';
-			}
+			if ( $args['id'] )
+				$format = get_post_format( $args['id'] ) ? get_post_format( $args['id'] ) : 'standard';
+			else
+				$format = $args['default'];
 
-			return '<img class="' . $class . ' wp-post-image ' . $format . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />';
+			if ( boozurk_is_mobile() )
+				return '<img class="' . $args['class'] . ' ' . $format . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />';
+			else
+				return '<i class="' . $args['class'] . ' icon-' . $args['size_h'] . ' ' . $format . '"></i>';
 
 		}
 
@@ -1372,7 +1380,7 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 		foreach( $share as $key => $btn ){
 			if ( $args[$key] )
 				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
-				$outer .= '<a class="bz-share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) ) . '" /></a>';
+				$outer .= '<a class="share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) ) . '" /></a>';
 		}
 		$outer .= '</div>';
 
@@ -1398,10 +1406,20 @@ if ( !function_exists( 'boozurk_single_nav' ) ) {
 ?>
 	<div class="nav-single fixfloat">
 		<?php if ( $prev ) { ?>
-			<span class="nav-previous"><a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . $prev_title ) ); ?>"><?php echo $prev_title; ?><?php echo boozurk_get_the_thumb( $prev->ID, 32, 32, 'tb-thumb-format' ); ?></a></span>
+			<span class="nav-previous ">
+				<i class="icon-angle-left"></i>
+				<a rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'boozurk' ) . ': ' . $prev_title ) ); ?>">
+					<?php echo boozurk_get_the_thumb( array( 'id' => $prev->ID, 'size_w' => 32, 'class' => 'tb-thumb-format' ) ); ?> <span><?php echo $prev_title; ?></span>
+				</a>
+			</span>
 		<?php } ?>
 		<?php if ( $next ) { ?>
-			<span class="nav-next"><a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . $next_title ) ); ?>"><?php echo boozurk_get_the_thumb( $next->ID, 32, 32, 'tb-thumb-format' ); ?><?php echo $next_title; ?></a></span>
+			<span class="nav-next">
+				<a rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'boozurk' ) . ': ' . $next_title ) ); ?>">
+					<span><?php echo $next_title; ?></span> <?php echo boozurk_get_the_thumb( array( 'id' => $next->ID, 'size_w' => 32, 'class' => 'tb-thumb-format' ) ); ?>
+				</a>
+				<i class="icon-angle-right"></i>
+			</span>
 		<?php } ?>
 	</div><!-- #nav-single -->
 <?php
@@ -1412,7 +1430,7 @@ if ( !function_exists( 'boozurk_single_nav' ) ) {
 
 //Image EXIF details
 if ( !function_exists( 'boozurk_exif_details' ) ) {
-	function boozurk_exif_details(){
+	function boozurk_exif_details( $echo = 1 ){
 
 		$imgmeta = wp_get_attachment_metadata();
 
@@ -1441,13 +1459,14 @@ if ( !function_exists( 'boozurk_exif_details' ) ) {
 		if ( $imgmeta['image_meta']['focal_length'] ) $output .=		__("Focal Length", "boozurk" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br>";
 		if ( $imgmeta['image_meta']['aperture'] ) $output .=			__("Aperture", "boozurk" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br>";
 		if ( $imgmeta['image_meta']['iso'] ) $output .=					__("ISO", "boozurk" ) . ": " . $imgmeta['image_meta']['iso']."<br>";
-		if ( $imgmeta['image_meta']['shutter_speed'] ) $output .=		__("Shutter Speed", "boozurk" ) . ": " . sprintf( '%s seconds', $imgmeta['image_meta']['shutter_speed']) . "<br>"
+		if ( $imgmeta['image_meta']['shutter_speed'] ) $output .=		__("Shutter Speed", "boozurk" ) . ": " . sprintf( '%s seconds', $imgmeta['image_meta']['shutter_speed']) . "<br>";
 
-?>
-	<div class="exif-attachment-info">
-		<?php echo $output; ?>
-	</div>
-<?php
+		$output = '<div class="exif-attachment-info">' . $output . '</div>';
+
+		if ( $echo )
+			echo $output;
+		else
+			return $output;
 
 	}
 }
@@ -1472,23 +1491,25 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 
 		$tax_separator = apply_filters( 'boozurk_filter_taxomony_separator', ', ' );
 
-		$output = '';
+		$output = '<ul class="post-details">';
 
 		if ( $args['featured'] &&  has_post_thumbnail( $post->ID ) )
-			$output .= '<div class="tb-post-details post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</div>';
+			$output .= '<li class="post-details-thumb">' . get_the_post_thumbnail( $post->ID, 'thumbnail') . '</li>';
 
 		if ( $args['author'] )
-			$output .= boozurk_author_badge( $post->post_author, $args['avatar_size'] );
+			$output .= '<li>' . boozurk_author_badge( $post->post_author, $args['avatar_size'] ) . '</li>';
 
 		if ( $args['categories'] )
-			$output .= '<div class="tb-post-details"><span class="post-details-cats">' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</div>';
+			$output .= '<li class="post-details-cats"><i class="icon-folder-close"></i> <span>' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</li>';
 
 		if ( $args['tags'] )
 			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'boozurk' ) . '</span>';
-			$output .= '<div class="tb-post-details"><span class="post-details-tags">' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</div>';
+			$output .= '<li class="post-details-tags"><i class="icon-tags"></i> <span>' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</li>';
 
 		if ( $args['date'] )
-			$output .= '<div class="tb-post-details"><span class="post-details-date">' . __( 'Published on', 'boozurk' ) . ': </span><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></div>';
+			$output .= '<li class="post-details-date"><i class="icon-time"></i> <span>' . __( 'Published', 'boozurk' ) . ': </span><a href="' . get_day_link(get_the_time('Y'), get_the_time('m'), get_the_time('d')) . '">' . get_the_time( get_option( 'date_format' ) ) . '</a></li>';
+
+		$output .= '</ul>';
 
 		if ( ! $args['echo'] )
 			return $output;
@@ -1580,69 +1601,64 @@ if ( !function_exists( 'boozurk_friendly_date' ) ) {
  * @see    http://wordpress.stackexchange.com/q/14037/
  * @author toscho, http://toscho.de
  */
-class boozurk_Thumb_Walker extends Walker_Nav_Menu
-{
+class boozurk_Thumb_Walker extends Walker_Nav_Menu {
+
 	/**
-	 * Start the element output.
+	 * @see Walker::start_el()
 	 *
-	 * @param  string $output Passed by reference. Used to append additional content.
-	 * @param  object $item   Menu item data object.
-	 * @param  int $depth     Depth of menu item. May be used for padding.
-	 * @param  array $args    Additional strings.
-	 * @return void
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $item Menu item data object.
+	 * @param int $depth Depth of menu item. Used for padding.
+	 * @param int $current_page Menu item ID.
+	 * @param object $args
 	 */
-	function start_el(&$output, $item, $depth, $args) {
-		$classes = empty ( $item->classes ) ? array () : (array) $item->classes;
+	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );
+		$class_names = $value = '';
 
-		! empty ( $class_names )
-		and $class_names = ' class="'. esc_attr( $class_names ) . '"';
+		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		$classes[] = 'menu-item-' . $item->ID;
 
-		$output .= "<li id='menu-item-$item->ID' $class_names>";
+		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-		$attributes = '';
+		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		! empty( $item->attr_title )
-		and $attributes .= ' title="'  . esc_attr( $item->attr_title ) .'"';
-		! empty( $item->target )
-		and $attributes .= ' target="' . esc_attr( $item->target     ) .'"';
-		! empty( $item->xfn )
-		and $attributes .= ' rel="'    . esc_attr( $item->xfn        ) .'"';
-		! empty( $item->url )
-		and $attributes .= ' href="'   . esc_attr( $item->url        ) .'"';
+		$output .= $indent . '<li' . $id . $value . $class_names .'>';
+
+		$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+		$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+		$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
-		
+
 		if ( 0 == $depth ) {
+
 			$thumb = '<img class="bz-menu-thumb default" width="' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . '" height="' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . '" alt="' . $title . '" src="' . get_template_directory_uri() . '/images/img40.png" />';
+
 			if ( has_post_thumbnail((int)$item->object_id) ) {
 				$thumb = get_the_post_thumbnail( (int)$item->object_id, array((int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ),(int)boozurk_get_opt( 'boozurk_main_menu_icon_size' )), array( 'title' => $title, 'class' => 'bz-menu-thumb' ) );
 			}
-			if ( boozurk_get_opt( 'boozurk_main_menu' ) == 'thumbnail' ) {
+
+			if ( boozurk_get_opt( 'boozurk_main_menu' ) == 'thumbnail' )
 				$title = $thumb;
-			} elseif ( boozurk_get_opt( 'boozurk_main_menu' ) == 'thumbnail and text' ) {
+			elseif ( boozurk_get_opt( 'boozurk_main_menu' ) == 'thumbnail and text' )
 				$title = $thumb . $title;
-			}
+
 		}
 
-		$item_output = $args->before
-			. "<a $attributes>"
-			. $args->link_before
-			. $title
-			. '</a> '
-			. $args->link_after
-			. $args->after;
+		$item_output = $args->before;
+		$item_output .= '<a'. $attributes .'>';
+		$item_output .= $args->link_before . $title . $args->link_after;
+		$item_output .= '</a>';
+		$item_output .= $args->after;
 
-		// Since $output is called by reference we don't need to return anything.
-		$output .= apply_filters(
-			'walker_nav_menu_start_el'
-			,$item_output
-			,$item
-			,$depth
-			,$args
-		);
+		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
+
 }
 
 
@@ -1834,6 +1850,7 @@ function boozurk_comment_form_defaults( $defaults ) {
 
 	$defaults['label_submit'] = __( 'Say It!','boozurk' );
 	$defaults['comment_field'] = '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" aria-required="true"></textarea></p>';
+	$defaults['cancel_reply_link'] = '<i class="icon-remove-circle"></i>';
 
 	return $defaults;
 
@@ -2133,13 +2150,6 @@ function boozurk_new_contactmethods( $contactmethods ) {
 }
 
 
-//delete the '(' and ')' from the edit comment link
-function  boozurk_edit_comment_link ( $link ) {
-
-	return str_replace( array( '(', ')' ) , '', $link );
-
-}
-
 // add 'quoted on' before trackback/pingback comments link
 function boozurk_add_quoted_on( $return ) {
 	global $comment;
@@ -2158,7 +2168,7 @@ function boozurk_titles_filter( $title, $id = null ) {
 
 	if ( is_admin() ) return $title;
 
-	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
+	$title = strip_tags( $title, '<abbr><acronym><em><i><del><ins><bdo>' );
 
 	if ( $id == null ) return $title;
 
@@ -2219,6 +2229,51 @@ function boozurk_more_link( $more_link, $more_link_text ) {
 }
 
 
+/**
+ * Add parent class to wp_page_menu top parent list items
+ */
+function prefix_add_parent_class( $css_class, $page, $depth, $args ) {
+
+	if ( ! empty( $args['has_children'] ) && $depth == 0 )
+		$css_class[] = 'menu-item-parent';
+
+	return $css_class;
+
+}
+add_filter( 'page_css_class', 'prefix_add_parent_class', 10, 4 );
+
+
+/**
+ * Add parent class to wp_nav_menu top parent list items
+ */
+function boozurk_add_menu_parent_class( $items ) {
+
+	$parents = array();
+	foreach ( $items as $item ) {
+		if ( $item->menu_item_parent && $item->menu_item_parent > 0 ) {
+			$parents[] = $item->menu_item_parent;
+		}
+	}
+
+	foreach ( $items as $item ) {
+		if ( in_array( $item->ID, $parents ) ) {
+			if ( ! $item->menu_item_parent )
+				$item->classes[] = 'menu-item-parent'; 
+		}
+	}
+
+	return $items;    
+}
+
+
+// wrap the categories count with a span
+function boozurk_wrap_categories_count( $output ) {
+	$pattern = '/<\/a>\s(\(\d+\))/i';
+	$replacement = ' <span class="details">$1</span></a>';
+	return preg_replace( $pattern, $replacement, $output );
+}
+
+
 // show all categories list (redirect to allcat.php if allcat=y)
 if ( !function_exists( 'boozurk_allcat' ) ) {
 	function boozurk_allcat () {
@@ -2235,18 +2290,77 @@ if ( !function_exists( 'boozurk_allcat' ) ) {
 }
 
 
-// media preview
-if ( !function_exists( 'boozurk_media' ) ) {
-	function boozurk_media () {
+//replace the comment_reply_link text
+function boozurk_comment_reply_link( $link ) {
 
-		if ( boozurk_is_media() ) {
+	preg_match_all( '/<a\b[^>]*>(.*?)<\/a>/',$link, $text );
 
-			get_template_part( 'lib/media' );
+	if ( isset( $text[1][0] ) )
+		$link = str_replace( '>' . $text[1][0], ' title="' . esc_attr( __( 'Reply to comment', 'boozurk' ) ) . '" ><i class="icon icon-share-alt"></i>', $link);
 
-			exit;
+	return $link;
 
-		}
-
-	}
 }
+
+
+//replace the edit_comment_link text
+function boozurk_edit_comment_link( $link ) {
+
+	preg_match_all( '/<a\b[^>]*>(.*?)<\/a>/',$link, $text );
+
+	if ( isset( $text[1][0] ) )
+		$link = str_replace( $text[1][0], '<i class="icon icon-edit"></i>', $link);
+
+	return $link;
+
+}
+
+
+// display the first secondary menu
+function boozurk_1st_secondary_menu() {
+
+	wp_nav_menu( array(
+		'container_class'	=> 'bz-menu',
+		'container_id'		=> 'secondary1',
+		'fallback_cb'		=> false,
+		'theme_location'	=> 'secondary1',
+		'depth'				=> 1
+	) );
+
+}
+
+
+// display the second secondary menu
+function boozurk_2nd_secondary_menu() {
+
+	wp_nav_menu( array(
+		'container'			=> false,
+		'menu_id'			=> 'mainmenu',
+		'fallback_cb'		=> 'boozurk_pages_menu',
+		'theme_location'	=> 'primary',
+		'walker'			=> new boozurk_Thumb_Walker
+	) );
+
+}
+
+
+// display the logo and site description
+function boozurk_secondary_sidebar_top() {
+
+	if ( boozurk_get_opt( 'boozurk_logo' ) )
+		echo '<img class="bz-logo" alt="logo" src="' . boozurk_get_opt( 'boozurk_logo' ) . '" />';
+
+	if ( boozurk_get_opt( 'boozurk_logo_description' ) )
+		echo '<div class="bz-description">' . get_bloginfo( 'description' ) . '</div>';
+
+}
+
+
+// display the header widget area
+function boozurk_header_widget_area() {
+
+	get_sidebar( 'header' );
+
+}
+
 

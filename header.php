@@ -15,11 +15,11 @@
 
 	<head profile="http://gmpg.org/xfn/11">
 
-		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-
 		<?php boozurk_hook_head_top(); ?>
 
-		<meta name = "viewport" content = "width = device-width" />
+		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
+
+		<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
 
 		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 
@@ -36,14 +36,6 @@
 	<body <?php body_class(); ?>>
 
 		<?php boozurk_hook_body_top(); ?>
-
-		<?php wp_nav_menu( array(
-			'container_class'	=> 'bz-menu',
-			'container_id'		=> 'secondary1',
-			'fallback_cb'		=> false,
-			'theme_location'	=> 'secondary1',
-			'depth'				=> 1
-		) ); ?>
 
 		<div id="main">
 
@@ -62,21 +54,3 @@
 				</div>
 
 				<?php boozurk_hook_header_after(); ?>
-
-				<?php wp_nav_menu( array(
-					'container'			=> false,
-					'menu_id'			=> 'mainmenu',
-					'fallback_cb'		=> 'boozurk_pages_menu',
-					'theme_location'	=> 'primary',
-					'walker'			=> new boozurk_Thumb_Walker
-				) ); ?>
-
-				<?php boozurk_hook_menu_after(); ?>
-
-				<?php get_sidebar( 'header' ); // show header widgets area ?>
-
-				<div id="breadcrumb-wrap">
-
-					<?php boozurk_hook_breadcrumb_navigation(); ?>
-
-				</div>

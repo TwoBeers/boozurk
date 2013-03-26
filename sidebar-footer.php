@@ -22,6 +22,8 @@
 
 	<?php boozurk_hook_sidebar_top(); ?>
 
+	<?php boozurk_hook_this_sidebar_top( 'footer' ); ?>
+
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_top(); ?></div>
 
 	<div id="first_fwa" class="widget-area">
@@ -37,6 +39,8 @@
 	</div><!-- #third .widget-area -->
 
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_bottom(); ?></div>
+
+	<?php boozurk_hook_this_sidebar_bottom( 'footer' ); ?>
 
 	<?php boozurk_hook_sidebar_bottom(); ?>
 

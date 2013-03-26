@@ -20,7 +20,7 @@ get_header(); ?>
 
 	<div class="hentry not-found" id="post-404-not-found">
 
-		<div class="post_meta_container"><span class="pmb_format tb-thumb-format">&nbsp;</span></div>
+		<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-placeholder"></i></span></div>
 
 		<h2 class="storytitle"><?php _e( 'Error 404','boozurk' ); ?> - <?php _e( 'Page not found','boozurk' ); ?></h2>
 
@@ -34,7 +34,7 @@ get_header(); ?>
 
 				<p><?php _e( 'Here is something that might help:','boozurk' ); ?></p>
 
-				<?php boozurk_hook_404_sidebar_before(); ?>
+				<?php boozurk_hook_this_sidebar_before( '404' ); ?>
 
 				<div class="ul_fwa">
 
@@ -42,7 +42,7 @@ get_header(); ?>
 
 				</div>
 
-				<?php boozurk_hook_404_sidebar_after(); ?>
+				<?php boozurk_hook_this_sidebar_after( '404' ); ?>
 
 			<?php } else { ?>
 

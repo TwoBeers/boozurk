@@ -11,7 +11,7 @@
 
 <div class="hentry not-found" id="post-404-not-found">
 
-	<div class="post_meta_container"><span class="pmb_format tb-thumb-format">&nbsp;</span></div>
+	<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-placeholder"></i></span></div>
 
 	<h2 class="storytitle"><?php _e( 'Nothing Found', 'boozurk' ); ?></h2>
 

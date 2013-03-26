@@ -9,21 +9,19 @@
  */
 
 
-add_action( 'admin_menu', 'boozurk_create_menu' ); // Add admin menus
+/* Custom actions - WP hooks */
 
-add_action( 'admin_notices', 'boozurk_setopt_admin_notice' );
+add_action( 'admin_menu'					, 'boozurk_create_menu' ); // Add admin menus
+add_action( 'admin_notices'					, 'boozurk_setopt_admin_notice' );
+add_action( 'manage_posts_custom_column'	, 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for posts
+add_action( 'manage_pages_custom_column'	, 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for pages
+add_action( 'admin_head'					, 'boozurk_post_manage_style' ); // column-thumbnail style
+add_action( 'admin_init'					, 'boozurk_default_options' ); // tell WordPress to run boozurk_default_options()
 
-add_action( 'manage_posts_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for posts
+/* Custom filters - WP hooks */
 
-add_action( 'manage_pages_custom_column', 'boozurk_addthumbvalue', 10, 2 ); // column-thumbnail for pages
-
-add_action( 'admin_head', 'boozurk_post_manage_style' ); // column-thumbnail style
-
-add_action( 'admin_init', 'boozurk_default_options' ); // tell WordPress to run boozurk_default_options()
-
-add_filter( 'manage_posts_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for posts
-
-add_filter( 'manage_pages_columns', 'boozurk_addthumbcolumn' ); // column-thumbnail for pages
+add_filter( 'manage_posts_columns'			, 'boozurk_addthumbcolumn' ); // column-thumbnail for posts
+add_filter( 'manage_pages_columns'			, 'boozurk_addthumbcolumn' ); // column-thumbnail for pages
 
 
 // create theme option page
@@ -31,15 +29,11 @@ function boozurk_create_menu() {
 
 	$pageopt = add_theme_page( __( 'Theme Options','boozurk' ), __( 'Theme Options','boozurk' ), 'edit_theme_options', 'boozurk_functions', 'boozurk_edit_options' ); //create new top-level menu
 
-	add_action( 'admin_init', 'boozurk_register_tb_settings' ); //call register settings function
-
-	add_action( 'admin_print_styles-' . $pageopt, 'boozurk_theme_admin_styles' );
-
-	add_action( 'admin_print_scripts-' . $pageopt, 'boozurk_theme_admin_scripts' );
-
-	add_action( 'admin_print_styles-widgets.php', 'boozurk_widgets_style' );
-
-	add_action( 'admin_print_scripts-widgets.php', 'boozurk_widgets_scripts' );
+	add_action( 'admin_init'						, 'boozurk_register_tb_settings' ); //call register settings function
+	add_action( 'admin_print_styles-' . $pageopt	, 'boozurk_theme_admin_styles' );
+	add_action( 'admin_print_scripts-' . $pageopt	, 'boozurk_theme_admin_scripts' );
+	add_action( 'admin_print_styles-widgets.php'	, 'boozurk_widgets_style' );
+	add_action( 'admin_print_scripts-widgets.php'	, 'boozurk_widgets_scripts' );
 
 }
 
@@ -93,6 +87,8 @@ function boozurk_setopt_admin_notice() {
 //add js script to the options page
 function boozurk_theme_admin_scripts() {
 
+	wp_enqueue_media();
+	wp_enqueue_script( 'wp-color-picker' );
 	wp_enqueue_script( 'boozurk-options-script', get_template_directory_uri().'/js/options.dev.js', array( 'jquery', 'farbtastic', 'thickbox' ), boozurk_get_info( 'version' ), true ); //thebird js
 
 	$data = array(
@@ -122,6 +118,7 @@ function boozurk_widgets_scripts() {
 // the custon header page style
 function boozurk_theme_admin_styles() {
 
+	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_style( 'boozurk-options-style', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
 
 }
@@ -282,11 +279,8 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 									<?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'url' ) { ?>
 										<input class="boozurk_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $key == 'boozurk_logo' ) {
-											$boozurk_arr_params['boozurk_media'] = '1'; 
-											$boozurk_arr_params['_wpnonce'] = wp_create_nonce( 'boozurk-logo-nonce' );
-											?>
-											<input class="hide-if-no-js button" type="button" value="<?php echo __( 'Select', 'boozurk' ); ?>" onClick="tb_show( '<?php echo __( 'Click an image to select', 'boozurk' ); ?>', '<?php echo add_query_arg( $boozurk_arr_params, home_url() ); ?>&amp;TB_iframe=true'); return false;" />
+										<?php if ( $key == 'boozurk_logo' ) { ?>
+											<a id="choose-logo-from-library-link" class="button hide-if-no-js" data-choose="<?php esc_attr_e( 'Choose a Logo Image' , 'boozurk' ); ?>" data-update="<?php esc_attr_e( 'Set as logo' , 'boozurk' ); ?>"><?php _e( 'Choose Image' , 'boozurk' ); ?></a>
 										<?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'txt' ) { ?>
 										<input class="boozurk_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
@@ -329,14 +323,9 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
 													<div class="col-tools">
 														<span><?php echo $the_coa[$subval]['info']; ?></span>
-														<input onclick="boozurkOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="boozurk_box_<?php echo $subval; ?>" value="" readonly="readonly" />
-														<div class="boozurk_cp" id="boozurk_colorpicker_<?php echo $subval; ?>"></div>
-														<input class="boozurk_input" id="boozurk_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
 														<br>
-														<a class="hide-if-no-js" href="#" onclick="boozurkOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>
-														<br>
-														<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="boozurkOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
-														<br class="clear" />
+														<input class="boozurk_input boozurk_cp" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" id="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" data-default-color="<?php echo $the_coa[$subval]['default']; ?>" />
+														<span class="description hide-if-js"><?php _e( 'Default' , 'boozurk' ); ?>: <?php echo $the_coa[$subval]['default']; ?></span>
 													</div>
 											<?php } elseif ( $the_coa[$subval]['type'] == 'catcol' ) { ?>
 													<?php
@@ -353,29 +342,24 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 															}
 															$catcolor = isset($the_opt[$subval][$category->term_id]) ? $the_opt[$subval][$category->term_id] : $hexnumber;
 													?>
-														<div class="col-tools">
+														<div class="col-tools catcol">
 															<span><?php echo $category->name; ?></span>
-															<input onclick="boozurkOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>');" style="background-color:<?php echo $catcolor; ?>;" class="color_preview_box" type="text" id="boozurk_box_<?php echo $subval.'-'.$category->term_id; ?>" value="" readonly="readonly" />
-															<div class="boozurk_cp" id="boozurk_colorpicker_<?php echo $subval.'-'.$category->term_id; ?>"></div>
-															<input class="boozurk_input" id="boozurk_input_<?php echo $subval.'-'.$category->term_id; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" />
 															<br>
-															<a class="hide-if-no-js" href="#" onclick="boozurkOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>'); return false;"><?php _e( 'Select a Color' , 'boozurk' ); ?></a>
-															<br>
-															<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['defaultcolor']; ?>;" href="#" onclick="boozurkOptions.updateColor('<?php echo $subval.'-'.$category->term_id; ?>','<?php echo $the_coa[$subval]['defaultcolor']; ?>'); return false;"><?php _e( 'Default' , 'boozurk' ); ?></a>
-															<br class="clear" />
+															<input class="boozurk_input boozurk_cp" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" id="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" data-default-color="<?php echo $the_coa[$subval]['defaultcolor']; ?>" />
+															<span class="description hide-if-js"><?php _e( 'Default' , 'boozurk' ); ?>: <?php echo $the_coa[$subval]['defaultcolor']; ?></span>
 															<?php if ( $category->description ) { ?><div class="column-des"><?php echo $category->description; ?></div><?php } ?>
 														</div>
-													<?php }	?>
+													<?php } ?>
 													
-											<?php }	?>
+											<?php } ?>
 												</div>
-										<?php }	?>
+										<?php } ?>
 											<br class="clear" />
 										</div>
-								<?php }	?>
+								<?php } ?>
 									<?php if ( $the_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','boozurk') . '</u>: ' . $the_coa[$the_coa[$key]['req']]['description']; ?></div><?php } ?>
 								</div>
-							<?php }	?>
+							<?php } ?>
 						</div>
 						<p id="buttons">
 							<input type="hidden" name="<?php echo $the_option_name; ?>[hidden_opt]" value="default" />

@@ -141,10 +141,6 @@ function boozurk_hook_body_bottom() {
 	do_action('boozurk_hook_body_bottom');
 }
 
-function boozurk_hook_menu_after() {
-	do_action('boozurk_hook_menu_after');
-}
-
 function boozurk_hook_post_title_before() {
 	do_action('boozurk_hook_post_title_before');
 }
@@ -161,28 +157,20 @@ function boozurk_hook_comments_list_after() {
 	do_action('boozurk_hook_comments_list_after');
 }
 
-function boozurk_hook_primary_sidebar_top() {
-	do_action('boozurk_hook_primary_sidebar_top');
+function boozurk_hook_this_sidebar_top( $location ) {
+	do_action('boozurk_hook_' . $location . '_sidebar_top');
 }
 
-function boozurk_hook_primary_sidebar_bottom() {
-	do_action('boozurk_hook_primary_sidebar_bottom');
+function boozurk_hook_this_sidebar_bottom( $location ) {
+	do_action('boozurk_hook_' . $location . '_sidebar_bottom');
 }
 
-function boozurk_hook_404_sidebar_before() {
-	do_action('boozurk_hook_404_sidebar_before');
+function boozurk_hook_this_sidebar_before( $location ) {
+	do_action('boozurk_hook_' . $location . '_sidebar_before');
 }
 
-function boozurk_hook_404_sidebar_after() {
-	do_action('boozurk_hook_404_sidebar_after');
-}
-
-function boozurk_hook_footer_sidebar_top() {
-	do_action('boozurk_hook_footer_sidebar_top');
-}
-
-function boozurk_hook_footer_sidebar_bottom() {
-	do_action('boozurk_hook_footer_sidebar_bottom');
+function boozurk_hook_this_sidebar_after( $location ) {
+	do_action('boozurk_hook_' . $location . '_sidebar_after');
 }
 
 function  boozurk_hook_breadcrumb_navigation () {

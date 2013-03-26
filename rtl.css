@@ -31,47 +31,31 @@ blockquote {
 /* Some browsing links
 ----------------------------------------------------------*/
 
-.img-navi-prev,
 .nav-previous {
 	float: right;
 }
 
-.img-navi-next,
 .nav-next {
 	float: left;
-}
-
-.img-navi-prev {
-	background: url('images/bc-sep.png') no-repeat right center;
-	padding-right: 15px;
-	padding-left: 0;
-}
-
-.img-navi-next {
-	background: url('images/bc-sep.png') no-repeat left center;
-	padding-left: 15px;
-	padding-right: 0;
-}
-
-.nav-next {
-	padding: 0 0 0 55px;
-	background: url('images/bc-sep.png') no-repeat left center;
 	text-align: left;
 }
 
-.nav-previous {
-	padding: 0 55px 0 0;
-	background: url('images/bc-sep.png') no-repeat right center;
+/* arrows icons
+----------------------------------------------------------*/
+body .icon-angle-left:before {
+	content: "\f105";
 }
 
-.nav-next img {
-	left: 15px;
-	right: auto;
+body .icon-angle-right:before {
+	content: "\f104";
 }
 
-.nav-previous img {
-	right: 15px;
-	left: auto;
+body .icon-chevron-left:before {
+	content: "\f054";
+}
+
+body .icon-chevron-right:before {
+	content: "\f053";
 }
 
 /* Posts/Pages/Attachments
@@ -146,7 +130,6 @@ blockquote {
 	margin-right : 25px;
 	background: transparent url(images/cooltips.gif) right top no-repeat;
 }
-
 /* Widgets
 ----------------------------------------------------------*/
 
@@ -160,24 +143,6 @@ blockquote {
 
 div.bz_widget_latest_commentators ul li {
 	float: right;
-}
-
-.bz-post-details-cats,
-.bz-post-details-tags,
-.bz-post-details-date {
-	padding: 1px 25px 5px 0;
-}
-
-.bz-post-details-cats {
-	background-position: right -200px;
-}
-
-.bz-post-details-tags {
-	background-position: right -100px;
-}
-
-.bz-post-details-date {
-	background-position: right 0;
 }
 
 div.bz_widget_post_formats ul li.compact {
@@ -211,10 +176,9 @@ div.bz_widget_post_formats ul li.compact {
 	margin-right: auto;
 }
 
-.hiraquo {
-	padding-right :5px;
+#mainmenu .menu-item-parent > a:after {
+	padding: 0 5px 0 0;
 }
-
 /* secondary menus
 ----------------------------------------------------------*/
 
@@ -259,10 +223,6 @@ div.bz_widget_post_formats ul li.compact {
 	float:right;
 }
 
-.bz-breadcrumb-sep {
-	background: url('images/bc-sep.png') no-repeat left center;
-}
-
 .bz-breadcrumb-childs {
 	margin-right:4px;
 	margin-left: auto;
@@ -275,7 +235,6 @@ div.bz_widget_post_formats ul li.compact {
 .bz-breadcrumb-home + .bz-breadcrumb-sep {
 	margin: 0 30px 0 0;
 } 
-
 /* Comments 
 ----------------------------------------------------------*/
 
@@ -350,7 +309,6 @@ div.bz_widget_post_formats ul li.compact {
 
 #cancel-comment-reply-link {
 	left: 10px;
-	background: url('images/details.png') no-repeat right -600px;
 	right: auto;
 }
 
@@ -368,10 +326,6 @@ div.bz_widget_post_formats ul li.compact {
 .gallery-caption {
 	margin-right: 0;
 	margin-left: auto;
-}
-
-.bzg-preview-link {
-	padding: 5px 25px 5px 5px;
 }
 
 /* =calendar

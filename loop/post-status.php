@@ -13,7 +13,7 @@
 
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-	<?php boozurk_extrainfo( false ); ?>
+	<?php boozurk_extrainfo(); ?>
 
 	<?php boozurk_hook_entry_top(); ?>
 

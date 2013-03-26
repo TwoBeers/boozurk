@@ -19,7 +19,7 @@
 
 		<?php boozurk_hook_sidebar_top(); ?>
 
-		<?php boozurk_hook_primary_sidebar_top(); ?>
+		<?php boozurk_hook_this_sidebar_top( 'primary' ); ?>
 
 		<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
 
@@ -29,7 +29,7 @@
 
 		<br class="fixfloat">
 
-		<?php boozurk_hook_primary_sidebar_bottom(); ?>
+		<?php boozurk_hook_this_sidebar_bottom( 'primary' ); ?>
 
 		<?php boozurk_hook_sidebar_bottom(); ?>
 

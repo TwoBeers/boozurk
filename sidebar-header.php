@@ -22,7 +22,11 @@
 
 	<?php boozurk_hook_sidebar_top(); ?>
 
+	<?php boozurk_hook_this_sidebar_top( 'header' ); ?>
+
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
+
+	<?php boozurk_hook_this_sidebar_bottom( 'header' ); ?>
 
 	<?php boozurk_hook_sidebar_bottom(); ?>
 

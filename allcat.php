@@ -28,6 +28,8 @@ get_header(); ?>
 
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
+				<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-folder-close"></i></span></div>
+
 				<?php boozurk_featured_title(); ?>
 
 				<div class="storycontent">
@@ -47,6 +49,8 @@ get_header(); ?>
 	<?php } else { ?>
 
 		<div class="hentry post">
+
+			<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-folder-close"></i></span></div>
 
 			<h2 class="storytitle"><?php _e( 'Categories','boozurk' ); ?></h2>
 

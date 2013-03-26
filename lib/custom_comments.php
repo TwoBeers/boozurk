@@ -9,13 +9,13 @@
  */
 
 
-class BoozurkCommentStyle {
+class Boozurk_Comment_Style {
 
 	var $variants = array();
 
-	function BoozurkCommentStyle() {
+	function __construct() {
 
-		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
+		if ( is_admin() || boozurk_is_mobile() ) return;
 
 		add_action( 'comment_form_after_fields', array( &$this, 'comment_variant_field' ) );
 		add_action( 'comment_form_logged_in_after', array( &$this, 'comment_variant_field' ) );
@@ -60,4 +60,4 @@ class BoozurkCommentStyle {
 
 }
 
-new BoozurkCommentStyle;
+new Boozurk_Comment_Style;

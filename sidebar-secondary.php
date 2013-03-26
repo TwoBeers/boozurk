@@ -19,9 +19,7 @@
 
 		<?php boozurk_hook_sidebar_top(); ?>
 
-		<?php if ( boozurk_get_opt( 'boozurk_logo' ) ) echo '<img class="bz-logo" alt="logo" src="' . boozurk_get_opt( 'boozurk_logo' ) . '" />';?>
-
-		<?php if ( boozurk_get_opt( 'boozurk_logo_description' ) ) echo '<div class="bz-description">' . get_bloginfo( 'description' ) . '</div>';?>
+		<?php boozurk_hook_this_sidebar_top( 'secondary' ); ?>
 
 		<!-- here should be the secondary widget area -->
 		<?php if ( is_active_sidebar( 'fixed-widget-area'  ) ) { ?>
@@ -35,6 +33,8 @@
 			</div><!-- #fixed-widget-area -->
 
 		<?php } ?>
+
+		<?php boozurk_hook_this_sidebar_bottom( 'secondary' ); ?>
 
 		<?php boozurk_hook_sidebar_bottom(); ?>
 

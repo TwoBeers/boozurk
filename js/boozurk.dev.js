@@ -22,8 +22,7 @@ boozurkScripts = {
 
 				case 'tooltips':
 					boozurkScripts.tooltips();
-					boozurkScripts.cooltips('.minibutton,.share-item img,.tb_widget_categories a,#bz-quotethis,.tb_widget_latest_commentators li,.tb_widget_social a,.post-format-item.compact img,a.bz-tipped-anchor',true,'');
-					boozurkScripts.cooltips('.pmb_comm',true,boozurk_l10n.comments_closed);
+					boozurkScripts.cooltips('.pmb_comm,.minibutton,.share-item img,.tb_categories a,#bz-quotethis,.tb_latest_commentators li,.tb_social a,.post-format-item.compact img,a.bz-tipped-anchor');
 					break;
 
 				case 'plusone':
@@ -67,7 +66,7 @@ boozurkScripts = {
 
 	post_expander : function() {
 
-		return $('a.more-link').each(function() {
+		return $('#posts_content').find('a.more-link').each(function() {
 			
 			$(this).click(function() {
 
@@ -124,26 +123,23 @@ boozurkScripts = {
 
 	animate_menu : function() {
 
-		return $('#mainmenu').children('li').each(function() {
-			
-			var d = $(this).children('ul'); //for each main item, get the sub list
+		return $('#mainmenu').children('.menu-item-parent').each(function() {
 
-			if(d.size() !== 0){ //if the sub list exists...
+			$this = $(this);
 
-				$(this).children('a').append('<span class="hiraquo">&raquo;</span>'); //add a raquo to the main item
-				
-				d.css( {'opacity' : 0 } );
-				
-				$(this).mouseenter(function(){ //when mouse enters, slide down the sub list
+			var d = $this.children('ul'); //for each main item, get the sub list
 
-					d.css( {'display' : 'block' } ).animate( { 'opacity' : 0.95 } );
+			d.css( {'opacity' : 0 } );
 
-				}).mouseleave(function(){ //when mouse leaves, hide the sub list
+			$this.mouseenter(function(){ //when mouse enters, slide down the sub list
 
-					d.stop().animate( { 'opacity' : 0 }, 200, 'swing', function(){ d.css( {'display' : '' } ); } );
+				d.css( {'display' : 'block' } ).animate( { 'opacity' : 0.95 } );
 
-				});
-			}
+			}).mouseleave(function(){ //when mouse leaves, hide the sub list
+
+				d.stop().animate( { 'opacity' : 0 }, 200, 'swing', function(){ d.css( {'display' : '' } ); } );
+
+			});
 
 		});
 
@@ -152,18 +148,20 @@ boozurkScripts = {
 
 	tooltips : function() {
 
-		return $('.bz-tooltip,.nb_tooltip').each(function() {
-			
+		return $('#posts_content').find('.bz-tooltip').each(function() {
+
 			var p = $(this).parent();
 			var self = $(this);
-			
+			var timeoutID;
+
 			p.mouseenter(function(){
 
-				self.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
+				window.clearTimeout(timeoutID);
+				self.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
 
 			}).mouseleave(function(){
 
-				self.stop().delay(100).fadeOut();
+				timeoutID = window.setTimeout( function(){self.fadeOut()}, 200);
 
 			});
 			
@@ -172,58 +170,47 @@ boozurkScripts = {
 	},
 
 
-	cooltips : function(selector,fade,fallback) {
+	cooltips : function(selector) {
+
+		var baloon = $('<div class="cooltip"></div>');
+		baloon.appendTo(document.body);
+		var timeoutID;
 
 		return $(selector).each(function() {
-			
-			$(this).hover(function() {
 
-				$this = $(this);
+			var $this = $(this);
 
-				$.data(this, 'cancel.cooltips', true);
+			$this.mouseenter(function(){
 
-				var tip = $.data(this, 'active.cooltips');
-				if (!tip) {
-					tip = $('<div class="cooltips"><div class="cooltips-inner"/></div>');
-					tip.css({position: 'absolute', zIndex: 100000});
-					$.data(this, 'active.cooltips', tip);
-				}
+				var offset,h_pos,pin_pos;
 
 				if ($this.attr('title') || typeof($this.attr('original-title')) != 'string') {
 					$this.attr('original-title', $this.attr('title') || '').removeAttr('title');
 				}
 
-				var title = $this.attr('original-title');
+				baloon.html($this.attr('original-title'));
 
-				tip.find('.cooltips-inner')['text'](title || fallback);
-
-				var pos = $.extend({}, $this.offset(), {width: this.offsetWidth, height: this.offsetHeight});
-				tip.get(0).className = 'cooltips'; // reset classname in case of dynamic gravity
-				tip.remove().css({top: 0, left: 0, visibility: 'hidden', display: 'block'}).appendTo(document.body);
-				var actualWidth = tip[0].offsetWidth, actualHeight = tip[0].offsetHeight;
-				var h_pos = ( $this.parents('#sidebar-secondary,#navbuttons.fixed').length ) ? 'to_left' : ''; // if in right sidebar, move to left
-				tip.css({top: pos.top - actualHeight, left: pos.left+(pos.width / 2)}).addClass(h_pos);
-				if (fade) {
-					tip.css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
+				offset = $this.offset();
+				baloon.css({top: 0, left: 0, display: 'block'}).removeClass('to_left to_right');
+				
+				if ( offset.left > ( $(window).width() - 250 )  ) {
+					h_pos = offset.left - baloon.outerWidth() + ( $this.outerWidth() / 2 );
+					pin_pos = 'to_left';
 				} else {
-					tip.css({visibility: 'visible'});
+					h_pos = offset.left + ( $this.outerWidth() / 2 );
+					pin_pos = 'to_right';
 				}
 
-			}, function() {
-				$.data(this, 'cancel.cooltips', false);
-				var self = this;
-				setTimeout(function() {
-					if ($.data(this, 'cancel.cooltips')) return;
-					var tip = $.data(self, 'active.cooltips');
-					if (fade) {
-						tip.stop().fadeOut(function() { $(this).remove(); });
-					} else {
-						tip.remove();
-					}
-				}, 100);
+				baloon.css({top: offset.top - baloon.outerHeight() - 10, left: h_pos}).addClass(pin_pos);
+				window.clearTimeout(timeoutID);
+				baloon.stop().css({opacity: 0}).animate({opacity: 0.9});
+
+			}).mouseleave(function(){
+
+				timeoutID = window.setTimeout( function(){baloon.fadeOut()}, 200);
 
 			});
-			
+
 		});
 		
 	},
@@ -256,9 +243,9 @@ boozurkScripts = {
 
 	init_thickbox : function() {
 
-		$('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
+		$('#posts_content').find('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
 
-		$('.storycontent .gallery').each(function() {
+		$('#posts_content').find('.storycontent .gallery').each(function() {
 			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$(this)).attr('rel', $(this).attr('id'));
 		});
 
@@ -267,8 +254,8 @@ boozurkScripts = {
 
 	scroll_top_bottom : function() {
 
-		top_but = $('.minib_top');
-		bot_but = $('.minib_bottom');
+		top_but = $('#navbuttons').find('.minib_top');
+		bot_but = $('#navbuttons').find('.minib_bottom');
 
 		// smooth scroll top/bottom
 		top_but.click(function() {
@@ -291,7 +278,7 @@ boozurkScripts = {
 
 
 	comment_variants : function() {
-		$('.comment-variants label').click(function() {
+		$('#commentform').find('.comment-variants label').click(function() {
 			$('#comment').removeClass( 'style-default style-blue style-pink style-orange style-yellow style-green style-gray style-white' );
 			$('#comment').addClass( $('input', this).val() );
 			$('input', this).attr('checked',true);
@@ -334,7 +321,8 @@ boozurkScripts = {
 
 	resize_video : function() {
 		// https://github.com/chriscoyier/Fluid-Width-Video
-		var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com'], object, embed"), $fluidEl = $(".storycontent");
+		var $fluidEl = $("#posts_content").find(".storycontent");
+		var $allVideos = $("iframe[src^='http://player.vimeo.com'], iframe[src^='http://www.youtube.com'], object, embed",$fluidEl);
 
 		$allVideos.each(function() {
 			$(this)

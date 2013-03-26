@@ -7,29 +7,11 @@ boozurkOptions = {
 
 	//initialize
 	init : function() {
-		
-		boozurkOptions.switchTab('colors');
-		
-		$('.boozurk_input').keyup(function() {
-			var _hex = $(this).val();
-			var hex = _hex;
-			if ( hex.substr(0,1) != '#' )
-				hex = '#' + hex;
-			hex = hex.replace(/[^#a-fA-F0-9]+/, '');
-			hex = hex.substring(0,7);
-			if ( hex != _hex )
-				$(this).val(hex);
-			if ( hex.length == 4 || hex.length == 7 )
-				boozurkOptions.updateColor( $(this).attr("id").replace('boozurk_input_', '') , hex );
-		});
 
-		$(document).mousedown(function(){
-			$('.boozurk_cp').each( function() {
-				var display = $(this).css('display');
-				if (display == 'block')
-					$(this).fadeOut(200);
-			});
-		});
+		var frame;
+
+		boozurkOptions.switchTab('colors');
+
 		$('#to-defaults').click (function () {
 			var answer = confirm(boozurk_options_l10n.confirm_to_defaults)
 			if (!answer){
@@ -37,22 +19,60 @@ boozurkOptions = {
 			}
 		});
 
-	},
+		$('#choose-logo-from-library-link').click( function( event ) {
+			var $el = $(this);
 
-	//update inputs value
-	updateColor : function (domid,color,txtcolor) {
-		boxid = '#boozurk_box_' + domid;
-		inputid = '#boozurk_input_' + domid;
-		$(boxid).css('background-color', color );
-		$(inputid).val(color);
-	},
+			event.preventDefault();
 
-	// display the color picker
-	showColorPicker : function (domid) {
-		placeholder = '#boozurk_colorpicker_' + domid;
-		$(placeholder).fadeIn();
-		farbtastic = $.farbtastic(placeholder, function(color) { boozurkOptions.updateColor(domid,color); });
-		farbtastic.setColor($('#boozurk_input_' + domid).val());
+			// If the media frame already exists, reopen it.
+			if ( frame ) {
+				frame.open();
+				return;
+			}
+
+			// Create the media frame.
+			frame = wp.media.frames.customLogo = wp.media({
+				// Set the title of the modal.
+				title: $el.data('choose'),
+
+				// Tell the modal to show only images.
+				library: {
+					type: 'image'
+				},
+
+				// Customize the submit button.
+				button: {
+					// Set the text of the button.
+					text: $el.data('update'),
+					// Tell the button not to close the modal, since we're
+					// going to refresh the page when the image is selected.
+					close: true
+				}
+			});
+
+			// When an image is selected, run a callback.
+			frame.on( 'select', function() {
+				// Grab the selected attachment.
+				var attachment = frame.state().get('selection').first().toJSON();
+				$('#option_field_boozurk_logo').val(attachment.url);
+			});
+
+			// Finally, open the modal.
+			frame.open();
+		});
+
+		$('#theme-options .boozurk_cp').each(function() {
+			$this = $(this);
+			$this.wpColorPicker({
+				change: function( event, ui ) {
+					$this.val( $this.wpColorPicker('color') );
+				},
+				clear: function() {
+					$this.val( '' );
+				}
+			});
+		});
+
 	},
 
 	//show only a set of rows
