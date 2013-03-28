@@ -16,13 +16,11 @@
 		return;
 ?>
 
-<?php boozurk_hook_sidebars_before(); ?>
+<?php boozurk_hook_sidebars_before( 'footer' ); ?>
 
 <div id="footer-widget-area">
 
-	<?php boozurk_hook_sidebar_top(); ?>
-
-	<?php boozurk_hook_this_sidebar_top( 'footer' ); ?>
+	<?php boozurk_hook_sidebar_top( 'footer' ); ?>
 
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_top(); ?></div>
 
@@ -40,10 +38,8 @@
 
 	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_bottom(); ?></div>
 
-	<?php boozurk_hook_this_sidebar_bottom( 'footer' ); ?>
-
-	<?php boozurk_hook_sidebar_bottom(); ?>
+	<?php boozurk_hook_sidebar_bottom( 'footer' ); ?>
 
 </div><!-- #footer-widget-area -->
 
-<?php boozurk_hook_sidebars_after(); ?>
+<?php boozurk_hook_sidebars_after( 'footer' ); ?>

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Boozurk v2.05\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-03-26 13:43:03+0000\n"
+"PO-Revision-Date: 2013-03-28 11:34:38+0000\n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "% Comments"
 msgstr "% Commenti"
 
-#: functions.php:1588
+#: functions.php:1590
 #, php-format
 #@ boozurk
 msgid "%s ago"
@@ -47,7 +47,7 @@ msgstr "%s fa"
 msgid "%s format posts"
 msgstr "articoli in formato %s"
 
-#: functions.php:1579
+#: functions.php:1581
 #, php-format
 #@ boozurk
 msgid "%s months ago"
@@ -58,7 +58,7 @@ msgstr "%s mesi fa"
 msgid "(current post category)"
 msgstr "(categoria del articolo corrente)"
 
-#: functions.php:2179
+#: functions.php:2181
 #: lib/options.php:321
 #@ boozurk
 msgid "(no title)"
@@ -86,17 +86,17 @@ msgstr "Una lista delle categorie più popolari"
 msgid "Add New Post"
 msgstr "Nuovo Articolo"
 
-#: functions.php:383
+#: functions.php:385
 #@ boozurk
 msgid "Add selected text as a quote"
 msgstr "Aggiungi il testo selezionato sottoforma di citazione"
 
-#: functions.php:2098
+#: functions.php:2100
 #@ boozurk
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-#: functions.php:1460
+#: functions.php:1462
 #@ boozurk
 msgid "Aperture"
 msgstr "Apertura"
@@ -112,23 +112,23 @@ msgstr "Archivi"
 msgid "Author"
 msgstr "Autore"
 
-#: functions.php:678
+#: functions.php:680
 #@ boozurk
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
-#: functions.php:1458
+#: functions.php:1460
 #@ boozurk
 msgid "Camera"
 msgstr "Fotocamera"
 
-#: functions.php:1457
+#: functions.php:1459
 #@ boozurk
 msgid "Caption"
 msgstr "Didascalia"
 
 #: allcat.php:55
-#: functions.php:1503
+#: functions.php:1505
 #: lib/widgets.php:1619
 #@ boozurk
 msgid "Categories"
@@ -145,7 +145,7 @@ msgstr "Categoria"
 msgid "Clean Archives"
 msgstr "Archivi Semplici"
 
-#: functions.php:379
+#: functions.php:381
 #@ boozurk
 msgid "Click on thumbnails"
 msgstr "Clicca le miniature"
@@ -172,7 +172,7 @@ msgstr "Per poter utilizzare questo widget, gli autori dei commenti <strong>devo
 msgid "Comments"
 msgstr "Commenti"
 
-#: functions.php:386
+#: functions.php:388
 #@ boozurk
 msgid "Comments closed"
 msgstr "Commenti chiusi"
@@ -182,7 +182,7 @@ msgstr "Commenti chiusi"
 msgid "Contact us"
 msgstr "Contattaci"
 
-#: functions.php:1454
+#: functions.php:1456
 #@ boozurk
 msgid "Copyright"
 msgstr "Copyright"
@@ -192,7 +192,7 @@ msgstr "Copyright"
 msgid "Create a random nick for not-logged users"
 msgstr "Crea un nick casuale per gli utenti non collegati"
 
-#: functions.php:1455
+#: functions.php:1457
 #@ boozurk
 msgid "Credit"
 msgstr "Crediti"
@@ -203,7 +203,7 @@ msgstr "Crediti"
 msgid "Date"
 msgstr "Data"
 
-#: functions.php:1453
+#: functions.php:1455
 #@ boozurk
 msgid "Date Taken"
 msgstr "Data di Acquisizione"
@@ -219,12 +219,12 @@ msgstr "Predefinito"
 msgid "Display image EXIF details. It's visible ONLY in single attachments"
 msgstr "Visualizza le informazioni EXIF delle immagini. Questo wdget è visibile SOLAMENTE negli allegati"
 
-#: functions.php:595
+#: functions.php:597
 #@ boozurk
 msgid "Edit"
 msgstr "Modifica"
 
-#: functions.php:1838
+#: functions.php:1840
 #: mobile/core-mobile.php:333
 #@ boozurk
 msgid "Email"
@@ -246,7 +246,7 @@ msgstr "Inserire la password corretta per visualizzare i commenti."
 msgid "Feed for comments"
 msgstr "Feed dei commenti"
 
-#: functions.php:622
+#: functions.php:624
 #@ boozurk
 msgid "Feed for comments on this post"
 msgstr "Feed dei commenti per questo post"
@@ -261,7 +261,7 @@ msgstr "Fondo pagina: prima area widget"
 msgid "Fixed position (bottom right)"
 msgstr "Posizione fissa (in basso a destra)"
 
-#: functions.php:1459
+#: functions.php:1461
 #@ boozurk
 msgid "Focal Length"
 msgstr "Lunghezza Focale"
@@ -278,7 +278,7 @@ msgstr "Seguimi"
 msgid "Follow us on %s"
 msgstr "Seguici su %s"
 
-#: functions.php:1452
+#: functions.php:1454
 #@ boozurk
 msgid "Height"
 msgstr "Altezza"
@@ -288,14 +288,14 @@ msgstr "Altezza"
 msgid "Here is something that might help:"
 msgstr "Ecco qualcosa che ti potrebbe aiutare:"
 
-#: functions.php:634
+#: functions.php:636
 #: lib/breadcrumb.php:153
 #: lib/widgets.php:1492
 #@ boozurk
 msgid "Home"
 msgstr "Home"
 
-#: functions.php:1461
+#: functions.php:1463
 #@ boozurk
 msgid "ISO"
 msgstr "ISO"
@@ -335,7 +335,7 @@ msgid "Leave a Reply to %s"
 msgstr "Replica al commento di %s"
 
 #: comments.php:26
-#: functions.php:616
+#: functions.php:618
 #: lib/widgets.php:1483
 #: mobile/core-mobile.php:348
 #@ boozurk
@@ -347,12 +347,12 @@ msgstr "Lascia un commento"
 msgid "Leave a feedback"
 msgstr "Lascia un feedback"
 
-#: lib/options.php:684
+#: lib/options.php:720
 #@ boozurk
 msgid "Logo"
 msgstr "Logo"
 
-#: functions.php:904
+#: functions.php:906
 #@ boozurk
 msgid "Main Navigation Menu"
 msgstr "Men&ugrave; Principale"
@@ -362,7 +362,7 @@ msgstr "Men&ugrave; Principale"
 msgid "Menu Widget Area"
 msgstr "Menu: area widget"
 
-#: functions.php:1836
+#: functions.php:1838
 #: mobile/core-mobile.php:331
 #@ boozurk
 msgid "Name"
@@ -373,20 +373,20 @@ msgstr "Nome"
 msgid "Navigation buttons"
 msgstr "Pulsanti di navigazione"
 
-#: functions.php:666
+#: functions.php:668
 #@ boozurk
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; recenti"
 
-#: functions.php:742
-#: functions.php:1727
+#: functions.php:744
+#: functions.php:1729
 #@ boozurk
 msgid "Next Page"
 msgstr "Pagina successiva"
 
-#: functions.php:654
-#: functions.php:1404
-#: functions.php:1418
+#: functions.php:656
+#: functions.php:1406
+#: functions.php:1420
 #@ boozurk
 msgid "Next Post"
 msgstr "Articolo successivo"
@@ -402,17 +402,17 @@ msgstr "Pagina successiva "
 msgid "No Comments"
 msgstr "Nessun Commento"
 
-#: functions.php:1506
+#: functions.php:1508
 #@ boozurk
 msgid "No Tags"
 msgstr "Nessun tag"
 
-#: functions.php:381
+#: functions.php:383
 #@ boozurk
 msgid "No more posts beyond this line"
 msgstr "Nessun altro articolo da qui in poi"
 
-#: functions.php:385
+#: functions.php:387
 #@ boozurk
 msgid "Nothing to quote. First of all you should select some text..."
 msgstr "Nulla da citare. Prima di tutto dovresti selezionare un testo..."
@@ -436,7 +436,7 @@ msgstr "Numero di articoli da visualizzare"
 msgid "Number of users to show"
 msgstr "Numero di utenti da visualizzare"
 
-#: functions.php:660
+#: functions.php:662
 #@ boozurk
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
@@ -465,7 +465,7 @@ msgstr "Altro"
 msgid "Page"
 msgstr "Pagina"
 
-#: functions.php:1701
+#: functions.php:1703
 #: lib/jetpack.php:64
 #, php-format
 #@ boozurk
@@ -477,7 +477,7 @@ msgstr "Pagina %s"
 msgid "Page 404"
 msgstr "Pagina 404"
 
-#: functions.php:380
+#: functions.php:382
 #@ boozurk
 msgid "Page is loading, please wait..."
 msgstr "Pagina in caricamento, attendi..."
@@ -488,15 +488,15 @@ msgstr "Pagina in caricamento, attendi..."
 msgid "Page not found"
 msgstr "Pagina non trovata"
 
-#: functions.php:797
-#: functions.php:1711
+#: functions.php:799
+#: functions.php:1713
 #: mobile/loop-front-page-mobile.php:23
 #: mobile/loop-single-mobile.php:24
 #@ boozurk
 msgid "Pages"
 msgstr "Pagine"
 
-#: 404.php:51
+#: 404.php:43
 #@ boozurk
 msgid "Perhaps using the search form will help too..."
 msgstr "Forse il modulo di ricerca ti potrebbe tornare utile..."
@@ -533,7 +533,7 @@ msgstr "Area Widget degli articoli"
 msgid "Post details"
 msgstr "Dettagli dell&#39;articolo"
 
-#: functions.php:377
+#: functions.php:379
 #@ boozurk
 msgid "Post loading, please wait..."
 msgstr "Articolo in caricamento, attendi..."
@@ -543,14 +543,14 @@ msgstr "Articolo in caricamento, attendi..."
 msgid "Posts"
 msgstr "Articoli"
 
-#: functions.php:378
+#: functions.php:380
 #@ boozurk
 msgid "Preview"
 msgstr "Anteprima"
 
-#: functions.php:648
-#: functions.php:1405
-#: functions.php:1411
+#: functions.php:650
+#: functions.php:1407
+#: functions.php:1413
 #@ boozurk
 msgid "Previous Post"
 msgstr "Articolo precedente"
@@ -566,7 +566,7 @@ msgid "Previous/Next"
 msgstr "Precedente/Successivo"
 
 #: footer.php:44
-#: functions.php:601
+#: functions.php:603
 #@ boozurk
 msgid "Print"
 msgstr "Stampa"
@@ -576,7 +576,7 @@ msgstr "Stampa"
 msgid "Print preview"
 msgstr "Anteprima di Stampa"
 
-#: functions.php:384
+#: functions.php:386
 #@ boozurk
 msgid "Quote"
 msgstr "Cita"
@@ -592,13 +592,13 @@ msgstr "Articoli Recenti in %s"
 msgid "Recent Posts in Category"
 msgstr "Articoli Recenti nella singola Categoria"
 
-#: functions.php:641
+#: functions.php:643
 #, php-format
 #@ boozurk
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
-#: functions.php:1851
+#: functions.php:1853
 #: mobile/core-mobile.php:346
 #@ boozurk
 msgid "Say It!"
@@ -615,12 +615,12 @@ msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 msgid "Second Footer Widget Area"
 msgstr "Fondo pagina: seconda area widget"
 
-#: functions.php:905
+#: functions.php:907
 #@ boozurk
 msgid "Secondary Navigation Menu #1"
 msgstr "Menu di navigazione secondario #1"
 
-#: functions.php:906
+#: functions.php:908
 #@ boozurk
 msgid "Secondary Navigation Menu #2"
 msgstr "Menu di navigazione secondario #2"
@@ -652,7 +652,7 @@ msgstr "Seleziona la dimensione delle icone"
 msgid "Share this"
 msgstr "Condividilo"
 
-#: functions.php:1383
+#: functions.php:1385
 #, php-format
 #@ boozurk
 msgid "Share with %s"
@@ -700,7 +700,7 @@ msgstr "Visualizza i link di alcuni tra i più diffusi servizi di sharing. Quest
 msgid "Show user gravatar"
 msgstr "Visualizza l&#39;avatar dell&#39;utente"
 
-#: functions.php:1462
+#: functions.php:1464
 #@ boozurk
 msgid "Shutter Speed"
 msgstr "Velocit&agrave; Otturatore"
@@ -733,7 +733,7 @@ msgstr "Spiacente, stai cercando qualcosa che non esiste"
 msgid "Tag"
 msgstr "Tag"
 
-#: functions.php:1507
+#: functions.php:1509
 #: lib/widgets.php:1614
 #@ boozurk
 msgid "Tags"
@@ -786,14 +786,14 @@ msgstr "L&#39;area widget sotto il menu"
 msgid "Theme Info"
 msgstr "Informazioni del tema"
 
-#: functions.php:1760
+#: functions.php:1762
 #: lib/admin.php:30
 #: lib/admin.php:241
 #@ boozurk
 msgid "Theme Options"
 msgstr "Opzioni del Tema"
 
-#: 404.php:49
+#: 404.php:41
 #@ boozurk
 msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
 msgstr "Ci sono parecchi link sparsi per la pagina, forse puoi trovare quello che fa per te"
@@ -808,7 +808,7 @@ msgstr "Fondo pagina: terza area widget"
 msgid "This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
 msgstr "Questo widget permette ai visitatori di abbonarsi al tuo blog e di seguirti sui più popolari social network quali Twitter, Facebook etc."
 
-#: functions.php:1456
+#: functions.php:1458
 #: images/temp/new  3.php:117
 #: lib/widgets.php:279
 #: lib/widgets.php:436
@@ -827,7 +827,7 @@ msgstr "Questo widget permette ai visitatori di abbonarsi al tuo blog e di segui
 msgid "Title"
 msgstr "Titolo"
 
-#: functions.php:672
+#: functions.php:674
 #@ boozurk
 msgid "Top of page"
 msgstr "Inizio pagina"
@@ -837,7 +837,7 @@ msgstr "Inizio pagina"
 msgid "Top/Bottom"
 msgstr "Alto/Basso"
 
-#: functions.php:628
+#: functions.php:630
 #: lib/widgets.php:1489
 #@ boozurk
 msgid "Trackback URL"
@@ -891,12 +891,12 @@ msgstr "Visualizza tutti gli articoli di %s"
 msgid "View full size"
 msgstr "Dimensione originale"
 
-#: functions.php:1303
+#: functions.php:1305
 #@ boozurk
 msgid "View gallery"
 msgstr "Guarda la galleria"
 
-#: functions.php:1840
+#: functions.php:1842
 #: mobile/core-mobile.php:335
 #@ boozurk
 msgid "Website"
@@ -908,7 +908,7 @@ msgstr "Sito web"
 msgid "Welcome %s"
 msgstr "Benvenuto %s"
 
-#: functions.php:1451
+#: functions.php:1453
 #@ boozurk
 msgid "Width"
 msgstr "Larghezza"
@@ -918,12 +918,12 @@ msgstr "Larghezza"
 msgid "Your Profile"
 msgstr "Il tuo profilo"
 
-#: lib/options.php:684
+#: lib/options.php:720
 #@ boozurk
 msgid "a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore"
 msgstr "un logo in alto a destra. incolla qui il percorso completo all&#39;immagine. se non ti serve, lascialo vuoto"
 
-#: functions.php:1583
+#: functions.php:1585
 #@ boozurk
 msgid "a month ago"
 msgstr "un mese fa"
@@ -938,12 +938,12 @@ msgstr "un&#39;area widget sotto il corpo degli articoli"
 msgid "add a lot of new usefull widgets"
 msgstr "aggiungi un sacco di nuovi e utili widget"
 
-#: lib/options.php:696
+#: lib/options.php:732
 #@ boozurk
 msgid "add style to the editor in order to write the post exactly how it will appear on the site"
 msgstr "applica lo stile all&#39;editor per scrivere gli articoli esattamente come appariranno nel sito"
 
-#: lib/options.php:534
+#: lib/options.php:570
 #@ boozurk
 msgid "add the thickbox effect to each linked image and galleries in post content"
 msgstr "aggiunge un effetto thickbox ad ogni immagine (dotata di collegamento) e galleria all&#39;interno del articolo"
@@ -963,22 +963,22 @@ msgstr "audio player"
 msgid "aug"
 msgstr "ago"
 
-#: lib/options.php:595
+#: lib/options.php:631
 #@ boozurk
 msgid "auto"
 msgstr "auto"
 
-#: lib/options.php:593
+#: lib/options.php:629
 #@ boozurk
 msgid "auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts"
 msgstr "auto: quando l&#39;utente raggiunge il fondo pagina - manual: cliccando il pulsante a fine pagina"
 
-#: lib/options.php:584
+#: lib/options.php:620
 #@ boozurk
 msgid "automatically append the next page of posts (via AJAX) to your current page"
 msgstr "aggiunge automaticamente alla pagina corrente la successiva pagina degli articoli (via AJAX)"
 
-#: lib/options.php:592
+#: lib/options.php:628
 #@ boozurk
 msgid "behaviour"
 msgstr "funzionamento"
@@ -989,7 +989,7 @@ msgstr "funzionamento"
 msgid "besides..."
 msgstr "inoltre..."
 
-#: functions.php:942
+#: functions.php:944
 #@ boozurk
 msgid "boozurk Default Gravatar"
 msgstr "gravatar predefinito di Boozurk"
@@ -1025,12 +1025,12 @@ msgstr "colori delle categorie"
 msgid "content"
 msgstr "contenuto"
 
-#: lib/options.php:559
+#: lib/options.php:595
 #@ boozurk
 msgid "cool tooltips"
 msgstr "cool tooltips"
 
-#: lib/options.php:568
+#: lib/options.php:604
 #@ boozurk
 msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
 msgstr "crea un player per i file audio (mp3,ogg e m4a) inserti come link all&#39;interno degli articoli formato audio"
@@ -1051,7 +1051,7 @@ msgstr "dic"
 msgid "default: \"Welcome %s\" , where %s is the user name"
 msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell&#39;utente"
 
-#: lib/options.php:696
+#: lib/options.php:732
 #@ boozurk
 msgid "editor style"
 msgstr "stile dell&#39;editor"
@@ -1072,7 +1072,7 @@ msgstr "titolo del articolo potenziato"
 msgid "excerpt"
 msgstr "riassunto"
 
-#: lib/options.php:552
+#: lib/options.php:588
 #@ boozurk
 msgid "expands a post to show the full content when the reader clicks the \"Read more...\" link"
 msgstr "espandi l&#39;articolo per visualizzare il contenuto completo quando il lettore clicca il link \"(continua...)\""
@@ -1098,12 +1098,12 @@ msgstr "titolo della prima immagine"
 msgid "first link text"
 msgstr "testo del primo link"
 
-#: lib/options.php:619
+#: lib/options.php:655
 #@ boozurk
 msgid "font family"
 msgstr "font"
 
-#: lib/options.php:623
+#: lib/options.php:659
 #@ boozurk
 msgid "font size"
 msgstr "dimensione del testo"
@@ -1123,7 +1123,7 @@ msgstr "Area Widget di Fondo Pagina #2"
 msgid "footer widget area #3"
 msgstr "Area Widget di Fondo Pagina #3"
 
-#: lib/options.php:543
+#: lib/options.php:579
 #@ boozurk
 msgid "force galleries to use links to image instead of links to attachment"
 msgstr "forza le gallerie ad utilizzare i link alle immagini anzichè agli allegati"
@@ -1158,12 +1158,12 @@ msgstr "nelle liste"
 msgid "in single posts/pages"
 msgstr "nei singoli articoli/pagine"
 
-#: lib/options.php:583
+#: lib/options.php:619
 #@ boozurk
 msgid "infinite pagination"
 msgstr "paginazione infinita"
 
-#: lib/options.php:664
+#: lib/options.php:700
 #@ boozurk
 msgid "integrates the +1 feature for your contents"
 msgstr "integra la funzionalità +1 ai tuoi contenuti"
@@ -1172,11 +1172,6 @@ msgstr "integra la funzionalità +1 ai tuoi contenuti"
 #@ boozurk
 msgid "jan"
 msgstr "gen"
-
-#: lib/options.php:525
-#@ boozurk
-msgid "javascript animations"
-msgstr "animazioni javascript"
 
 #: lib/widgets.php:2072
 #@ boozurk
@@ -1188,7 +1183,7 @@ msgstr "lug"
 msgid "jun"
 msgstr "giu"
 
-#: functions.php:557
+#: functions.php:559
 #@ boozurk
 msgid "last comments"
 msgstr "ultimi commenti"
@@ -1198,17 +1193,17 @@ msgstr "ultimi commenti"
 msgid "links"
 msgstr "collegamenti"
 
-#: lib/options.php:680
+#: lib/options.php:716
 #@ boozurk
 msgid "main menu icon size"
 msgstr "Dimensione delle icone del menu principale"
 
-#: lib/options.php:676
+#: lib/options.php:712
 #@ boozurk
 msgid "main menu look"
 msgstr "aspetto del menu principale"
 
-#: lib/options.php:595
+#: lib/options.php:631
 #@ boozurk
 msgid "manual"
 msgstr "manuale"
@@ -1223,7 +1218,7 @@ msgstr "mar"
 msgid "may"
 msgstr "mag"
 
-#: lib/options.php:603
+#: lib/options.php:639
 #@ boozurk
 msgid "mobile support"
 msgstr "supporto per dispositivi mobili"
@@ -1261,13 +1256,13 @@ msgstr "numero di widget che possono stare affiancati nell&#39;area widget"
 msgid "oct"
 msgstr "ott"
 
-#: functions.php:1574
+#: functions.php:1576
 #@ boozurk
 msgid "over a year ago"
 msgstr "pi&ugrave; di un anno fa"
 
-#: functions.php:738
-#: functions.php:1721
+#: functions.php:740
+#: functions.php:1723
 #: mobile/core-mobile.php:214
 #, php-format
 #@ boozurk
@@ -1284,7 +1279,7 @@ msgstr "pagina %1$s di %2$s"
 msgid "post date"
 msgstr "data dell&#39;articolo"
 
-#: lib/options.php:551
+#: lib/options.php:587
 #@ boozurk
 msgid "post expander"
 msgstr "espandi gli articoli"
@@ -1314,22 +1309,22 @@ msgstr "presentazione"
 msgid "quick browsing links"
 msgstr "link rapidi di navigazione"
 
-#: functions.php:1570
+#: functions.php:1572
 #@ boozurk
 msgid "quite a long while ago..."
 msgstr "tempo fa..."
 
-#: lib/options.php:575
+#: lib/options.php:611
 #@ boozurk
 msgid "quote link"
 msgstr "link per la citazione"
 
-#: functions.php:2159
+#: functions.php:2161
 #@ boozurk
 msgid "quoted on"
 msgstr "citato in"
 
-#: lib/options.php:542
+#: lib/options.php:578
 #@ boozurk
 msgid "replace links"
 msgstr "modifica i collegamenti"
@@ -1339,7 +1334,7 @@ msgstr "modifica i collegamenti"
 msgid "requires"
 msgstr "richiede"
 
-#: lib/options.php:676
+#: lib/options.php:712
 #@ boozurk
 msgid "select the style of the main menu: text, thumbnails or both"
 msgstr "seleziona lo stile del menu principale: test, miniature, o entrambi"
@@ -1359,7 +1354,7 @@ msgstr "set"
 msgid "short quote excerpt"
 msgstr "breve estratto della citazione"
 
-#: lib/options.php:576
+#: lib/options.php:612
 #@ boozurk
 msgid "show a link for easily add the selected text as a quote inside the comment form"
 msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&#39;interno della pagina, sottoforma di citazione nel del modulo di risposta"
@@ -1369,7 +1364,7 @@ msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&#
 msgid "show navigation links before post content"
 msgstr "visualizza i link di navigazione prima del contenuto del articolo"
 
-#: lib/options.php:692
+#: lib/options.php:728
 #@ boozurk
 msgid "show site description below the logo"
 msgstr "visualizza la descrizione del sito sotto il logo"
@@ -1384,33 +1379,33 @@ msgstr "dividi l&#39;area widget di testata"
 msgid "split Post widget area"
 msgstr "dividi l&#39;area widget degli articoli"
 
-#: lib/options.php:567
+#: lib/options.php:603
 #@ boozurk
 msgid "swf audio player"
 msgstr "swf audio player"
 
-#: lib/options.php:691
+#: lib/options.php:727
 #@ boozurk
 msgid "tagline"
 msgstr "motto"
 
-#: lib/options.php:676
+#: lib/options.php:712
 #: lib/widgets.php:1743
 #@ boozurk
 msgid "text"
 msgstr "testo"
 
-#: lib/options.php:680
+#: lib/options.php:716
 #@ boozurk
 msgid "the dimension of the thumbnails in main menu (if \"thumbnails\" style is selected)"
 msgstr "la dimensione (in pixel) delle miniature nel menu principale (se lo stile è impostato su \"miniature\")"
 
-#: lib/options.php:714
+#: lib/options.php:750
 #@ boozurk
 msgid "theme credits"
 msgstr "crediti del tema"
 
-#: lib/options.php:533
+#: lib/options.php:569
 #@ boozurk
 msgid "thickbox preview"
 msgstr "anteprima thickbox"
@@ -1422,13 +1417,13 @@ msgstr "questo tipo di file audio non è supportato dal tuo browser"
 
 #: lib/admin.php:397
 #: lib/options.php:430
-#: lib/options.php:676
+#: lib/options.php:712
 #: lib/widgets.php:1585
 #@ boozurk
 msgid "thumbnail"
 msgstr "miniatura"
 
-#: lib/options.php:676
+#: lib/options.php:712
 #@ boozurk
 msgid "thumbnail and text"
 msgstr "miniatura e testo"
@@ -1443,12 +1438,7 @@ msgstr "miniatura e testo"
 msgid "title"
 msgstr "titolo"
 
-#: lib/options.php:526
-#@ boozurk
-msgid "try disable animations if you encountered problems with javascript"
-msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript"
-
-#: lib/options.php:604
+#: lib/options.php:640
 #@ boozurk
 msgid "use a dedicated style in mobile devices"
 msgstr "usa un stile dedicato per la visualizzazione su dispositivi mobili"
@@ -1477,7 +1467,7 @@ msgstr "Archivi per %s"
 msgid "Search for \"%s\""
 msgstr "Ricerca per \"%s\""
 
-#: functions.php:1302
+#: functions.php:1304
 #, php-format
 #@ boozurk
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
@@ -1485,7 +1475,7 @@ msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
 msgstr[1] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagini</a>"
 
-#: functions.php:2104
+#: functions.php:2106
 #@ boozurk
 msgid "Mobile View"
 msgstr "Modalità Mobile"
@@ -1510,7 +1500,7 @@ msgstr "Barre laterali e Widget"
 msgid "Mobile"
 msgstr "Mobile"
 
-#: lib/options.php:560
+#: lib/options.php:596
 #@ boozurk
 msgid "replace titles of some links with cool tooltips"
 msgstr "sostituisce il titolo di alcuni collegamenti con un simpatico tooltip"
@@ -1522,6 +1512,7 @@ msgstr "barra laterale principale"
 
 #: lib/options.php:450
 #: lib/options.php:460
+#: lib/options.php:551
 #@ boozurk
 msgid "scroll"
 msgstr "scorri"
@@ -1593,27 +1584,27 @@ msgstr "tag \"more\""
 msgid "only plain text. use <code>%t</code> as placeholder for the post title"
 msgstr "solo testo semplice. puoi usare <code>%t</code> per inserire il titolo dell'articolo"
 
-#: lib/options.php:631
+#: lib/options.php:667
 #@ boozurk
 msgid "Google web font"
 msgstr "Google web font"
 
-#: lib/options.php:632
+#: lib/options.php:668
 #@ boozurk
 msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>"
 msgstr "Copia e incolla qui iol nome della <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a>. Ad esempio: <code>Architects Daughter</code>"
 
-#: lib/options.php:640
+#: lib/options.php:676
 #@ boozurk
 msgid "for whole site"
 msgstr "per tutto il sito"
 
-#: lib/options.php:649
+#: lib/options.php:685
 #@ boozurk
 msgid "for posts/pages title"
 msgstr "per il titolo degli articoli/pagine"
 
-#: lib/options.php:658
+#: lib/options.php:694
 #@ boozurk
 msgid "for posts/pages content"
 msgstr "per il contenuto degli articoli/pagine"
@@ -1623,27 +1614,27 @@ msgstr "per il contenuto degli articoli/pagine"
 msgid "custom smilies"
 msgstr "faccine personalizzate"
 
-#: lib/options.php:702
+#: lib/options.php:738
 #@ boozurk
 msgid "comment style"
 msgstr "stile dei commenti"
 
-#: lib/options.php:703
+#: lib/options.php:739
 #@ boozurk
 msgid "let the commenters to choose their comment background"
 msgstr "dai la possibilità ai commentatori di scegliere il colore di fondo dei loro commenti"
 
-#: lib/options.php:710
+#: lib/options.php:746
 #@ boozurk
 msgid "custom CSS code"
 msgstr "codice CSS personalizzato"
 
-#: lib/options.php:711
+#: lib/options.php:747
 #@ boozurk
 msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
 msgstr "<strong>Solo per utenti esperti</strong>: incolla qui il tuo codice CSS personalizzato. verrà aggiunto a quello predefinito"
 
-#: lib/options.php:614
+#: lib/options.php:650
 #@ boozurk
 msgid "colors"
 msgstr "colori"
@@ -1750,17 +1741,17 @@ msgstr "Pagine discendenti"
 msgid "Parent page"
 msgstr "Pagina superiore"
 
-#: functions.php:1780
+#: functions.php:1782
 #@ boozurk
 msgid "read me!"
 msgstr "leggimi!"
 
-#: functions.php:2180
+#: functions.php:2182
 #@ boozurk
 msgid "Post"
 msgstr "Articolo"
 
-#: functions.php:2101
+#: functions.php:2103
 #: mobile/footer-mobile.php:27
 #, php-format
 #@ boozurk
@@ -1808,33 +1799,33 @@ msgstr "categorie"
 msgid "tags"
 msgstr "tag"
 
-#: lib/options.php:714
+#: lib/options.php:750
 #@ boozurk
 msgid "It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom"
 msgstr "Sarebbe carino se manteneste visibili i crediti del tema. Grazie"
 
-#: functions.php:1377
+#: functions.php:1379
 #@ boozurk
 msgid "Check it out!"
 msgstr "Guarda qua!"
 
-#: functions.php:1820
+#: functions.php:1822
 #@ boozurk
 msgid "Comments are closed."
 msgstr "Commenti chiusi"
 
-#: functions.php:2073
+#: functions.php:2075
 #@ boozurk
 msgid "Missing Attachment"
 msgstr "Allegato Mancante"
 
-#: functions.php:2101
+#: functions.php:2103
 #: mobile/footer-mobile.php:27
 #@ boozurk
 msgid "Visit theme authors homepage"
 msgstr "Visita il sito dell'autore del tema"
 
-#: functions.php:2101
+#: functions.php:2103
 #@ boozurk
 msgid "Boozurk theme"
 msgstr "Boozurk"
@@ -1865,23 +1856,23 @@ msgstr "Inserisci l'indirizzo del tuo servizio di feed. Lascia vuoto per utilizz
 msgid "Nothing Found"
 msgstr "Nessun articolo trovato"
 
-#: functions.php:520
+#: functions.php:522
 #@ boozurk
 msgid "recommend this with Google+"
 msgstr "consiglialo con Google+"
 
-#: functions.php:1510
+#: functions.php:1512
 #@ boozurk
 msgid "Published"
 msgstr "Pubblicato"
 
-#: functions.php:1538
+#: functions.php:1540
 #, php-format
 #@ boozurk
 msgid "Follow %s on %s"
 msgstr "Segui %s su %s"
 
-#: functions.php:2299
+#: functions.php:2301
 #@ boozurk
 msgid "Reply to comment"
 msgstr "Rispondi al commento"
@@ -1929,4 +1920,44 @@ msgstr "ancora nessun commento"
 #@ boozurk
 msgid "Taxonomy"
 msgstr "Tassonomia"
+
+#: lib/options.php:525
+#@ boozurk
+msgid "javascript features"
+msgstr "funzionalità javascript"
+
+#: lib/options.php:526
+#@ boozurk
+msgid "try disable all javascript features if you encountered problems with javascript"
+msgstr "se hai riscontrato problemi con i javascript, prova a disabilitare tutte le funzioni"
+
+#: lib/options.php:533
+#@ boozurk
+msgid "basic animations"
+msgstr "animazioni di base"
+
+#: lib/options.php:542
+#@ boozurk
+msgid "main menu"
+msgstr "menu principale"
+
+#: lib/options.php:543
+#@ boozurk
+msgid "fade in/out menu subitems"
+msgstr "dissolvenza in entrata/uscita dei sottogruppi"
+
+#: lib/options.php:552
+#@ boozurk
+msgid "smooth scroll to top/bottom when click top/bottom buttons"
+msgstr "scorrimento morbido della pagina quando vengono cliccati i pulsanti su/giù"
+
+#: lib/options.php:560
+#@ boozurk
+msgid "video resize"
+msgstr "ridimensiona video"
+
+#: lib/options.php:561
+#@ boozurk
+msgid "resize embeded video when window resizes"
+msgstr "ridimensiona i video incorporati quando la pagina viene ridimensionata"
 

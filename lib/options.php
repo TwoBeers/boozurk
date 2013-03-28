@@ -522,9 +522,45 @@ function boozurk_get_coa( $option = false ) {
 							'group'=>'javascript',
 							'type'=>'chk',
 							'default'=>1,
-							'description'=>__( 'javascript animations','boozurk' ),
-							'info'=>__( 'try disable animations if you encountered problems with javascript','boozurk' ),
+							'description'=>__( 'javascript features','boozurk' ),
+							'info'=>__( 'try disable all javascript features if you encountered problems with javascript','boozurk' ),
 							'req'=>'' 
+		),
+		'boozurk_js_basic'=> array(
+							'group'=>'javascript',
+							'type'=>'',
+							'default'=>1,
+							'description'=>__( 'basic animations','boozurk' ),
+							'info'=>'',
+							'req'=>'boozurk_jsani',
+							'sub'=>array('boozurk_js_basic_menu','boozurk_js_basic_autoscroll','boozurk_js_basic_video_resize') 
+		),
+		'boozurk_js_basic_menu'=> array(
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>__( 'main menu','boozurk' ),
+							'info'=>__( 'fade in/out menu subitems','boozurk' ),
+							'req'=>'boozurk_jsani',
+							'sub'=>false 
+		),
+		'boozurk_js_basic_autoscroll'=> array(
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>__( 'scroll','boozurk' ),
+							'info'=>__( 'smooth scroll to top/bottom when click top/bottom buttons','boozurk' ),
+							'req'=>'boozurk_jsani',
+							'sub'=>false 
+		),
+		'boozurk_js_basic_video_resize'=> array(
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>__( 'video resize','boozurk' ),
+							'info'=>__( 'resize embeded video when window resizes','boozurk' ),
+							'req'=>'boozurk_jsani',
+							'sub'=>false 
 		),
 		'boozurk_js_thickbox'=> array(
 							'group'=>'javascript',

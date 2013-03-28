@@ -107,3 +107,7 @@
 	text-decoration: none; 
 	margin: 0 10px; 
 }
+.wp-picker-holder {
+	position: absolute;
+	z-index: 999;
+}

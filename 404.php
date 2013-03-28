@@ -30,19 +30,11 @@ get_header(); ?>
 
 			<br>
 
-			<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
+			<?php if ( is_active_sidebar( 'error404-widgets-area' ) ) { ?>
 
 				<p><?php _e( 'Here is something that might help:','boozurk' ); ?></p>
 
-				<?php boozurk_hook_this_sidebar_before( '404' ); ?>
-
-				<div class="ul_fwa">
-
-					<?php dynamic_sidebar( '404-widgets-area' ); ?>
-
-				</div>
-
-				<?php boozurk_hook_this_sidebar_after( '404' ); ?>
+				<?php get_sidebar( 'error404' ); ?>
 
 			<?php } else { ?>
 

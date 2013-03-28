@@ -9,6 +9,8 @@
  */
 ?>
 
+<?php boozurk_hook_sidebars_before( 'secondary' ); ?>
+
 <!-- begin secondary sidebar -->
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>" id="sidebar-secondary">
@@ -17,9 +19,7 @@
 
 	<div class="inner">
 
-		<?php boozurk_hook_sidebar_top(); ?>
-
-		<?php boozurk_hook_this_sidebar_top( 'secondary' ); ?>
+		<?php boozurk_hook_sidebar_top( 'secondary' ); ?>
 
 		<!-- here should be the secondary widget area -->
 		<?php if ( is_active_sidebar( 'fixed-widget-area'  ) ) { ?>
@@ -34,9 +34,7 @@
 
 		<?php } ?>
 
-		<?php boozurk_hook_this_sidebar_bottom( 'secondary' ); ?>
-
-		<?php boozurk_hook_sidebar_bottom(); ?>
+		<?php boozurk_hook_sidebar_bottom( 'secondary' ); ?>
 
 	</div>
 
@@ -53,3 +51,5 @@
 </div>
 
 <!-- end secondary sidebar -->
+
+<?php boozurk_hook_sidebars_after( 'secondary' ); ?>

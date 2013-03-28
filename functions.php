@@ -271,8 +271,10 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 		$modules = array();
 
 		if ( !$afterajax ) {
-			$modules[] = 'animatemenu';
-			$modules[] = 'scrolltopbottom';
+			if ( boozurk_get_opt( 'boozurk_js_basic_menu' ) )
+				$modules[] = 'animatemenu';
+			if ( boozurk_get_opt( 'boozurk_js_basic_autoscroll' ) )
+				$modules[] = 'scrolltopbottom';
 			if ( is_singular() && comments_open() )
 				$modules[] = 'commentvariants';
 			if ( ( boozurk_get_opt( 'boozurk_quotethis' ) ) && is_singular() )
@@ -281,11 +283,11 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'infinitescroll';
 		}
 
-		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )	$modules[] = 'postexpander';
-		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )			$modules[] = 'thickbox';
-		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )			$modules[] = 'tooltips';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) )				$modules[] = 'plusone';
-		$modules[] = 'resizevideo';
+		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )		$modules[] = 'postexpander';
+		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )				$modules[] = 'thickbox';
+		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )				$modules[] = 'tooltips';
+		if ( boozurk_get_opt( 'boozurk_plusone' ) )					$modules[] = 'plusone';
+		if ( boozurk_get_opt( 'boozurk_js_basic_video_resize' ) )	$modules[] = 'resizevideo';
 
 
 		$modules = implode(',', $modules);
@@ -316,7 +318,7 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 
 	<?php if ( ! boozurk_get_opt( 'boozurk_jsani' ) || boozurk_is_printpreview() ) return; ?>
 
-	<?php if ( boozurk_get_opt( 'boozurk_plusone' ) ) { ?>
+	<?php if ( boozurk_get_opt( 'boozurk_plusone' ) && boozurk_get_opt( 'boozurk_plusone_official' ) ) { ?>
 
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
 	  {parsetags: 'explicit'}
@@ -2232,7 +2234,7 @@ function boozurk_more_link( $more_link, $more_link_text ) {
 /**
  * Add parent class to wp_page_menu top parent list items
  */
-function prefix_add_parent_class( $css_class, $page, $depth, $args ) {
+function boozurk_add_parent_class( $css_class, $page, $depth, $args ) {
 
 	if ( ! empty( $args['has_children'] ) && $depth == 0 )
 		$css_class[] = 'menu-item-parent';
@@ -2240,7 +2242,7 @@ function prefix_add_parent_class( $css_class, $page, $depth, $args ) {
 	return $css_class;
 
 }
-add_filter( 'page_css_class', 'prefix_add_parent_class', 10, 4 );
+add_filter( 'page_css_class', 'boozurk_add_parent_class', 10, 4 );
 
 
 /**

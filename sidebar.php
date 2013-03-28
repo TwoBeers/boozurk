@@ -9,6 +9,8 @@
  */
 ?>
 
+<?php boozurk_hook_sidebars_before( 'primary' ); ?>
+
 <!-- begin primary sidebar -->
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>" id="sidebar-primary">
@@ -17,9 +19,7 @@
 
 	<div class="inner">
 
-		<?php boozurk_hook_sidebar_top(); ?>
-
-		<?php boozurk_hook_this_sidebar_top( 'primary' ); ?>
+		<?php boozurk_hook_sidebar_top( 'primary' ); ?>
 
 		<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
 
@@ -29,9 +29,7 @@
 
 		<br class="fixfloat">
 
-		<?php boozurk_hook_this_sidebar_bottom( 'primary' ); ?>
-
-		<?php boozurk_hook_sidebar_bottom(); ?>
+		<?php boozurk_hook_sidebar_bottom( 'primary' ); ?>
 
 	</div>
 
@@ -40,3 +38,5 @@
 </div>
 
 <!-- end primary sidebar -->
+
+<?php boozurk_hook_sidebars_after( 'primary' ); ?>

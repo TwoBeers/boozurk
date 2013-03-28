@@ -16,22 +16,18 @@
 		return;
 ?>
 
-<?php boozurk_hook_sidebars_before(); ?>
+<?php boozurk_hook_sidebars_before( 'header' ); ?>
 
 <div id="header-widget-area">
 
-	<?php boozurk_hook_sidebar_top(); ?>
-
-	<?php boozurk_hook_this_sidebar_top( 'header' ); ?>
+	<?php boozurk_hook_sidebar_top( 'header' ); ?>
 
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
 
-	<?php boozurk_hook_this_sidebar_bottom( 'header' ); ?>
-
-	<?php boozurk_hook_sidebar_bottom(); ?>
+	<?php boozurk_hook_sidebar_bottom( 'header' ); ?>
 
 	<br class="fixfloat">
 
 </div><!-- #header-widget-area -->
 
-<?php boozurk_hook_sidebars_after(); ?>
+<?php boozurk_hook_sidebars_after( 'header' ); ?>

@@ -69,7 +69,8 @@ boozurkOptions = {
 				},
 				clear: function() {
 					$this.val( '' );
-				}
+				},
+				palettes: ['#21759b','#404040','#87ceeb','#000','#fff','#aaa','#ff7b0a','#f7009c']
 			});
 		});
 

@@ -123,7 +123,7 @@ function boozurk_widget_area_init() {
 	register_sidebar( array_merge( 
 		array(
 			'name' => __( 'Page 404', 'boozurk' ),
-			'id' => '404-widgets-area',
+			'id' => 'error404-widgets-area',
 			'description' => __( 'Enrich the page 404 with some useful widgets', 'boozurk' )
 		),
 		boozurk_get_default_widget_args()
