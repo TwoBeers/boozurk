@@ -55,7 +55,7 @@ class Boozurk_Audio_Player {
 			preg_match_all( $pattern, $post->post_content, $result );
 
 		if ( $result[0] )
-			$this->scripts(); // Add js
+			self::scripts(); // Add js
 
 		$instance = 0;
 

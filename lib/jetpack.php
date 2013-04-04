@@ -115,3 +115,5 @@ class Boozurk_For_Jetpack {
 	}
 
 }
+
+new Boozurk_For_Jetpack;

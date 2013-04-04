@@ -53,6 +53,10 @@ boozurkScripts = {
 					boozurkScripts.resize_video();
 					break;
 
+				case 'tinynav':
+					boozurkScripts.tinynav();
+					break;
+
 				default :
 					//no default action
 					break;
@@ -341,8 +345,15 @@ boozurkScripts = {
 					.height(newWidth * $el.attr('data-aspectRatio'));
 			});
 		}).resize();
-	}
+	},
 
+	tinynav : function() {
+		$(".nav-menu").tinyNav({
+			active: 'current_page_item', // Set the "active" class for default menu
+			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
+			header: '' // String: Specify text for "header" and show header instead of the active item
+		});
+	}
 
 };
 

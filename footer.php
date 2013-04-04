@@ -21,8 +21,6 @@
 
 					<?php boozurk_hook_footer_top(); ?>
 
-					<?php wp_nav_menu( array( 'container_class' => 'bz-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
-
 					<?php get_sidebar( 'footer' ); // show footer widgets area ?>
 
 					<div id="bz-credits">

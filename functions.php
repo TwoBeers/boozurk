@@ -26,25 +26,26 @@
 
 /* Custom actions - WP hooks */
 
-add_action( 'after_setup_theme'						, 'boozurk_setup' ); // tell WordPress to run boozurk_setup() when the 'after_setup_theme' hook is run.
-add_action( 'wp_enqueue_scripts'					, 'boozurk_stylesheet' ); // Add stylesheets
-add_action( 'wp_head'								, 'boozurk_custom_style' ); // Add custom style
-add_action( 'wp_enqueue_scripts'					, 'boozurk_scripts' ); // Add js scripts
-add_action( 'wp_footer'								, 'boozurk_initialize_scripts' ); // start js scripts
-add_action( 'init'									, 'boozurk_post_expander_activate' ); // post expander ajax request
-add_action( 'init'									, 'boozurk_infinite_scroll_activate' ); // infinite scroll ajax request
-add_action( 'admin_bar_menu'						, 'boozurk_admin_bar_plus', 999 ); // add links to admin bar
-add_action( 'wp_head'								, 'boozurk_plus_snippet' ); // localize js scripts
-add_action( 'created_category'						, 'boozurk_created_category_color' ); // add a random color to every new category
-add_action( 'comment_form_comments_closed'			, 'boozurk_comments_closed' ); // comments-are-closed message
-add_action( 'template_redirect'						, 'boozurk_allcat' ); // Add custom category page
-add_action( 'template_redirect'						, 'boozurk_media' ); // media select
+add_action( 'after_setup_theme'						, 'boozurk_setup' );
+add_action( 'wp_enqueue_scripts'					, 'boozurk_stylesheet' );
+add_action( 'wp_head'								, 'boozurk_custom_style' );
+add_action( 'wp_enqueue_scripts'					, 'boozurk_scripts' );
+add_action( 'wp_footer'								, 'boozurk_initialize_scripts' );
+add_action( 'init'									, 'boozurk_post_expander_activate' );
+add_action( 'init'									, 'boozurk_infinite_scroll_activate' );
+add_action( 'admin_bar_menu'						, 'boozurk_admin_bar_plus', 999 );
+add_action( 'wp_head'								, 'boozurk_plus_snippet' );
+add_action( 'created_category'						, 'boozurk_created_category_color' );
+add_action( 'comment_form_comments_closed'			, 'boozurk_comments_closed' );
+add_action( 'template_redirect'						, 'boozurk_allcat' );
+add_action( 'comment_form_before'					, 'boozurk_enqueue_comments_reply' );
 
 
 /* Custom actions - theme hooks */
 
+add_action( 'boozurk_hook_header_after'				, 'boozurk_primary_menu' );
 add_action( 'boozurk_hook_body_top'					, 'boozurk_1st_secondary_menu' );
-add_action( 'boozurk_hook_header_after'				, 'boozurk_2nd_secondary_menu' );
+add_action( 'boozurk_hook_footer_top'				, 'boozurk_2nd_secondary_menu' );
 add_action( 'boozurk_hook_header_after'				, 'boozurk_header_widget_area' );
 add_action( 'boozurk_hook_entry_before'				, 'boozurk_print_details' );
 add_action( 'boozurk_hook_entry_before'				, 'boozurk_navigate_attachments' );
@@ -81,6 +82,7 @@ add_filter( 'edit_comment_link'						, 'boozurk_edit_comment_link' );
 add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
 add_filter( 'wp_list_categories'					, 'boozurk_wrap_categories_count' );
 add_filter( 'comment_reply_link'					, 'boozurk_comment_reply_link' );
+add_filter( 'wp_nav_menu_items'						, 'boozurk_add_home_link', 10, 2 );
 
 
 /* get the theme options */
@@ -121,7 +123,7 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 require_once( 'lib/audio-player.php' ); // load the audio player module
 
-require_once( 'lib/jetpack.php' ); // load the audio player module
+require_once( 'lib/jetpack.php' ); // load the jetpack support module
 
 if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
 
@@ -275,6 +277,8 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'animatemenu';
 			if ( boozurk_get_opt( 'boozurk_js_basic_autoscroll' ) )
 				$modules[] = 'scrolltopbottom';
+			if ( boozurk_get_opt( 'boozurk_tinynav' ) )
+				$modules[] = 'tinynav';
 			if ( is_singular() && comments_open() )
 				$modules[] = 'commentvariants';
 			if ( ( boozurk_get_opt( 'boozurk_quotethis' ) ) && is_singular() )
@@ -283,11 +287,16 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'infinitescroll';
 		}
 
-		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )		$modules[] = 'postexpander';
-		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )				$modules[] = 'thickbox';
-		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )				$modules[] = 'tooltips';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) )					$modules[] = 'plusone';
-		if ( boozurk_get_opt( 'boozurk_js_basic_video_resize' ) )	$modules[] = 'resizevideo';
+		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )
+			$modules[] = 'postexpander';
+		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )
+			$modules[] = 'thickbox';
+		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )
+			$modules[] = 'tooltips';
+		if ( boozurk_get_opt( 'boozurk_plusone' ) && boozurk_get_opt( 'boozurk_plusone_official' ) )
+			$modules[] = 'plusone';
+		if ( boozurk_get_opt( 'boozurk_js_basic_video_resize' ) )
+			$modules[] = 'resizevideo';
 
 
 		$modules = implode(',', $modules);
@@ -362,35 +371,34 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 if ( !function_exists( 'boozurk_scripts' ) ) {
 	function boozurk_scripts(){
 
-		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
-
-		if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); // comment-reply js
+		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() || ! boozurk_get_opt( 'boozurk_jsani' ) ) return;
 
 		$deps = array('jquery');
-		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) ) $deps[] = 'thickbox';
 
-		if ( boozurk_get_opt( 'boozurk_jsani' ) ) {
+		if ( boozurk_get_opt( 'boozurk_tinynav' ) )
+			wp_enqueue_script( 'boozurk-tinynav', get_template_directory_uri() . '/js/tinynav/tinynav.min.js', $deps, boozurk_get_info( 'version' ), true );
 
-			wp_enqueue_script( 'boozurk-script', get_template_directory_uri() . '/js/boozurk.min.js', $deps, boozurk_get_info( 'version' ), true );
+		if ( boozurk_get_opt( 'boozurk_js_thickbox' ) )
+			$deps[] = 'thickbox';
 
-			$data = array(
-				'script_modules' => boozurk_get_js_modules(),
-				'script_modules_afterajax' => boozurk_get_js_modules(1),
-				'post_expander' => esc_js( __( 'Post loading, please wait...','boozurk' ) ),
-				'gallery_preview' => esc_js( __( 'Preview','boozurk' ) ),
-				'gallery_click' => esc_js( __( 'Click on thumbnails','boozurk' ) ),
-				'infinite_scroll' => esc_js( __( 'Page is loading, please wait...','boozurk' ) ),
-				'infinite_scroll_end' => esc_js( __( 'No more posts beyond this line','boozurk' ) ),
-				'infinite_scroll_type' => boozurk_get_opt( 'boozurk_infinite_scroll_type' ),
-				'quote_tip' => esc_js( __( 'Add selected text as a quote', 'boozurk' ) ),
-				'quote' => esc_js( __( 'Quote', 'boozurk' ) ),
-				'quote_alert' => esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
-				'comments_closed' => esc_js( __( 'Comments closed', 'boozurk' ) )
-			);
+		wp_enqueue_script( 'boozurk-script', get_template_directory_uri() . '/js/boozurk.min.js', $deps, boozurk_get_info( 'version' ), true );
 
-			wp_localize_script( 'boozurk-script', 'boozurk_l10n', $data );
+		$data = array(
+			'script_modules' => boozurk_get_js_modules(),
+			'script_modules_afterajax' => boozurk_get_js_modules(1),
+			'post_expander' => esc_js( __( 'Post loading, please wait...','boozurk' ) ),
+			'gallery_preview' => esc_js( __( 'Preview','boozurk' ) ),
+			'gallery_click' => esc_js( __( 'Click on thumbnails','boozurk' ) ),
+			'infinite_scroll' => esc_js( __( 'Page is loading, please wait...','boozurk' ) ),
+			'infinite_scroll_end' => esc_js( __( 'No more posts beyond this line','boozurk' ) ),
+			'infinite_scroll_type' => boozurk_get_opt( 'boozurk_infinite_scroll_type' ),
+			'quote_tip' => esc_js( __( 'Add selected text as a quote', 'boozurk' ) ),
+			'quote' => esc_js( __( 'Quote', 'boozurk' ) ),
+			'quote_alert' => esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
+			'comments_closed' => esc_js( __( 'Comments closed', 'boozurk' ) )
+		);
 
-		}
+		wp_localize_script( 'boozurk-script', 'boozurk_l10n', $data );
 
 	}
 }
@@ -418,18 +426,6 @@ function boozurk_print_details() {
 }
 
 
-// Pages Menu
-if ( !function_exists( 'boozurk_pages_menu' ) ) {
-	function boozurk_pages_menu() {
-
-		echo '<ul id="mainmenu">';
-		wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted
-		echo '</ul>';
-
-	}
-}
-
-
 // display the post title with the featured image
 if ( !function_exists( 'boozurk_featured_title' ) ) {
 	function boozurk_featured_title( $args = '' ) {
@@ -450,6 +446,8 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
 		$title_content = is_singular() ? $post_title : '<a title="' . esc_attr( $args['title'] ) . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a>';
 		if ( $post_title ) $post_title = '<h2 class="storytitle">' . $title_content . '</h2>';
+		if ( is_front_page() && get_option('show_on_front') == "page" ) $post_title = '';
+
 		switch ( boozurk_get_opt( 'boozurk_featured_title' ) ) {
 			case 'none':
 				$args['featured'] = false;
@@ -1826,6 +1824,15 @@ function boozurk_comments_closed() {
 }
 
 
+//enqueue the 'comment-reply' script
+function boozurk_enqueue_comments_reply() {
+
+	if( get_option( 'thread_comments' ) )
+		wp_enqueue_script( 'comment-reply' );
+
+}
+
+
 // Custom form fields for the comment form
 function boozurk_comments_form_fields( $fields ) {
 
@@ -2318,12 +2325,28 @@ function boozurk_edit_comment_link( $link ) {
 }
 
 
+// display the second secondary menu
+function boozurk_primary_menu() {
+
+	wp_nav_menu( array(
+		'container'			=> false,
+		'menu_id'			=> 'mainmenu',
+		'menu_class'		=> 'nav-menu',
+		'fallback_cb'		=> 'boozurk_pages_menu',
+		'theme_location'	=> 'primary',
+		'walker'			=> new boozurk_Thumb_Walker
+	) );
+
+}
+
+
 // display the first secondary menu
 function boozurk_1st_secondary_menu() {
 
 	wp_nav_menu( array(
-		'container_class'	=> 'bz-menu',
-		'container_id'		=> 'secondary1',
+		'container'			=> false,
+		'menu_id'			=> 'secondary1',
+		'menu_class'		=> 'nav-menu',
 		'fallback_cb'		=> false,
 		'theme_location'	=> 'secondary1',
 		'depth'				=> 1
@@ -2337,12 +2360,65 @@ function boozurk_2nd_secondary_menu() {
 
 	wp_nav_menu( array(
 		'container'			=> false,
-		'menu_id'			=> 'mainmenu',
-		'fallback_cb'		=> 'boozurk_pages_menu',
-		'theme_location'	=> 'primary',
-		'walker'			=> new boozurk_Thumb_Walker
+		'menu_id'			=> 'secondary2',
+		'menu_class'		=> 'nav-menu',
+		'fallback_cb'		=> false,
+		'theme_location'	=> 'secondary2',
+		'depth'				=> 1
 	) );
 
+}
+
+
+//add "Home" link
+function boozurk_add_home_link( $items = '', $args = null ) {
+
+	$defaults = array(
+		'theme_location' => 'undefined',
+		'before' => '',
+		'after' => '',
+		'link_before' => '',
+		'link_after' => '',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( ( $args['theme_location'] === 'primary' ) && ( 'posts' == get_option( 'show_on_front' ) ) ) {
+		if (is_front_page())
+			$class = ' current_page_item';
+		else
+			$class = '';
+
+		$homeMenuItem =
+				'<li class="navhome' . $class . '">' .
+				$args['before'] .
+				'<a href="' . home_url( '/' ) . '" title="' . esc_attr__( 'Home', 'boozurk' ) . '">' .
+				$args['link_before'] . __( 'Home', 'boozurk' ) . $args['link_after'] .
+				'</a>' .
+				$args['after'] .
+				'</li>';
+
+		$items = $homeMenuItem . $items;
+	}
+
+	return $items;
+
+}
+
+
+// Pages Menu
+if ( !function_exists( 'boozurk_pages_menu' ) ) {
+	function boozurk_pages_menu() {
+
+		echo '<ul id="mainmenu" class="nav-menu">';
+
+		echo boozurk_add_home_link( $items = '', $args = 'theme_location=primary' );
+
+		wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted
+
+		echo '</ul>';
+
+	}
 }
 
 

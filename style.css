@@ -566,6 +566,10 @@ a:hover .tb-thumb-format {
 .category-status .storycontent {
 	padding-left: 60px;
 }
+.single .format-status .storycontent,
+.single .category-status .storycontent {
+	padding-left: 0;
+}
 .bz-no-post {
 	padding: 10px;
 	font-weight: bold;
@@ -907,6 +911,7 @@ img.tb-thumb-format {
 	padding: 0 10px;
 	max-width: 100%;
 	overflow: hidden;
+	line-height: 2em;
 }
 #mainmenu > li {
 	float: left;
@@ -951,28 +956,37 @@ img.tb-thumb-format {
 	content: '';
 	display: none;
 }
+.navhome {
+	display: none;
+}
+.tinynav {
+	display: none;
+}
 
 /* secondary menus
 ----------------------------------------------------------*/
+#secondary1,
+#secondary2 {
+	text-align: center;
+	line-height: 2em;
+	margin: 0;
+	padding: 10px;
+}
 #secondary1 {
 	background: #fff;
-	border-bottom: 5px solid #424242;
-	text-align: center;
-	line-height: 30px;
-}
-#secondary1 li {
-	display: inline;
-	margin: 0 10px;
+	border-bottom: 5px solid #404040;
+	height: 30px;
+	padding:0;
+	overflow: auto;
 }
 #secondary2 {
 	border: 1px solid #ddd;
 	border-left: none;
-	text-align: center;
-	line-height: 20px;
 }
+#secondary1 li,
 #secondary2 li {
 	display: inline;
-	margin: 10px;
+	margin: 0 10px;
 	white-space: nowrap;
 }
 
@@ -1741,6 +1755,17 @@ div#infinite-handle span:hover {
 	.minib_print ,
 	.minib_track ,
 	.minib_home {
+		display: none;
+	}
+	.tinynav {
+		display: block;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.tinynav option {
+		padding: 5px 0;
+	}
+	.nav-menu {
 		display: none;
 	}
 }

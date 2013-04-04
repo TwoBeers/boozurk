@@ -632,6 +632,14 @@ function boozurk_get_coa( $option = false ) {
 							'req'=>'',
 							'sub'=>false 
 		),
+		'boozurk_tinynav'=> array(
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>'<a href="https://github.com/viljamis/TinyNav.js">Tinynav</a>',
+							'info'=>__( 'tiny navigation menu for small screen','boozurk' ),
+							'req'=>'boozurk_jsani'
+		),
 		'boozurk_mobile_css'=> array(
 							'group'=>'mobile',
 							'type'=>'chk',

@@ -21,7 +21,7 @@ class Boozurk_Comment_Style {
 		add_action( 'comment_form_logged_in_after', array( &$this, 'comment_variant_field' ) );
 		add_action( 'comment_post', array( &$this, 'save_comment_meta_data' ) );
 		add_filter( 'comment_class', array( &$this, 'add_comment_class' ) );
-		
+
 		$this->variants = array( 'style-default', 'style-blue', 'style-pink', 'style-orange', 'style-yellow', 'style-green', 'style-gray', 'style-white');
 
 	}
