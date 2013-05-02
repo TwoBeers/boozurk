@@ -22,7 +22,7 @@
 		<div class="status-subcont">
 			<div class="details"><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" title="<?php echo esc_attr( printf( __( 'View all posts by %s', 'boozurk' ), get_the_author() ) ); ?>"><?php echo get_the_author(); ?></a> - <?php echo boozurk_friendly_date(); ?></div>
 			<?php the_content(); ?>
-			<br class="fixfloat">
+			<br class="fixfloat" />
 		</div>
 	</div>
 

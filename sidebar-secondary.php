@@ -9,6 +9,8 @@
  */
 ?>
 
+<?php if ( boozurk_get_opt( 'boozurk_sidebar_secondary' ) == 'hidden' ) return; ?>
+
 <?php boozurk_hook_sidebars_before( 'secondary' ); ?>
 
 <!-- begin secondary sidebar -->
@@ -28,7 +30,7 @@
 
 				<?php dynamic_sidebar( 'fixed-widget-area' ); ?>
 
-				<br class="fixfloat"> 
+				<br class="fixfloat" /> 
 
 			</div><!-- #fixed-widget-area -->
 
@@ -38,15 +40,7 @@
 
 	</div>
 
-	<?php if ( ! is_active_widget( false, false, 'bz-navbuttons', true ) ) { ?>
-
-		<?php boozurk_navbuttons(); ?>
-
-	<?php } else { ?>
-
-		<div class="secondary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>"></div>
-
-	<?php } ?>
+	<div class="secondary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>"></div>
 
 </div>
 

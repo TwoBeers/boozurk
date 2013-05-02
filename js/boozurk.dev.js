@@ -135,15 +135,20 @@ boozurkScripts = {
 
 			d.css( {'opacity' : 0 } );
 
-			$this.mouseenter(function(){ //when mouse enters, slide down the sub list
+			$this.hoverIntent(
 
-				d.css( {'display' : 'block' } ).animate( { 'opacity' : 0.95 } );
+				function(){ //when mouse enters, slide down the sub list
 
-			}).mouseleave(function(){ //when mouse leaves, hide the sub list
+					d.css( {'display' : 'block' } ).animate( { 'opacity' : 0.95 } );
 
-				d.stop().animate( { 'opacity' : 0 }, 200, 'swing', function(){ d.css( {'display' : '' } ); } );
+				},
 
-			});
+				function(){ //when mouse leaves, hide the sub list
+
+					d.stop().animate( { 'opacity' : 0 }, 200, 'swing', function(){ d.css( {'display' : '' } ); } );
+
+				}
+			);
 
 		});
 
@@ -158,16 +163,23 @@ boozurkScripts = {
 			var self = $(this);
 			var timeoutID;
 
-			p.mouseenter(function(){
+			self.hide();
 
-				window.clearTimeout(timeoutID);
-				self.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
+			p.hoverIntent(
 
-			}).mouseleave(function(){
+				function(){
 
-				timeoutID = window.setTimeout( function(){self.fadeOut()}, 200);
+					window.clearTimeout(timeoutID);
+					self.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: 0.9});
 
-			});
+				},
+
+				function(){
+
+					timeoutID = window.setTimeout( function(){self.fadeOut()}, 200);
+
+				}
+			);
 			
 		});
 		
@@ -184,36 +196,41 @@ boozurkScripts = {
 
 			var $this = $(this);
 
-			$this.mouseenter(function(){
+			$this.hoverIntent(
 
-				var offset,h_pos,pin_pos;
+				function(){
 
-				if ($this.attr('title') || typeof($this.attr('original-title')) != 'string') {
-					$this.attr('original-title', $this.attr('title') || '').removeAttr('title');
+					var offset,h_pos,pin_pos;
+
+					if ($this.attr('title') || typeof($this.attr('original-title')) != 'string') {
+						$this.attr('original-title', $this.attr('title') || '').removeAttr('title');
+					}
+
+					baloon.html($this.attr('original-title'));
+
+					offset = $this.offset();
+					baloon.css({top: 0, left: 0, display: 'block'}).removeClass('to_left to_right');
+					
+					if ( offset.left > ( $(window).width() - 250 )  ) {
+						h_pos = offset.left - baloon.outerWidth() + ( $this.outerWidth() / 2 );
+						pin_pos = 'to_left';
+					} else {
+						h_pos = offset.left + ( $this.outerWidth() / 2 );
+						pin_pos = 'to_right';
+					}
+
+					baloon.css({top: offset.top - baloon.outerHeight() - 10, left: h_pos}).addClass(pin_pos);
+					window.clearTimeout(timeoutID);
+					baloon.stop().css({opacity: 0}).animate({opacity: 0.9});
+
+				},
+
+				function(){
+
+					timeoutID = window.setTimeout( function(){baloon.fadeOut()}, 200);
+
 				}
-
-				baloon.html($this.attr('original-title'));
-
-				offset = $this.offset();
-				baloon.css({top: 0, left: 0, display: 'block'}).removeClass('to_left to_right');
-				
-				if ( offset.left > ( $(window).width() - 250 )  ) {
-					h_pos = offset.left - baloon.outerWidth() + ( $this.outerWidth() / 2 );
-					pin_pos = 'to_left';
-				} else {
-					h_pos = offset.left + ( $this.outerWidth() / 2 );
-					pin_pos = 'to_right';
-				}
-
-				baloon.css({top: offset.top - baloon.outerHeight() - 10, left: h_pos}).addClass(pin_pos);
-				window.clearTimeout(timeoutID);
-				baloon.stop().css({opacity: 0}).animate({opacity: 0.9});
-
-			}).mouseleave(function(){
-
-				timeoutID = window.setTimeout( function(){baloon.fadeOut()}, 200);
-
-			});
+			);
 
 		});
 		
@@ -350,7 +367,7 @@ boozurkScripts = {
 	tinynav : function() {
 		$(".nav-menu").tinyNav({
 			active: 'current_page_item', // Set the "active" class for default menu
-			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
+			label: '<i class="icon-align-justify"></i>', // String: Sets the <label> text for the <select> (if not set, no label will be added)
 			header: '' // String: Specify text for "header" and show header instead of the active item
 		});
 	}

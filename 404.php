@@ -48,7 +48,7 @@ get_header(); ?>
 
 		</div>
 
-		<br class="fixfloat">
+		<br class="fixfloat" />
 
 	</div>
 

@@ -49,7 +49,7 @@
 <?php if ( comments_open() && ! boozurk_is_printpreview() ) {  //if comments are open
 
 	comment_form(); ?>
-	<br class="fixfloat">
+	<br class="fixfloat" />
 
 <?php } ?>
 

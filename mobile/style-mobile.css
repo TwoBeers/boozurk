@@ -7,15 +7,16 @@
 */
 
 body {
-	color: #fff;
+	color: #333;
 	font-family: arial,sans-serif;
 	font-size: 18px;
 	margin: 0;
-	background: #333;
+	background: #ddd;
 }
 #main {
 	background: #1a1a1a url("images/dark/bg.png") left top repeat;
 	padding-bottom: 5px;
+	color: #fff;
 }
 a img {
 	border: none;
@@ -70,7 +71,7 @@ pre {
 	background: #222 url("images/dark/head.png") left bottom repeat-x;
 	padding: 10px 5px 20px;
 	display: block;
-	text-shadow: -1px -1px 0 #000;
+	text-shadow: 1px 1px 0 #fff;
 }
 .post {
 	clear: both;
@@ -662,6 +663,10 @@ li.allcat {
 	padding: 5px;
 }
 /* light variant */
+ body.light {
+	background: #333;
+	color: #fff;
+}
 .light #main {
 	background: #eee url("images/light/bg.png") left top repeat;
 	color: #333;
@@ -677,6 +682,7 @@ li.allcat {
 }
 .light #head a {
 	background: #222 url("images/light/head.png") left bottom repeat-x;
+	text-shadow: -1px -1px 0 #000;
 }
 .light .tbm-group > li {
 	background: #f1f1f1 url("images/light/arr_r.png") right center no-repeat;

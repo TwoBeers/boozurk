@@ -142,7 +142,7 @@ class Boozurk_Breadcrumb {
 	the breadcrumb walker
 	Based on Yoast Breadcrumbs Plugin (http://yoast.com/wordpress/breadcrumbs/)
 	*/
-	function get_the_breadcrumb( $before = '<div id="bz-breadcrumb">', $after = '<br class="fixfloat"></div>' ) {
+	function get_the_breadcrumb( $before = '<div id="bz-breadcrumb">', $after = '<br class="fixfloat" /></div>' ) {
 		global $wp_query, $post;
 
 		$output = apply_filters( 'boozurk_filter_breadcrumb', '' );

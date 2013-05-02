@@ -446,8 +446,8 @@ function boozurk_get_coa( $option = false ) {
 							'default'=>'scroll',
 							'description'=>__( 'primary sidebar','boozurk' ),
 							'info'=> '',
-							'options'=>array('scroll','fixed'),
-							'options_l10n'=>array(__('scroll','boozurk'),__('fixed','boozurk')),
+							'options'=>array('scroll','fixed','hidden'),
+							'options_l10n'=>array(__('scroll with page','boozurk'),__('fixed','boozurk'),__('hidden','boozurk')),
 							'req'=>'' 
 		),
 		'boozurk_sidebar_secondary'=> array(
@@ -456,8 +456,8 @@ function boozurk_get_coa( $option = false ) {
 							'default'=>'fixed',
 							'description'=>__( 'secondary sidebar','boozurk' ),
 							'info'=> '',
-							'options'=>array('scroll','fixed'),
-							'options_l10n'=>array(__('scroll','boozurk'),__('fixed','boozurk')),
+							'options'=>array('scroll','fixed','hidden'),
+							'options_l10n'=>array(__('scroll with page','boozurk'),__('fixed','boozurk'),__('hidden','boozurk')),
 							'req'=>'' 
 		),
 		'boozurk_sidebar_head_split'=> array(

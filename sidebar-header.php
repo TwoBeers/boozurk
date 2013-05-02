@@ -26,7 +26,7 @@
 
 	<?php boozurk_hook_sidebar_bottom( 'header' ); ?>
 
-	<br class="fixfloat">
+	<br class="fixfloat" />
 
 </div><!-- #header-widget-area -->
 

@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.05
+Version: 2.06
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -26,7 +26,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 ----------------------------------------------------------*/
 body {
 	font-family: monospace;
-	background: transparent url('images/bg.png') 256px 0px repeat-y;
 	font-size: 15px;
 	line-height: 1.6em;
 }
@@ -103,7 +102,8 @@ input {
 select {
 	max-width: 100%;
 	background-color: #fff;
-	border: 1px solid #ddd;
+	border: none;
+	border-bottom: 1px solid;
 }
 object,
 embed {
@@ -118,8 +118,8 @@ input[type=button],
 input[type=submit],
 input[type=reset] {
 	background-color: #404040;
-	border: 1px solid #ddd;
-	border-radius: 2px 2px 2px 2px;
+	border: 1px solid #404040;
+	border-radius: 2px;
 	color: #eee;
 	cursor: pointer;
 	font-size: .9em;
@@ -152,7 +152,7 @@ input[type=button]:focus,
 input[type=submit]:focus,
 input[type=reset]:focus {
 	cursor: pointer;
-	background-color: #F5F5F5;
+	background-color: #f5f5f5;
 	color: #666;
 }
 input[type=password]:focus {
@@ -190,6 +190,9 @@ input[type=password]:focus {
 	max-width: 100%;
 	height: auto;
 	margin: 0;
+}
+.widget select {
+	width: 250px;
 }
 
 /* Utils
@@ -326,12 +329,12 @@ a:hover .tb-thumb-format {
 	bottom: 0;
 	height: 50px;
 	background: transparent url(images/sidebar-fade.png) left top repeat-x;
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 70%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(70%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%,rgba(255,255,255,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%,rgba(255,255,255,1) 100%); /* W3C */
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 .bz-description {
@@ -371,15 +374,26 @@ a:hover .tb-thumb-format {
 
 /* Main content
 ----------------------------------------------------------*/
+#fixed-bg {
+	position: fixed;
+	background: transparent url('images/bg.png') 256px 0px repeat-y;
+	height: 4000px;
+	width: 100%;
+	z-index: -1;
+	margin-top: -200px;
+}
 #main {
 	position: relative;
-	margin-top: 20px;
+	max-width:1420px;
+	margin: 20px auto 0;
+}
+.top-menu #main {
+	margin: 55px auto 0;
 }
 #content {
 	margin-left: 310px;
-	margin-right: 220px;
+	margin-right: 260px;
 }
-
 /* Footer
 ----------------------------------------------------------*/
 #footer {
@@ -594,6 +608,7 @@ a:hover .tb-thumb-format {
 	font-size:.8em;
 	margin:20px 0 -20px;
 	text-align:right;
+	padding: 0 10px;
 }
 .post-top-cat a,
 .post-top-tag a,
@@ -618,7 +633,7 @@ a:hover .tb-thumb-format {
 	margin-bottom: 20px;
 	width: 300px;
 	padding: 5px;
-	background: #F5F5F5;
+	background: #f5f5f5;
 	border: 1px solid #ddd;
 }
 .bz-player-container:hover {
@@ -806,7 +821,7 @@ div.tb_post_details ul {
 	line-height: 2em;
 }
 .tb_font_resize a {
-	background: #F5F5F5;
+	background: #f5f5f5;
 	border: 1px solid #ddd;
 	padding: 0 3px;
 	margin: 0 5px;
@@ -959,7 +974,8 @@ img.tb-thumb-format {
 .navhome {
 	display: none;
 }
-.tinynav {
+.tinynav,
+.tinynav_label {
 	display: none;
 }
 
@@ -978,6 +994,14 @@ img.tb-thumb-format {
 	height: 30px;
 	padding:0;
 	overflow: auto;
+	position: fixed;
+	top: 0;
+	padding-top: 30px;
+	width: 100%;
+	z-index:1;
+}
+.admin-bar #secondary1 {
+	padding-top: 30px;
 }
 #secondary2 {
 	border: 1px solid #ddd;
@@ -1069,21 +1093,21 @@ img.tb-thumb-format {
 /* Navigation buttons
 ----------------------------------------------------------*/
 #navbuttons.fixed {
-	position: fixed;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
 	bottom: 0;
-	right: 0;
-	width:215px;
-	padding: 30px 0 5px 0;
-	background: transparent url(images/sidebar-fade.png) left top repeat-x;
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(20%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%); /* W3C */
+	padding: 2000px 2px 0;
+	position: fixed;
+	right: 220px;
+	width: 36px;
+	background: #fff;
 }
 #navbuttons ul {
 	margin: 0;
+	overflow: hidden;
+}
+#navbuttons ul li {
+	list-style: none outside none;
 }
 .minibutton {
 	float:left;
@@ -1091,7 +1115,7 @@ img.tb-thumb-format {
 	position: relative;
 	text-align: center;
 	background: #fff;
-	border-radius: 5px;
+	border-radius: 2px;
 	border:1px solid #ddd;
 	font-size: 24px;
 	padding: 1px;
@@ -1099,6 +1123,10 @@ img.tb-thumb-format {
 }
 .minibutton i {
 	line-height: 32px;
+}
+#navbuttons.fixed .minibutton {
+	margin: 3px 0;
+	border: 1px solid transparent;
 }
 
 /* BreadCrumb 
@@ -1152,6 +1180,7 @@ img.tb-thumb-format {
 #comments {
 	text-align: right;
 	margin-top: 10px;
+	padding: 0 10px;
 }
 #commentlist, #commentlist .children {
 	list-style: none inside none;
@@ -1237,10 +1266,10 @@ img.tb-thumb-format {
 	bottom: 2px;
 }
 .comment-edit-link {
-	right: 2em;
+	right: 2.5em;
 }
 .comment-reply-link {
-	right: 2px;
+	right: 10px;
 }
 .comment-reply-link:hover .icon,
 .comment-edit-link:hover .icon {
@@ -1278,7 +1307,7 @@ img.tb-thumb-format {
 	border: 1px solid #ddd;
 	padding: 5px;
 	max-width: 80%;
-	background: #F5F5F5;
+	background: #f5f5f5;
 }
 .gallery img:hover {
 	border: 1px solid #777;
@@ -1380,7 +1409,7 @@ img.tb-thumb-format {
 	text-align: center;
 	margin: 10px;
 	max-width: 94%;
-	background: #F5F5F5;
+	background: #f5f5f5;
 }
 .wp-caption img {
 	border: 0 none;
@@ -1463,13 +1492,13 @@ img.aligncenter {
 	padding: 0;
 }
 #main .bz-navigate a {
-	background: #fff;
+	background: #f5f5f5;
 	border: 1px solid #ddd;
 	margin: 0 4px 0 0;
 }
 #main .bz-navigate a:hover,
 #main .bz-navigate a:active {
-	background: #eee;
+	border: 1px solid #aaa;
 }
 #main .bz-navigate .current {
 	font-weight: normal;
@@ -1711,6 +1740,19 @@ div#infinite-handle span:hover {
 	display: none;
 }
 
+/* Very Hi Resolutions
+----------------------------------------------------------*/
+@media screen and (min-width: 1440px) {
+	#navbuttons.fixed {
+		right: auto;
+		margin-left: 849px;
+	}
+	#sidebar-secondary.fixed {
+		right: auto;
+		margin-left: 892px;
+	}
+}
+
 /* Low Resolutions
 ----------------------------------------------------------*/
 @media screen and (max-width: 960px) {
@@ -1736,7 +1778,7 @@ div#infinite-handle span:hover {
 		width: auto;
 		padding: 10px;
 	}
-	body {
+	#fixed-bg {
 		background-position: -14px 0;
 	}
 	.post-top-date,
@@ -1744,12 +1786,16 @@ div#infinite-handle span:hover {
 	.post-top-cat {
 		margin-right: 10px;
 	}
-	.top-fade {
+	.top-fade,
+	.bottom-fade {
 		display: none;
 	}
 	#navbuttons.fixed {
 		width: 40px;
-		background: transparent;
+		padding-left: 0;
+		padding-right: 0;
+		right: 0;
+		border-right: none;
 	}
 	.minib_edit ,
 	.minib_print ,
@@ -1761,11 +1807,28 @@ div#infinite-handle span:hover {
 		display: block;
 		width: 100%;
 		margin-bottom: 20px;
+		border: 1px solid #ddd;
+	}
+	body > .tinynav {
+		padding-left: 40px;
+	}
+	.menu-wrap:before {
+		content: "...";
+		display: block;
+		width: 32px;
+		height: 32px;
 	}
 	.tinynav option {
 		padding: 5px 0;
 	}
 	.nav-menu {
 		display: none;
+	}
+	.tinynav_label {
+		display: inline-block;
+		font-size:23px;
+		position: absolute;
+		left: 8px;
+		margin-top: 4px;
 	}
 }

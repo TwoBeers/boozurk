@@ -45,6 +45,7 @@ add_action( 'comment_form_before'					, 'boozurk_enqueue_comments_reply' );
 
 add_action( 'boozurk_hook_header_after'				, 'boozurk_primary_menu' );
 add_action( 'boozurk_hook_body_top'					, 'boozurk_1st_secondary_menu' );
+add_action( 'boozurk_hook_footer_before'			, 'boozurk_navigation' );
 add_action( 'boozurk_hook_footer_top'				, 'boozurk_2nd_secondary_menu' );
 add_action( 'boozurk_hook_header_after'				, 'boozurk_header_widget_area' );
 add_action( 'boozurk_hook_entry_before'				, 'boozurk_print_details' );
@@ -374,6 +375,7 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() || ! boozurk_get_opt( 'boozurk_jsani' ) ) return;
 
 		$deps = array('jquery');
+		$deps[] = 'hoverIntent';
 
 		if ( boozurk_get_opt( 'boozurk_tinynav' ) )
 			wp_enqueue_script( 'boozurk-tinynav', get_template_directory_uri() . '/js/tinynav/tinynav.min.js', $deps, boozurk_get_info( 'version' ), true );
@@ -395,7 +397,7 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 			'quote_tip' => esc_js( __( 'Add selected text as a quote', 'boozurk' ) ),
 			'quote' => esc_js( __( 'Quote', 'boozurk' ) ),
 			'quote_alert' => esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
-			'comments_closed' => esc_js( __( 'Comments closed', 'boozurk' ) )
+			'comments_closed' => esc_js( __( 'Comments closed', 'boozurk' ) ),
 		);
 
 		wp_localize_script( 'boozurk-script', 'boozurk_l10n', $data );
@@ -567,12 +569,20 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 				</div></div>
 			</div>
 		<?php } ?>
-		<br class="fixfloat">
+		<br class="fixfloat" />
 	</div>
 <?php
 		}
 
 	}
+}
+
+
+// display navigation
+function boozurk_navigation() {
+
+	if ( ! is_active_widget( false, false, 'bz-navbuttons', true ) ) boozurk_navbuttons();
+
 }
 
 
@@ -593,7 +603,7 @@ if (!function_exists('boozurk_navbuttons')) {
 
 		<?php if ( $is_singular && get_edit_post_link() ) { 												// ------- Edit ------- ?>
 			<li class="minibutton minib_edit btn" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
-				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>"><i class="icon-edit"></i></a>
+				<a rel="nofollow" href="<?php echo get_edit_post_link(); ?>"><i class="icon-pencil"></i></a>
 			</li>
 		<?php } ?>
 
@@ -811,7 +821,7 @@ function boozurk_single_widgets_area() {
 ?>
 	<div id="single-widgets-area" class="ul_swa fixfloat">
 		<?php dynamic_sidebar( 'single-widgets-area' ); ?>
-		<br class="fixfloat">
+		<br class="fixfloat" />
 	</div>
 <?php
 
@@ -1308,7 +1318,7 @@ if ( !function_exists( 'boozurk_gallery_preview_walker' ) ) {
 
 		$output = apply_filters( 'boozurk_gallery_preview_walker', $output );
 
-		$output = '<div class="gallery gallery-preview">' . $output . '<br class="fixfloat"></div>';
+		$output = '<div class="gallery gallery-preview">' . $output . '<br class="fixfloat" /></div>';
 
 		echo $output;
 
@@ -1802,7 +1812,7 @@ if ( !function_exists( 'boozurk_navigate_comments' ) ) {
 		} else {
 			paginate_comments_links();
 		} ?>
-		<br class="fixfloat">
+		<br class="fixfloat" />
 	</div>
 <?php 
 
@@ -1958,10 +1968,15 @@ function boozurk_quote_content( $content ) {
 // Add specific CSS class by filter
 function boozurk_body_classes($classes) {
 
-	$temp_class = has_nav_menu( 'secondary1' )? 'top-menu' : '';
-
 	$classes[] = 'no-js';
-	if ( $temp_class ) $classes[] = $temp_class;
+
+	if ( has_nav_menu( 'secondary1' ) ) $classes[] = 'top-menu';
+
+	if ( ! is_active_widget( false, false, 'bz-navbuttons', true ) ) $classes[] = 'fixed-navigation';
+
+	if ( ! ( boozurk_get_opt( 'boozurk_sidebar_primary' ) == 'hidden' ) ) $classes[] = 'primary-sidebar';
+
+	if ( ! ( boozurk_get_opt( 'boozurk_sidebar_secondary' ) == 'hidden' ) ) $classes[] = 'secondary-sidebar';
 
 	return $classes;
 
@@ -2318,7 +2333,7 @@ function boozurk_edit_comment_link( $link ) {
 	preg_match_all( '/<a\b[^>]*>(.*?)<\/a>/',$link, $text );
 
 	if ( isset( $text[1][0] ) )
-		$link = str_replace( $text[1][0], '<i class="icon icon-edit"></i>', $link);
+		$link = str_replace( $text[1][0], '<i class="icon icon-pencil"></i>', $link);
 
 	return $link;
 
@@ -2384,7 +2399,7 @@ function boozurk_add_home_link( $items = '', $args = null ) {
 	$args = wp_parse_args( $args, $defaults );
 
 	if ( ( $args['theme_location'] === 'primary' ) && ( 'posts' == get_option( 'show_on_front' ) ) ) {
-		if (is_front_page())
+		if ( is_front_page() || is_single() )
 			$class = ' current_page_item';
 		else
 			$class = '';

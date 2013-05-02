@@ -39,6 +39,8 @@
 
 		<div id="main">
 
+			<div id="fixed-bg"></div>
+
 			<div id="content">
 
 				<?php boozurk_hook_header_before(); ?>

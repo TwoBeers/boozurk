@@ -32,7 +32,9 @@ class Boozurk_For_Jetpack {
 
 		//Likes
 		if ( class_exists( 'Jetpack_Likes' ) ) {
-			add_filter( 'wpl_is_index_disabled'		, '__return_false' );
+			add_action		( 'boozurk_hook_entry_bottom'	, array( $this, 'likes' ) );
+			remove_filter	( 'the_content'					, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_filter		( 'boozurk_filter_likes'		, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 		}
 
 		//Infinite Scroll
@@ -53,6 +55,14 @@ class Boozurk_For_Jetpack {
 			remove_filter( 'post_gallery'			, 'boozurk_gallery_shortcode', 10, 2 );
 			add_filter( 'boozurk_option_override'	, array( $this, 'carousel_skip_options' ), 10, 2 );
 		}
+
+	}
+
+
+	//print the "likes" button after post content
+	function likes() {
+
+		echo '<br class="fixfloat">' . apply_filters('boozurk_filter_likes','') . '<br class="fixfloat">';
 
 	}
 

@@ -9,6 +9,8 @@
  */
 ?>
 
+<?php if ( boozurk_get_opt( 'boozurk_sidebar_primary' ) == 'hidden' ) return; ?>
+
 <?php boozurk_hook_sidebars_before( 'primary' ); ?>
 
 <!-- begin primary sidebar -->
@@ -27,7 +29,7 @@
 
 		<?php } ?>
 
-		<br class="fixfloat">
+		<br class="fixfloat" />
 
 		<?php boozurk_hook_sidebar_bottom( 'primary' ); ?>
 

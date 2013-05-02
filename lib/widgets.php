@@ -59,25 +59,27 @@ function boozurk_get_default_widget_args( $extra_wrap_class = '' ) {
  */
 function boozurk_widget_area_init() {
 
-	// Area 0, in the left sidebar.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Primary Sidebar', 'boozurk' ),
-			'id' => 'primary-widget-area',
-			'description' => __( 'The primary sidebar widget area', 'boozurk' )
-		),
-		boozurk_get_default_widget_args()
-	) );
+	if ( ! ( boozurk_get_opt( 'boozurk_sidebar_primary' ) == 'hidden' ) )
+		// Area 0, in the left sidebar.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Primary Sidebar', 'boozurk' ),
+				'id' => 'primary-widget-area',
+				'description' => __( 'The primary sidebar widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
 
-	// Area 1, in the right sidebar.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Secondary sidebar', 'boozurk' ),
-			'id' => 'fixed-widget-area',
-			'description' => __( 'The secondary sidebar widget area', 'boozurk' )
-		),
-		boozurk_get_default_widget_args()
-	) );
+	if ( ! ( boozurk_get_opt( 'boozurk_sidebar_secondary' ) == 'hidden' ) )
+		// Area 1, in the right sidebar.
+		register_sidebar( array_merge( 
+			array(
+				'name' => __( 'Secondary sidebar', 'boozurk' ),
+				'id' => 'fixed-widget-area',
+				'description' => __( 'The secondary sidebar widget area', 'boozurk' )
+			),
+			boozurk_get_default_widget_args()
+		) );
 
 	// Area 2, located under the main menu.
 	register_sidebar( array_merge( 
@@ -543,7 +545,7 @@ class Boozurk_Widget_Latest_Commentators extends WP_Widget {
 
 		}
 
-		$output = $before_widget . $title . '<ul>' . $output . '</ul><br class="fixfloat">' . $after_widget;
+		$output = $before_widget . $title . '<ul>' . $output . '</ul><br class="fixfloat" />' . $after_widget;
 
 		echo $output;
 
@@ -616,7 +618,7 @@ class Boozurk_Widget_Latest_Commentators extends WP_Widget {
 	</p>
 
 	<p<?php $this->field_class( 'icon_size' ); ?>>
-		<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'boozurk' ); ?>:</label><br>
+		<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'boozurk' ); ?>:</label><br />
 		<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 			<?php
 				$size_array = array ( '16', '24', '32', '48', '64' );
@@ -990,7 +992,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 
 		<div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
 
-			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'boozurk' ); ?>:</label><br>
+			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'boozurk' ); ?>:</label><br />
 			<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 				<?php
 					$size_array = array ( '16', '24', '32', '48', '64' );
@@ -1430,7 +1432,6 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 			'home'		=> 1,
 			'next_prev'	=> 1,
 			'up_down'	=> 1,
-			'fixed'		=> 1,
 		);
 
 	}
@@ -1443,7 +1444,7 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 
 ?>
 	<?php echo $before_widget; ?>
-	<?php boozurk_navbuttons( $instance['print'], $instance['comment'], $instance['feed'], $instance['trackback'], $instance['home'], $instance['next_prev'], $instance['up_down'], $instance['fixed'] ); ?>
+	<?php boozurk_navbuttons( $instance['print'], $instance['comment'], $instance['feed'], $instance['trackback'], $instance['home'], $instance['next_prev'], $instance['up_down'], 0 ); ?>
 	<?php echo $after_widget; ?>
 <?php
 
@@ -1461,7 +1462,6 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 		$instance['home']		= (int) $new_instance['home'] ? 1 : 0;
 		$instance['next_prev']	= (int) $new_instance['next_prev'] ? 1 : 0;
 		$instance['up_down']	= (int) $new_instance['up_down'] ? 1 : 0;
-		$instance['fixed']		= (int) $new_instance['fixed'] ? 1 : 0;
 
 		return $instance;
 
@@ -1478,28 +1478,24 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 	<p>
 		<input id="<?php echo $this->get_field_id( 'print' ); ?>" name="<?php echo $this->get_field_name( 'print' ); ?>" value="1" type="checkbox" <?php checked( 1 , $print ); ?> />
 		<label for="<?php echo $this->get_field_id( 'print' ); ?>"><?php _e( 'Print preview', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'comment' ); ?>" name="<?php echo $this->get_field_name( 'comment' ); ?>" value="1" type="checkbox" <?php checked( 1 , $comment ); ?> />
 		<label for="<?php echo $this->get_field_id( 'comment' ); ?>"><?php _e( 'Leave a comment', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'feed' ); ?>" name="<?php echo $this->get_field_name( 'feed' ); ?>" value="1" type="checkbox" <?php checked( 1 , $feed ); ?> />
 		<label for="<?php echo $this->get_field_id( 'feed' ); ?>"><?php _e( 'Feed for comments', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'trackback' ); ?>" name="<?php echo $this->get_field_name( 'trackback' ); ?>" value="1" type="checkbox" <?php checked( 1 , $trackback ); ?> />
 		<label for="<?php echo $this->get_field_id( 'trackback' ); ?>"><?php _e( 'Trackback URL', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'home' ); ?>" name="<?php echo $this->get_field_name( 'home' ); ?>" value="1" type="checkbox" <?php checked( 1 , $home ); ?> />
 		<label for="<?php echo $this->get_field_id( 'home' ); ?>"><?php _e( 'Home', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'next_prev' ); ?>" name="<?php echo $this->get_field_name( 'next_prev' ); ?>" value="1" type="checkbox" <?php checked( 1 , $next_prev ); ?> />
 		<label for="<?php echo $this->get_field_id( 'next_prev' ); ?>"><?php _e( 'Previous/Next', 'boozurk' ); ?></label>
-		</br>
+		<br />
 		<input id="<?php echo $this->get_field_id( 'up_down' ); ?>" name="<?php echo $this->get_field_name( 'up_down' ); ?>" value="1" type="checkbox" <?php checked( 1 , $up_down ); ?> />
 		<label for="<?php echo $this->get_field_id( 'up_down' ); ?>"><?php _e( 'Top/Bottom', 'boozurk' ); ?></label>
-		</br>
-		</br>
-		<input id="<?php echo $this->get_field_id( 'fixed' ); ?>" name="<?php echo $this->get_field_name( 'fixed' ); ?>" value="1" type="checkbox" <?php checked( 1 , $fixed ); ?> />
-		<label for="<?php echo $this->get_field_id( 'fixed' ); ?>"><?php _e( 'Fixed position (bottom right)', 'boozurk' ); ?></label>
 	</p>
 <?php
 
@@ -1694,7 +1690,7 @@ class Boozurk_Widget_Post_Formats extends WP_Widget {
 			}
 		}
 
-		$output = $before_widget . $title . '<ul>' . $output . '</ul><br class="fixfloat">' . $after_widget;
+		$output = $before_widget . $title . '<ul>' . $output . '</ul><br class="fixfloat" />' . $after_widget;
 
 		echo $output;
 
@@ -1736,7 +1732,7 @@ class Boozurk_Widget_Post_Formats extends WP_Widget {
 	</p>
 
 	<p>
-		<label for="<?php echo $this->get_field_id( 'icon' ); ?>"><?php _e( 'Show', 'boozurk' ); ?>:</label><br>
+		<label for="<?php echo $this->get_field_id( 'icon' ); ?>"><?php _e( 'Show', 'boozurk' ); ?>:</label><br />
 		<select name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" >
 			<option value="3" <?php selected( '3', $icon ); ?>><?php echo __( 'icons & text', 'boozurk' ); ?></option>
 			<option value="2" <?php selected( '2', $icon ); ?>><?php echo __( 'icons', 'boozurk' ); ?></option>
@@ -1746,7 +1742,7 @@ class Boozurk_Widget_Post_Formats extends WP_Widget {
 
 	<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>"<?php checked( $count ); ?> />
-		<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show posts count', 'boozurk' ); ?></label><br>
+		<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show posts count', 'boozurk' ); ?></label><br />
 	</p>
 <?php
 
