@@ -80,10 +80,13 @@ add_filter( 'the_content_more_link'					, 'boozurk_more_link', 10, 2 );
 add_filter( 'wp_title'								, 'boozurk_filter_wp_title' );
 add_filter( 'avatar_defaults'						, 'boozurk_addgravatar' );
 add_filter( 'edit_comment_link'						, 'boozurk_edit_comment_link' );
-add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
 add_filter( 'wp_list_categories'					, 'boozurk_wrap_categories_count' );
 add_filter( 'comment_reply_link'					, 'boozurk_comment_reply_link' );
 add_filter( 'wp_nav_menu_items'						, 'boozurk_add_home_link', 10, 2 );
+add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
+add_filter( 'page_css_class'						, 'boozurk_add_parent_class', 10, 4 );
+add_filter( 'page_css_class'						, 'boozurk_add_selected_class_to_page_item', 10, 1 );
+add_filter( 'nav_menu_css_class'					, 'boozurk_add_selected_class_to_menu_item', 10, 2 );
 
 
 /* get the theme options */
@@ -877,10 +880,7 @@ if ( !function_exists( 'boozurk_get_the_thumb' ) ) {
 			else
 				$format = $args['default'];
 
-			if ( boozurk_is_mobile() )
-				return '<img class="' . $args['class'] . ' ' . $format . '" alt="thumb" src="' . get_template_directory_uri() . '/images/img40.png" />';
-			else
-				return '<i class="' . $args['class'] . ' icon-' . $args['size_h'] . ' ' . $format . '"></i>';
+			return apply_filters( 'boozurk_hook_get_the_thumb', '<i class="' . $args['class'] . ' icon-' . $args['size_h'] . ' ' . $format . '"></i>', $format, $args );
 
 		}
 
@@ -1608,7 +1608,7 @@ if ( !function_exists( 'boozurk_friendly_date' ) ) {
  * Create HTML list of nav menu items.
  * Replacement for the native Walker, using the thumbnail.
  *
- * @see    http://wordpress.stackexchange.com/q/14037/
+ * @see http://wordpress.stackexchange.com/q/14037/
  * @author toscho, http://toscho.de
  */
 class boozurk_Thumb_Walker extends Walker_Nav_Menu {
@@ -1647,11 +1647,7 @@ class boozurk_Thumb_Walker extends Walker_Nav_Menu {
 
 		if ( 0 == $depth ) {
 
-			$thumb = '<img class="bz-menu-thumb default" width="' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . '" height="' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . '" alt="' . $title . '" src="' . get_template_directory_uri() . '/images/img40.png" />';
-
-			if ( has_post_thumbnail((int)$item->object_id) ) {
-				$thumb = get_the_post_thumbnail( (int)$item->object_id, array((int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ),(int)boozurk_get_opt( 'boozurk_main_menu_icon_size' )), array( 'title' => $title, 'class' => 'bz-menu-thumb' ) );
-			}
+			$thumb = $this->get_the_thumb( $item );
 
 			if ( boozurk_get_opt( 'boozurk_main_menu' ) == 'thumbnail' )
 				$title = $thumb;
@@ -1667,6 +1663,47 @@ class boozurk_Thumb_Walker extends Walker_Nav_Menu {
 		$item_output .= $args->after;
 
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+
+	}
+
+	function get_the_thumb( $item ) {
+
+		if ( $item->object == 'page' ) {
+
+			$thumb = boozurk_get_the_thumb( array(
+				'id'		=> (int)$item->object_id,
+				'size_w'	=> (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ),
+				'class'		=> 'tb-thumb-format',
+			) );
+
+		} elseif ( $item->object == 'category' ) {
+
+			$thumb = '<i class="icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' icon-folder-close"></i>';
+
+		} elseif ( $item->object == 'custom' ) {
+
+			if ( $item->url ) {
+				if ( substr( $item->url, 0, strlen(home_url())) == home_url() )
+					$thumb = '<i class="icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' icon-circle"></i>';
+				else
+					$thumb = '<i class="icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' icon-external-link"></i>';
+			} else {
+				$thumb = '<i class="icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' icon-circle-blank"></i>';
+			}
+
+		} elseif ( $item->object == 'post_format' ) {
+
+			$term = get_term($item->object_id, 'post_format' );
+			$thumb = '<i class="tb-thumb-format icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' ' . str_replace('post-format-', '', $term->slug ) . '"></i>';
+
+		} else {
+
+			$thumb = '<i class="icon-' . (int)boozurk_get_opt( 'boozurk_main_menu_icon_size' ) . ' icon-check-empty"></i>';
+
+		}
+
+		return $thumb;
+
 	}
 
 }
@@ -2264,7 +2301,6 @@ function boozurk_add_parent_class( $css_class, $page, $depth, $args ) {
 	return $css_class;
 
 }
-add_filter( 'page_css_class', 'boozurk_add_parent_class', 10, 4 );
 
 
 /**
@@ -2287,6 +2323,29 @@ function boozurk_add_menu_parent_class( $items ) {
 	}
 
 	return $items;    
+}
+
+
+/**
+ * Add 'selected' class to current page item in menus
+ */
+function boozurk_add_selected_class_to_page_item( $css_class ) {
+
+	if ( in_array( 'current_page_item', $css_class ) ) $css_class[] = 'selected';
+
+	return $css_class;    
+}
+
+
+/**
+ * Add 'selected' class to current menu item in menus
+ */
+function boozurk_add_selected_class_to_menu_item( $classes, $item ) {
+
+	if ( $item->current )
+		$classes[] = 'selected';
+
+	return $classes;    
 }
 
 
@@ -2388,6 +2447,8 @@ function boozurk_2nd_secondary_menu() {
 //add "Home" link
 function boozurk_add_home_link( $items = '', $args = null ) {
 
+	if ( ! $items ) return $items;
+
 	$defaults = array(
 		'theme_location' => 'undefined',
 		'before' => '',
@@ -2400,7 +2461,7 @@ function boozurk_add_home_link( $items = '', $args = null ) {
 
 	if ( ( $args['theme_location'] === 'primary' ) && ( 'posts' == get_option( 'show_on_front' ) ) ) {
 		if ( is_front_page() || is_single() )
-			$class = ' current_page_item';
+			$class = ' selected';
 		else
 			$class = '';
 
@@ -2425,13 +2486,11 @@ function boozurk_add_home_link( $items = '', $args = null ) {
 if ( !function_exists( 'boozurk_pages_menu' ) ) {
 	function boozurk_pages_menu() {
 
-		echo '<ul id="mainmenu" class="nav-menu">';
+		$menu = boozurk_add_home_link( $items = wp_list_pages( 'sort_column=menu_order&title_li=&echo=0' ), $args = 'theme_location=primary' );
 
-		echo boozurk_add_home_link( $items = '', $args = 'theme_location=primary' );
+		if ( ! $menu ) return;
 
-		wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted
-
-		echo '</ul>';
+		echo '<ul id="mainmenu" class="nav-menu">' . $menu . '</ul>';
 
 	}
 }

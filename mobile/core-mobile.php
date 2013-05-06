@@ -79,26 +79,27 @@ class Boozurk_Mobile {
 
 		if ( ! $this->is_mobile ) return;
 
-		add_action( 'wp_enqueue_scripts',					array( $this, 'stylesheet' ) );
-		add_action( 'boozurk_mobile_hook_comments_before',	array( $this, 'comments_navigation' ) );
-		add_action( 'boozurk_mobile_hook_comments_after',	array( $this, 'comments_navigation' ) );
-		add_action( 'boozurk_mobile_hook_entry_before',		array( $this, 'posts_navigation' ) );
-		add_action( 'boozurk_mobile_hook_entry_after',		array( $this, 'posts_navigation' ) );
-		add_action( 'boozurk_mobile_hook_entry_after',		array( $this, 'page_hierarchy' ) );
-		add_action( 'boozurk_mobile_hook_content_before',	array( $this, 'search_reminder' ) );
-		add_action( 'boozurk_mobile_hook_content_after',	array( $this, 'indexes_navigation' ) );
-		add_filter( 'user_contactmethods',					array( $this, 'new_contactmethods' ),10,1 );
-		add_filter( 'widget_tag_cloud_args',				array( $this, 'tag_cloud_filter' ), 90 );
-		add_filter( 'widget_categories_args',				array( $this, 'widget_categories_filter' ), 90 );
-		add_filter( 'wp_list_categories',					array( $this, 'list_categories_filter' ), 90 );
-		add_filter( 'widget_archives_args',					array( $this, 'widget_archives_filter' ), 90 );
-		add_filter( 'widget_pages_args',					array( $this, 'widget_pages_filter' ), 90 );
-		add_filter( 'body_class' ,							array( $this, 'body_classes' ) );
-		add_filter( 'post_class' ,							array( $this, 'post_classes' ) );
-		add_filter( 'boozurk_mobile_filter_seztitle' ,		array( $this, 'get_seztitle' ) );
-		add_filter( 'comment_form_default_fields' ,			array( $this, 'comments_form_fields' ), 90 );
-		add_filter( 'comment_form_defaults' ,				array( $this, 'comment_form_defaults' ), 90 );
-		add_filter( 'boozurk_filter_taxomony_separator' ,	array( $this, 'taxomony_separator' ), 90 );
+		add_action( 'wp_enqueue_scripts'					, array( $this, 'stylesheet' ) );
+		add_action( 'boozurk_mobile_hook_comments_before'	, array( $this, 'comments_navigation' ) );
+		add_action( 'boozurk_mobile_hook_comments_after'	, array( $this, 'comments_navigation' ) );
+		add_action( 'boozurk_mobile_hook_entry_before'		, array( $this, 'posts_navigation' ) );
+		add_action( 'boozurk_mobile_hook_entry_after'		, array( $this, 'posts_navigation' ) );
+		add_action( 'boozurk_mobile_hook_entry_after'		, array( $this, 'page_hierarchy' ) );
+		add_action( 'boozurk_mobile_hook_content_before'	, array( $this, 'search_reminder' ) );
+		add_action( 'boozurk_mobile_hook_content_after'		, array( $this, 'indexes_navigation' ) );
+		add_filter( 'user_contactmethods'					, array( $this, 'new_contactmethods' ),10,1 );
+		add_filter( 'widget_tag_cloud_args'					, array( $this, 'tag_cloud_filter' ), 90 );
+		add_filter( 'widget_categories_args'				, array( $this, 'widget_categories_filter' ), 90 );
+		add_filter( 'wp_list_categories'					, array( $this, 'list_categories_filter' ), 90 );
+		add_filter( 'widget_archives_args'					, array( $this, 'widget_archives_filter' ), 90 );
+		add_filter( 'widget_pages_args'						, array( $this, 'widget_pages_filter' ), 90 );
+		add_filter( 'body_class'							, array( $this, 'body_classes' ) );
+		add_filter( 'post_class'							, array( $this, 'post_classes' ) );
+		add_filter( 'boozurk_mobile_filter_seztitle'		, array( $this, 'get_seztitle' ) );
+		add_filter( 'comment_form_default_fields'			, array( $this, 'comments_form_fields' ), 90 );
+		add_filter( 'comment_form_defaults'					, array( $this, 'comment_form_defaults' ), 90 );
+		add_filter( 'boozurk_filter_taxomony_separator'		, array( $this, 'taxomony_separator' ), 90 );
+		add_filter( 'boozurk_hook_get_the_thumb'			, array( $this, 'get_the_thumb' ), 10, 4 );
 
 		// Set the content width
 		$content_width = 300;
@@ -411,6 +412,14 @@ class Boozurk_Mobile {
 		return $classes;
 
 	}
+
+
+	function get_the_thumb( $thumb, $format, $args ) {
+
+		return '<img class="' . $args['class'] . ' ' . $format . '" alt="thumb" src="' . get_template_directory_uri() . '/mobile/images/empty.png" />';
+
+	}
+
 
 }
 
