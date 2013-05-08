@@ -32,8 +32,8 @@ class Boozurk_Audio_Player {
 		wp_enqueue_script( 'boozurk-audioplayer-script', get_template_directory_uri() . '/js/audio-player.dev.js', array( 'jquery', 'swfobject' ), boozurk_get_info( 'version' ), true );
 
 		$data = array(
-			'unknown_media' => esc_attr( __( 'unknown media format', 'boozurk' ) ),
-			'player_path' => get_template_directory_uri().'/resources/audio-player/player.swf',
+			'unknown_media'	=> esc_attr( __( 'unknown media format', 'boozurk' ) ),
+			'player_path'	=> get_template_directory_uri().'/resources/audio-player/player.swf',
 		);
 		wp_localize_script( 'boozurk-audioplayer-script', 'boozurkAudioPlayer_l10n', $data );
 
@@ -68,7 +68,7 @@ class Boozurk_Audio_Player {
 		<div class="bz-player-content">
 			<audio controls="" id="sw-player-<?php echo $instance . '-' . $post->ID; ?>" class="no-player">
 				<source src="<?php echo $result[3][$key];?>" />
-				<span class="bz-player-notice"><?php _e( 'this audio type is not supported by your browser','boozurk' ); ?></span>
+				<span class="bz-player-notice"><?php _e( 'this audio type is not supported by your browser', 'boozurk' ); ?></span>
 			</audio>
 		</div>
 	</div>

@@ -951,38 +951,6 @@ img.tb-thumb-format {
 .not-found .icon-placeholder:before {
 	content: "\f071";
 }
-#main .icon-32 {
-	font-size: 24px;
-	width: 32px;
-	line-height: 32px;
-	vertical-align: middle;
-	margin: 0;
-	text-align: center;
-}
-#main .icon-48 {
-	font-size: 32px;
-	width: 48px;
-	line-height: 48px;
-	vertical-align: middle;
-	margin: 0;
-	text-align: center;
-}
-#main .icon-64 {
-	font-size: 48px;
-	width: 64px;
-	line-height: 64px;
-	vertical-align: middle;
-	margin: 0;
-	text-align: center;
-}
-#main .icon-96 {
-	font-size: 64px;
-	width: 96px;
-	line-height: 96px;
-	vertical-align: middle;
-	margin: 0;
-	text-align: center;
-}
 /* Main menu 
 ----------------------------------------------------------*/
 #mainmenu {

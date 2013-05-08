@@ -36,13 +36,24 @@ add_action( 'widgets_init'	, 'boozurk_widgets_init' );
 /**
  * Define default Widget arguments
  */
-function boozurk_get_default_widget_args( $extra_wrap_class = '' ) {
+function boozurk_get_default_widget_args( $args = '' ) {
+
+	$defaults = array(
+		'before'	=> '',
+		'after'		=> '',
+		'id'		=> '%1$s',
+		'class'		=> '%2$s',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$args['id'] = $args['id'] ? ' id="' . $args['id'] . '"' : '';
 
 	$widget_args = array(
 		// Widget container opening tag, with classes
-		'before_widget' => $extra_wrap_class ? '<div class="' . $extra_wrap_class . '"><div id="%1$s" class="widget %2$s">' : '<div id="%1$s" class="widget %2$s">',
+		'before_widget' => $args['before']  . '<div' . $args['id'] . ' class="widget ' . $args['class'] . '">',
 		// Widget container closing tag
-		'after_widget' => $extra_wrap_class ? '</div></div>' : '</div>',
+		'after_widget' => '</div>' . $args['after'],
 		// Widget Title container opening tag, with classes
 		'before_title' => '<div class="w_title">',
 		// Widget Title container closing tag
@@ -88,7 +99,7 @@ function boozurk_widget_area_init() {
 			'id' => 'header-widget-area',
 			'description' => __( 'The widget area under the main menu', 'boozurk' )
 		),
-		boozurk_get_default_widget_args( 'bz-widget' )
+		boozurk_get_default_widget_args( 'before=<div class="bz-widget">&after=</div>' )
 	) );
 
 	// Area 3, located in the footer. Empty by default.
@@ -138,7 +149,7 @@ function boozurk_widget_area_init() {
 			'id' => 'single-widgets-area',
 			'description' => __( 'a widget area located after the post body', 'boozurk' ),
 		),
-		boozurk_get_default_widget_args( 'bz-widget' )
+		boozurk_get_default_widget_args( 'before=<div class="bz-widget">&after=</div>' )
 	) );
 
 }
@@ -888,7 +899,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 			}
 
 			if ( $show && ! empty( $account ) ) {
-				$icon = '<img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png" alt="' . $follow_service . '" style="width: ' . $icon_size . 'px; height: ' . $icon_size . 'px;" />';
+				$icon = '<img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ) . '" alt="' . $follow_service . '" style="width: ' . $icon_size . 'px; height: ' . $icon_size . 'px;" />';
 				$output .= '<a target="' . $target . '" href="' . $account . '"' . $onclick . ' class="tb-social-icon' . $class . '" title="' . esc_attr( sprintf( $prefix, $service_name ) ) . '">' . $icon . '</a>';
 			}
 
@@ -969,7 +980,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 
 			<h2>
 				<input id="<?php echo $this->get_field_id( 'show_'.$follow_service ); ?>" name="<?php echo $this->get_field_name( 'show_'.$follow_service ); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
+				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ); ?>" alt="<?php echo esc_attr( $follow_service ); ?>" />
 				<?php echo $service_name; ?>
 			</h2>
 
@@ -1272,7 +1283,7 @@ class Boozurk_Widget_Recent_Posts extends WP_Widget {
 		}
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
+		$title = sprintf( $title, '<a href="' . esc_url( get_category_link( $category ) ) . '">' . get_cat_name( $category ) . '</a>' );
 		$title = $title ? $before_title . $title . $after_title : '';
 
 		$number = (int) $instance['number'];
@@ -1299,7 +1310,7 @@ class Boozurk_Widget_Recent_Posts extends WP_Widget {
 				$thumb = $instance['thumb'] ? boozurk_get_the_thumb( array( 'id' => get_the_ID(), 'size_w' => 32, 'class' => 'tb-thumb-format' ) ) . ' ' : '';
 				$post_title = get_the_title() ? get_the_title() : get_the_ID();
 
-				$output .= '<li><a href="' . get_permalink() . '" title="' . esc_attr( $post_title ) . '">' . $thumb . $post_title . '</a></li>';
+				$output .= '<li><a href="' . esc_url( get_permalink() ) . '" title="' . esc_attr( $post_title ) . '">' . $thumb . $post_title . '</a></li>';
 
 			}
 

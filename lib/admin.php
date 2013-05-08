@@ -275,7 +275,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 										</select>
 								<?php } elseif ( $the_coa[$key]['type'] == 'opt' ) { ?>
 									<?php foreach( $the_coa[$key]['options'] as $optionkey => $option ) { ?>
-										<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></span></label>
+										<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_l10n'][$optionkey]; ?></span></label>
 									<?php } ?>
 								<?php } elseif ( $the_coa[$key]['type'] == 'url' ) { ?>
 										<input class="boozurk_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
@@ -309,7 +309,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 													<span><?php echo $the_coa[$subval]['info']; ?></span>
 											<?php } elseif ( $the_coa[$subval]['type'] == 'opt' ) { ?>
 												<?php foreach( $the_coa[$subval]['options'] as $optionkey => $option ) { ?>
-													<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]"> <span><?php echo $the_coa[$subval]['options_readable'][$optionkey]; ?></span></label>
+													<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]"> <span><?php echo $the_coa[$subval]['options_l10n'][$optionkey]; ?></span></label>
 												<?php } ?>
 											<?php } elseif ( $the_coa[$subval]['type'] == 'url' ) { ?>
 													<input class="boozurk_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
