@@ -15,7 +15,7 @@
 
 <?php
 	if ( post_password_required() ) {
-		echo '<div id="comments">' . __( 'Enter your password to view comments.','boozurk' ) . '</div>';
+		echo '<div id="comments">' . __( 'Enter your password to view comments', 'boozurk' ) . '</div>';
 		return;
 	}
 ?>
@@ -46,12 +46,9 @@
 
 <?php } ?>
 
-<?php if ( comments_open() && ! boozurk_is_printpreview() ) {  //if comments are open
+<?php comment_form(); ?>
 
-	comment_form(); ?>
-	<br class="fixfloat" />
-
-<?php } ?>
+<br class="fixfloat" />
 
 <!-- end comments -->
 

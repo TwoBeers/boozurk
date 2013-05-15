@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.06
+Version: 2.06.1
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -116,7 +116,8 @@ input[type=password] {
 }
 input[type=button],
 input[type=submit],
-input[type=reset] {
+input[type=reset],
+button {
 	background-color: #404040;
 	border: 1px solid #404040;
 	border-radius: 2px;
@@ -142,7 +143,9 @@ input[type=submit]:focus,
 input[type=reset]:focus,
 textarea:focus,
 input[type=text]:focus,
-input[type=password]:focus {
+input[type=password]:focus,
+button:hover,
+button:focus {
 	border: 1px solid #21759b;
 }
 input[type=button]:hover,
@@ -150,7 +153,9 @@ input[type=submit]:hover,
 input[type=reset]:hover,
 input[type=button]:focus,
 input[type=submit]:focus,
-input[type=reset]:focus {
+input[type=reset]:focus,
+button:hover,
+button:focus {
 	cursor: pointer;
 	background-color: #f5f5f5;
 	color: #666;
@@ -164,11 +169,17 @@ input[type=password]:focus {
 .storycontent p {
 	margin: 0 0 1em 0;
 }
-.storycontent ul li,
-.widget ul li,
-.comment-body ul li {
+.storycontent ul,
+.widget ul,
+.comment-body ul {
 	list-style: square outside none;
 }
+.storycontent ol,
+.widget ol,
+.comment-body ol {
+	list-style: decimal inside none;
+}
+
 .storycontent table,
 .comment-body table {
 	border-collapse: collapse;
@@ -201,8 +212,7 @@ input[type=password]:focus {
 	clear: both;
 }
 br.fixfloat {
-	display: block;
-	height: 2px;
+	line-height: 1px;
 }
 .hide_if_no_print {
 	display: none;
@@ -229,6 +239,14 @@ br.fixfloat {
 #cancel-comment-reply-link:hover [class^="icon-"],
 a:hover .tb-thumb-format {
 	color: #aaa;
+}
+button [class^="icon-"],
+button [class^="icon-"] {
+	color: #eee;
+}
+button:hover [class^="icon-"],
+button:focus [class^="icon-"] {
+	color: #404040;
 }
 #main .icon-32 {
 	font-size: 24px;
@@ -872,6 +890,18 @@ div.tb_post_details ul {
 	text-align: right;
 	margin-top:12px;
 }
+.widget_search input[type="text"] {
+	width: 175px;
+}
+.widget_search button {
+	font-size: 20px;
+	height: auto;
+	line-height: 20px;
+	margin: 5px;
+	min-width: 50px;
+	padding: 0 5px;
+}
+
 /* Post Format icons
 ----------------------------------------------------------*/
 .tb-thumb-format,
@@ -1212,7 +1242,8 @@ img.tb-thumb-format {
 }
 /* Comments 
 ----------------------------------------------------------*/
-#comments {
+#comments,
+.comments_note {
 	text-align: right;
 	margin-top: 10px;
 	padding: 0 10px;
@@ -1260,7 +1291,7 @@ img.tb-thumb-format {
 }
 .bypostauthor > .comment-body {
 	border: 1px solid #ddd;
-	border-bottom: none;
+	border-left: none;
 	background: #eee;
 }
 .comment-body .avatar {

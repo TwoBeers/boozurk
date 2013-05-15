@@ -11,7 +11,7 @@
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) {
-		echo '<p>' . __( 'Enter your password to view comments.', 'boozurk' ) . '</p>';
+		echo '<p>' . __( 'Enter your password to view comments', 'boozurk' ) . '</p>';
 		return;
 	} 
 ?>

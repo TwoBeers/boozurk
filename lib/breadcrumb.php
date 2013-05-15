@@ -242,7 +242,7 @@ class Boozurk_Breadcrumb {
 			} else {
 
 				if ( get_query_var( 'page' ) ) {
-					$output .= '<a href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . __( 'Page', 'boozurk' ) . get_query_var( 'page' ) . '</span>';
+					$output .= '<a href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output .= '<span>' . get_the_title() . '</span>';
 				}
@@ -257,7 +257,7 @@ class Boozurk_Breadcrumb {
 			if ( 0 == $post->post_parent ) {
 
 				if ( get_query_var( 'page' ) ) {
-					$output = $homelink . $opt['sep'] . '<a href="'. esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . __( 'Page', 'boozurk' ) . get_query_var( 'page' ) . '</span>';
+					$output = $homelink . $opt['sep'] . '<a href="'. esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output = $homelink . $opt['sep'] . '<span>' . get_the_title() . '</span>';
 				}
@@ -299,7 +299,7 @@ class Boozurk_Breadcrumb {
 						$output .= '<a href="' . esc_url( $link['url'] ) . '">' . $link['title'] . '</a>';
 					} else {
 						if ( get_query_var( 'page' ) ) {
-							$output .= '<a href="' . esc_url( $link['url'] ) . '">' . $link['title'] . '</a>' . $opt['sep'] . '<span>' . __('Page','boozurk') . get_query_var( 'page' ) . '</span>';
+							$output .= '<a href="' . esc_url( $link['url'] ) . '">' . $link['title'] . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';
 						} else {
 							$output .= '<span>' . $link['title'] . '</span>';
 						}
@@ -311,7 +311,7 @@ class Boozurk_Breadcrumb {
 		}
 
 		if ( get_query_var('paged') )
-			$output .= $opt['sep'] . '<span>' . __('Page','boozurk') . get_query_var('paged') . '</span>';
+			$output .= $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'paged' ) ) . '</span>';
 
 		return $before . $output . $after;
 

@@ -87,6 +87,7 @@ add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
 add_filter( 'page_css_class'						, 'boozurk_add_parent_class', 10, 4 );
 add_filter( 'page_css_class'						, 'boozurk_add_selected_class_to_page_item', 10, 1 );
 add_filter( 'nav_menu_css_class'					, 'boozurk_add_selected_class_to_menu_item', 10, 2 );
+add_filter( 'get_search_form'						, 'boozurk_search_form' );
 
 
 /* get the theme options */
@@ -418,7 +419,7 @@ function boozurk_print_details() {
 	if ( boozurk_get_opt( 'boozurk_post_date' ) )
 		echo '<li class="post-top-date"><i class="icon-time"></i> ' . get_the_time( get_option( 'date_format' ) ) . '</li>';
 
-	if ( boozurk_get_opt( 'boozurk_post_cat' ) ) {
+	if ( boozurk_get_opt( 'boozurk_post_cat' ) && $categories = get_the_category() ) {
 		echo '<li class="post-top-cat"><i class="icon-folder-close"></i> ';
 		the_category(', ');
 		echo '</li>';
@@ -513,9 +514,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 
 		<?php
 			$page_cd_nc = ( is_page() && !comments_open() && !have_comments() ); //true if page with comments disabled and no comments
-			if ( !$page_cd_nc ) {
-				if( $args['comments'] && !post_password_required() ) comments_popup_link( '0', '1', '%', 'pmb_comm', '-'); // number of comments
-			}
+			if ( ! $page_cd_nc && $args['comments'] ) boozurk_comments_link( 'zero=0&one=1&more=%&none=-&class=pmb_comm'); // number of comments
 		?>
 
 		<?php if ( boozurk_get_opt( 'boozurk_plusone' ) && !post_password_required() && $args['plusone'] ) { ?>
@@ -528,7 +527,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 			<?php } ?>
 		<?php } ?>
 
-		<?php if ( !is_singular() ) edit_post_link( '<i class="icon-pencil"></i>' ); ?>
+		<?php edit_post_link( '<i class="icon-pencil"></i>' ); ?>
 
 	</div>
 <?php
@@ -603,12 +602,6 @@ if (!function_exists('boozurk_navbuttons')) {
 	<div id="navbuttons"<?php if ( $fixed ) echo ' class="fixed"'; ?>>
 
 		<ul>
-
-		<?php if ( $is_singular && get_edit_post_link() ) { 												// ------- Edit ------- ?>
-			<li class="minibutton minib_edit btn" title="<?php esc_attr_e( 'Edit','boozurk' ); ?>">
-				<a rel="nofollow" href="<?php echo esc_url( get_edit_post_link() ); ?>"><i class="icon-pencil"></i></a>
-			</li>
-		<?php } ?>
 
 		<?php if ( $print && $is_singular ) { 																// ------- Print ------- ?>
 			<li class="minibutton minib_print btn" title="<?php esc_attr_e( 'Print','boozurk' ); ?>">
@@ -840,7 +833,7 @@ if ( !function_exists( 'boozurk_default_widgets' ) ) {
 			'WP_Widget_Search'		=> 'widget_search',
 			'WP_Widget_Meta'		=> 'widget_meta',
 			'WP_Widget_Pages'		=> 'widget_pages',
-			'WP_Widget_Links'		=> 'widget_links',
+			//'WP_Widget_Links'		=> 'widget_links',
 			'WP_Widget_Categories'	=> 'widget_categories',
 			'WP_Widget_Archives'	=> 'widget_archive',
 		);
@@ -1865,10 +1858,68 @@ function boozurk_comments_closed() {
 	if ( ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) {
 
 ?>
-	<p class="nocomments"><?php _e( 'Comments are closed.', 'boozurk' ); ?></p>
+	<div class="comments_note"><?php _e( 'Comments are closed', 'boozurk' ); ?></div>
 <?php
 
 	}
+}
+
+
+//the comments link ( based on http://core.trac.wordpress.org/browser/tags/3.5.1/wp-includes/comment-template.php#L968 )
+function boozurk_comments_link( $args = '' ) {
+
+	$defaults = array(
+		'zero'	=> __( 'No Comments', 'boozurk' ),
+		'one'	=> __( '1 Comment', 'boozurk' ),
+		'more'	=> __( '% Comments', 'boozurk' ),
+		'none'	=> __( 'Comments are closed', 'boozurk' ),
+		'id'	=> get_the_ID(),
+		'class'	=> '',
+		'echo'	=> 1,
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	$number = get_comments_number( $args['id'] );
+
+	$css_class = ( ! empty( $args['class'] ) ) ? ' class="' . esc_attr( $args['class'] ) . '"' : '';
+
+	if ( 0 == $number && !comments_open( $args['id'] ) ) {
+
+		$output = '<span title="' . esc_attr__( 'Comments are closed', 'boozurk' ) . '"' . $css_class . '>' . $args['none'] . '</span>';
+
+	} elseif ( post_password_required( $args['id'] ) ) {
+
+		$output = '<span title="' . esc_attr__( 'Enter your password to view comments', 'boozurk' ) . '"' . $css_class . '><i class="icon-ban-circle"></i></span>';
+
+	} else {
+
+		if ( 0 == $number )
+			$href = get_permalink( $args['id'] ) . '#respond';
+		else
+			$href = get_comments_link( $args['id'] );
+
+		$title = ' title="' . esc_attr( sprintf( __( 'Comments on %s', 'boozurk' ), strip_tags( get_the_title( $args['id'] ) ) ) ) . '"';
+
+		if ( $number > 1 )
+			$text = str_replace( '%', number_format_i18n( $number ), $args['more'] );
+		elseif ( $number == 0 )
+			$text = $args['zero'];
+		else // must be one
+			$text = $args['one'];
+		$text = apply_filters( 'comments_number', $text, $number );
+
+		$output = '<a href="' . esc_url( $href ) . '"' . $css_class . $title . '>' . $text . '</a>';
+
+	}
+
+	$output = apply_filters( 'boozurk_comments_link', $output );
+
+	if ( $args['echo'] )
+		echo $output;
+	else
+		return $output;
+
 }
 
 
@@ -2232,7 +2283,7 @@ function boozurk_titles_filter( $title, $id = null ) {
 
 	if ( is_admin() ) return $title;
 
-	$title = strip_tags( $title, '<abbr><acronym><em><i><del><ins><bdo>' );
+	$title = strip_tags( $title, '<abbr><acronym><em><i><del><ins><bdo><strong>' );
 
 	if ( $id == null ) return $title;
 
@@ -2481,6 +2532,24 @@ function boozurk_add_home_link( $items = '', $args = null ) {
 	}
 
 	return $items;
+
+}
+
+
+// Display search form.
+function boozurk_search_form() {
+
+	$form = '<form role="search" method="get" id="searchform" action="' . esc_url( home_url( '/' ) ) . '" >
+	<div>
+		<label class="screen-reader-text" for="s">Search for:</label>
+		<input type="text" value="' . get_search_query() . '" name="s" id="s" />
+		<button type="submit">
+			<i class="icon-search"></i>
+		</button>
+		</div>
+	</form>';
+
+	return $form;
 
 }
 

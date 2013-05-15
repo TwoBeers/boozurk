@@ -237,7 +237,7 @@ msgstr ""
 #: comments.php:18
 #: mobile/comments-mobile.php:14
 #@ boozurk
-msgid "Enter your password to view comments."
+msgid "Enter your password to view comments"
 msgstr ""
 
 #: lib/widgets.php:1486
@@ -1810,7 +1810,7 @@ msgstr ""
 
 #: functions.php:1822
 #@ boozurk
-msgid "Comments are closed."
+msgid "Comments are closed"
 msgstr ""
 
 #: functions.php:2075
