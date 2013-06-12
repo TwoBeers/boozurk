@@ -366,7 +366,17 @@ function boozurk_get_coa( $option = false ) {
 							'default'		=> __( '(more...)', 'boozurk' ),
 							'description'	=> __( '"more" tag string', 'boozurk' ),
 							'info'			=> __( 'only plain text. use <code>%t</code> as placeholder for the post title', 'boozurk' ) . ' (<a href="http://codex.wordpress.org/Customizing_the_Read_More" target="_blank">Codex</a>)',
-							'req'			=> ''
+							'req'			=> '',
+							'sub'			=> array( 'boozurk_more_tag_scroll' ) 
+		),
+		'boozurk_more_tag_scroll' => array(
+							'group'			=> 'content',
+							'type'			=> 'chk',
+							'default'		=> 0,
+							'description'	=> __( 'prevent page scroll when clicking the more link', 'boozurk' ),
+							'info'			=> '',
+							'req'			=> '',
+							'sub'			=> false 
 		),
 		'boozurk_browse_links'=> array(
 							'group'			=> 'content',
@@ -774,7 +784,7 @@ if ( !function_exists( 'boozurk_get_opt' ) ) {
 	function boozurk_get_opt( $opt ) {
 		global $boozurk_opt;
 
-		if ( isset( $boozurk_opt[$opt] ) ) return apply_filters( 'boozurk_option_override', $boozurk_opt[$opt], $opt );
+		if ( isset( $boozurk_opt[$opt] ) ) return apply_filters( 'boozurk_option_' . $opt, $boozurk_opt[$opt], $opt );
 
 		$defopt = boozurk_get_coa( $opt );
 		

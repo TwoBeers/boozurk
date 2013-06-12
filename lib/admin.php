@@ -239,6 +239,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 		<div class="wrap" id="main-wrap">
 			<div class="icon32" id="theme-icon"><br></div>
 			<h2><?php echo boozurk_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
+			<br />
 			<ul id="tabselector" class="hide-if-no-js">
 <?php
 				foreach( $the_groups as $key => $name ) {

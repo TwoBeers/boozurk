@@ -82,6 +82,7 @@ add_filter( 'avatar_defaults'						, 'boozurk_addgravatar' );
 add_filter( 'edit_comment_link'						, 'boozurk_edit_comment_link' );
 add_filter( 'wp_list_categories'					, 'boozurk_wrap_categories_count' );
 add_filter( 'comment_reply_link'					, 'boozurk_comment_reply_link' );
+add_filter( 'cancel_comment_reply_link'				, 'boozurk_cancel_comment_reply_link' );
 add_filter( 'wp_nav_menu_items'						, 'boozurk_add_home_link', 10, 2 );
 add_filter( 'wp_nav_menu_objects'					, 'boozurk_add_menu_parent_class' );
 add_filter( 'page_css_class'						, 'boozurk_add_parent_class', 10, 4 );
@@ -129,6 +130,8 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 require_once( 'lib/audio-player.php' ); // load the audio player module
 
 require_once( 'lib/jetpack.php' ); // load the jetpack support module
+
+require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
 
 if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
 
@@ -198,6 +201,36 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 		font-family: <?php echo boozurk_get_opt( 'boozurk_google_font_family' ); ?>;
 	}
 <?php } ?>
+	input[type=button]:hover,
+	input[type=submit]:hover,
+	input[type=reset]:hover,
+	textarea:hover,
+	input[type=text]:hover,
+	input[type=email]:hover,
+	input[type=password]:hover,
+	input[type=button]:focus,
+	input[type=submit]:focus,
+	input[type=reset]:focus,
+	textarea:focus,
+	input[type=text]:focus,
+	input[type=email]:focus,
+	input[type=password]:focus,
+	button:hover,
+	button:focus,
+	#bbpress-forums #bbp-your-profile fieldset input:hover,
+	#bbpress-forums #bbp-your-profile fieldset textarea:hover,
+	#bbpress-forums #bbp-your-profile fieldset input:focus,
+	#bbpress-forums #bbp-your-profile fieldset textarea:focus,
+	textarea#bbp_reply_content:hover,
+	textarea#bbp_topic_content:hover,
+	textarea#bbp_forum_content:hover,
+	textarea#bbp_reply_content:focus,
+	textarea#bbp_topic_content:focus,
+	textarea#bbp_forum_content:focus,
+	select:hover,
+	select:focus {
+		border-color: <?php echo boozurk_get_opt( 'boozurk_colors_link' ); ?>;
+	}
 	a {
 		color: <?php echo boozurk_get_opt( 'boozurk_colors_link' ); ?>;
 	}
@@ -286,7 +319,7 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'tinynav';
 			if ( is_singular() && comments_open() )
 				$modules[] = 'commentvariants';
-			if ( ( boozurk_get_opt( 'boozurk_quotethis' ) ) && is_singular() )
+			if ( ! class_exists( 'TB_Comment_Tools' ) && boozurk_get_opt( 'boozurk_quotethis' ) && is_singular() )
 				$modules[] = 'quotethis';
 			if ( ( boozurk_get_opt( 'boozurk_infinite_scroll' ) ) && !is_singular() && !is_404() )
 				$modules[] = 'infinitescroll';
@@ -402,6 +435,20 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 			'quote'						=> esc_js( __( 'Quote', 'boozurk' ) ),
 			'quote_alert'				=> esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
 			'comments_closed'			=> esc_js( __( 'Comments closed', 'boozurk' ) ),
+			'cooltips_selector'			=> esc_js( implode( ',', apply_filters( 'boozurk_cooltips_selector', array(
+					'#quotethis',
+					'#cancel-comment-reply-link',
+					'.comment-reply-link',
+					'.pmb_comm',
+					'.minibutton',
+					'.share-item img',
+					'.tb_categories a',
+					'#bz-quotethis',
+					'.tb_latest_commentators li',
+					'.tb_social a',
+					'.post-format-item.compact img',
+					'a.bz-tipped-anchor',
+				) ) ) ),
 		);
 
 		wp_localize_script( 'boozurk-script', 'boozurk_l10n', $data );
@@ -476,6 +523,9 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 			}
 		}
 
+		$post_title = apply_filters( 'boozurk_featured_title_text', $post_title );
+		$thumb = apply_filters( 'boozurk_featured_title_thumb', $thumb );
+
 		// Check if this is a post or page, if it has a thumbnail, and if it's a big one
 		if ( $thumb ) {
 
@@ -504,6 +554,8 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 			'plusone'	=> 1,
 		);
 		$args = wp_parse_args( $args, $defaults );
+
+		$args = apply_filters( 'boozurk_extrainfo', $args );
 
 ?>
 	<div class="post_meta_container">
@@ -1157,27 +1209,28 @@ if ( !function_exists( 'boozurk_random_nick' ) ) {
 
 // Get first image of a post
 if ( !function_exists( 'boozurk_get_first_image' ) ) {
-	function boozurk_get_first_image() {
-		global $post;
+	function boozurk_get_first_image( $post_id = null, $filtered_content = false ) {
 
-		$first_info = array( 'img' => '', 'title' => '', 'src' => '' );
+		$post = get_post( $post_id );
+
+		$first_image = array( 'img' => '', 'title' => '', 'src' => '' );
+
 		//search the images in post content
-		preg_match_all( '/<img[^>]+>/i',$post->post_content, $result );
+		preg_match_all( '/<img[^>]+>/i',$filtered_content ? apply_filters( 'the_content', $post->post_content ): $post->post_content, $result );
 		//grab the first one
 		if ( isset( $result[0][0] ) ){
-			$first_info['img'] = $result[0][0];
-			$first_img = $result [0][0];
+			$first_image['img'] = $result[0][0];
 			//get the title (if any)
-			preg_match_all( '/(title)=("[^"]*")/i',$first_img, $img_title );
-			if ( isset( $img_title[2][0] ) ){
-				$first_info['title'] = str_replace( '"','',$img_title[2][0] );
+			preg_match_all( '/(title)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $title );
+			if ( isset( $title[2][0] ) ){
+				$first_image['title'] = str_replace( '"','',$title[2][0] );
 			}
 			//get the path
-			preg_match_all( '/(src)=("[^"]*")/i',$first_img, $img_src );
-			if ( isset( $img_src[2][0] ) ){
-				$first_info['src'] = str_replace( '"','',$img_src[2][0] );
+			preg_match_all( '/(src)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $src );
+			if ( isset( $src[2][0] ) ){
+				$first_image['src'] = str_replace( array( '"', '\''),'',$src[2][0] );
 			}
-			return $first_info;
+			return $first_image;
 		} else {
 			return false;
 		}
@@ -1325,14 +1378,22 @@ if ( !function_exists( 'boozurk_gallery_preview_walker' ) ) {
 //add share links to post/page
 if ( !function_exists( 'boozurk_share_this' ) ) {
 	function boozurk_share_this( $args = array() ){
-		global $post;
 
 		$defaults = array(
 			'size'			=> 24, 
 			'echo'			=> true,
 			'compact'		=> false,
+			'split'			=> 0, 
+			'id'			=> 0,
+			'title'			=> false,
+			'href'			=> false,
+			'href_short'	=> false,
+			'thumb'			=> false,
+			'source'		=> false,
+			'summary'		=> false,
 			'twitter'		=> 1,
 			'facebook'		=> 1,
+			'googleplus'	=> 1,
 			'sina'			=> 1,
 			'tencent'		=> 1,
 			'qzone'			=> 1,
@@ -1347,38 +1408,42 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 			'tumblr'		=> 1,
 			'mail'			=> 1,
 		);
-
 		$args = wp_parse_args( $args, $defaults );
 
-		$share = array();
+		$post = get_post( $args['id'] );
 
-		$pName = rawurlencode( get_the_title( $post->ID ) );
-		$pHref = rawurlencode( home_url() . '/?p=' . $post->ID );
-		$pLongHref = rawurlencode( get_permalink( $post->ID ) );
-		$pPict = rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
-		$pSource = rawurlencode( get_bloginfo( 'name' ) );
-		if ( !empty( $post->post_password ) )
-			$pSum = '';
+		$enc_title			= $args['title'] ? $args['title'] : rawurlencode( get_the_title( $post->ID ) );
+		$enc_href			= $args['href'] ? $args['href'] : rawurlencode( get_permalink( $post->ID ) );
+		$enc_href_short		= $args['href_short'] ? $args['href_short'] : rawurlencode( home_url() . '/?p=' . $post->ID );
+		$enc_thumb			= $args['thumb'] ? $args['thumb'] : rawurlencode( boozurk_get_the_thumb_url( $post->ID ) );
+		$enc_source			= $args['source'] ? $args['source'] : rawurlencode( get_bloginfo( 'name' ) );
+		if ( $args['summary'] )
+			$enc_summary	= $args['summary'];
+		elseif ( !empty( $post->post_password ) )
+			$enc_summary	= '';
 		elseif ( has_excerpt() )
-			$pSum = rawurlencode( get_the_excerpt() );
+			$enc_summary	= rawurlencode( get_the_excerpt() );
 		else
-			$pSum = rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
+			$enc_summary	= rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
 
-		$share['twitter']		= array( 'Twitter'		, 'http://twitter.com/home?status=' . $pName . '%20-%20' . $pHref );
-		$share['facebook']		= array( 'Facebook'		, 'http://www.facebook.com/sharer.php?u=' . $pHref. '&t=' . $pName );
-		$share['sina']			= array( 'Weibo'		, 'http://v.t.sina.com.cn/share/share.php?url=' . $pHref );
-		$share['tencent']		= array( 'Tencent'		, 'http://v.t.qq.com/share/share.php?url=' . $pHref . '&title=' . $pName . '&pic=' . $pPict );
-		$share['qzone']			= array( 'Qzone'		, 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $pHref );
-		$share['reddit']		= array( 'Reddit'		, 'http://reddit.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['stumbleupon']	= array( 'StumbleUpon'	, 'http://www.stumbleupon.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['digg']			= array( 'Digg'			, 'http://digg.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['orkut']			= array( 'Orkut'		, 'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $pName . '&du=' . $pHref . '&tn=' . $pPict );
-		$share['bookmarks']		= array( 'Bookmarks'	, 'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName . '&annotation=' . $pSum );
-		$share['blogger']		= array( 'Blogger'		, 'http://www.blogger.com/blog_this.pyra?t&u=' . $pHref . '&n=' . $pName . '&pli=1' );
-		$share['delicious']		= array( 'Delicious'	, 'http://delicious.com/post?url=' . $pHref . '&title=' . $pName . '&notes=' . $pSum );
-		$share['linkedin']		= array( 'LinkedIn'		, 'http://www.linkedin.com/shareArticle?mini=true&url=' . $pHref . '&title=' . $pName . '&source=' . $pSource . '&summary=' . $pSum );
-		$share['tumblr']		= array( 'Tumblr'		, 'http://www.tumblr.com/share?v=3&u=' . $pHref . '&t=' . $pName . '&s=' . $pSum );
-		$share['mail']			= array( 'e-mail'		, 'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'boozurk' ) ) . '&body=' . $pName . '%20-%20' . $pLongHref . '%0D%0A' . $pSum );
+		$share['twitter']		= array( 'Twitter',		'http://twitter.com/home?status=' . $enc_title . '%20-%20' . $enc_href_short );
+		$share['facebook']		= array( 'Facebook',	'http://www.facebook.com/sharer.php?u=' . $enc_href_short. '&t=' . $enc_title );
+		$share['googleplus']	= array( 'Google+',		'https://plus.google.com/share?url=' . $enc_href_short );
+		$share['sina']			= array( 'Weibo',		'http://v.t.sina.com.cn/share/share.php?url=' . $enc_href_short );
+		$share['tencent']		= array( 'Tencent',		'http://v.t.qq.com/share/share.php?url=' . $enc_href_short . '&title=' . $enc_title . '&pic=' . $enc_thumb );
+		$share['qzone']			= array( 'Qzone',		'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $enc_href_short );
+		$share['reddit']		= array( 'Reddit',		'http://reddit.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['stumbleupon']	= array( 'StumbleUpon',	'http://www.stumbleupon.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['digg']			= array( 'Digg',		'http://digg.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['orkut']			= array( 'Orkut',		'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $enc_title . '&du=' . $enc_href_short . '&tn=' . $enc_thumb );
+		$share['bookmarks']		= array( 'Bookmarks',	'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $enc_href_short . '&title=' . $enc_title . '&annotation=' . $enc_summary );
+		$share['blogger']		= array( 'Blogger',		'http://www.blogger.com/blog_this.pyra?t&u=' . $enc_href_short . '&n=' . $enc_title . '&pli=1' );
+		$share['delicious']		= array( 'Delicious',	'http://delicious.com/post?url=' . $enc_href_short . '&title=' . $enc_title . '&notes=' . $enc_summary );
+		$share['linkedin']		= array( 'LinkedIn',	'http://www.linkedin.com/shareArticle?mini=true&url=' . $enc_href_short . '&title=' . $enc_title . '&source=' . $enc_source . '&summary=' . $enc_summary );
+		$share['tumblr']		= array( 'Tumblr',		'http://www.tumblr.com/share?v=3&u=' . $enc_href_short . '&t=' . $enc_title . '&s=' . $enc_summary );
+		$share['mail']			= array( 'e-mail',		'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $enc_title . '%20-%20' . $enc_href . '%0D%0A' . $enc_summary );
+
+		$share = apply_filters( 'boozurk_filter_share_this', $share );
 
 		$outer = '<div class="bz-article-share fixfloat">';
 		foreach( $share as $key => $btn ){
@@ -1391,6 +1456,49 @@ if ( !function_exists( 'boozurk_share_this' ) ) {
 		if ( $args['echo'] ) echo $outer; else return $outer;
 
 	}
+}
+
+
+//get a thumb for a post/page
+if ( !function_exists( 'boozurk_get_the_thumb_url' ) ) {
+	function boozurk_get_the_thumb_url( $post_id = 0 ){
+		global $post;
+
+		if ( !$post_id ) $post_id = $post->ID;
+
+		// has featured image
+		if ( get_post_thumbnail_id( $post_id ) )
+			return wp_get_attachment_thumb_url( get_post_thumbnail_id( $post_id ) );
+
+		$attachments = get_children( array(
+			'post_parent'		=> $post_id,
+			'post_status'		=> 'inherit',
+			'post_type'			=> 'attachment',
+			'post_mime_type'	=> 'image',
+			'orderby'			=> 'menu_order',
+			'order'				=> 'ASC',
+			'numberposts'		=> 1,
+		) );
+
+		//has attachments
+		if ( $attachments )
+			return wp_get_attachment_thumb_url( key($attachments) );
+
+		//has an hardcoded <img>
+		if ( $img = boozurk_get_first_image() )
+			return $img['src'];
+
+		//has a generated <img>
+		if ( $img = boozurk_get_first_image( false, true) )
+			return $img['src'];
+
+		if ( $img = get_header_image() )
+			return $img;
+
+		//nothing found
+		return '';
+	}
+
 }
 
 
@@ -2335,9 +2443,11 @@ function boozurk_more_link( $more_link, $more_link_text ) {
 
 		$text = str_replace ( '%t', get_the_title(), boozurk_get_opt( 'boozurk_more_tag' ) );
 
-		return str_replace( $more_link_text, $text, $more_link );
+		$more_link = str_replace( $more_link_text, $text, $more_link );
 
 	}
+
+	if ( boozurk_get_opt( 'boozurk_more_tag_scroll' ) ) $more_link = preg_replace( '|#more-[0-9]+|', '', $more_link );
 
 	return $more_link;
 
@@ -2434,6 +2544,16 @@ function boozurk_comment_reply_link( $link ) {
 
 	if ( isset( $text[1][0] ) )
 		$link = str_replace( '>' . $text[1][0], ' title="' . esc_attr__( 'Reply to comment', 'boozurk' ) . '" ><i class="icon icon-share-alt"></i>', $link);
+
+	return $link;
+
+}
+
+
+//replace the cancel_comment_reply_link text
+function boozurk_cancel_comment_reply_link( $link ) {
+
+	$link = str_replace( 'id="cancel-comment-reply-link"', 'id="cancel-comment-reply-link" title="' . esc_attr__( 'Cancel reply', 'boozurk' ) . '"', $link);
 
 	return $link;
 

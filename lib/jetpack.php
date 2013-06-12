@@ -24,17 +24,17 @@ class Boozurk_For_Jetpack {
 
 		//Sharedaddy
 		if ( function_exists( 'sharing_display' ) ) {
-			remove_filter( 'the_content'			, 'sharing_display', 19 );
-			remove_filter( 'the_excerpt'			, 'sharing_display', 19 );
-			add_action( 'boozurk_hook_entry_bottom'	, array( $this, 'sharedaddy_display' ) );
-			add_filter( 'boozurk_option_override'	, array( $this, 'sharedaddy_skip_options' ), 10, 2 );
+			remove_filter( 'the_content'					, 'sharing_display', 19 );
+			remove_filter( 'the_excerpt'					, 'sharing_display', 19 );
+			add_action( 'boozurk_hook_entry_bottom'			, array( $this, 'sharedaddy_display' ) );
+			add_filter( 'boozurk_option_boozurk_plusone'	, '__return_false' );
 		}
 
 		//Likes
 		if ( class_exists( 'Jetpack_Likes' ) ) {
-			add_action		( 'boozurk_hook_entry_bottom'	, array( $this, 'likes' ) );
-			remove_filter	( 'the_content'					, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
-			add_filter		( 'boozurk_filter_likes'		, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_action		( 'boozurk_hook_entry_bottom'			, array( $this, 'likes' ) );
+			remove_filter	( 'the_content'							, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_filter		( 'boozurk_filter_likes'				, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 		}
 
 		//Infinite Scroll
@@ -46,14 +46,14 @@ class Boozurk_For_Jetpack {
 		) );
 
 		if ( class_exists( 'The_Neverending_Home_Page' ) ) {
-			add_filter( 'boozurk_option_override'	, array( $this, 'infinite_scroll_skip_options' ), 10, 2 );
-			add_filter( 'infinite_scroll_results'	, array( $this, 'infinite_scroll_encode' ), 11, 1 );
+			add_filter( 'boozurk_option_boozurk_infinite_scroll'	, '__return_false' );
+			add_filter( 'infinite_scroll_results'					, array( $this, 'infinite_scroll_encode' ), 11, 1 );
 		}
 
 		//Carousel
 		if ( class_exists( 'Jetpack_Carousel' ) ) {
-			remove_filter( 'post_gallery'			, 'boozurk_gallery_shortcode', 10, 2 );
-			add_filter( 'boozurk_option_override'	, array( $this, 'carousel_skip_options' ), 10, 2 );
+			remove_filter( 'post_gallery'							, 'boozurk_gallery_shortcode', 10, 2 );
+			add_filter( 'boozurk_option_boozurk_js_thickbox'		, '__return_false' );
 		}
 
 	}
@@ -77,16 +77,6 @@ class Boozurk_For_Jetpack {
 	}
 
 
-	//skip the built-in infinite-scroll feature
-	function infinite_scroll_skip_options( $value, $name ) {
-
-		if ( 'boozurk_infinite_scroll' === $name ) return false;
-
-		return $value;
-
-	}
-
-
 	//encodes html result to UTF8 (jetpack bug?)
 	//http://localhost/wordpress/?infinity=scrolling&action=infinite_scroll&page=5&order=DESC
 	function infinite_scroll_encode( $results ) {
@@ -97,30 +87,10 @@ class Boozurk_For_Jetpack {
 	}
 
 
-	//skip the Google+ option
-	function sharedaddy_skip_options( $value, $name ) {
-
-		if ( 'boozurk_plusone' === $name ) return false;
-
-		return $value;
-
-	}
-
-
 	//print the sharedaddy buttons after post content
 	function sharedaddy_display() {
 
 		echo sharing_display();
-
-	}
-
-
-	//skip the thickbox js module
-	function carousel_skip_options( $value, $name ) {
-
-		if ( 'boozurk_js_thickbox' === $name ) return false;
-
-		return $value;
 
 	}
 

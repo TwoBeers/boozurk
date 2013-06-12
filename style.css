@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.06.1
+Version: 2.07
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -103,7 +103,7 @@ select {
 	max-width: 100%;
 	background-color: #fff;
 	border: none;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid #ddd;
 }
 object,
 embed {
@@ -111,8 +111,10 @@ embed {
 }
 textarea,
 input[type=text],
+input[type=email],
 input[type=password] {
-	border: 1px solid #404040;
+	border: 1px solid #ddd;
+	padding: 3px;
 }
 input[type=button],
 input[type=submit],
@@ -184,6 +186,7 @@ input[type=password]:focus {
 .comment-body table {
 	border-collapse: collapse;
 	text-align: left;
+	width: 100%;
 	max-width: 100%;
 	border: 1px solid #ddd;
 }
@@ -897,7 +900,7 @@ div.tb_post_details ul {
 	font-size: 20px;
 	height: auto;
 	line-height: 20px;
-	margin: 5px;
+	margin: 5px 0 5px 5px;
 	min-width: 50px;
 	padding: 0 5px;
 }
@@ -1733,18 +1736,86 @@ body.js .comment-variants input {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=1 ); /* IE6-9 */
 }
 
+/* Coming Soon template
+----------------------------------------------------------*/
+body.coming-soon {
+	padding: 50px 0;
+	background: #222;
+}
+.coming-soon .hentry {
+	max-width: 848px;
+	margin: 0 auto;
+}
+
+.coming-soon .content-wrap {
+	background: #fff;
+}
+
+.coming-soon .storycontent {
+	padding: 20px;
+}
+.coming-soon .storytitle {
+	padding: 20px 20px 0;
+	text-align: center;
+	font-size: 2em;
+}
+.coming-soon .storytitle h1 {
+	margin: 20px 0 0;
+}
+.coming-soon .storytitle a {
+	color:#404040;
+}
+.coming-soon .storyshare {
+	padding: 20px;
+	text-align: right;
+	position:relative;
+
+}
+.coming-soon .storyshare a {
+	margin-left: 10px;
+}
+.coming-soon .storyshare:before {
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid #fff;
+	content: " ";
+	display: block;
+	height: 0;
+	position: absolute;
+	right: 25px;
+	top: 0;
+	width: 0;
+}
+
+.coming-soon .storyshare .bz-article-share {
+	margin: 0;
+}
+
 /* TB Chat Post
 ----------------------------------------------------------*/
 .tb-chat .chat-select li,
 .tb-chat .chat-transcript li {
-	border: 1px solid #ddd;
+	border: none;
 	background: #ffdab9;
+	border-left: 3px solid;
+	border-color: #FF7700;
+	overflow: hidden;
+}
+.tb-chat li.rightalign {
+	border-left: none;
+	border-right: 3px solid;
 }
 .tb-chat li.speaker-1 {
 	background: #fffacd;
+	border-color: #FFE600;
 }
 .tb-chat li.speaker-2 {
 	background: #d8eef4;
+	border-color: #00C0F5;
+}
+.tb-chat li.speaker-3 {
+	background: #d8ffcd;
+	border-color: #37FF00;
 }
 .tb-chat li.aside-text {
 	border: none;
@@ -1759,6 +1830,17 @@ body.js .comment-variants input {
 }
 .tb-chat .chat-transcript .rightalign {
 	margin: 0 0 20px 100px;
+	text-align: left;
+}
+.tb-chat .timestamp {
+	font-size: 0.8em;
+	opacity: 0.3;
+	display: block;
+	line-height:1em;
+	padding-top: 5px;
+}
+.tb-chat .rightalign .timestamp {
+	text-align: right;
 }
 
 /* Jetpack
@@ -1804,6 +1886,20 @@ div#infinite-handle span:hover {
 .infinite-scroll .navigate_archives,
 .infinite-scroll .nb-nextprev {
 	display: none;
+}
+
+
+/* TB Comment Tools
+----------------------------------------------------------*/
+#tb-comment-tools-tags a {
+	font: 11px "Courier New",monospace;
+	background: none repeat scroll 0 0 #F5F5F5;
+	border: 1px solid #ddd;
+	margin: 0 1px 0 0;
+	padding: 0 6px;
+}
+#tb-comment-tools-tags a:hover {
+	border: 1px solid #aaa;
 }
 
 /* Very Hi Resolutions

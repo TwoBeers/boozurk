@@ -22,7 +22,7 @@ boozurkScripts = {
 
 				case 'tooltips':
 					boozurkScripts.tooltips();
-					boozurkScripts.cooltips('.pmb_comm,.minibutton,.share-item img,.tb_categories a,#bz-quotethis,.tb_latest_commentators li,.tb_social a,.post-format-item.compact img,a.bz-tipped-anchor');
+					boozurkScripts.cooltips(boozurk_l10n.cooltips_selector);
 					break;
 
 				case 'plusone':
@@ -71,8 +71,8 @@ boozurkScripts = {
 	post_expander : function() {
 
 		return $('#posts_content').find('a.more-link').each(function() {
-			
-			$(this).click(function() {
+
+			$(this).unbind().click(function() {
 
 				var link = $(this);
 
@@ -165,7 +165,7 @@ boozurkScripts = {
 
 			self.hide();
 
-			p.hoverIntent(
+			p.unbind().hoverIntent(
 
 				function(){
 
@@ -196,7 +196,7 @@ boozurkScripts = {
 
 			var $this = $(this);
 
-			$this.hoverIntent(
+			$this.unbind().hoverIntent(
 
 				function(){
 
@@ -275,8 +275,8 @@ boozurkScripts = {
 
 	scroll_top_bottom : function() {
 
-		top_but = $('#navbuttons').find('.minib_top');
-		bot_but = $('#navbuttons').find('.minib_bottom');
+		top_but = $('#navbuttons').find('.minib_top a');
+		bot_but = $('#navbuttons').find('.minib_bottom a');
 
 		// smooth scroll top/bottom
 		top_but.click(function() {

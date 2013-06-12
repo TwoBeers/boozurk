@@ -37,6 +37,8 @@ class Boozurk_Mobile {
 
 		if ( is_admin() || is_feed() ) return false;
 
+		if ( class_exists( 'TB_Mobile' ) ) return false;
+
 		// #1 check: mobile support is off (via options)
 		if ( ! $this->get_option( 'boozurk_mobile_css' ) ) return false;
 
