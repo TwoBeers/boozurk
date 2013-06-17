@@ -46,3 +46,6 @@ div[id*=_bz-] .widget-title {
 	margin-left: -5px;
 	padding: 4px;
 }
+.services-wrap .service:nth-of-type(odd) {
+	clear: left;
+}
