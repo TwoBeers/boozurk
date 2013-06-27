@@ -49,7 +49,7 @@
 
 						<div class="storycontent">
 
-							<?php echo strip_shortcodes( get_the_content() ); ?>
+							<?php the_content(); ?>
 
 						</div>
 
