@@ -22,8 +22,6 @@
 
 	<?php boozurk_hook_sidebar_top( 'footer' ); ?>
 
-	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_top(); ?></div>
-
 	<div id="first_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) { dynamic_sidebar( 'first-footer-widget-area' ); } ?>
 	</div><!-- #first .widget-area -->
@@ -35,8 +33,6 @@
 	<div id="third_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) { dynamic_sidebar( 'third-footer-widget-area' ); } ?>
 	</div><!-- #third .widget-area -->
-
-	<div class="fixfloat"><?php boozurk_hook_footer_sidebar_bottom(); ?></div>
 
 	<?php boozurk_hook_sidebar_bottom( 'footer' ); ?>
 
