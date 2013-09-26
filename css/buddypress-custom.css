@@ -1,0 +1,58 @@
+.bp_activity .icon-placeholder:before {
+	content: "\f140";
+}
+.bp_group .icon-placeholder:before {
+	content: "\f0c0";
+}
+.bp_members .icon-placeholder:before {
+	content: "\f007";
+}
+#bz-breadcrumb .bp-title-button {
+	float: none;
+}
+div#buddypress div.dir-search {
+	margin: 0;
+}
+div#buddypress button,
+div#buddypress input[type="submit"],
+div#buddypress input[type="button"],
+div#buddypress input[type="reset"],
+div#buddypress ul.button-nav li a,
+div#buddypress div.generic-button a,
+div#buddypress .comment-reply-link,
+a.bp-title-button {
+	background-color: #404040;
+	border: 1px solid #404040;
+	border-radius: 2px 2px 2px 2px;
+	color: #EEEEEE;
+	cursor: pointer;
+	font-size: 1em;
+	font-weight: bold;
+	height: 29px;
+	line-height: 27px;
+	margin: 10px 4px;
+	min-width: 54px;
+	padding: 0 8px;
+	text-align: center;	
+}
+div#buddypress button:hover,
+div#buddypress a.button:hover,
+div#buddypress input[type="submit"]:hover,
+div#buddypress input[type="button"]:hover,
+div#buddypress input[type="reset"]:hover,
+div#buddypress ul.button-nav li a:hover,
+div#buddypress div.generic-button a:hover,
+div#buddypress .comment-reply-link:hover,
+a.bp-title-button:hover {
+	cursor: pointer;
+	background-color: #f5f5f5;
+	color: #666;
+}
+div#buddypress input.ed_button[type="button"] {
+	background-color: #eee;
+	border: 1px solid #fff;
+	border-radius: 0 0 0 0;
+	color: #666;
+	font-size: 0.9em;
+	font-weight: normal;
+}

@@ -42,7 +42,7 @@
 			switch ( boozurk_get_opt( 'boozurk_post_formats_image_content' ) ) {
 				case 'first image':
 					if ( $bz_first_img ) {
-						?><a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo esc_attr( $bz_first_img['title'] ); ?>"><?php echo $bz_first_img['img']; ?></a><br><?php
+						?><a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo esc_attr( $bz_first_img['title'] ); ?>"><?php echo $bz_first_img['img']; ?></a><br /><?php
 						the_excerpt();
 					} else {
 						the_content();

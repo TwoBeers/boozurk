@@ -58,11 +58,7 @@
 
 					<div class="storyshare">
 
-						<?php boozurk_share_this( array(
-							'title'			=> get_bloginfo( 'name' ),
-							'href'			=> home_url( '/' ),
-							'href_short'	=> home_url( '/' ),
-						) ); ?>
+						<?php boozurk_share_this(); ?>
 
 					</div>
 

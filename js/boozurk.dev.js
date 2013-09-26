@@ -29,6 +29,10 @@ boozurkScripts = {
 					gapi.plusone.go("posts_content");
 					break;
 
+				case 'addthis':
+					addthis.button('.addthis_button_compact');
+					break;
+
 				case 'quotethis':
 					boozurkScripts.init_quote_this();
 					break;

@@ -793,6 +793,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 			// SLUG => NAME
 			'Blogger'		=> 'Blogger',
 			'blurb'			=> 'Blurb',
+			'cloudup'		=> 'Cloudup',
 			'Delicious'		=> 'Delicious',
 			'Deviantart'	=> 'deviantART',
 			'Digg'			=> 'Digg',
@@ -802,6 +803,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 			'Github'		=> 'GitHub',
 			'GooglePlus'	=> 'Google+',
 			'Hi5'			=> 'Hi5',
+			'instagram'		=> 'Instagram',
 			'LinkedIn'		=> 'LinkedIn',
 			'livejournal'	=> 'LiveJournal',
 			'Myspace'		=> 'Myspace',
@@ -1941,86 +1943,6 @@ class Boozurk_Widget_User_Quick_Links extends WP_Widget {
 
 
 /**
- * Post share links
- */
-class Boozurk_Widget_Share_This extends WP_Widget {
-
-	function Boozurk_Widget_Share_This() {
-
-		$widget_ops = array( 'classname' => 'tb_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments", "boozurk" ) );
-		$this->WP_Widget( 'bz-share-this', __( 'Share this', 'boozurk' ), $widget_ops );
-		$this->alt_option_name = 'tb_share_this';
-
-		$this->defaults = array(
-			'title' => __( 'Share this', 'boozurk' ),
-			'icon_size' => 16,
-		);
-
-	}
-
-
-	function widget($args, $instance) {
-
-		if ( !is_singular() ) return;
-
-		extract($args);
-		$instance = wp_parse_args( (array)$instance, $this->defaults );
-
-		$icon_size = $instance['icon_size'];
-
-		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
-		$title = $title ? $before_title . $title . $after_title : '';
-
-		echo $before_widget . $title . boozurk_share_this( array( 'size' => $icon_size, 'echo' => 0 ) ) . $after_widget;
-
-	}
-
-
-	function update( $new_instance, $old_instance ) {
-
-		$instance = $old_instance;
-
-		$instance['title']		= strip_tags( $new_instance['title'] );
-		$instance['icon_size']	= in_array( $new_instance['icon_size'], array ( '16', '24', '32', '48', '64' ) ) ? $new_instance['icon_size'] : $this->defaults['icon_size'];
-
-		return $instance;
-
-	}
-
-
-	function form( $instance ) {
-
-		$instance = wp_parse_args( (array) $instance, $this->defaults );
-
-		extract($instance);
-
-?>
-	<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'boozurk' ); ?>:</label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-	</p>
-
-	<p>
-		<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select icon size', 'boozurk' ); ?>:</label>
-		<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
-			<?php
-				$size_array = array ( '16', '24', '32', '48', '64' );
-				foreach($size_array as $size) {
-			?>
-				<option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
-			<?php
-				}
-			?>
-		</select>
-	</p>
-<?php
-
-	}
-
-}
-
-
-/**
  * Clean Archives Widget
  */
 class Boozurk_Widget_Clean_Archives extends WP_Widget {
@@ -2209,8 +2131,6 @@ function boozurk_widgets_init() {
 	register_widget( 'Boozurk_Widget_Post_Formats' );
 
 	register_widget( 'Boozurk_Widget_Image_Exif' );
-
-	register_widget( 'Boozurk_Widget_Share_This' );
 
 	register_widget( 'Boozurk_Widget_Clean_Archives' );
 

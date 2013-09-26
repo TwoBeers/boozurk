@@ -129,9 +129,7 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 require_once( 'lib/audio-player.php' ); // load the audio player module
 
-require_once( 'lib/jetpack.php' ); // load the jetpack support module
-
-require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
+require_once( 'lib/plug-n-play.php' ); // load the plugin compatibility module
 
 if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
 
@@ -217,16 +215,6 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 	input[type=password]:focus,
 	button:hover,
 	button:focus,
-	#bbpress-forums #bbp-your-profile fieldset input:hover,
-	#bbpress-forums #bbp-your-profile fieldset textarea:hover,
-	#bbpress-forums #bbp-your-profile fieldset input:focus,
-	#bbpress-forums #bbp-your-profile fieldset textarea:focus,
-	textarea#bbp_reply_content:hover,
-	textarea#bbp_topic_content:hover,
-	textarea#bbp_forum_content:hover,
-	textarea#bbp_reply_content:focus,
-	textarea#bbp_topic_content:focus,
-	textarea#bbp_forum_content:focus,
 	select:hover,
 	select:focus {
 		border-color: <?php echo boozurk_get_opt( 'boozurk_colors_link' ); ?>;
@@ -331,8 +319,10 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 			$modules[] = 'thickbox';
 		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )
 			$modules[] = 'tooltips';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) && boozurk_get_opt( 'boozurk_plusone_official' ) )
+		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' )
 			$modules[] = 'plusone';
+		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' )
+			$modules[] = 'addthis';
 		if ( boozurk_get_opt( 'boozurk_js_basic_video_resize' ) )
 			$modules[] = 'resizevideo';
 
@@ -352,7 +342,6 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 		if ( is_admin() || boozurk_is_mobile() ) return;
 
 ?>
-
 	<script type="text/javascript">
 		/* <![CDATA[ */
 		(function(){
@@ -362,16 +351,33 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 		})();
 		/* ]]> */
 	</script>
+<?php
 
-	<?php if ( ! boozurk_get_opt( 'boozurk_jsani' ) || boozurk_is_printpreview() ) return; ?>
+		if ( ! boozurk_get_opt( 'boozurk_jsani' ) || boozurk_is_printpreview() ) return;
 
-	<?php if ( boozurk_get_opt( 'boozurk_plusone' ) && boozurk_get_opt( 'boozurk_plusone_official' ) ) { ?>
+		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' ) {
 
+?>
 	<script type="text/javascript" src="//apis.google.com/js/plusone.js">
-	  {parsetags: 'explicit'}
+		{parsetags: 'explicit'}
 	</script>
+<?php
 
-<?php }
+		}
+
+		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' ) {
+
+?>
+	<script type="text/javascript">
+		var addthis_config =
+		{
+			ui_delay:200
+		}
+	</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
+<?php
+
+		}
 
 	}
 }
@@ -392,6 +398,9 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 
 			wp_enqueue_style( 'boozurk-general-style', get_stylesheet_uri(), array('thickbox'), boozurk_get_info( 'version' ), 'screen' );
 			wp_enqueue_style( 'boozurk-font-awesome', get_template_directory_uri() . '/css/font-awesome.min.css' );
+
+			if ( boozurk_get_opt( 'boozurk_adaptive_layout' ) )
+				wp_enqueue_style( 'boozurk-adaptive-layout', get_template_directory_uri() . '/css/adaptive.css', false, boozurk_get_info( 'version' ), 'screen' );
 
 		}
 
@@ -493,7 +502,18 @@ if ( !function_exists( 'boozurk_featured_title' ) ) {
 			'title'			=> the_title_attribute( array('echo' => 0 ) ), 
 		);
 		$args = wp_parse_args( $args, $defaults );
-		
+
+		if ( boozurk_get_opt( 'boozurk_hide_frontpage_title' ) && is_page() && is_front_page() ) return;
+
+		if ( boozurk_get_opt( 'boozurk_hide_pages_title' ) && is_page() ) return;
+
+		if ( boozurk_get_opt( 'boozurk_hide_posts_title' ) && is_single() ) return;
+
+		if ( $selected_ids = boozurk_get_opt( 'boozurk_hide_selected_entries_title' ) ) {
+			$selected_ids = explode( ',', $selected_ids );
+			if ( in_array( $post->ID, $selected_ids ) ) return;
+		}
+
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
@@ -566,20 +586,44 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 
 		<?php
 			$page_cd_nc = ( is_page() && !comments_open() && !have_comments() ); //true if page with comments disabled and no comments
-			if ( ! $page_cd_nc && $args['comments'] ) boozurk_comments_link( 'zero=0&one=1&more=%&none=-&class=pmb_comm'); // number of comments
+			if ( ( ! $page_cd_nc ) && $args['comments'] ) boozurk_comments_link( 'zero=0&one=1&more=%&none=-&class=pmb_comm'); // number of comments
 		?>
 
-		<?php if ( boozurk_get_opt( 'boozurk_plusone' ) && !post_password_required() && $args['plusone'] ) { ?>
-			<?php if ( boozurk_get_opt( 'boozurk_plusone_official' ) ) { ?>
-				<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php echo esc_url( get_permalink() ); ?>"></div></div>
-			<?php } else { ?>
-				<a class="btn plusone pmb_comm" title="<?php esc_attr_e( 'recommend this with Google+', 'boozurk' ); ?>" href="https://plus.google.com/share?url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-					<i class="icon-google-plus"></i>
+		<?php if ( !post_password_required() && $args['plusone'] ) { ?>
+
+			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' ) { ?>
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_16x16_style">
+					<a class="addthis_button_compact" href="javascript:void(0)" addthis:url="<?php echo esc_attr( get_permalink() ); ?>" addthis:title="<?php echo esc_attr( get_the_title() ); ?>"><i class="icon icon-plus"></i></a>
+				</div>
+				<!-- AddThis Button END -->
+			<?php } ?>
+
+			<?php if ( ( boozurk_get_opt( 'boozurk_plusone' ) === 1 ) || ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus' ) ) { ?>
+				<a class="btn share-with-plusone pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Google+' ) ); ?>" href="http://plus.google.com/share?url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<i class="icon icon-google-plus"></i>
 				</a>
 			<?php } ?>
+
+			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' ) { ?>
+				<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php echo esc_url( get_permalink() ); ?>"></div></div>
+			<?php } ?>
+
+			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'facebook' ) { ?>
+				<a class="btn share-with-facebook pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Facebook' ) ); ?>" href="http://www.facebook.com/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>&t=<?php echo rawurlencode( get_the_title() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<i class="icon icon-facebook"></i>
+				</a>
+			<?php } ?>
+
+			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'twitter' ) { ?>
+				<a class="btn share-with-twitter pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Twitter' ) ); ?>" href="https://twitter.com/intent/tweet?original_referer=<?php echo rawurlencode( get_permalink() ); ?>&text=<?php echo rawurlencode( get_the_title() ); ?>&url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+					<i class="icon icon-twitter"></i>
+				</a>
+			<?php } ?>
+
 		<?php } ?>
 
-		<?php edit_post_link( '<i class="icon-pencil"></i>' ); ?>
+		<?php edit_post_link( '<i class="icon icon-pencil"></i>' ); ?>
 
 	</div>
 <?php
@@ -618,7 +662,7 @@ if ( !function_exists( 'boozurk_last_comments' ) ) {
 				<?php echo get_avatar( $comment, 32, $default=get_option('avatar_default'), $comment->comment_author );?>
 				<div class="bz-tooltip bz-300"><div class="bz-tooltip-inner">
 					<?php echo $comment->comment_author; ?>
-					<br><br>
+					<br /><br />
 					<?php comment_excerpt( $comment->comment_ID ); ?>
 				</div></div>
 			</div>
@@ -641,9 +685,25 @@ function boozurk_navigation() {
 
 
 // navigation buttons
-if (!function_exists('boozurk_navbuttons')) {
-	function boozurk_navbuttons( $print = 1, $comment = 1, $feed = 1, $trackback = 1, $home = 1, $next_prev = 1, $up_down = 1, $fixed = 1 ) {
+if ( !function_exists( 'boozurk_navbuttons' ) ) {
+	function boozurk_navbuttons( $args = '' ) {
 		global $post;
+
+		$defaults = array(
+			'print'		=> 1,
+			'comment'	=> 1,
+			'feed'		=> 1,
+			'trackback'	=> 1,
+			'home'		=> 1,
+			'next_prev'	=> 1,
+			'up_down'	=> 1,
+			'fixed'		=> 1,
+		);
+		$args = wp_parse_args( $args, $defaults );
+
+		$args = apply_filters( 'boozurk_navbuttons', $args );
+
+		extract( $args );
 
 		$is_post = is_single() && ! is_attachment() && ! boozurk_is_allcat();
 		$is_image = is_attachment() && ! boozurk_is_allcat();
@@ -863,6 +923,8 @@ function boozurk_link_pages() {
 function boozurk_single_widgets_area() {
 
 	if ( !is_singular() ) return;
+
+	if ( apply_filters( 'boozurk_skip_post_widgets_area', false ) ) return;
 
 	if ( is_active_sidebar( 'single-widgets-area' ) ) {
 
@@ -1377,83 +1439,28 @@ if ( !function_exists( 'boozurk_gallery_preview_walker' ) ) {
 
 //add share links to post/page
 if ( !function_exists( 'boozurk_share_this' ) ) {
-	function boozurk_share_this( $args = array() ){
+	function boozurk_share_this(){
 
-		$defaults = array(
-			'size'			=> 24, 
-			'echo'			=> true,
-			'compact'		=> false,
-			'split'			=> 0, 
-			'id'			=> 0,
-			'title'			=> false,
-			'href'			=> false,
-			'href_short'	=> false,
-			'thumb'			=> false,
-			'source'		=> false,
-			'summary'		=> false,
-			'twitter'		=> 1,
-			'facebook'		=> 1,
-			'googleplus'	=> 1,
-			'sina'			=> 1,
-			'tencent'		=> 1,
-			'qzone'			=> 1,
-			'reddit'		=> 1,
-			'stumbleupon'	=> 1,
-			'digg'			=> 1,
-			'orkut'			=> 1,
-			'bookmarks'		=> 1,
-			'blogger'		=> 1,
-			'delicious'		=> 1,
-			'linkedin'		=> 1,
-			'tumblr'		=> 1,
-			'mail'			=> 1,
-		);
-		$args = wp_parse_args( $args, $defaults );
-
-		$post = get_post( $args['id'] );
-
-		$enc_title			= $args['title'] ? $args['title'] : rawurlencode( get_the_title( $post->ID ) );
-		$enc_href			= $args['href'] ? $args['href'] : rawurlencode( get_permalink( $post->ID ) );
-		$enc_href_short		= $args['href_short'] ? $args['href_short'] : rawurlencode( home_url() . '/?p=' . $post->ID );
-		$enc_thumb			= $args['thumb'] ? $args['thumb'] : rawurlencode( boozurk_get_the_thumb_url( $post->ID ) );
-		$enc_source			= $args['source'] ? $args['source'] : rawurlencode( get_bloginfo( 'name' ) );
-		if ( $args['summary'] )
-			$enc_summary	= $args['summary'];
-		elseif ( !empty( $post->post_password ) )
-			$enc_summary	= '';
-		elseif ( has_excerpt() )
-			$enc_summary	= rawurlencode( get_the_excerpt() );
-		else
-			$enc_summary	= rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
-
-		$share['twitter']		= array( 'Twitter',		'http://twitter.com/home?status=' . $enc_title . '%20-%20' . $enc_href_short );
-		$share['facebook']		= array( 'Facebook',	'http://www.facebook.com/sharer.php?u=' . $enc_href_short. '&t=' . $enc_title );
-		$share['googleplus']	= array( 'Google+',		'https://plus.google.com/share?url=' . $enc_href_short );
-		$share['sina']			= array( 'Weibo',		'http://v.t.sina.com.cn/share/share.php?url=' . $enc_href_short );
-		$share['tencent']		= array( 'Tencent',		'http://v.t.qq.com/share/share.php?url=' . $enc_href_short . '&title=' . $enc_title . '&pic=' . $enc_thumb );
-		$share['qzone']			= array( 'Qzone',		'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $enc_href_short );
-		$share['reddit']		= array( 'Reddit',		'http://reddit.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['stumbleupon']	= array( 'StumbleUpon',	'http://www.stumbleupon.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['digg']			= array( 'Digg',		'http://digg.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['orkut']			= array( 'Orkut',		'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $enc_title . '&du=' . $enc_href_short . '&tn=' . $enc_thumb );
-		$share['bookmarks']		= array( 'Bookmarks',	'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $enc_href_short . '&title=' . $enc_title . '&annotation=' . $enc_summary );
-		$share['blogger']		= array( 'Blogger',		'http://www.blogger.com/blog_this.pyra?t&u=' . $enc_href_short . '&n=' . $enc_title . '&pli=1' );
-		$share['delicious']		= array( 'Delicious',	'http://delicious.com/post?url=' . $enc_href_short . '&title=' . $enc_title . '&notes=' . $enc_summary );
-		$share['linkedin']		= array( 'LinkedIn',	'http://www.linkedin.com/shareArticle?mini=true&url=' . $enc_href_short . '&title=' . $enc_title . '&source=' . $enc_source . '&summary=' . $enc_summary );
-		$share['tumblr']		= array( 'Tumblr',		'http://www.tumblr.com/share?v=3&u=' . $enc_href_short . '&t=' . $enc_title . '&s=' . $enc_summary );
-		$share['mail']			= array( 'e-mail',		'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $enc_title . '%20-%20' . $enc_href . '%0D%0A' . $enc_summary );
-
-		$share = apply_filters( 'boozurk_filter_share_this', $share );
-
-		$outer = '<div class="bz-article-share fixfloat">';
-		foreach( $share as $key => $btn ){
-			if ( $args[$key] )
-				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
-				$outer .= '<a class="share-item" rel="nofollow"' . $target . ' id="bz-share-with-' . esc_attr( $key ) . '" href="' . esc_url( $btn[1] ) . '"><img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png' ) . '" width="' . esc_attr( $args['size'] ) . '" height="' . esc_attr( $args['size'] ) . '" alt="' . esc_attr( $btn[0] ) . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'boozurk' ), $btn[0] ) ) . '" /></a>';
+?>
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		<a class="addthis_button_facebook"></a>
+		<a class="addthis_button_twitter"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+	<br class="fixfloat"/>
+	<script type="text/javascript">
+		var addthis_share =
+		{
+			title: '<?php echo get_bloginfo( 'name' ) ?>',
+			url : '<?php echo home_url( '/' ) ?>'
 		}
-		$outer .= '</div>';
-
-		if ( $args['echo'] ) echo $outer; else return $outer;
+	</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-523ad91d38c2da47"></script>
+	<!-- AddThis Button END -->
+<?php
 
 	}
 }
@@ -1560,18 +1567,18 @@ if ( !function_exists( 'boozurk_exif_details' ) ) {
 
 		$output = '';
 		// get other EXIF and IPTC data of digital photograph
-		$output														.= __("Width", "boozurk" ) . ": " . $imgmeta['width']."px<br>";
-		$output														.= __("Height", "boozurk" ) . ": " . $imgmeta['height']."px<br>";
-		if ( $imgmeta['image_meta']['created_timestamp'] ) $output	.= __("Date Taken", "boozurk" ) . ": " . date("d-M-Y H:i:s", $imgmeta['image_meta']['created_timestamp'])."<br>";
-		if ( $imgmeta['image_meta']['copyright'] ) $output			.= __("Copyright", "boozurk" ) . ": " . $imgmeta['image_meta']['copyright']."<br>";
-		if ( $imgmeta['image_meta']['credit'] ) $output				.= __("Credit", "boozurk" ) . ": " . $imgmeta['image_meta']['credit']."<br>";
-		if ( $imgmeta['image_meta']['title'] ) $output				.= __("Title", "boozurk" ) . ": " . $imgmeta['image_meta']['title']."<br>";
-		if ( $imgmeta['image_meta']['caption'] ) $output			.= __("Caption", "boozurk" ) . ": " . $imgmeta['image_meta']['caption']."<br>";
-		if ( $imgmeta['image_meta']['camera'] ) $output				.= __("Camera", "boozurk" ) . ": " . $imgmeta['image_meta']['camera']."<br>";
-		if ( $imgmeta['image_meta']['focal_length'] ) $output		.= __("Focal Length", "boozurk" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br>";
-		if ( $imgmeta['image_meta']['aperture'] ) $output			.= __("Aperture", "boozurk" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br>";
-		if ( $imgmeta['image_meta']['iso'] ) $output				.= __("ISO", "boozurk" ) . ": " . $imgmeta['image_meta']['iso']."<br>";
-		if ( $imgmeta['image_meta']['shutter_speed'] ) $output		.= __("Shutter Speed", "boozurk" ) . ": " . sprintf( __("%s seconds", "boozurk" ), $imgmeta['image_meta']['shutter_speed']) . "<br>";
+		$output														.= __("Width", "boozurk" ) . ": " . $imgmeta['width']."px<br />";
+		$output														.= __("Height", "boozurk" ) . ": " . $imgmeta['height']."px<br />";
+		if ( $imgmeta['image_meta']['created_timestamp'] ) $output	.= __("Date Taken", "boozurk" ) . ": " . date("d-M-Y H:i:s", $imgmeta['image_meta']['created_timestamp'])."<br />";
+		if ( $imgmeta['image_meta']['copyright'] ) $output			.= __("Copyright", "boozurk" ) . ": " . $imgmeta['image_meta']['copyright']."<br />";
+		if ( $imgmeta['image_meta']['credit'] ) $output				.= __("Credit", "boozurk" ) . ": " . $imgmeta['image_meta']['credit']."<br />";
+		if ( $imgmeta['image_meta']['title'] ) $output				.= __("Title", "boozurk" ) . ": " . $imgmeta['image_meta']['title']."<br />";
+		if ( $imgmeta['image_meta']['caption'] ) $output			.= __("Caption", "boozurk" ) . ": " . $imgmeta['image_meta']['caption']."<br />";
+		if ( $imgmeta['image_meta']['camera'] ) $output				.= __("Camera", "boozurk" ) . ": " . $imgmeta['image_meta']['camera']."<br />";
+		if ( $imgmeta['image_meta']['focal_length'] ) $output		.= __("Focal Length", "boozurk" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br />";
+		if ( $imgmeta['image_meta']['aperture'] ) $output			.= __("Aperture", "boozurk" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br />";
+		if ( $imgmeta['image_meta']['iso'] ) $output				.= __("ISO", "boozurk" ) . ": " . $imgmeta['image_meta']['iso']."<br />";
+		if ( $imgmeta['image_meta']['shutter_speed'] ) $output		.= __("Shutter Speed", "boozurk" ) . ": " . sprintf( __("%s seconds", "boozurk" ), $imgmeta['image_meta']['shutter_speed']) . "<br />";
 
 		$output = '<div class="exif-attachment-info">' . $output . '</div>';
 
@@ -1615,7 +1622,7 @@ if ( !function_exists( 'boozurk_post_details' ) ) {
 			$output .= '<li class="post-details-cats"><i class="icon-folder-close"></i> <span>' . __( 'Categories', 'boozurk' ) . ': </span>' . get_the_category_list( $tax_separator ) . '</li>';
 
 		if ( $args['tags'] )
-			$tags = get_the_tags() ? get_the_tag_list( '</span>', $tax_separator, '' ) : __( 'No Tags', 'boozurk' ) . '</span>';
+			$tags = get_the_tags() ? '</span>' . get_the_tag_list( '', $tax_separator, '' ) : __( 'No Tags', 'boozurk' ) . '</span>';
 			$output .= '<li class="post-details-tags"><i class="icon-tags"></i> <span>' . __( 'Tags', 'boozurk' ) . ': ' . $tags . '</li>';
 
 		if ( $args['date'] )
@@ -1929,9 +1936,9 @@ if ( !function_exists( 'boozurk_plus_snippet' ) ) {
 		if ($content == '') $content = __('read me!','boozurk');
 
 ?>
-	<meta itemprop="name" content="<?php the_title(); ?>">
-	<meta itemprop="description" content="<?php echo $content; ?>">
-	<?php if( has_post_thumbnail() ) { $image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id() ); ?><meta itemprop="image" content="<?php echo $image_attributes[0]; ?>"><?php } ?>
+	<meta itemprop="name" content="<?php esc_attr( get_the_title() ); ?>" />
+	<meta itemprop="description" content="<?php echo $content; ?>" />
+	<?php if( has_post_thumbnail() ) { $image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id() ); ?><meta itemprop="image" content="<?php echo $image_attributes[0]; ?>" /><?php } ?>
 <?php
 
 	}
@@ -2163,7 +2170,7 @@ function boozurk_quote_content( $content ) {
 
 
 // Add specific CSS class by filter
-function boozurk_body_classes($classes) {
+function boozurk_body_classes( $classes ) {
 
 	$classes[] = 'no-js';
 
@@ -2179,6 +2186,14 @@ function boozurk_body_classes($classes) {
 
 }
 
+// Add specific CSS class by filter
+function boozurk_post_classes( $classes ) {
+
+	$classes[] = 'post-element';
+
+	return $classes;
+
+}add_filter('post_class','boozurk_post_classes');
 
 // custom gallery shortcode function
 function boozurk_gallery_shortcode( $output, $attr ) {
@@ -2321,7 +2336,7 @@ function boozurk_get_credits() {
 	$credits = apply_filters( 'boozurk_credits', '&copy; ' . date( 'Y' ) . ' <strong>' . get_bloginfo( 'name' ) . '</strong>. ' . __( 'All rights reserved','boozurk' ) );
 
 	if ( boozurk_get_opt('boozurk_tbcred') )
-		$credits .= '<br>' . sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) . ' @ twobeers.net' ) . '">' . esc_attr( __( 'Boozurk theme','boozurk' ) ) . '</a>');
+		$credits .= '<br />' . sprintf( __('Powered by %s and %s','boozurk'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','boozurk' ) . ' @ twobeers.net' ) . '">' . esc_attr( __( 'Boozurk theme','boozurk' ) ) . '</a>');
 
 	if ( boozurk_get_opt('boozurk_mobile_css') )
 		$credits .= '<span class="hide_if_print"> - <a rel="nofollow" href="' . esc_url( home_url() . '?mobile_override=mobile' ) . '">'. __('Mobile View','boozurk') .'</a></span>';
@@ -2391,7 +2406,7 @@ function boozurk_titles_filter( $title, $id = null ) {
 
 	if ( is_admin() ) return $title;
 
-	$title = strip_tags( $title, '<abbr><acronym><em><i><del><ins><bdo><strong>' );
+	$title = strip_tags( $title, '<abbr><acronym><em><i><del><ins><bdo><strong><a>' );
 
 	if ( $id == null ) return $title;
 
