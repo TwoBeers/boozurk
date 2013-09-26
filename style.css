@@ -2,7 +2,7 @@
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.07.1
+Version: 2.08
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -28,6 +28,7 @@ body {
 	font-family: monospace;
 	font-size: 15px;
 	line-height: 1.6em;
+	background: #fff;
 }
 a img {
 	border: none;
@@ -533,10 +534,7 @@ button:focus [class^="icon-"] {
 }
 /* Posts/Pages/Attachments
 ----------------------------------------------------------*/
-#posts_content .hentry.not-found,
-#posts_content .hentry.post,
-#posts_content .hentry.page,
-#posts_content .hentry.attachment {
+#posts_content .post-element {
 	border: 1px solid #ddd;
 	border-left: 40px solid #87ceeb;
 	padding: 0 10px 10px 11px;
@@ -557,6 +555,7 @@ button:focus [class^="icon-"] {
 	opacity: 0.5;
 	filter: alpha(opacity=50);
 	margin-bottom: 2px;
+	padding: 2px 0;
 }
 .pmb_format {
 	background-color: #fff;
@@ -569,7 +568,8 @@ button:focus [class^="icon-"] {
 	filter: alpha(opacity=85);
 }
 .pmb_comm:hover,
-.pmb_format:hover {
+.pmb_format:hover,
+.post_meta_container .addthis_button_compact:hover {
 	opacity: 1;
 	filter: alpha(opacity=100);
 }
@@ -578,10 +578,33 @@ button:focus [class^="icon-"] {
 	margin: 4px 1px;
 	z-index: 300;
 }
-.plusone:hover {
+.share-with-plusone:hover {
 	background: #AA2A1C;
 }
-.plusone:hover .icon-google-plus {
+.share-with-facebook:hover {
+	background: #3B5998;
+}
+.share-with-twitter:hover {
+	background: #1AB2E8;
+}
+.pmb_comm:hover .icon {
+	color: #fff;
+}
+.post_meta_container .addthis_button_compact {
+	background-color: #fff;
+	color: #000;
+	display: block;
+	line-height: 20px;
+	width: 40px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	margin-bottom: 2px;
+	padding: 2px 0;
+}
+.post_meta_container .addthis_button_compact:hover {
+	background: #FF5C3D;
+}
+.post_meta_container .addthis_button_compact:hover .icon-plus {
 	color: #fff;
 }
 .post_meta_container {
@@ -985,6 +1008,7 @@ img.tb-thumb-format {
 .not-found .icon-placeholder:before {
 	content: "\f071";
 }
+
 /* Main menu 
 ----------------------------------------------------------*/
 #mainmenu {
@@ -1577,6 +1601,52 @@ img.aligncenter {
 	padding: 3px 6px;
 }
 
+/* MediaElements 
+----------------------------------------------------------*/
+div.mejs-container,
+div.mejs-embed,
+div.mejs-embed body,
+div.mejs-container .mejs-controls {
+	background: #fff;
+}
+div.mejs-container .mejs-controls .mejs-time span {
+	color: #404040;
+}
+div.mejs-controls .mejs-button button {
+	min-width: 0;
+}
+div.mejs-controls .mejs-button button {
+	background-image: url(images/controls_invert.png);
+}
+div.mejs-controls .mejs-time-rail .mejs-time-total,
+div.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+	background: #444;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+	border-radius: 0;
+	background: #aaa;
+}
+div.mejs-controls .mejs-button button:focus {
+	outline: 1px solid #aaa;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-loaded {
+	background: #777;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #21759B;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-float {
+	border-color: #000;
+	box-shadow: 0 0 5px #000;
+	background: #000;
+	color: #fff;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
+	border-color: #000 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+}
 /* Thickbox 
 ----------------------------------------------------------*/
 #TB_overlay {
@@ -1770,10 +1840,11 @@ body.coming-soon {
 	padding: 20px;
 	text-align: right;
 	position:relative;
-
+}
+.coming-soon .storyshare .addthis_toolbox {
+	float: right;
 }
 .coming-soon .storyshare a {
-	margin-left: 10px;
 }
 .coming-soon .storyshare:before {
 	border-left: 10px solid transparent;
@@ -1889,7 +1960,6 @@ div#infinite-handle span:hover {
 	display: none;
 }
 
-
 /* TB Comment Tools
 ----------------------------------------------------------*/
 #tb-comment-tools-tags a {
@@ -1901,97 +1971,4 @@ div#infinite-handle span:hover {
 }
 #tb-comment-tools-tags a:hover {
 	border: 1px solid #aaa;
-}
-
-/* Very Hi Resolutions
-----------------------------------------------------------*/
-@media screen and (min-width: 1440px) {
-	#navbuttons.fixed {
-		right: auto;
-		margin-left: 849px;
-	}
-	#sidebar-secondary.fixed {
-		right: auto;
-		margin-left: 892px;
-	}
-}
-
-/* Low Resolutions
-----------------------------------------------------------*/
-@media screen and (max-width: 960px) {
-	#content {
-		margin: 0 40px;
-	}
-	#sidebar-primary ,
-	#sidebar-secondary ,
-	#sidebar-primary.fixed ,
-	#sidebar-secondary.fixed {
-		position: static;
-		width: 49.5%;
-		height: auto;
-		overflow: auto;
-		float: left;
-		padding: 0;
-		margin: 0;
-	}
-	#sidebar-primary .inner ,
-	#sidebar-secondary .inner ,
-	#sidebar-primary.fixed .inner ,
-	#sidebar-secondary.fixed .inner {
-		width: auto;
-		padding: 10px;
-	}
-	#fixed-bg {
-		background-position: -14px 0;
-	}
-	.post-top-date,
-	.post-top-tag,
-	.post-top-cat {
-		margin-right: 10px;
-	}
-	.top-fade,
-	.bottom-fade {
-		display: none;
-	}
-	#navbuttons.fixed {
-		width: 40px;
-		padding-left: 0;
-		padding-right: 0;
-		right: 0;
-		border-right: none;
-	}
-	.minib_edit ,
-	.minib_print ,
-	.minib_track ,
-	.minib_home {
-		display: none;
-	}
-	.tinynav {
-		display: block;
-		width: 100%;
-		margin-bottom: 20px;
-		border: 1px solid #ddd;
-	}
-	body > .tinynav {
-		padding-left: 40px;
-	}
-	.menu-wrap:before {
-		content: "...";
-		display: block;
-		width: 32px;
-		height: 32px;
-	}
-	.tinynav option {
-		padding: 5px 0;
-	}
-	.nav-menu {
-		display: none;
-	}
-	.tinynav_label {
-		display: inline-block;
-		font-size:23px;
-		position: absolute;
-		left: 8px;
-		margin-top: 4px;
-	}
 }

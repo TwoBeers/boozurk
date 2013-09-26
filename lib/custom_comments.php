@@ -32,7 +32,7 @@ class Boozurk_Comment_Style {
 
 		$outer = '';
 		foreach( $variants as $variant ) {
-			$outer .= '<label for="style-variant"><input type="radio" name="style-variant" value="' . $variant . '" /><span class="' . $variant . '"></span></label>';
+			$outer .= '<label for="input-' . $variant . '"><input id="input-' . $variant . '" type="radio" name="style-variant" value="' . $variant . '" /><span class="' . $variant . '"></span></label>';
 		}
 		$outer = '<p class="comment-variants">' . $outer . '</p>';
 

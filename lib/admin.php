@@ -237,7 +237,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 
 	?>
 		<div class="wrap" id="main-wrap">
-			<div class="icon32" id="theme-icon"><br></div>
+			<div class="icon32" id="theme-icon"><br /></div>
 			<h2><?php echo boozurk_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
 			<br />
 			<ul id="tabselector" class="hide-if-no-js">
@@ -294,7 +294,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 								<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
 										<div class="sub-opt-wrap">
 									<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>
-										<?php if ( $subval == '' ) { echo '<br>'; continue;} ?>
+										<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
 											<div class="sub-opt">
 											<?php if ( !isset ($the_opt[$subval]) ) $the_opt[$subval] = $the_coa[$subval]['default']; ?>
 												<?php if ( $the_coa[$subval]['description'] != '' ) { ?><span><?php echo $the_coa[$subval]['description']; ?> : </span><?php } ?>
@@ -324,7 +324,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 											<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
 													<div class="col-tools">
 														<span><?php echo $the_coa[$subval]['info']; ?></span>
-														<br>
+														<br />
 														<input class="boozurk_input boozurk_cp" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" id="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" data-default-color="<?php echo $the_coa[$subval]['default']; ?>" />
 														<span class="description hide-if-js"><?php _e( 'Default' , 'boozurk' ); ?>: <?php echo $the_coa[$subval]['default']; ?></span>
 													</div>
@@ -345,7 +345,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 													?>
 														<div class="col-tools catcol">
 															<span><?php echo $category->name; ?></span>
-															<br>
+															<br />
 															<input class="boozurk_input boozurk_cp" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" id="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" data-default-color="<?php echo $the_coa[$subval]['defaultcolor']; ?>" />
 															<span class="description hide-if-js"><?php _e( 'Default' , 'boozurk' ); ?>: <?php echo $the_coa[$subval]['defaultcolor']; ?></span>
 															<?php if ( $category->description ) { ?><div class="column-des"><?php echo $category->description; ?></div><?php } ?>
@@ -372,7 +372,7 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 					</form>
 					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
 						<small>
-							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br>
+							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br />
 							<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-boozurk' ); ?>" title="boozurk theme" target="_blank"><?php _e( 'Leave a feedback', 'boozurk' ); ?></a>
 						</small>
 					</p>

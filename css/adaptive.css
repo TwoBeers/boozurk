@@ -1,0 +1,92 @@
+/* Very Hi Resolutions
+----------------------------------------------------------*/
+@media screen and (min-width: 1440px) {
+	#navbuttons.fixed {
+		right: auto;
+		margin-left: 849px;
+	}
+	#sidebar-secondary.fixed {
+		right: auto;
+		margin-left: 892px;
+	}
+}
+
+/* Low Resolutions
+----------------------------------------------------------*/
+@media screen and (max-width: 960px) {
+	#content {
+		margin: 0 40px;
+	}
+	#sidebar-primary ,
+	#sidebar-secondary ,
+	#sidebar-primary.fixed ,
+	#sidebar-secondary.fixed {
+		position: static;
+		width: 49.5%;
+		height: auto;
+		overflow: auto;
+		float: left;
+		padding: 0;
+		margin: 0;
+	}
+	#sidebar-primary .inner ,
+	#sidebar-secondary .inner ,
+	#sidebar-primary.fixed .inner ,
+	#sidebar-secondary.fixed .inner {
+		width: auto;
+		padding: 10px;
+	}
+	#fixed-bg {
+		background-position: -14px 0;
+	}
+	.post-top-date,
+	.post-top-tag,
+	.post-top-cat {
+		margin-right: 10px;
+	}
+	.top-fade,
+	.bottom-fade {
+		display: none;
+	}
+	#navbuttons.fixed {
+		width: 40px;
+		padding-left: 0;
+		padding-right: 0;
+		right: 0;
+		border-right: none;
+	}
+	.minib_edit ,
+	.minib_print ,
+	.minib_track ,
+	.minib_home {
+		display: none;
+	}
+	.tinynav {
+		display: block;
+		width: 100%;
+		margin-bottom: 20px;
+		border: 1px solid #ddd;
+	}
+	body > .tinynav {
+		padding-left: 40px;
+	}
+	.menu-wrap:before {
+		content: "...";
+		display: block;
+		width: 32px;
+		height: 32px;
+	}
+	.tinynav option {
+		padding: 5px 0;
+	}
+	.nav-menu {
+		display: none;
+	}
+	.tinynav_label {
+		display: inline-block;
+		font-size:23px;
+		position: absolute;
+		left: 8px;
+		margin-top: 4px;
+	}
+}

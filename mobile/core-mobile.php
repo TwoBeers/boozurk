@@ -122,7 +122,7 @@ class Boozurk_Mobile {
 
 	function setup() {
 
-		register_nav_menus( array( 'mobile' => __( 'Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>', 'boozurk' ) ) );
+		register_nav_menus( array( 'mobile' => __( 'Navigation Menu for mobiles<br /><small>only supports the first level of hierarchy</small>', 'boozurk' ) ) );
 
 	}
 

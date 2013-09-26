@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Boozurk v2.05\n"
+"Project-Id-Version: Boozurk v2.08\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2013-03-28 11:34:38+0000\n"
@@ -1717,7 +1717,7 @@ msgstr ""
 
 #: mobile/core-mobile.php:122
 #@ boozurk
-msgid "Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>"
+msgid "Navigation Menu for mobiles<br /><small>only supports the first level of hierarchy</small>"
 msgstr ""
 
 #: mobile/footer-mobile.php:15
@@ -1837,12 +1837,12 @@ msgstr ""
 #: lib/options.php:323
 #, php-format
 #@ boozurk
-msgid "<br>you may use these codes:<br><code>%d</code> for post date<br><code>%f</code> for post format (if any)<br><code>%n</code> for post id"
+msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id"
 msgstr ""
 
 #: lib/options.php:384
 #@ boozurk
-msgid "show post details in index view, right before the post content<br>in single post view you can use the <strong>Post details</strong> widget"
+msgid "show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget"
 msgstr ""
 
 #: lib/widgets.php:980

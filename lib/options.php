@@ -320,7 +320,52 @@ function boozurk_get_coa( $option = false ) {
 							'type'			=> 'txt',
 							'default'		=> __( '(no title)', 'boozurk' ),
 							'description'	=> __( 'default text', 'boozurk' ),
-							'info'			=> __( '<br>you may use these codes:<br><code>%d</code> for post date<br><code>%f</code> for post format (if any)<br><code>%n</code> for post id', 'boozurk' ),
+							'info'			=> __( '<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id', 'boozurk' ),
+							'req'			=> '',
+							'sub'			=> false
+		),
+		'boozurk_hide_titles' => array(
+							'group'			=> 'content',
+							'type'			=> '',
+							'default'		=> 1,
+							'description'	=> __( 'Hide titles', 'boozurk' ),
+							'info'			=> __( 'Hide posts/pages title in single view', 'boozurk' ),
+							'req'			=> '',
+							'sub'			=> array( 'boozurk_hide_frontpage_title', 'boozurk_hide_pages_title', 'boozurk_hide_posts_title', 'boozurk_hide_selected_entries_title' )
+		),
+		'boozurk_hide_frontpage_title' => array(
+							'group'			=> 'content',
+							'type'			=> 'chk',
+							'default'		=> 1,
+							'description'	=> __( 'in front page', 'boozurk' ),
+							'info'			=> '',
+							'req'			=> '',
+							'sub'			=> false
+		),
+		'boozurk_hide_pages_title' => array(
+							'group'			=> 'content',
+							'type'			=> 'chk',
+							'default'		=> 0,
+							'description'	=> __( 'in every page', 'boozurk' ),
+							'info'			=> '',
+							'req'			=> '',
+							'sub'			=> false
+		),
+		'boozurk_hide_posts_title' => array(
+							'group'			=> 'content',
+							'type'			=> 'chk',
+							'default'		=> 0,
+							'description'	=> __( 'in every post', 'boozurk' ),
+							'info'			=> '',
+							'req'			=> '',
+							'sub'			=> false
+		),
+		'boozurk_hide_selected_entries_title' => array(
+							'group'			=> 'content',
+							'type'			=> 'txt',
+							'default'		=> '',
+							'description'	=> __( 'in selected posts/pages', 'boozurk' ),
+							'info'			=> __( 'comma-separated list of IDs ( eg. <em>23,86,120</em> )', 'boozurk' ),
 							'req'			=> '',
 							'sub'			=> false
 		),
@@ -390,8 +435,8 @@ function boozurk_get_coa( $option = false ) {
 							'group'			=> 'content',
 							'type'			=> '',
 							'default'		=> '',
-							'description'	=> __( 'Post details', 'boozurk' ),
-							'info'			=> __( 'show post details in index view, right before the post content<br>in single post view you can use the <strong>Post details</strong> widget', 'boozurk' ),
+							'description'	=> __( 'post details', 'boozurk' ),
+							'info'			=> __( 'show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget', 'boozurk' ),
 							'req'			=> '',
 							'sub'			=> array( 'boozurk_post_date', 'boozurk_post_cat', 'boozurk_post_tag' )
 		),
@@ -474,7 +519,7 @@ function boozurk_get_coa( $option = false ) {
 							'group'			=> 'widgets',
 							'type'			=> 'sel',
 							'default'		=> '3',
-							'description'	=> __( 'split Header widget area', 'boozurk' ),
+							'description'	=> __( 'split header widget area', 'boozurk' ),
 							'info'			=> __( 'number of widget that can stay in the widget area side by side', 'boozurk' ),
 							'options'		=> array( '1', '2', '3' ),
 							'options_l10n'	=> array( '1', '2', '3' ),
@@ -484,7 +529,7 @@ function boozurk_get_coa( $option = false ) {
 							'group'			=> 'widgets',
 							'type'			=> 'sel',
 							'default'		=> '1',
-							'description'	=> __( 'split Post widget area', 'boozurk' ),
+							'description'	=> __( 'split post widget area', 'boozurk' ),
 							'info'			=> __( 'number of widget that can stay in the widget area side by side', 'boozurk' ),
 							'options'		=> array( '1', '2', '3' ),
 							'options_l10n'	=> array( '1', '2', '3' ),
@@ -609,8 +654,8 @@ function boozurk_get_coa( $option = false ) {
 		'boozurk_js_swfplayer'=> array( 
 							'group'			=> 'javascript',
 							'type'			=> 'chk',
-							'default'		=> 1,
-							'description'	=> __( 'swf audio player', 'boozurk' ),
+							'default'		=> 0,
+							'description'	=> __( 'audio player', 'boozurk' ),
 							'info'			=> __( 'create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts', 'boozurk' ),
 							'req'			=> 'boozurk_jsani' 
 		),
@@ -714,18 +759,15 @@ function boozurk_get_coa( $option = false ) {
 							'req'			=> '',
 							'sub'			=> false
 		),
-
-		'boozurk_plusone'=> array(							'group'			=> 'other',							'type'			=> 'chk',							'default'		=> 1,							'description'	=> '<a href="https://plus.google.com/" target="_blank">Google +1</a>',							'info'			=> __( 'integrates the +1 feature for your contents', 'boozurk' ),							'req'			=> '',
-							'sub'			=> array( 'boozurk_plusone_official' )
-		),
-		'boozurk_plusone_official'=> array(
+		'boozurk_plusone'=> array(
 							'group'			=> 'other',
-							'type'			=> 'chk',
-							'default'		=> 0,
-							'description'	=> 'use the official button',
+							'type'			=> 'sel',
+							'default'		=> 'googleplus',
+							'description'	=> __( 'sharing buttons', 'boozurk' ),
 							'info'			=> '',
+							'options'		=> array( 'addthis', 'googleplus', 'googleplus_official', 'facebook', 'twitter', 0 ),
+							'options_l10n'	=> array( 'AddThis', 'Google+', 'Google+ (' . __( 'official button', 'boozurk' ) . ')', 'Facebook', 'Twitter', __( 'none', 'boozurk' ) ),
 							'req'			=> '',
-							'sub'			=> false
 		),
 		'boozurk_main_menu'=> array(							'group'			=> 'other',							'type'			=> 'sel',							'default'		=> 'text',							'description'	=> __( 'main menu look', 'boozurk' ),							'info'			=> __( 'select the style of the main menu: text, thumbnails or both', 'boozurk' ),							'options'		=> array( 'text', 'thumbnail', 'thumbnail and text' ),							'options_l10n'	=> array( __( 'text', 'boozurk' ), __( 'thumbnail', 'boozurk' ), __( 'thumbnail and text', 'boozurk' ) ),
 							'req'			=> '',
@@ -735,7 +777,7 @@ function boozurk_get_coa( $option = false ) {
 							'req'			=> '',
 							'sub'			=> false 
 		),
-		'boozurk_logo'=> array(							'group'			=> 'other',							'type'			=> 'url',							'default'		=> '',							'description'	=> __( 'Logo', 'boozurk' ),							'info'			=> __( 'a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore', 'boozurk' ),							'req'			=> '',
+		'boozurk_logo'=> array(							'group'			=> 'other',							'type'			=> 'url',							'default'		=> '',							'description'	=> __( 'logo', 'boozurk' ),							'info'			=> __( 'a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore', 'boozurk' ),							'req'			=> '',
 							'sub'			=> array( 'boozurk_logo_description' ) 
 		),
 		'boozurk_logo_description'=> array(
@@ -755,6 +797,14 @@ function boozurk_get_coa( $option = false ) {
 							'default'		=> 0,
 							'description'	=> __( 'comment style', 'boozurk' ),
 							'info'			=> __( 'let the commenters to choose their comment background', 'boozurk' ),
+							'req'			=> '' 
+		),
+		'boozurk_adaptive_layout'=> array(
+							'group'			=> 'other',
+							'type'			=> 'chk',
+							'default'		=> 1,
+							'description'	=> __( 'adaptive layout', 'boozurk' ),
+							'info'			=> __( 'the theme changes the layout to fit the small screens', 'boozurk' ),
 							'req'			=> '' 
 		),
 		'boozurk_custom_css' => array(
