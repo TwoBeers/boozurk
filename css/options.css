@@ -3,67 +3,53 @@
 #theme-icon {
 	background: url('../images/boozurk.png') no-repeat scroll center transparent;
 }
+div.wrap {
+	margin-right: 290px;
+}
+#theme_donation {
+	position: fixed;
+	right: 20px;
+	top: 50px;
+	width: 250px;
+	text-align: center;
+}
+#buttons {
+	position: fixed;
+	right: 20px;
+	top: 211px;
+	width: 250px;
+	text-align: center;
+}
 #theme-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
 }
-#theme-options,
-#theme-infos {
-	padding: 0 20px 10px;
-}
 #theme-infos h3:first-of-type {
 	margin-top:0;
-}
-#tabs-container {
-	margin: 0 20px 20px 150px;
 }
 #theme-options select {
 	max-width: 160px;
 }
-#tabselector,
-#selector {
-	position: absolute;
-	left: 0;
-	margin-top: 0;
-}
-#tabselector li,
-#selector li {
-	width: 130px;
-	padding: 3px 16px 3px 4px;
-}
-#tabselector li a,
-#selector li a {
-	text-decoration: none;
-}
-.sel-active a {
-	color: #000;
-}
-.sel-active {
-	font-weight: bold;
-}
-#main-wrap {
-	position: relative;
+#tabselector {
+	margin-bottom: 20px;
 }
 .tab-opt {
-	margin-bottom: 20px;
+	margin: 20px 0;
 	padding: 10px;
 	background: #fff;
 	border: 1px solid #ccc;
 }
-.tab-opt:hover {
+.tab-opt + .tab-opt{
+	margin-bottom: 10px;
 }
 .tab-opt input {
 	margin-left: 10px;
 }
-.boozurk_text {
+.theme_option_text {
 	width: 50%;
 }
 .column-nam {
 	font-weight: bold;
-}
-.tabgroup-colors .column-nam {
-	margin-bottom: 10px;
-	display: block;
 }
 .column-des {
 	font-style:italic;
@@ -84,7 +70,7 @@
 .sub-opt-wrap br.clear {
 	display: block;
 }
-.tabgroup-colors .col-tools {
+.col-tools {
 	border: 1px solid #DFDFDF;
 	float: left;
 	margin: 0 1% 1% 0;
@@ -92,9 +78,6 @@
 	width: 30%;
 	position: relative;
 	text-align: center;
-}
-.catcol:nth-child(3n+1) {
-	clear: left;
 }
 .col-tools span {
 	font-weight: bold;
@@ -128,12 +111,6 @@
 }
 .admin-color-mp6 #tabselector li, #selector li {
 	border-left: 3px solid transparent;
-}
-.admin-color-mp6 .sel-active {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border-left: 3px solid #0074A2 !important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-	font-weight: normal;
 }
 .admin-color-mp6 .column-req {
 	color: #aaa;

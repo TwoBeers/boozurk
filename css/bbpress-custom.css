@@ -3,7 +3,8 @@
 div#bbpress-forums {
 	font-size: 1em;
 }
-textarea#bbp_topic_content {
+textarea#bbp_topic_content,
+textarea#bbp_reply_content {
 	border: 1px solid transparent;
 }
 div.bbp-breadcrumb {
@@ -52,7 +53,6 @@ a.bp-title-button:hover {
 	background-color: #f5f5f5;
 	color: #666;
 }
-
 div#bbpress-forums input.ed_button[type="button"] {
 	background: #eee;
 	border: 1px solid #fff;
@@ -61,4 +61,7 @@ div#bbpress-forums input.ed_button[type="button"] {
 	font-size: 0.9em;
 	font-weight: normal;
 }
-
+div#bbpress-forums div.bbp-topic-content a, #bbpress-forums div.bbp-reply-content a {
+	font-size: 1.5em;
+	margin: 0 0 0 5px;
+}

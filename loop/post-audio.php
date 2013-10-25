@@ -19,7 +19,7 @@
 
 	<?php boozurk_hook_post_title_before(); ?>
 
-	<?php $bz_first_link = boozurk_get_first_link(); ?>
+	<?php $boozurk_first_link = boozurk_get_first_link(); ?>
 
 	<?php
 		switch ( boozurk_get_opt( 'boozurk_post_formats_audio_title' ) ) {
@@ -30,7 +30,7 @@
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'first link text':
-				boozurk_featured_title( array( 'alternative' => $bz_first_link ? $bz_first_link['text'] : '' ) );
+				boozurk_featured_title( array( 'alternative' => $boozurk_first_link ? $boozurk_first_link['text'] : '' ) );
 				break;
 		}
 	?>
@@ -41,7 +41,7 @@
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_audio_content' ) ) {
 				case 'audio player':
-					( $bz_first_link ) ? Boozurk_Audio_Player::audio_player( $bz_first_link['anchor'] ) : the_content();
+					( $boozurk_first_link ) ? Boozurk_Audio_Player::audio_player( $boozurk_first_link['anchor'] ) : the_content();
 					break;
 				case 'content':
 					the_content();

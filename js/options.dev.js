@@ -10,7 +10,7 @@ boozurkOptions = {
 
 		var frame;
 
-		boozurkOptions.switchTab('colors');
+		boozurkOptions.switchTab('style');
 
 		$('#to-defaults').click (function () {
 			var answer = confirm(boozurk_options_l10n.confirm_to_defaults)
@@ -83,15 +83,15 @@ boozurkOptions = {
 			$('#theme-options').css({ 'display' : '' });
 			thisclass = '.tabgroup-' + thisset;
 			thissel = '#selgroup-' + thisset;
-			$('.tab-opt').css({ 'display' : 'none' });
+			$('.tabgroup').css({ 'display' : 'none' });
 			$(thisclass).css({ 'display' : '' });
-			$('#tabselector li').removeClass("sel-active");
-			$(thissel).addClass("sel-active");
+			$('#tabselector a').removeClass("nav-tab-active");
+			$(thissel).addClass("nav-tab-active");
 		} else {
 			$('#theme-infos').css({ 'display' : '' });
 			$('#theme-options').css({ 'display' : 'none' });
-			$('#tabselector li').removeClass("sel-active");
-			$('#selgroup-info').addClass("sel-active");
+			$('#tabselector a').removeClass("nav-tab-active");
+			$('#selgroup-info').addClass("nav-tab-active");
 		}
 	}
 

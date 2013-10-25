@@ -1,8 +1,8 @@
 /*
 Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
-Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options! WP3.4 compatible
-Version: 2.08
+Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
+Version: 3.00
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -616,6 +616,7 @@ button:focus [class^="icon-"] {
 .storytitle {
 	line-height: 40px;
 	margin: 0;
+	word-wrap: break-word;
 }
 .storycontent {
 	padding-top : 10px;
@@ -1647,6 +1648,7 @@ div.mejs-controls .mejs-time-rail .mejs-time-float {
 div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
 	border-color: #000 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
 }
+
 /* Thickbox 
 ----------------------------------------------------------*/
 #TB_overlay {

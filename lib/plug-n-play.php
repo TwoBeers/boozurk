@@ -109,12 +109,14 @@ class Boozurk_For_Bbpress {
 
 	function __construct() {
 
+		if ( ! function_exists( 'is_bbpress' ) ) return;
+
 		add_filter( 'bbp_after_get_user_subscribe_link_parse_args'	, array( $this, 'user_subscribe_link' ) );
 		add_filter( 'bbp_after_get_user_favorites_link_parse_args'	, array( $this, 'user_favorites_link' ) );
 		add_filter( 'boozurk_cooltips_selector'						, array( $this, 'user_navigation_tips' ) );
 		add_filter( 'boozurk_options_array'							, array( $this, 'extra_options' ), 10, 1 );
 
-		add_action( 'wp_head', array( $this, 'init' ), 999 );
+		add_action( 'wp_head'										, array( $this, 'init' ), 999 );
 		add_action( 'wp_enqueue_scripts'							, array( $this, 'custom_stylesheet' ), 99 );
 		add_action( 'wp_head'										, array( $this, 'dinamic_style' ) );
 
@@ -125,7 +127,7 @@ class Boozurk_For_Bbpress {
 	 */
 	function init() {
 
-		if ( ! ( function_exists( 'is_bbpress' ) && is_bbpress() ) ) return;
+		if ( ! is_bbpress() ) return;
 
 		add_filter( 'boozurk_filter_breadcrumb'						, array( $this, 'bbpress_breadcrumb' ) );
 

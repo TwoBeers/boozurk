@@ -17,7 +17,7 @@
 
 	<?php boozurk_hook_entry_top(); ?>
 
-	<?php $bz_first_quote = boozurk_get_blockquote(); ?>
+	<?php $boozurk_first_quote = boozurk_get_blockquote(); ?>
 
 	<?php boozurk_hook_post_title_before(); ?>
 
@@ -30,7 +30,7 @@
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'short quote excerpt':
-				boozurk_featured_title( array( 'alternative' => $bz_first_quote ? '&ldquo;'.$bz_first_quote['quote'].'&rdquo;' : wp_trim_words( $post->post_content, 5, '...' ) ) );
+				boozurk_featured_title( array( 'alternative' => $boozurk_first_quote ? '&ldquo;'.$boozurk_first_quote['quote'].'&rdquo;' : wp_trim_words( $post->post_content, 5, '...' ) ) );
 				break;
 		}
 	?>

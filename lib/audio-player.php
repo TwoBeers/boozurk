@@ -27,7 +27,7 @@ class Boozurk_Audio_Player {
 	}
 
 
-	function audio_player( $text = '' ) {
+	public static function audio_player( $text = '' ) {
 		global $post;
 
 		if ( post_password_required() ) return;

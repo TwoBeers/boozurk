@@ -19,7 +19,7 @@
 
 	<?php boozurk_hook_post_title_before(); ?>
 
-	<?php $bz_first_img = boozurk_get_first_image(); ?>
+	<?php $boozurk_first_img = boozurk_get_first_image(); ?>
 
 	<?php
 		switch ( boozurk_get_opt( 'boozurk_post_formats_image_title' ) ) {
@@ -30,7 +30,7 @@
 				boozurk_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'first image title':
-				boozurk_featured_title( array( 'alternative' => $bz_first_img ? $bz_first_img['title'] : '' ) );
+				boozurk_featured_title( array( 'alternative' => $boozurk_first_img ? $boozurk_first_img['title'] : '' ) );
 				break;
 		}
 	?>
@@ -41,8 +41,8 @@
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_image_content' ) ) {
 				case 'first image':
-					if ( $bz_first_img ) {
-						?><a href="<?php echo $bz_first_img['src']; ?>" title="<?php echo esc_attr( $bz_first_img['title'] ); ?>"><?php echo $bz_first_img['img']; ?></a><br /><?php
+					if ( $boozurk_first_img ) {
+						?><a href="<?php echo $boozurk_first_img['src']; ?>" title="<?php echo esc_attr( $boozurk_first_img['title'] ); ?>"><?php echo $boozurk_first_img['img']; ?></a><br /><?php
 						the_excerpt();
 					} else {
 						the_content();

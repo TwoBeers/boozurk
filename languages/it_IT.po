@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Boozurk v2.08\n"
+"Project-Id-Version: Boozurk v2.08.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-09-26 16:16:46+0000\n"
+"PO-Revision-Date: 2013-10-25 14:16:57+0000\n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,16 +33,26 @@ msgstr "% Commenti"
 msgid "%s ago"
 msgstr "%s fa"
 
-#: lib/options.php:95
-#: lib/options.php:126
-#: lib/options.php:134
-#: lib/options.php:165
-#: lib/options.php:174
-#: lib/options.php:205
-#: lib/options.php:236
-#: lib/options.php:267
-#: lib/options.php:298
-#: lib/options.php:306
+#: lib/options - Copia.php:95
+#: lib/options - Copia.php:126
+#: lib/options - Copia.php:134
+#: lib/options - Copia.php:165
+#: lib/options - Copia.php:174
+#: lib/options - Copia.php:205
+#: lib/options - Copia.php:236
+#: lib/options - Copia.php:267
+#: lib/options - Copia.php:298
+#: lib/options - Copia.php:306
+#: lib/options.php:217
+#: lib/options.php:245
+#: lib/options.php:252
+#: lib/options.php:283
+#: lib/options.php:292
+#: lib/options.php:323
+#: lib/options.php:354
+#: lib/options.php:385
+#: lib/options.php:416
+#: lib/options.php:424
 #, php-format
 #@ boozurk
 msgid "%s format posts"
@@ -60,7 +70,8 @@ msgid "(current post category)"
 msgstr "(categoria del articolo corrente)"
 
 #: functions.php:2417
-#: lib/options.php:321
+#: lib/options - Copia.php:321
+#: lib/options.php:437
 #@ boozurk
 msgid "(no title)"
 msgstr "(senza titolo)"
@@ -157,7 +168,9 @@ msgstr "Clicca le miniature"
 msgid "Close"
 msgstr "Chiudi"
 
+#: lib/options - Copia.php:16
 #: lib/options.php:16
+#: lib/options.php:33
 #@ boozurk
 msgid "Colors"
 msgstr "Colori"
@@ -210,8 +223,11 @@ msgstr "Data"
 msgid "Date Taken"
 msgstr "Data di Acquisizione"
 
-#: lib/admin.php:329
-#: lib/admin.php:350
+#: lib/admin - Copia.php:329
+#: lib/admin - Copia.php:350
+#: lib/admin.php:229
+#: lib/admin.php:387
+#: lib/admin.php:454
 #@ boozurk
 msgid "Default"
 msgstr "Predefinito"
@@ -295,7 +311,8 @@ msgstr "Home"
 msgid "ISO"
 msgstr "ISO"
 
-#: lib/admin.php:375
+#: lib/admin - Copia.php:375
+#: lib/admin.php:488
 #@ boozurk
 msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
 msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
@@ -306,7 +323,9 @@ msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace
 msgid "Image EXIF details"
 msgstr "Dettagli Immagine"
 
+#: lib/options - Copia.php:20
 #: lib/options.php:20
+#: lib/options.php:133
 #@ boozurk
 msgid "Javascript"
 msgstr "Javascript"
@@ -337,7 +356,8 @@ msgstr "Replica al commento di %s"
 msgid "Leave a comment"
 msgstr "Lascia un commento"
 
-#: lib/admin.php:376
+#: lib/admin - Copia.php:376
+#: lib/admin.php:489
 #@ boozurk
 msgid "Leave a feedback"
 msgstr "Lascia un feedback"
@@ -432,18 +452,23 @@ msgstr "Numero di utenti da visualizzare"
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
-#: lib/admin.php:254
-#: lib/admin.php:260
+#: lib/admin - Copia.php:254
+#: lib/admin - Copia.php:260
 #@ boozurk
 msgid "Options"
 msgstr "Opzioni"
 
-#: lib/admin.php:230
+#: lib/admin - Copia.php:230
+#: lib/admin.php:288
 #@ boozurk
 msgid "Options saved."
 msgstr "Opzioni salvate."
 
+#: lib/options - Copia.php:22
 #: lib/options.php:22
+#: lib/options.php:49
+#: lib/options.php:117
+#: lib/options.php:147
 #@ boozurk
 msgid "Other"
 msgstr "Altro"
@@ -743,16 +768,20 @@ msgstr "La terza area widget nel fondo pagina"
 msgid "The widget area under the main menu"
 msgstr "L&#39;area widget sotto il menu"
 
-#: lib/admin.php:251
-#: lib/admin.php:255
-#: lib/admin.php:384
+#: lib/admin - Copia.php:251
+#: lib/admin - Copia.php:255
+#: lib/admin - Copia.php:384
+#: lib/admin.php:316
+#: lib/admin.php:497
 #@ boozurk
 msgid "Theme Info"
 msgstr "Informazioni del tema"
 
 #: functions.php:1916
+#: lib/admin - Copia.php:30
+#: lib/admin - Copia.php:241
 #: lib/admin.php:30
-#: lib/admin.php:241
+#: lib/admin.php:299
 #@ boozurk
 msgid "Theme Options"
 msgstr "Opzioni del Tema"
@@ -811,12 +840,14 @@ msgstr "Trackback URL"
 msgid "Type of posts to show"
 msgstr "Tipo di articoli  da visualizzare"
 
-#: lib/admin.php:368
+#: lib/admin - Copia.php:368
+#: lib/admin.php:479
 #@ boozurk
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
-#: lib/admin.php:367
+#: lib/admin - Copia.php:367
+#: lib/admin.php:475
 #@ boozurk
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
@@ -881,7 +912,8 @@ msgstr "Larghezza"
 msgid "Your Profile"
 msgstr "Il tuo profilo"
 
-#: lib/options.php:780
+#: lib/options - Copia.php:780
+#: lib/options.php:849
 #@ boozurk
 msgid "a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore"
 msgstr "un logo in alto a destra. incolla qui il percorso completo all&#39;immagine. se non ti serve, lascialo vuoto"
@@ -896,17 +928,20 @@ msgstr "un mese fa"
 msgid "a widget area located after the post body"
 msgstr "un&#39;area widget sotto il corpo degli articoli"
 
-#: lib/options.php:573
+#: lib/options - Copia.php:573
+#: lib/options.php:663
 #@ boozurk
 msgid "add a lot of new usefull widgets"
 msgstr "aggiungi un sacco di nuovi e utili widget"
 
-#: lib/options.php:792
+#: lib/options - Copia.php:792
+#: lib/options.php:860
 #@ boozurk
 msgid "add style to the editor in order to write the post exactly how it will appear on the site"
 msgstr "applica lo stile all&#39;editor per scrivere gli articoli esattamente come appariranno nel sito"
 
-#: lib/options.php:625
+#: lib/options - Copia.php:625
+#: lib/options.php:709
 #@ boozurk
 msgid "add the thickbox effect to each linked image and galleries in post content"
 msgstr "aggiunge un effetto thickbox ad ogni immagine (dotata di collegamento) e galleria all&#39;interno del articolo"
@@ -916,8 +951,10 @@ msgstr "aggiunge un effetto thickbox ad ogni immagine (dotata di collegamento) e
 msgid "apr"
 msgstr "apr"
 
-#: lib/options.php:156
-#: lib/options.php:658
+#: lib/options - Copia.php:156
+#: lib/options - Copia.php:658
+#: lib/options.php:274
+#: lib/options.php:738
 #@ boozurk
 msgid "audio player"
 msgstr "audio player"
@@ -927,22 +964,26 @@ msgstr "audio player"
 msgid "aug"
 msgstr "ago"
 
-#: lib/options.php:686
+#: lib/options - Copia.php:686
+#: lib/options.php:763
 #@ boozurk
 msgid "auto"
 msgstr "auto"
 
-#: lib/options.php:684
+#: lib/options - Copia.php:684
+#: lib/options.php:761
 #@ boozurk
 msgid "auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts"
 msgstr "auto: quando l&#39;utente raggiunge il fondo pagina - manual: cliccando il pulsante a fine pagina"
 
-#: lib/options.php:675
+#: lib/options - Copia.php:675
+#: lib/options.php:753
 #@ boozurk
 msgid "automatically append the next page of posts (via AJAX) to your current page"
 msgstr "aggiunge automaticamente alla pagina corrente la successiva pagina degli articoli (via AJAX)"
 
-#: lib/options.php:683
+#: lib/options - Copia.php:683
+#: lib/options.php:760
 #@ boozurk
 msgid "behaviour"
 msgstr "funzionamento"
@@ -958,7 +999,8 @@ msgstr "inoltre..."
 msgid "boozurk Default Gravatar"
 msgstr "gravatar predefinito di Boozurk"
 
-#: lib/options.php:477
+#: lib/options - Copia.php:477
+#: lib/options.php:577
 #@ boozurk
 msgid "both"
 msgstr "entrambi"
@@ -968,38 +1010,53 @@ msgstr "entrambi"
 msgid "by selecting \"(current post category)\", the widget will be visible ONLY in single posts"
 msgstr "selezionando \"(categoria del articolo corrente)\", il widget sarà visibile SOLAMENTE nei singoli articoli"
 
-#: lib/options.php:67
+#: lib/options - Copia.php:67
 #@ boozurk
 msgid "colors for categories"
 msgstr "colori delle categorie"
 
-#: lib/options.php:114
-#: lib/options.php:117
-#: lib/options.php:153
-#: lib/options.php:156
-#: lib/options.php:193
-#: lib/options.php:196
-#: lib/options.php:224
-#: lib/options.php:227
-#: lib/options.php:255
-#: lib/options.php:258
-#: lib/options.php:286
-#: lib/options.php:289
+#: lib/options - Copia.php:114
+#: lib/options - Copia.php:117
+#: lib/options - Copia.php:153
+#: lib/options - Copia.php:156
+#: lib/options - Copia.php:193
+#: lib/options - Copia.php:196
+#: lib/options - Copia.php:224
+#: lib/options - Copia.php:227
+#: lib/options - Copia.php:255
+#: lib/options - Copia.php:258
+#: lib/options - Copia.php:286
+#: lib/options - Copia.php:289
+#: lib/options.php:234
+#: lib/options.php:237
+#: lib/options.php:271
+#: lib/options.php:274
+#: lib/options.php:311
+#: lib/options.php:314
+#: lib/options.php:342
+#: lib/options.php:345
+#: lib/options.php:373
+#: lib/options.php:376
+#: lib/options.php:404
+#: lib/options.php:407
 #@ boozurk
 msgid "content"
 msgstr "contenuto"
 
-#: lib/options.php:650
+#: lib/options - Copia.php:650
+#: lib/options.php:731
 #@ boozurk
 msgid "cool tooltips"
 msgstr "cool tooltips"
 
-#: lib/options.php:659
+#: lib/options - Copia.php:659
+#: lib/options.php:739
 #@ boozurk
 msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
 msgstr "crea un player per i file audio (mp3,ogg e m4a) inserti come link all&#39;interno degli articoli formato audio"
 
-#: lib/options.php:572
+#: lib/options - Copia.php:572
+#: lib/options.php:662
 #@ boozurk
 msgid "custom widgets"
 msgstr "widget speciali"
@@ -1015,28 +1072,38 @@ msgstr "dic"
 msgid "default: \"Welcome %s\" , where %s is the user name"
 msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell&#39;utente"
 
-#: lib/options.php:792
+#: lib/options - Copia.php:792
+#: lib/options.php:860
 #@ boozurk
 msgid "editor style"
 msgstr "stile dell&#39;editor"
 
-#: lib/options.php:474
+#: lib/options - Copia.php:474
+#: lib/options.php:574
 #@ boozurk
 msgid "enhanced post title"
 msgstr "titolo del articolo potenziato"
 
-#: lib/options.php:117
-#: lib/options.php:156
-#: lib/options.php:196
-#: lib/options.php:227
-#: lib/options.php:258
-#: lib/options.php:289
+#: lib/options - Copia.php:117
+#: lib/options - Copia.php:156
+#: lib/options - Copia.php:196
+#: lib/options - Copia.php:227
+#: lib/options - Copia.php:258
+#: lib/options - Copia.php:289
+#: lib/options - Copia.php:376
+#: lib/options.php:237
+#: lib/options.php:274
+#: lib/options.php:314
+#: lib/options.php:345
 #: lib/options.php:376
+#: lib/options.php:407
+#: lib/options.php:486
 #@ boozurk
 msgid "excerpt"
 msgstr "riassunto"
 
-#: lib/options.php:643
+#: lib/options - Copia.php:643
+#: lib/options.php:725
 #@ boozurk
 msgid "expands a post to show the full content when the reader clicks the \"Read more...\" link"
 msgstr "espandi l&#39;articolo per visualizzare il contenuto completo quando il lettore clicca il link \"(continua...)\""
@@ -1046,48 +1113,58 @@ msgstr "espandi l&#39;articolo per visualizzare il contenuto completo quando il 
 msgid "feb"
 msgstr "feb"
 
-#: lib/options.php:227
+#: lib/options - Copia.php:227
+#: lib/options.php:345
 #@ boozurk
 msgid "first image"
 msgstr "prima immagine"
 
-#: lib/options.php:216
+#: lib/options - Copia.php:216
+#: lib/options.php:334
 #@ boozurk
 msgid "first image title"
 msgstr "titolo della prima immagine"
 
-#: lib/options.php:145
-#: lib/options.php:247
+#: lib/options - Copia.php:145
+#: lib/options - Copia.php:247
+#: lib/options.php:263
+#: lib/options.php:365
 #@ boozurk
 msgid "first link text"
 msgstr "testo del primo link"
 
-#: lib/options.php:718
+#: lib/options - Copia.php:718
+#: lib/options.php:792
 #@ boozurk
 msgid "font family"
 msgstr "font"
 
-#: lib/options.php:722
+#: lib/options - Copia.php:722
+#: lib/options.php:796
 #@ boozurk
 msgid "font size"
 msgstr "dimensione del testo"
 
-#: lib/options.php:542
+#: lib/options - Copia.php:542
+#: lib/options.php:635
 #@ boozurk
 msgid "footer widget area #1"
 msgstr "Area Widget di Fondo Pagina #1"
 
-#: lib/options.php:552
+#: lib/options - Copia.php:552
+#: lib/options.php:644
 #@ boozurk
 msgid "footer widget area #2"
 msgstr "Area Widget di Fondo Pagina #2"
 
-#: lib/options.php:562
+#: lib/options - Copia.php:562
+#: lib/options.php:653
 #@ boozurk
 msgid "footer widget area #3"
 msgstr "Area Widget di Fondo Pagina #3"
 
-#: lib/options.php:634
+#: lib/options - Copia.php:634
+#: lib/options.php:717
 #@ boozurk
 msgid "force galleries to use links to image instead of links to attachment"
 msgstr "forza le gallerie ad utilizzare i link alle immagini anzichè agli allegati"
@@ -1097,7 +1174,7 @@ msgstr "forza le gallerie ad utilizzare i link alle immagini anzichè agli alleg
 msgid "guest"
 msgstr "ospite"
 
-#: lib/options.php:50
+#: lib/options - Copia.php:50
 #@ boozurk
 msgid "highlighted links"
 msgstr "collegamenti evidenziati"
@@ -1112,17 +1189,20 @@ msgstr "icone"
 msgid "icons & text"
 msgstr "icone e testo"
 
-#: lib/options.php:477
+#: lib/options - Copia.php:477
+#: lib/options.php:577
 #@ boozurk
 msgid "in lists"
 msgstr "nelle liste"
 
-#: lib/options.php:477
+#: lib/options - Copia.php:477
+#: lib/options.php:577
 #@ boozurk
 msgid "in single posts/pages"
 msgstr "nei singoli articoli/pagine"
 
-#: lib/options.php:674
+#: lib/options - Copia.php:674
+#: lib/options.php:752
 #@ boozurk
 msgid "infinite pagination"
 msgstr "paginazione infinita"
@@ -1147,22 +1227,26 @@ msgstr "giu"
 msgid "last comments"
 msgstr "ultimi commenti"
 
-#: lib/options.php:41
+#: lib/options - Copia.php:41
+#: lib/options.php:167
 #@ boozurk
 msgid "links"
 msgstr "collegamenti"
 
-#: lib/options.php:776
+#: lib/options - Copia.php:776
+#: lib/options.php:845
 #@ boozurk
 msgid "main menu icon size"
 msgstr "Dimensione delle icone del menu principale"
 
-#: lib/options.php:772
+#: lib/options - Copia.php:772
+#: lib/options.php:841
 #@ boozurk
 msgid "main menu look"
 msgstr "aspetto del menu principale"
 
-#: lib/options.php:686
+#: lib/options - Copia.php:686
+#: lib/options.php:763
 #@ boozurk
 msgid "manual"
 msgstr "manuale"
@@ -1177,25 +1261,40 @@ msgstr "mar"
 msgid "may"
 msgstr "mag"
 
-#: lib/options.php:702
+#: lib/options - Copia.php:702
+#: lib/options.php:777
 #@ boozurk
 msgid "mobile support"
 msgstr "supporto per dispositivi mobili"
 
-#: lib/options.php:106
-#: lib/options.php:117
-#: lib/options.php:145
-#: lib/options.php:156
-#: lib/options.php:185
-#: lib/options.php:196
-#: lib/options.php:216
+#: lib/options - Copia.php:106
+#: lib/options - Copia.php:117
+#: lib/options - Copia.php:145
+#: lib/options - Copia.php:156
+#: lib/options - Copia.php:185
+#: lib/options - Copia.php:196
+#: lib/options - Copia.php:216
+#: lib/options - Copia.php:227
+#: lib/options - Copia.php:247
+#: lib/options - Copia.php:258
+#: lib/options - Copia.php:278
+#: lib/options - Copia.php:289
+#: lib/options - Copia.php:477
+#: lib/options - Copia.php:769
 #: lib/options.php:227
-#: lib/options.php:247
-#: lib/options.php:258
-#: lib/options.php:278
-#: lib/options.php:289
-#: lib/options.php:477
-#: lib/options.php:769
+#: lib/options.php:237
+#: lib/options.php:263
+#: lib/options.php:274
+#: lib/options.php:303
+#: lib/options.php:314
+#: lib/options.php:334
+#: lib/options.php:345
+#: lib/options.php:365
+#: lib/options.php:376
+#: lib/options.php:396
+#: lib/options.php:407
+#: lib/options.php:577
+#: lib/options.php:838
 #@ boozurk
 msgid "none"
 msgstr "nessuno"
@@ -1205,8 +1304,10 @@ msgstr "nessuno"
 msgid "nov"
 msgstr "nov"
 
-#: lib/options.php:523
-#: lib/options.php:533
+#: lib/options - Copia.php:523
+#: lib/options - Copia.php:533
+#: lib/options.php:618
+#: lib/options.php:627
 #@ boozurk
 msgid "number of widget that can stay in the widget area side by side"
 msgstr "numero di widget che possono stare affiancati nell&#39;area widget"
@@ -1229,42 +1330,57 @@ msgstr "pi&ugrave; di un anno fa"
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
 
-#: lib/options.php:106
-#: lib/options.php:145
-#: lib/options.php:185
-#: lib/options.php:216
-#: lib/options.php:247
-#: lib/options.php:278
+#: lib/options - Copia.php:106
+#: lib/options - Copia.php:145
+#: lib/options - Copia.php:185
+#: lib/options - Copia.php:216
+#: lib/options - Copia.php:247
+#: lib/options - Copia.php:278
+#: lib/options.php:227
+#: lib/options.php:263
+#: lib/options.php:303
+#: lib/options.php:334
+#: lib/options.php:365
+#: lib/options.php:396
 #@ boozurk
 msgid "post date"
 msgstr "data dell&#39;articolo"
 
-#: lib/options.php:642
+#: lib/options - Copia.php:642
+#: lib/options.php:724
 #@ boozurk
 msgid "post expander"
 msgstr "espandi gli articoli"
 
-#: lib/options.php:86
+#: lib/options - Copia.php:86
 #@ boozurk
 msgid "post formats support"
 msgstr "supporto per i formati degli articoli"
 
-#: lib/options.php:106
-#: lib/options.php:145
-#: lib/options.php:185
-#: lib/options.php:216
-#: lib/options.php:247
-#: lib/options.php:278
+#: lib/options - Copia.php:106
+#: lib/options - Copia.php:145
+#: lib/options - Copia.php:185
+#: lib/options - Copia.php:216
+#: lib/options - Copia.php:247
+#: lib/options - Copia.php:278
+#: lib/options.php:227
+#: lib/options.php:263
+#: lib/options.php:303
+#: lib/options.php:334
+#: lib/options.php:365
+#: lib/options.php:396
 #@ boozurk
 msgid "post title"
 msgstr "titolo dell&#39;articolo"
 
-#: lib/options.php:196
+#: lib/options - Copia.php:196
+#: lib/options.php:314
 #@ boozurk
 msgid "presentation"
 msgstr "presentazione"
 
-#: lib/options.php:430
+#: lib/options - Copia.php:430
+#: lib/options.php:535
 #@ boozurk
 msgid "quick browsing links"
 msgstr "link rapidi di navigazione"
@@ -1274,7 +1390,8 @@ msgstr "link rapidi di navigazione"
 msgid "quite a long while ago..."
 msgstr "tempo fa..."
 
-#: lib/options.php:666
+#: lib/options - Copia.php:666
+#: lib/options.php:745
 #@ boozurk
 msgid "quote link"
 msgstr "link per la citazione"
@@ -1284,22 +1401,25 @@ msgstr "link per la citazione"
 msgid "quoted on"
 msgstr "citato in"
 
-#: lib/options.php:633
+#: lib/options - Copia.php:633
+#: lib/options.php:716
 #@ boozurk
 msgid "replace links"
 msgstr "modifica i collegamenti"
 
-#: lib/admin.php:361
+#: lib/admin - Copia.php:361
+#: lib/admin.php:466
 #@ boozurk
 msgid "requires"
 msgstr "richiede"
 
-#: lib/options.php:772
+#: lib/options - Copia.php:772
+#: lib/options.php:841
 #@ boozurk
 msgid "select the style of the main menu: text, thumbnails or both"
 msgstr "seleziona lo stile del menu principale: test, miniature, o entrambi"
 
-#: lib/options.php:59
+#: lib/options - Copia.php:59
 #@ boozurk
 msgid "selected links"
 msgstr "collegamenti selezionati"
@@ -1309,88 +1429,106 @@ msgstr "collegamenti selezionati"
 msgid "sep"
 msgstr "set"
 
-#: lib/options.php:278
+#: lib/options - Copia.php:278
+#: lib/options.php:396
 #@ boozurk
 msgid "short quote excerpt"
 msgstr "breve estratto della citazione"
 
-#: lib/options.php:667
+#: lib/options - Copia.php:667
+#: lib/options.php:746
 #@ boozurk
 msgid "show a link for easily add the selected text as a quote inside the comment form"
 msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&#39;interno della pagina, sottoforma di citazione nel del modulo di risposta"
 
-#: lib/options.php:431
+#: lib/options - Copia.php:431
+#: lib/options.php:536
 #@ boozurk
 msgid "show navigation links before post content"
 msgstr "visualizza i link di navigazione prima del contenuto del articolo"
 
-#: lib/options.php:788
+#: lib/options - Copia.php:788
+#: lib/options.php:856
 #@ boozurk
 msgid "show site description below the logo"
 msgstr "visualizza la descrizione del sito sotto il logo"
 
-#: lib/options.php:787
+#: lib/options - Copia.php:787
+#: lib/options.php:855
 #@ boozurk
 msgid "tagline"
 msgstr "motto"
 
-#: lib/options.php:772
+#: lib/options - Copia.php:772
+#: lib/options.php:841
 #: lib/widgets.php:1759
 #@ boozurk
 msgid "text"
 msgstr "testo"
 
-#: lib/options.php:776
+#: lib/options - Copia.php:776
+#: lib/options.php:845
 #@ boozurk
 msgid "the dimension of the thumbnails in main menu (if \"thumbnails\" style is selected)"
 msgstr "la dimensione (in pixel) delle miniature nel menu principale (se lo stile è impostato su \"miniature\")"
 
-#: lib/options.php:818
+#: lib/options - Copia.php:818
+#: lib/options.php:883
 #@ boozurk
 msgid "theme credits"
 msgstr "crediti del tema"
 
-#: lib/options.php:624
+#: lib/options - Copia.php:624
+#: lib/options.php:708
 #@ boozurk
 msgid "thickbox preview"
 msgstr "anteprima thickbox"
 
-#: lib/admin.php:398
-#: lib/options.php:485
-#: lib/options.php:772
+#: lib/admin - Copia.php:398
+#: lib/admin.php:509
+#: lib/options - Copia.php:485
+#: lib/options - Copia.php:772
+#: lib/options.php:584
+#: lib/options.php:841
 #: lib/widgets.php:1601
 #@ boozurk
 msgid "thumbnail"
 msgstr "miniatura"
 
-#: lib/options.php:772
+#: lib/options - Copia.php:772
+#: lib/options.php:841
 #@ boozurk
 msgid "thumbnail and text"
 msgstr "miniatura e testo"
 
-#: lib/options.php:103
-#: lib/options.php:142
-#: lib/options.php:182
-#: lib/options.php:213
-#: lib/options.php:244
-#: lib/options.php:275
+#: lib/options - Copia.php:103
+#: lib/options - Copia.php:142
+#: lib/options - Copia.php:182
+#: lib/options - Copia.php:213
+#: lib/options - Copia.php:244
+#: lib/options - Copia.php:275
+#: lib/options.php:224
+#: lib/options.php:260
+#: lib/options.php:300
+#: lib/options.php:331
+#: lib/options.php:362
+#: lib/options.php:393
 #@ boozurk
 msgid "title"
 msgstr "titolo"
 
-#: lib/options.php:703
+#: lib/options - Copia.php:703
+#: lib/options.php:778
 #@ boozurk
 msgid "use a dedicated style in mobile devices"
 msgstr "usa un stile dedicato per la visualizzazione su dispositivi mobili"
 
-#: lib/options.php:475
-#@ boozurk
-msgid "use the featured image as background for the post title"
-msgstr "usa l&#39;immagine in evidenza come sfondo del titolo"
-
-#: lib/options.php:543
-#: lib/options.php:553
-#: lib/options.php:563
+#: lib/options - Copia.php:543
+#: lib/options - Copia.php:553
+#: lib/options - Copia.php:563
+#: lib/options.php:636
+#: lib/options.php:645
+#: lib/options.php:654
 #@ boozurk
 msgid "width of the widget area"
 msgstr "larghezza dell&#39;area widget"
@@ -1420,159 +1558,192 @@ msgstr[1] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagini</a>"
 msgid "Mobile View"
 msgstr "Modalità Mobile"
 
+#: lib/options - Copia.php:17
 #: lib/options.php:17
 #@ boozurk
 msgid "Posts archives"
 msgstr "Archivi"
 
+#: lib/options - Copia.php:18
 #: lib/options.php:18
+#: lib/options.php:88
 #@ boozurk
 msgid "Contents"
 msgstr "Contenuti"
 
+#: lib/options - Copia.php:19
 #: lib/options.php:19
 #@ boozurk
 msgid "Sidebars and Widgets"
 msgstr "Barre laterali e Widget"
 
+#: lib/options - Copia.php:21
 #: lib/options.php:21
+#: lib/options.php:78
 #@ boozurk
 msgid "Mobile"
 msgstr "Mobile"
 
-#: lib/options.php:651
+#: lib/options - Copia.php:651
+#: lib/options.php:732
 #@ boozurk
 msgid "replace titles of some links with cool tooltips"
 msgstr "sostituisce il titolo di alcuni collegamenti con un simpatico tooltip"
 
-#: lib/options.php:502
+#: lib/options - Copia.php:502
+#: lib/options.php:599
 #@ boozurk
 msgid "primary sidebar"
 msgstr "barra laterale principale"
 
-#: lib/options.php:606
+#: lib/options - Copia.php:606
+#: lib/options.php:692
 #@ boozurk
 msgid "scroll"
 msgstr "scorri"
 
-#: lib/options.php:505
-#: lib/options.php:515
+#: lib/options - Copia.php:505
+#: lib/options - Copia.php:515
+#: lib/options.php:602
+#: lib/options.php:611
 #@ boozurk
 msgid "fixed"
 msgstr "fissa"
 
-#: lib/options.php:512
+#: lib/options - Copia.php:512
+#: lib/options.php:608
 #@ boozurk
 msgid "secondary sidebar"
 msgstr "barra laterale secondaria"
 
-#: lib/options.php:31
+#: lib/options - Copia.php:31
 #@ boozurk
 msgid "links colors"
 msgstr "colore dei collegamenti"
 
-#: lib/options.php:313
+#: lib/options - Copia.php:313
+#: lib/options.php:430
 #@ boozurk
 msgid "blank titles"
 msgstr "titoli vuoti"
 
-#: lib/options.php:314
+#: lib/options - Copia.php:314
+#: lib/options.php:431
 #@ boozurk
 msgid "set the standard text for blank titles"
 msgstr "imposta il testo predefinito per i titoli vuoti"
 
-#: lib/options.php:322
+#: lib/options - Copia.php:322
+#: lib/options.php:438
 #@ boozurk
 msgid "default text"
 msgstr "testo predefinito"
 
-#: lib/options.php:385
+#: lib/options - Copia.php:385
+#: lib/options.php:494
 #@ boozurk
 msgid "excerpt length"
 msgstr "lunghezza riassunto"
 
-#: lib/options.php:394
+#: lib/options - Copia.php:394
+#: lib/options.php:502
 #@ boozurk
 msgid "<em>excerpt more</em> string"
 msgstr "testo dell'<em>excerpt more</em>"
 
-#: lib/options.php:403
+#: lib/options - Copia.php:403
+#: lib/options.php:510
 #@ boozurk
 msgid "<em>excerpt more</em> linked"
 msgstr "<em>excerpt more</em> collegato"
 
-#: lib/options.php:404
+#: lib/options - Copia.php:404
+#: lib/options.php:511
 #@ boozurk
 msgid "use the <em>excerpt more</em> string as a link to the full post"
 msgstr "usa l'<em>excerpt more</em> come collegamento all'articolo completo"
 
-#: lib/options.php:411
+#: lib/options - Copia.php:411
+#: lib/options.php:517
 #@ boozurk
 msgid "(more...)"
 msgstr "(continua...)"
 
-#: lib/options.php:412
+#: lib/options - Copia.php:412
+#: lib/options.php:518
 #@ boozurk
 msgid "\"more\" tag string"
 msgstr "tag \"more\""
 
-#: lib/options.php:413
+#: lib/options - Copia.php:413
+#: lib/options.php:519
 #, php-format
 #@ boozurk
 msgid "only plain text. use <code>%t</code> as placeholder for the post title"
 msgstr "solo testo semplice. puoi usare <code>%t</code> per inserire il titolo dell'articolo"
 
-#: lib/options.php:730
+#: lib/options - Copia.php:730
+#: lib/options.php:803
 #@ boozurk
 msgid "Google web font"
 msgstr "Google web font"
 
-#: lib/options.php:731
+#: lib/options - Copia.php:731
+#: lib/options.php:804
 #@ boozurk
 msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>"
 msgstr "Copia e incolla qui iol nome della <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a>. Ad esempio: <code>Architects Daughter</code>"
 
-#: lib/options.php:739
+#: lib/options - Copia.php:739
+#: lib/options.php:811
 #@ boozurk
 msgid "for whole site"
 msgstr "per tutto il sito"
 
-#: lib/options.php:748
+#: lib/options - Copia.php:748
+#: lib/options.php:819
 #@ boozurk
 msgid "for posts/pages title"
 msgstr "per il titolo degli articoli/pagine"
 
-#: lib/options.php:757
+#: lib/options - Copia.php:757
+#: lib/options.php:827
 #@ boozurk
 msgid "for posts/pages content"
 msgstr "per il contenuto degli articoli/pagine"
 
-#: lib/options.php:494
+#: lib/options - Copia.php:494
+#: lib/options.php:592
 #@ boozurk
 msgid "custom smilies"
 msgstr "faccine personalizzate"
 
-#: lib/options.php:798
+#: lib/options - Copia.php:798
+#: lib/options.php:865
 #@ boozurk
 msgid "comment style"
 msgstr "stile dei commenti"
 
-#: lib/options.php:799
+#: lib/options - Copia.php:799
+#: lib/options.php:866
 #@ boozurk
 msgid "let the commenters to choose their comment background"
 msgstr "dai la possibilità ai commentatori di scegliere il colore di fondo dei loro commenti"
 
-#: lib/options.php:814
+#: lib/options - Copia.php:814
+#: lib/options.php:879
 #@ boozurk
 msgid "custom CSS code"
 msgstr "codice CSS personalizzato"
 
-#: lib/options.php:815
+#: lib/options - Copia.php:815
+#: lib/options.php:880
 #@ boozurk
 msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
 msgstr "<strong>Solo per utenti esperti</strong>: incolla qui il tuo codice CSS personalizzato. verrà aggiunto a quello predefinito"
 
-#: lib/options.php:713
+#: lib/options - Copia.php:713
+#: lib/options.php:787
 #@ boozurk
 msgid "colors"
 msgstr "colori"
@@ -1597,23 +1768,27 @@ msgstr "Barra laterale secondaria"
 msgid "The secondary sidebar widget area"
 msgstr "L'area widget all'interno della barra laterale secondaria"
 
+#: lib/admin - Copia.php:82
 #: lib/admin.php:82
 #, php-format
 #@ boozurk
 msgid "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\""
 msgstr "%s dice: \"Non ti dimenticare di impostare le <a href=\"%s\">mie opzioni</a>!\""
 
+#: lib/admin - Copia.php:95
 #: lib/admin.php:95
 #@ boozurk
 msgid "Are you really sure you want to set all the options to their default values?"
 msgstr "Sei veramente sicuro di voler ripristinare i valori predefiniti?"
 
-#: lib/admin.php:235
+#: lib/admin - Copia.php:235
+#: lib/admin.php:293
 #@ boozurk
 msgid "Defaults values loaded."
 msgstr "Valori predefiniti impostati"
 
-#: lib/admin.php:370
+#: lib/admin - Copia.php:370
+#: lib/admin.php:483
 #@ boozurk
 msgid "Back to defaults"
 msgstr "Ripristina predefiniti"
@@ -1722,22 +1897,27 @@ msgstr "Semplice strumento per modificare la dimensione dei caratteri (usa javas
 msgid "Error 404"
 msgstr "Errore 404"
 
-#: lib/options.php:447
+#: lib/options - Copia.php:447
+#: lib/options.php:550
 #@ boozurk
 msgid "date"
 msgstr "data"
 
-#: lib/options.php:456
+#: lib/options - Copia.php:456
+#: lib/options.php:199
+#: lib/options.php:558
 #@ boozurk
 msgid "categories"
 msgstr "categorie"
 
-#: lib/options.php:465
+#: lib/options - Copia.php:465
+#: lib/options.php:566
 #@ boozurk
 msgid "tags"
 msgstr "tag"
 
-#: lib/options.php:818
+#: lib/options - Copia.php:818
+#: lib/options.php:883
 #@ boozurk
 msgid "It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom"
 msgstr "Sarebbe carino se manteneste visibili i crediti del tema. Grazie"
@@ -1765,13 +1945,15 @@ msgstr "Visita il sito dell'autore del tema"
 msgid "Boozurk theme"
 msgstr "Boozurk"
 
-#: lib/options.php:323
+#: lib/options - Copia.php:323
+#: lib/options.php:439
 #, php-format
 #@ boozurk
 msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id"
 msgstr "<br />puoi usare i seguenti codici:<br /><code>%d</code>data di pubblicazione<br /><code>%f</code>formato (se impostato)<br /><code>%n</code> id"
 
-#: lib/options.php:439
+#: lib/options - Copia.php:439
+#: lib/options.php:543
 #@ boozurk
 msgid "show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget"
 msgstr "visualizza i dettagli dell'articolo nelle liste, appena prima del contenuto<br />nei singli articoli puoi usare l'widget <strong>Dettagli Articolo</strong>"
@@ -1808,17 +1990,23 @@ msgstr "Rispondi al commento"
 msgid "ID of the page created using the \"List of Categories\" template (if any)"
 msgstr "ID della pagina creata usando il tamplate \"List of Categories\" (se esistente)"
 
-#: lib/admin.php:284
+#: lib/admin - Copia.php:284
+#: lib/admin.php:356
+#: lib/admin.php:423
 #@ boozurk
 msgid "Choose a Logo Image"
 msgstr "Scegli un Logo"
 
-#: lib/admin.php:284
+#: lib/admin - Copia.php:284
+#: lib/admin.php:356
+#: lib/admin.php:423
 #@ boozurk
 msgid "Set as logo"
 msgstr "Imposta come logo"
 
-#: lib/admin.php:284
+#: lib/admin - Copia.php:284
+#: lib/admin.php:356
+#: lib/admin.php:423
 #@ boozurk
 msgid "Choose Image"
 msgstr "Scegli una immagine"
@@ -1846,42 +2034,50 @@ msgstr "ancora nessun commento"
 msgid "Taxonomy"
 msgstr "Tassonomia"
 
-#: lib/options.php:580
+#: lib/options - Copia.php:580
+#: lib/options.php:669
 #@ boozurk
 msgid "javascript features"
 msgstr "funzionalità javascript"
 
-#: lib/options.php:581
+#: lib/options - Copia.php:581
+#: lib/options.php:670
 #@ boozurk
 msgid "try disable all javascript features if you encountered problems with javascript"
 msgstr "se hai riscontrato problemi con i javascript, prova a disabilitare tutte le funzioni"
 
-#: lib/options.php:588
+#: lib/options - Copia.php:588
+#: lib/options.php:676
 #@ boozurk
 msgid "basic animations"
 msgstr "animazioni di base"
 
-#: lib/options.php:597
+#: lib/options - Copia.php:597
+#: lib/options.php:684
 #@ boozurk
 msgid "main menu"
 msgstr "menu principale"
 
-#: lib/options.php:598
+#: lib/options - Copia.php:598
+#: lib/options.php:685
 #@ boozurk
 msgid "fade in/out menu subitems"
 msgstr "dissolvenza in entrata/uscita dei sottogruppi"
 
-#: lib/options.php:607
+#: lib/options - Copia.php:607
+#: lib/options.php:693
 #@ boozurk
 msgid "smooth scroll to top/bottom when click top/bottom buttons"
 msgstr "scorrimento morbido della pagina quando vengono cliccati i pulsanti su/giù"
 
-#: lib/options.php:615
+#: lib/options - Copia.php:615
+#: lib/options.php:700
 #@ boozurk
 msgid "video resize"
 msgstr "ridimensiona video"
 
-#: lib/options.php:616
+#: lib/options - Copia.php:616
+#: lib/options.php:701
 #@ boozurk
 msgid "resize embeded video when window resizes"
 msgstr "ridimensiona i video incorporati quando la pagina viene ridimensionata"
@@ -1903,24 +2099,30 @@ msgstr "Commenti a %s"
 msgid "Cancel reply"
 msgstr "Cancella la risposta"
 
-#: lib/options.php:421
+#: lib/options - Copia.php:421
+#: lib/options.php:526
 #@ boozurk
 msgid "prevent page scroll when clicking the more link"
 msgstr "evita che la pagina scorra in giù quando viene premuto il link <em>more</em>"
 
-#: lib/options.php:505
-#: lib/options.php:515
+#: lib/options - Copia.php:505
+#: lib/options - Copia.php:515
+#: lib/options.php:602
+#: lib/options.php:611
 #@ boozurk
 msgid "scroll with page"
 msgstr "scorri con la pagina"
 
-#: lib/options.php:505
-#: lib/options.php:515
+#: lib/options - Copia.php:505
+#: lib/options - Copia.php:515
+#: lib/options.php:602
+#: lib/options.php:611
 #@ boozurk
 msgid "hidden"
 msgstr "nascosto"
 
-#: lib/options.php:695
+#: lib/options - Copia.php:695
+#: lib/options.php:771
 #@ boozurk
 msgid "tiny navigation menu for small screen"
 msgstr "menu di navigazione ridotto per schermi di piccole dimensioni"
@@ -1933,88 +2135,174 @@ msgstr "menu di navigazione ridotto per schermi di piccole dimensioni"
 msgid "recommend this with %s"
 msgstr "consiglialo con %s"
 
-#: lib/options.php:331
+#: lib/options - Copia.php:331
+#: lib/options.php:446
 #@ boozurk
 msgid "Hide titles"
 msgstr "nascondi i titoli"
 
-#: lib/options.php:332
+#: lib/options - Copia.php:332
+#: lib/options.php:447
 #@ boozurk
 msgid "Hide posts/pages title in single view"
 msgstr "nascondi i titoli delle pagine/articoli nella modalità singola"
 
-#: lib/options.php:340
+#: lib/options - Copia.php:340
+#: lib/options.php:454
 #@ boozurk
 msgid "in front page"
 msgstr "nella front page"
 
-#: lib/options.php:349
+#: lib/options - Copia.php:349
+#: lib/options.php:462
 #@ boozurk
 msgid "in every page"
 msgstr "in ogni pagina"
 
-#: lib/options.php:358
+#: lib/options - Copia.php:358
+#: lib/options.php:470
 #@ boozurk
 msgid "in every post"
 msgstr "in ogni articolo"
 
-#: lib/options.php:367
+#: lib/options - Copia.php:367
+#: lib/options.php:478
 #@ boozurk
 msgid "in selected posts/pages"
 msgstr "nelle pagine/articoli selezionati"
 
-#: lib/options.php:368
+#: lib/options - Copia.php:368
+#: lib/options.php:479
 #@ boozurk
 msgid "comma-separated list of IDs ( eg. <em>23,86,120</em> )"
 msgstr "lista di ID separati da virgola (es. <em>23,86,120</em>)"
 
-#: lib/options.php:438
+#: lib/options - Copia.php:438
+#: lib/options.php:542
 #@ boozurk
 msgid "post details"
 msgstr "dettagli dell'articolo"
 
-#: lib/options.php:522
+#: lib/options - Copia.php:522
+#: lib/options.php:617
 #@ boozurk
 msgid "split header widget area"
 msgstr "dividi l'area widget di testata"
 
-#: lib/options.php:532
+#: lib/options - Copia.php:532
+#: lib/options.php:626
 #@ boozurk
 msgid "split post widget area"
 msgstr "dividi l'area widget degli articoli"
 
-#: lib/options.php:766
+#: lib/options - Copia.php:766
+#: lib/options.php:835
 #@ boozurk
 msgid "sharing buttons"
 msgstr "pulsanti di condivisione"
 
-#: lib/options.php:769
+#: lib/options - Copia.php:769
+#: lib/options.php:838
 #@ boozurk
 msgid "official button"
 msgstr "pulsante ufficiale"
 
-#: lib/options.php:780
+#: lib/options - Copia.php:780
+#: lib/options.php:849
 #@ boozurk
 msgid "logo"
 msgstr "logo"
 
-#: lib/options.php:806
+#: lib/options - Copia.php:806
+#: lib/options.php:872
 #@ boozurk
 msgid "adaptive layout"
 msgstr "impaginazione adattiva"
 
-#: lib/options.php:807
+#: lib/options - Copia.php:807
+#: lib/options.php:873
 #@ boozurk
 msgid "the theme changes the layout to fit the small screens"
 msgstr "il tema modifica l'impaginazione per adattarsi agli schermi piccoli"
 
-#: lib/plug-n-play.php:207
+#: lib/plug-n-play.php:209
 #@ boozurk
 msgid "in bbPress"
 msgstr "nei forum bbPress"
 
-#: lib/plug-n-play.php:343
+#: lib/plug-n-play.php:345
 #@ boozurk
 msgid "in BuddyPress"
 msgstr "nelle pagine BuddyPress"
+
+#: lib/options - Copia.php:475
+#: lib/options.php:575
+#@ boozurk
+msgid "use the featured image as background for the post title (the image must be at least 900px wide)"
+msgstr "utilizza l'immagine in evidenza come sfondo per il titolo del post (l'immagine deve essere larga almeno 900px)"
+
+#: lib/admin.php:302
+#@ boozurk
+msgid "Our developers need coffee (and beer). How about a small donation?"
+msgstr "I nostri programmatori hanno bisogno di caffè (e birra). Che ne dici di una piccola donazione?"
+
+#: lib/options.php:29
+#@ boozurk
+msgid "Style"
+msgstr "Stile"
+
+#: lib/options.php:41
+#@ boozurk
+msgid "Fonts"
+msgstr "Caratteri"
+
+#: lib/options.php:61
+#@ boozurk
+msgid "Layout"
+msgstr "Impaginazione"
+
+#: lib/options.php:65
+#@ boozurk
+msgid "Sidebars"
+msgstr "Barre laterali"
+
+#: lib/options.php:92
+#@ boozurk
+msgid "learn more about the post formats"
+msgstr "informati riguardo ai formati degli articoli"
+
+#: lib/options.php:92
+#@ boozurk
+msgid "Post formats"
+msgstr "Formato degli articoli"
+
+#: lib/options.php:93
+#@ boozurk
+msgid "the following options affect only the blog/index view, while in single posts the appearance will be the same"
+msgstr "le seguenti opzioni hanno effetto unicamente negli archivi/blog, mentre nei singoli articoli l'aspetto sarà il medesimo"
+
+#: lib/options.php:108
+#@ boozurk
+msgid "Titles"
+msgstr "Titoli"
+
+#: lib/options.php:129
+#@ boozurk
+msgid "Features"
+msgstr "Funzionalità"
+
+#: lib/options.php:175
+#@ boozurk
+msgid "normal"
+msgstr "normali"
+
+#: lib/options.php:183
+#@ boozurk
+msgid "highlighted"
+msgstr "evidenziati"
+
+#: lib/options.php:191
+#@ boozurk
+msgid "selected"
+msgstr "selezionati"
 
