@@ -203,7 +203,6 @@ class Boozurk_For_Bbpress {
 	function extra_options( $coa ) {
 
 		$coa['boozurk_hide_bbpress_title'] = array(
-			'group'				=> 'content',
 			'type'				=> 'chk',
 			'default'			=> 0,
 			'description'		=> __( 'in bbPress', 'boozurk' ),
@@ -339,7 +338,6 @@ class Boozurk_For_BuddyPress {
 	function extra_options( $coa ) {
 
 		$coa['boozurk_hide_buddypress_title'] = array(
-			'group'				=> 'content',
 			'type'				=> 'chk',
 			'default'			=> 0,
 			'description'		=> __( 'in BuddyPress', 'boozurk' ),

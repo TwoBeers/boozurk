@@ -254,7 +254,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> array( 'boozurk_post_formats_audio_title', 'boozurk_post_formats_audio_content' )
 		),
 		'boozurk_post_formats_audio_title' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'first link text',
 							'description'	=> __( 'title', 'boozurk' ),
@@ -265,7 +264,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_audio_content' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'audio player',
 							'description'	=> __( 'content', 'boozurk' ),
@@ -276,16 +274,13 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_chat' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'chat' ),
 							'info'			=> sprintf( __( '%s format posts', 'boozurk' ), '&quot;' . get_post_format_string( 'chat' ) . '&quot;' ),
 							'req'			=> '',
-							'sub'			=> array( 'boozurk_post_formats_audio_title', 'boozurk_post_formats_audio_content' )
 		),
 		'boozurk_post_formats_gallery' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'gallery' ),
@@ -294,7 +289,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> array( 'boozurk_post_formats_gallery_title', 'boozurk_post_formats_gallery_content' )
 		),
 		'boozurk_post_formats_gallery_title' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'none',
 							'description'	=> __( 'title', 'boozurk' ),
@@ -305,7 +299,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_gallery_content' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'presentation',
 							'description'	=> __( 'content', 'boozurk' ),
@@ -316,7 +309,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_image' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'image' ),
@@ -325,7 +317,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> array( 'boozurk_post_formats_image_title', 'boozurk_post_formats_image_content' )
 		),
 		'boozurk_post_formats_image_title' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'first image title',
 							'description'	=> __( 'title', 'boozurk' ),
@@ -336,7 +327,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_image_content' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'first image',
 							'description'	=> __( 'content', 'boozurk' ),
@@ -347,7 +337,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_link' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'link' ),
@@ -356,7 +345,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> array( 'boozurk_post_formats_link_title', 'boozurk_post_formats_link_content' )
 		),
 		'boozurk_post_formats_link_title' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'first link text',
 							'description'	=> __( 'title', 'boozurk' ),
@@ -367,7 +355,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_link_content' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'none',
 							'description'	=> __( 'content', 'boozurk' ),
@@ -378,7 +365,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_quote' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'quote' ),
@@ -387,7 +373,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> array( 'boozurk_post_formats_quote_title', 'boozurk_post_formats_quote_content' )
 		),
 		'boozurk_post_formats_quote_title' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'short quote excerpt',
 							'description'	=> __( 'title', 'boozurk' ),
@@ -398,7 +383,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_quote_content' => array(
-							'group'			=> 'index',
 							'type'			=> 'sel',
 							'default'		=> 'content',
 							'description'	=> __( 'content', 'boozurk' ),
@@ -409,7 +393,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_post_formats_status' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'status' ),
@@ -417,7 +400,6 @@ function boozurk_get_coa( $option = false ) {
 							'req'			=> ''
 		),
 		'boozurk_post_formats_video' => array(
-							'group'			=> 'index',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> get_post_format_string( 'video' ),

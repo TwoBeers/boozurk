@@ -49,3 +49,15 @@ div[id*=_bz-] .widget-title {
 .services-wrap .service:nth-of-type(odd) {
 	clear: left;
 }
+.mp6 div.widget-liquid-left div#widgets-left #available-widgets div[id*=_bz-] .widget-top:before {
+	content: '';
+}
+.mp6 div.widget-liquid-right div#widgets-right .widgets-sortables {
+	padding-top: 90px;
+}
+.mp6 div[id*=_bz-] .widget-title {
+	background-position: 16px center;
+}
+.mp6 div.widget-liquid-right div#widgets-right .widget .widget-title {
+	padding-left: 42px;
+}

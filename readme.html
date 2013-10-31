@@ -23,7 +23,7 @@
 <h3>REQUIREMENTS :</h3>
 	<ul>
 		<li>PHP 5+</li>
-		<li>Wordpress 3.5+ (REQUIRED)</li>
+		<li>Wordpress 3.6+ (REQUIRED)</li>
 	</ul>
 
 <h3>BUNDLED RESOURCES :</h3>
@@ -169,7 +169,7 @@
 
 <h3>POST FORMATS :</h3>
 	A <a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Format</a> is a piece of meta information that can be used by a theme to customize its presentation of a post.
-	The theme uses the customization in lists (main blog, archives, search and so on), while, in single posts, the appearance will be ever the same (title + content)
+	The theme uses the customization in lists (main blog, archives, search and so on), while, in single posts, the appearance will be ever the same (title + content).
 	The recognized formats are:
 	<ul>
 		<li><h4>aside</h4>
@@ -208,128 +208,132 @@
 		<li><strong>this theme is not compatible with Internet Explorer 7 (or less), and it will never be!</strong> so don't ask...</li>
 	</ul>
 
-<h3>CHANGE LOG (FROM VERSION 2.08.1) :</h3>
-Adds:
-	<ul>
-		<li>new look for the theme options page</li>
-	</ul>
-Notes:
-	<ul>
-	</ul>
+<h3>CHANGE LOG :</h3>
 
-<h3>CHANGE LOG (FROM VERSION 2.07.1) :</h3>
-Adds:
-	<ul>
-		<li><a href="http://wordpress.org/plugins/bbpress/">bbPress</a> support</li>
-		<li><a href="http://wordpress.org/plugins/buddypress/">BuddyPress</a> support</li>
-		<li>styling for mediaelements</li>
-		<li>Cloudup and Instagram added to "Follow Me" widget</li>
-		<li>option for disabling the adaptive layout</li>
-	</ul>
-Notes:
-	<ul>
-		<li>removed swf audio player. now uses mediaelements.js</li>
-		<li>added some other sharing services buttons (top left of post/page)</li>
-		<li>removed "Share this" widget</li>
-	</ul>
+	<h4>3.00</h4>
+	Adds:
+		<ul>
+			<li>new look for the theme options page</li>
+		</ul>
+	Fixes:
+		<ul>
+			<li>minor css fixes in admin side</li>
+		</ul>
 
-<h3>CHANGE LOG (FROM VERSION 2.07) :</h3>
-Fixes:
-	<ul>
-		<li>"Fatal error: Call to undefined function" in footer widget area</li>
-	</ul>
+	<h4>2.08.1</h4>
+	Adds:
+		<ul>
+			<li><a href="http://wordpress.org/plugins/bbpress/">bbPress</a> support</li>
+			<li><a href="http://wordpress.org/plugins/buddypress/">BuddyPress</a> support</li>
+			<li>styling for mediaelements.js</li>
+			<li>Cloudup and Instagram added to "Follow Me" widget</li>
+			<li>option for disabling the adaptive layout</li>
+		</ul>
+	Notes:
+		<ul>
+			<li>removed swf audio player. now uses mediaelements.js</li>
+			<li>added some other sharing services buttons (top left of post/page)</li>
+			<li>removed "Share this" widget</li>
+		</ul>
 
-<h3>CHANGE LOG (FROM VERSION 2.06.1) :</h3>
-Adds:
-	<ul>
-		<li>admin style integration for <a href="http://wordpress.org/plugins/mp6/">MP6</a> plugin</li>
-		<li>style integration for <a href="http://wordpress.org/plugins/bbpress/">bbPress</a> plugin</li>
-		<li>support for <a href="https://github.com/TwoBeers/tb-comment-tools">TB Comment Tools</a> plugin</li>
-		<li>option for preventing page scroll when clicking the more link</li>
-		<li>filter for js tooltips selector</li>
-		<li>"Coming Soon" template</li>
-		<li>"Follow Me" widget fields validation</li>
-	</ul>
-Fixes:
-	<ul>
-		<li>minor css and js fixes</li>
-	</ul>
+	<h4>2.07.1</h4>
+	Fixes:
+		<ul>
+			<li>"Fatal error: Call to undefined function" in footer widget area</li>
+		</ul>
 
-<h3>CHANGE LOG (FROM VERSION 2.02.1) :</h3>
+	<h4>2.07</h4>
+	Adds:
+		<ul>
+			<li>admin style integration for <a href="http://wordpress.org/plugins/mp6/">MP6</a> plugin</li>
+			<li>style integration for <a href="http://wordpress.org/plugins/bbpress/">bbPress</a> plugin</li>
+			<li>support for <a href="https://github.com/TwoBeers/tb-comment-tools">TB Comment Tools</a> plugin</li>
+			<li>option for preventing page scroll when clicking the more link</li>
+			<li>filter for js tooltips selector</li>
+			<li>"Coming Soon" template</li>
+			<li>"Follow Me" widget fields validation</li>
+		</ul>
+	Fixes:
+		<ul>
+			<li>minor css and js fixes</li>
+		</ul>
 
-Adds:
-	<ul>
-		<li>option for hiding sidebars</li>
-		<li>max-width for hi-res monitors</li>
-		<li>hoverIntent added to fading animations</li>
-		<li>new function for printing credits (partially filterable)</li>
-		<li>a lot of filters and hooks for adding/deleting/modifing the theme elements and functions</li>
-		<li>added TheHookAlliance hooks support</li>
-		<li>display image captions while viewing with thickbox</li>
-		<li>Jetpack modules support (Carousel, Likes, Sharedaddy, InfiniteScroll)</li>
-		<li>RSS link in "follow me" widget customizable</li>
-		<li>low resolution monitors ( less then 960px ) compatibility</li>
-		<li>Yoast Breadcrumbs support</li>
-		<li>Font Awesome iconset</li>
-		<li>options for selectively disabling basic animations</li>
-	</ul>
-Fixes:
-	<ul>
-		<li>code cleaned</li>
-		<li>sidebars moved after the footer (faster content loading)</li>
-		<li>hooks consistency (names, postions etc)</li>
-		<li>comment form filters defined in functions.php</li>
-		<li>the_bird.php renamed to admin.php + functions moved</li>
-		<li>"created_category" action error</li>
-		<li>"select logo" page</li>
-		<li>increased use of theme slug in code</li>
-		<li>hide page title in front-page</li>
-		<li>navigation buttons placement</li>
-		<li>css fixes</li>
-		<li>navigation buttons widget - fixed option removed</li>
-	</ul>
+	<h4>2.06.1</h4>
+	Adds:
+		<ul>
+			<li>option for hiding sidebars</li>
+			<li>max-width for hi-res monitors</li>
+			<li>hoverIntent added to fading animations</li>
+			<li>new function for printing credits (partially filterable)</li>
+			<li>a lot of filters and hooks for adding/deleting/modifing the theme elements and functions</li>
+			<li>added TheHookAlliance hooks support</li>
+			<li>display image captions while viewing with thickbox</li>
+			<li>Jetpack modules support (Carousel, Likes, Sharedaddy, InfiniteScroll)</li>
+			<li>RSS link in "follow me" widget customizable</li>
+			<li>low resolution monitors ( less then 960px ) compatibility</li>
+			<li>Yoast Breadcrumbs support</li>
+			<li>Font Awesome iconset</li>
+			<li>options for selectively disabling basic animations</li>
+		</ul>
+	Fixes:
+		<ul>
+			<li>code cleaned</li>
+			<li>sidebars moved after the footer (faster content loading)</li>
+			<li>hooks consistency (names, postions etc)</li>
+			<li>comment form filters defined in functions.php</li>
+			<li>the_bird.php renamed to admin.php + functions moved</li>
+			<li>"created_category" action error</li>
+			<li>"select logo" page</li>
+			<li>increased use of theme slug in code</li>
+			<li>hide page title in front-page</li>
+			<li>navigation buttons placement</li>
+			<li>css fixes</li>
+			<li>navigation buttons widget - fixed option removed</li>
+		</ul>
 
+	<h4>2.02.1</h4>
+	Adds:
+		<ul>
+			<li>custom header support</li>
+			<li>"bz-tipped-anchor" class for adding tooltips to anchors</li>
+			<li>Orkut, Tumblr, Blurb, Scribd, SlideShare, SoundCloud, Google Bookmarks, Blogger and Ubuntu One added to "Follow me" widgets</li>
+			<li>e-mail, LinkedIn, Orkut, Tumblr, Google Bookmarks, Blogger added to "Share this" widget</li>
+			<li>Google Buzz service removed from "Social Links" and "Share this" widgets</li>
+			<li>blank titles handling</li>
+			<li>custom "more" tag</li>
+			<li>excerpt length</li>
+			<li>custom smilies</li>
+			<li>selectable style for mobile</li>
+			<li>Google web fonts</li>
+			<li>custom css</li>
+			<li>selectable color for comments</li>
+			<li>sidebars position (fixed/scrolling)</li>
+			<li>...and other new cool options</li>
+			<li>Breadcrumb NavXT native support</li>
+			<li>WP-Paginate native support</li>
+			<li>TB Chat Post native support</li>
+			<li>filter for adding/customizing theme options</li>
+			<li>WP Multibyte Patch excerpt length support (thanks to gdgd_hirahira)</li>
+			<li>simple javascript-based font resizer widget</li>
+		</ul>
+	Fixes:
+		<ul>
+			<li>full WP3.4 compatible</li>
+			<li>"nofollow" attribute to mobile/desktop switch link</li>
+			<li>removed debug output for security reasons.</li>
+			<li>post/pages titles with HTML tags</li>
+			<li>javascript optimized</li>
+			<li>removed the option for using the logo in the login page (WordPress requirements)</li>
+			<li>the_title filter warnings</li>
+			<li>fixes in rtl style</li>
+			<li>navigation logic reversed (accordingly to <a rel="nofollow" target="_blank" href="http://digwp.com/2009/08/wordpress-page-navigation/">http://digwp.com/2009/08/wordpress-page-navigation/</a></li>
+			<li>minor fixes in code and style</li>
+		</ul>
 
-<h3>CHANGE LOG (FROM VERSION 1.04) :</h3>
-
-Adds:
-	<ul>
-		<li>custom header support</li>
-		<li>"bz-tipped-anchor" class for adding tooltips to anchors</li>
-		<li>Orkut, Tumblr, Blurb, Scribd, SlideShare, SoundCloud, Google Bookmarks, Blogger and Ubuntu One added to "Follow me" widgets</li>
-		<li>e-mail, LinkedIn, Orkut, Tumblr, Google Bookmarks, Blogger added to "Share this" widget</li>
-		<li>Google Buzz service removed from "Social Links" and "Share this" widgets</li>
-		<li>blank titles handling</li>
-		<li>custom "more" tag</li>
-		<li>excerpt length</li>
-		<li>custom smilies</li>
-		<li>selectable style for mobile</li>
-		<li>Google web fonts</li>
-		<li>custom css</li>
-		<li>selectable color for comments</li>
-		<li>sidebars position (fixed/scrolling)</li>
-		<li>...and other new cool options</li>
-		<li>Breadcrumb NavXT native support</li>
-		<li>WP-Paginate native support</li>
-		<li>TB Chat Post native support</li>
-		<li>filter for adding/customizing theme options</li>
-		<li>WP Multibyte Patch excerpt length support (thanks to gdgd_hirahira)</li>
-		<li>simple javascript-based font resizer widget</li>
-	</ul>
-Fixes:
-	<ul>
-		<li>full WP3.4 compatible</li>
-		<li>"nofollow" attribute to mobile/desktop switch link</li>
-		<li>removed debug output for security reasons.</li>
-		<li>post/pages titles with HTML tags</li>
-		<li>javascript optimized</li>
-		<li>removed the option for using the logo in the login page (WordPress requirements)</li>
-		<li>the_title filter warnings</li>
-		<li>fixes in rtl style</li>
-		<li>navigation logic reversed (accordingly to <a rel="nofollow" target="_blank" href="http://digwp.com/2009/08/wordpress-page-navigation/">http://digwp.com/2009/08/wordpress-page-navigation/</a></li>
-		<li>minor fixes in code and style</li>
-	</ul>
-
+	<h4>1.04</h4>
+		<ul>
+			<li>initial release</li>
+		</ul>
 
 <h3>SUPPORT :</h3>
 	<ul>

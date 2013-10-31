@@ -4,21 +4,29 @@
 	background: url('../images/boozurk.png') no-repeat scroll center transparent;
 }
 div.wrap {
-	margin-right: 290px;
+	margin-right: 240px;
+}
+.button {
+	min-width:130px;
 }
 #theme_donation {
 	position: fixed;
 	right: 20px;
-	top: 50px;
-	width: 250px;
+	top: 118px;
+	width: 200px;
 	text-align: center;
 }
 #buttons {
 	position: fixed;
 	right: 20px;
-	top: 211px;
-	width: 250px;
+	top: 270px;
+	width: 200px;
 	text-align: center;
+}
+#theme_bottom {
+	clear: both;
+	text-align: center;
+	border-top: 1px solid #ccc;
 }
 #theme-infos ul {
 	list-style: disc outside;
@@ -31,7 +39,10 @@ div.wrap {
 	max-width: 160px;
 }
 #tabselector {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+}
+#tabselector img {
+	vertical-align: bottom;
 }
 .tab-opt {
 	margin: 20px 0;

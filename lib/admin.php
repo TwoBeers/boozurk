@@ -295,21 +295,16 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 
 ?>
 	<div class="wrap" id="main-wrap">
-		<div class="icon32" id="theme-icon"><br /></div>
 		<h2><?php echo boozurk_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options','boozurk' ); ?></h2>
 
 		<div id="theme_donation">
 			<small><?php _e( 'Our developers need coffee (and beer). How about a small donation?', 'boozurk' ); ?></small>
 			<br />
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHkAYJKoZIhvcNAQcEoIIHgTCCB30CAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCgmkdCeuKG0DsDW1Nxdgr718YtbYgxuAvr1Wj+sd6xs0RtJvRCEzkKKw1amF2+G/JR71bdSyRC2iwrKhCv7ENypApQdcCa+Y+49v1fTNf7wD2pciNcKx4mVYPRuVsy1dWjXq+TwGRXTyrtSXtm1Z/GzGTOyVReag2ZVcPB2DwlVDELMAkGBSsOAwIaBQAwggEMBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECEOP/47dbF97gIHoo7qXD+AJGSv9zKQjX07aWsxCwopiJbyli7IV1DSGITRDy6b6oIEXE6BCXyS7BdcgYxGjsTK87YVG2Ol1Faw6daOrYMMLWg8NLnRQF0u/AvWtfFXxgpjXfIh7m7iItGq06tUaUR/lO44zbRPFwOwLi0godzwlDwASZxQKiH07+gS1EC+D9MQseDh0JLJm1TuwUU25kpPv8ompigepKXaHfBUWh+dXd1S0Zef20IHbjgxQyNh9QtOCDvOifPvDbk9YC3PEpZUTbKVu1jwd7nqiRNv/EaF3ZVJEoqx3bsYd+ISMIarCI1bleqCCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTEzMTAyNTEzMTE0M1owIwYJKoZIhvcNAQkEMRYEFD89JIR5P5JuCuUxi6d9qw/vmHOPMA0GCSqGSIb3DQEBAQUABIGADZopAyxEOojSi0RaO6jCs85XPNEOe5RW+Y/19952s1C9vIWGD7UT1iJ4Tzlt9KD63A26sLOXkDyLfXPowwNi+9e0G4rI9fRlWdklaFrtebnmPojBZc7+GlM/jK7stcrF89S4wLckBJtGpEYGO8cd5b+GZ3HPx4w4artG3Ncjxxc=-----END PKCS7-----">
-				<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-				<img alt="" border="0" src="https://www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
-			</form>
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5FWKWFH62RRC8"><img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal - The safer, easier way to pay online."/></a>
 		</div>
 
 		<h2 id="tabselector" class="nav-tab-wrapper">
+			<img src="<?php echo get_template_directory_uri() . '/images/boozurk.png' ?>" alt="boozurk"/>
 			<?php foreach( $the_hierarchy as $key => $genus ) { ?>
 				<a id="selgroup-<?php echo $key; ?>" class="nav-tab" href="#" onClick="boozurkOptions.switchTab('<?php echo $key; ?>'); return false;"><?php echo $genus['label']; ?></a>
 			<?php } ?>
@@ -472,26 +467,27 @@ if ( !function_exists( 'boozurk_edit_options' ) ) {
 				<?php } ?>
 				<div id="buttons">
 					<input type="hidden" name="<?php echo $the_option_name; ?>[hidden_opt]" value="default" />
-					<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'boozurk' ); ?>" />
+					<input class="button button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'boozurk' ); ?>" />
 					<br />
 					-
 					<br />
-					<a href="themes.php?page=boozurk_functions" target="_self"><?php _e( 'Undo Changes' , 'boozurk' ); ?></a>
+					<a class="button" href="themes.php?page=boozurk_functions" target="_self"><?php _e( 'Undo Changes' , 'boozurk' ); ?></a>
 					<br />
 					-
 					<br />
-					<a id="to-defaults" href="themes.php?page=boozurk_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'boozurk' ); ?></a>
+					<a class="button" id="to-defaults" href="themes.php?page=boozurk_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'boozurk' ); ?></a>
 				</div>
 			</form>
-			<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
+			<div id="theme_bottom">
 				<small>
 					<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br />
 					<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-boozurk' ); ?>" title="boozurk theme" target="_blank"><?php _e( 'Leave a feedback', 'boozurk' ); ?></a>
 				</small>
-			</p>
-			<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc; margin-top: 10px;">
+				<br />
+				-
+				<br />
 				<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
-			</p>
+			</div>
 		</div>
 		<div id="theme-infos">
 			<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info', 'boozurk' ); ?></h2>
