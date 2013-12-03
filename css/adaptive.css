@@ -1,40 +1,66 @@
 /* Very Hi Resolutions
 ----------------------------------------------------------*/
-@media screen and (min-width: 1440px) {
-	#navbuttons.fixed {
-		right: auto;
-		margin-left: 849px;
+@media screen and (min-width: 1360px) {
+	#main {
+		max-width:1340px;
 	}
-	#sidebar-secondary.fixed {
-		right: auto;
-		margin-left: 892px;
+	#head_wrap.fixed {
+		max-width: 737px;
 	}
 }
 
 /* Low Resolutions
 ----------------------------------------------------------*/
 @media screen and (max-width: 960px) {
-	#content {
+	div#content {
 		margin: 0 40px;
+		position: static;
+	}
+	.top-menu #main {
+		padding-top: 0;
+	}
+	#main {
+		position: relative;
 	}
 	#sidebar-primary ,
 	#sidebar-secondary ,
 	#sidebar-primary.fixed ,
-	#sidebar-secondary.fixed {
+	#sidebar-secondary.fixed,
+	#sidebar-primary.tinyscroll ,
+	#sidebar-secondary.tinyscroll {
+		position: static;
+		padding: 0;
+		margin: 0;
+		width: auto;
+	}
+	#sidebar-primary.fixed .viewport,
+	#sidebar-secondary.fixed .viewport,
+	#sidebar-primary.tinyscroll .viewport,
+	#sidebar-secondary.tinyscroll .viewport {
 		position: static;
 		width: 49.5%;
-		height: auto;
+		height: auto !important;
 		overflow: auto;
 		float: left;
 		padding: 0;
 		margin: 0;
 	}
-	#sidebar-primary .inner ,
-	#sidebar-secondary .inner ,
-	#sidebar-primary.fixed .inner ,
-	#sidebar-secondary.fixed .inner {
+	#sidebar-primary.fixed:hover .viewport,
+	#sidebar-secondary.fixed:hover .viewport {
+		overflow-y: auto;
+	}
+	#sidebar-primary .overview ,
+	#sidebar-secondary .overview ,
+	#sidebar-primary.fixed .overview ,
+	#sidebar-secondary.fixed .overview,
+	#sidebar-primary.tinyscroll .overview ,
+	#sidebar-secondary.tinyscroll .overview {
 		width: auto;
 		padding: 10px;
+		position: static;
+	}
+	.sidebar.tinyscroll .scrollbar{
+		display: none !important;
 	}
 	#fixed-bg {
 		background-position: -14px 0;
@@ -48,7 +74,7 @@
 	.bottom-fade {
 		display: none;
 	}
-	#navbuttons.fixed {
+	#navbuttons.fixed ul {
 		width: 40px;
 		padding-left: 0;
 		padding-right: 0;
@@ -61,11 +87,17 @@
 	.minib_home {
 		display: none;
 	}
+	#secondary1_wrap {
+		margin: 0 40px;
+	}
 	.tinynav {
 		display: block;
 		width: 100%;
 		margin-bottom: 20px;
 		border: 1px solid #ddd;
+	}
+	#tinynav1 {
+		margin: 0;
 	}
 	body > .tinynav {
 		padding-left: 40px;
@@ -88,5 +120,15 @@
 		position: absolute;
 		left: 8px;
 		margin-top: 4px;
+	}
+	#head_wrap.fixed {
+		background: transparent;
+		margin: 0;
+		padding: 0;
+		position: static;
+		z-index: 100;
+	}
+	#posts_content {
+		padding-top: 0 !important;
 	}
 }

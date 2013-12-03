@@ -17,25 +17,25 @@
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>" id="sidebar-primary">
 
-	<div class="primary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
+	<div class="viewport">
 
-	<div class="inner">
+		<div class="overview">
 
-		<?php boozurk_hook_sidebar_top( 'primary' ); ?>
+			<?php boozurk_hook_sidebar_top( 'primary' ); ?>
 
-		<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
+			<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
 
-			<?php boozurk_default_widgets(); ?>
+				<?php boozurk_default_widgets(); ?>
 
-		<?php } ?>
+			<?php } ?>
 
-		<br class="fixfloat" />
+			<br class="fixfloat" />
 
-		<?php boozurk_hook_sidebar_bottom( 'primary' ); ?>
+			<?php boozurk_hook_sidebar_bottom( 'primary' ); ?>
+
+		</div>
 
 	</div>
-
-	<div class="primary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_primary' ) ?>"></div>
 
 </div>
 

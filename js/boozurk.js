@@ -61,6 +61,10 @@ boozurkScripts = {
 					boozurkScripts.tinynav();
 					break;
 
+				case 'tinyscrollbar':
+					boozurkScripts.tinyscrollbar();
+					break;
+
 				default :
 					//no default action
 					break;
@@ -372,6 +376,41 @@ boozurkScripts = {
 		$(".nav-menu").tinyNav({
 			label: '<i class="icon-align-justify"></i>', // String: Sets the <label> text for the <select> (if not set, no label will be added)
 			header: '' // String: Specify text for "header" and show header instead of the active item
+		});
+	},
+
+	tinyscrollbar : function() {
+		var $sidebar_primary_scrollable = $('#sidebar-primary.fixed');
+		var $sidebar_secondary_scrollable = $('#sidebar-secondary.fixed');
+		var doit;
+
+		function resize_sidebar(){
+			if ($sidebar_primary_scrollable.length)
+				$sidebar_primary_scrollable.tinyscrollbar_update();
+
+			if ($sidebar_secondary_scrollable.length)
+				$sidebar_secondary_scrollable.tinyscrollbar_update();
+		}
+
+		if ($sidebar_primary_scrollable.length) {
+			$sidebar_primary_scrollable.prepend( '<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>' );
+			$sidebar_primary_scrollable.removeClass('fixed').addClass('tinyscroll');
+			$sidebar_primary_scrollable.tinyscrollbar();
+			$sidebar_primary_scrollable.hover(function () {$('.scrollbar', this).fadeIn()},function () {$('.scrollbar', this).stop().fadeOut()});
+		}
+
+		if ($sidebar_secondary_scrollable.length) {
+			$sidebar_secondary_scrollable.prepend( '<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>' );
+			$sidebar_secondary_scrollable.removeClass('fixed').addClass('tinyscroll');
+			$sidebar_secondary_scrollable.tinyscrollbar();
+			$sidebar_secondary_scrollable.hover(function () {$('.scrollbar', this).fadeIn()},function () {$('.scrollbar', this).stop().fadeOut()});
+		}
+
+		$(window).resize(function() {
+			clearTimeout(doit);
+			doit = setTimeout(function() {
+				resize_sidebar();
+			}, 100);
 		});
 	}
 

@@ -300,97 +300,126 @@ button:focus [class^="icon-"] {
 	max-width: 100%;
 	height: auto;
 }
+#head_wrap.fixed {
+	background: url("images/bg.png") repeat-y scroll -12px 0 #FFFFFF;
+	margin: 0 276px 0 -42px;
+	padding: 0 0 0 42px;
+	position: fixed;
+	z-index: 100;
+	border-bottom: solid 1px #ddd;
+}
+.top-menu #head_wrap.fixed {
+}
 
 /* Sidebars
 ----------------------------------------------------------*/
+.sidebar .overview {
+	word-wrap: break-word;
+}
 #sidebar-primary {
-	width: 247px;
-	padding: 0 10px 0;
 	position: absolute;
+	margin-left: -310px;
 	left: 0;
 	top: 0;
 }
-.sidebar .inner {
-	word-wrap: break-word;
+#sidebar-primary .viewport {
 }
-#sidebar-primary .inner {
-	padding-bottom: 50px;
+#sidebar-primary .overview {
+	width: 250px;
+	padding-top: 20px;
+}
+#sidebar-primary.tinyscroll .overview {
+	position: absolute;
+}
+#sidebar-primary.fixed .viewport,
+#sidebar-primary.tinyscroll .viewport {
+	position: fixed;
+	overflow: hidden;
+}
+#sidebar-primary.fixed .viewport {
+	height:90%;
+}
+#sidebar-primary.tinyscroll .viewport {
+	width: 250px;
+	padding-right: 17px;
+}
+#sidebar-primary.fixed:hover .viewport {
+	overflow-y: scroll;
+}
+#sidebar-primary.tinyscroll .scrollbar {
+	margin-left: 260px;
+	border-left: 1px solid #ddd;
 }
 #sidebar-secondary {
-	width: 200px;
-	padding: 0 10px 0;
 	position: absolute;
+	margin-right: -41px;
 	right: 0;
 	top: 0;
 }
-#sidebar-secondary .inner {
-	padding-bottom: 100px;
+#sidebar-secondary .viewport {
+	position: absolute;
+	padding-left: 17px;
 }
-#sidebar-primary.fixed {
-	position: fixed;
-	top: 0;
-	height:90%;
-	overflow: hidden;
+#sidebar-secondary .overview {
+	width: 200px;
 	padding-top: 20px;
 }
-#sidebar-primary.fixed:hover {
-	overflow-y: auto;
+#sidebar-secondary.tinyscroll .overview {
+	position: absolute;
 }
-#sidebar-primary.fixed .inner {
-	width: 237px;
-}
-#sidebar-secondary.fixed {
+#sidebar-secondary.fixed .viewport,
+#sidebar-secondary.tinyscroll .viewport {
 	position: fixed;
-	top: 0;
-	height:90%;
 	overflow: hidden;
-	padding-top: 20px;
 }
-#sidebar-secondary.fixed:hover {
-	overflow-y: auto;
+#sidebar-secondary.fixed .viewport {
+	height:90%;
 }
-#sidebar-secondary.fixed .inner {
-	width: 190px;
+#sidebar-secondary.tinyscroll .viewport {
+	width: 200px;
 }
-.primary.top-fade,
-.primary.bottom-fade {
-	width: 247px;
-	left: 0;
+#sidebar-secondary.fixed:hover .viewport {
+	overflow-y: scroll;
 }
-.secondary.top-fade,
-.secondary.bottom-fade {
-	width: 190px;
-	right: 20px;
+#sidebar-secondary.tinyscroll .scrollbar {
+	border-right: 1px solid #ddd;
 }
-.top-fade.scroll,
-.bottom-fade.scroll {
+.sidebar.tinyscroll .scrollbar{
+	position: fixed;
+	width: 6px;
+	z-index: 1;
 	display: none;
 }
-.top-fade {
-	position: fixed;
-	top: 0;
-	height: 20px;
-	background: transparent url(images/sidebar-fade.png) left bottom repeat-x;
-	background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(255,255,255,0) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-8 */
+.sidebar.tinyscroll .track {
+	height: 100%;
+	width: 6px;
+	position: relative;
 }
-.bottom-fade {
-	position: fixed;
-	bottom: 0;
-	height: 50px;
-	background: transparent url(images/sidebar-fade.png) left top repeat-x;
-	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+.sidebar.tinyscroll .thumb {
+	background: #aaa;
+	height: 20px;
+	width: 6px;
+	cursor: pointer;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.sidebar.tinyscroll .thumb .end {
+	background: #aaa;
+	overflow: hidden;
+	height: 5px;
+	width: 6px;
+}
+.sidebar.tinyscroll .disable {
+	display: none;
+}
+.noSelect {
+	user-select: none;
+	-o-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
 }
 .bz-description {
 	margin-bottom: 1.8em;
@@ -399,56 +428,31 @@ button:focus [class^="icon-"] {
 	max-width: 200px;
 	height: auto;
 }
-.admin-bar #sidebar-primary.fixed {
-	top: 28px;
-}
-.admin-bar #sidebar-secondary.fixed {
-	top: 28px;
-}
-.admin-bar .top-fade {
-	top: 28px;
-}
-.top-menu #sidebar-primary.fixed {
-	top: 35px;
-}
-.top-menu #sidebar-secondary.fixed {
-	top: 35px;
-}
-.top-menu .top-fade {
-	top: 35px;
-}
-.admin-bar.top-menu #sidebar-primary.fixed {
-	top: 63px;
-}
-.admin-bar.top-menu #sidebar-secondary.fixed {
-	top: 63px;
-}
-.admin-bar.top-menu .top-fade {
-	top: 63px;
-}
 
 /* Main content
 ----------------------------------------------------------*/
 #fixed-bg {
 	position: fixed;
-	background: transparent url('images/bg.png') 256px 0px repeat-y;
+	background: transparent url('images/bg.png') 273px 0px repeat-y;
 	height: 4000px;
 	width: 100%;
 	z-index: -1;
 	margin-top: -200px;
 }
 #main {
-	position: relative;
-	max-width:1420px;
-	margin: 20px auto 0;
+	margin: 0 auto 0;
 }
 .top-menu #main {
-	margin: 55px auto 0;
+	padding-top: 35px;
+}
+.top-menu #content {
 }
 #content {
-	margin-left: 310px;
-	margin-right: 260px;
+	margin-left: 327px;
+	margin-right: 275px;
+	position: relative;
 }
+
 /* Footer
 ----------------------------------------------------------*/
 #footer {
@@ -923,11 +927,9 @@ div.tb_post_details ul {
 }
 .widget_search button {
 	font-size: 20px;
-	height: auto;
-	line-height: 20px;
 	margin: 5px 0 5px 5px;
 	min-width: 50px;
-	padding: 0 5px;
+	padding: 0 5px 2px;
 }
 
 /* Post Format icons
@@ -1089,13 +1091,10 @@ img.tb-thumb-format {
 	padding:0;
 	overflow: auto;
 	position: fixed;
-	top: 0;
-	padding-top: 30px;
 	width: 100%;
 	z-index:1;
 }
 .admin-bar #secondary1 {
-	padding-top: 30px;
 }
 #secondary2 {
 	border: 1px solid #ddd;
@@ -1167,6 +1166,7 @@ img.tb-thumb-format {
 	border-radius: 3px;
 	box-shadow:0 0 3px #000;
 	display: none;
+	z-index: 2;
 }
 .cooltip:before {
 	background: transparent url(images/cooltips.gif) 0 bottom no-repeat;
@@ -1187,18 +1187,22 @@ img.tb-thumb-format {
 /* Navigation buttons
 ----------------------------------------------------------*/
 #navbuttons.fixed {
+	position: absolute;
+	right: 0;
+	width: 42px;
+}
+#navbuttons ul {
+	margin: 0;
+	overflow: hidden;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	bottom: 0;
 	padding: 2000px 2px 0;
 	position: fixed;
-	right: 220px;
 	width: 36px;
 	background: #fff;
-}
-#navbuttons ul {
-	margin: 0;
-	overflow: hidden;
+	display: block;
+	margin-left: 41px;
 }
 #navbuttons ul li {
 	list-style: none outside none;
@@ -1222,16 +1226,20 @@ img.tb-thumb-format {
 	margin: 3px 0;
 	border: 1px solid transparent;
 }
-
+#navbuttons a [class^="icon-"],
+#navbuttons a [class*=" icon-"],
+#navbuttons a [class^="icon-"]:before,
+#navbuttons a [class*=" icon-"]:before {
+	display: block; /* Safari fix */
+}
 /* BreadCrumb 
 ----------------------------------------------------------*/
 #breadcrumb-wrap {
 	background: url('images/bc-sep.png') no-repeat -590px center;
-	margin: 0;
 	border:solid 1px #ddd;
 	border-left: none;
 	line-height: 30px;
-	margin-bottom:20px;
+	margin: 0 0 20px 0;
 	padding: 0 5px 0 10px;
 }
 #bz-breadcrumb {
@@ -1269,6 +1277,11 @@ img.tb-thumb-format {
 .reminder {
 	border-top: solid 1px #ddd;
 }
+#head_wrap.fixed #breadcrumb-wrap {
+	margin: 0 0 -1px;
+	border-right: none;
+}
+
 /* Comments 
 ----------------------------------------------------------*/
 #comments,

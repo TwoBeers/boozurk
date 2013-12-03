@@ -29,8 +29,10 @@
 
 /* Custom actions - WP hooks */
 
-add_action( 'widgets_init'	, 'boozurk_widget_area_init' );
-add_action( 'widgets_init'	, 'boozurk_widgets_init' );
+add_action( 'widgets_init'						, 'boozurk_widget_area_init' );
+add_action( 'widgets_init'						, 'boozurk_widgets_init' );
+add_action( 'admin_print_styles-widgets.php'	, 'boozurk_widgets_style' );
+add_action( 'admin_print_scripts-widgets.php'	, 'boozurk_widgets_scripts' );
 
 
 /**
@@ -151,6 +153,22 @@ function boozurk_widget_area_init() {
 		),
 		boozurk_get_default_widget_args( 'before=<div class="bz-widget">&after=</div>' )
 	) );
+
+}
+
+
+//add custom stylesheet
+function boozurk_widgets_style() {
+
+	wp_enqueue_style( 'boozurk-widgets-style', get_template_directory_uri() . '/css/widgets.css', false, '', 'screen' );
+
+}
+
+
+//add js script to the widgets page
+function boozurk_widgets_scripts() {
+
+	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.js', array('jquery'), boozurk_get_info( 'version' ), true );
 
 }
 

@@ -17,30 +17,30 @@
 
 <div class="sidebar<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>" id="sidebar-secondary">
 
-	<div class="secondary top-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>"></div>
+	<div class="viewport">
 
-	<div class="inner">
+		<div class="overview">
 
-		<?php boozurk_hook_sidebar_top( 'secondary' ); ?>
+			<?php boozurk_hook_sidebar_top( 'secondary' ); ?>
 
-		<!-- here should be the secondary widget area -->
-		<?php if ( is_active_sidebar( 'fixed-widget-area'  ) ) { ?>
+			<!-- here should be the secondary widget area -->
+			<?php if ( is_active_sidebar( 'fixed-widget-area'  ) ) { ?>
 
-			<div id="fixed-widget-area">
+				<div id="fixed-widget-area">
 
-				<?php dynamic_sidebar( 'fixed-widget-area' ); ?>
+					<?php dynamic_sidebar( 'fixed-widget-area' ); ?>
 
-				<br class="fixfloat" /> 
+					<br class="fixfloat" /> 
 
-			</div><!-- #fixed-widget-area -->
+				</div><!-- #fixed-widget-area -->
 
-		<?php } ?>
+			<?php } ?>
 
-		<?php boozurk_hook_sidebar_bottom( 'secondary' ); ?>
+			<?php boozurk_hook_sidebar_bottom( 'secondary' ); ?>
+
+		</div>
 
 	</div>
-
-	<div class="secondary bottom-fade<?php echo ' ' . boozurk_get_opt( 'boozurk_sidebar_secondary' ) ?>"></div>
 
 </div>
 

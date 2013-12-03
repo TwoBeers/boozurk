@@ -1,19 +1,18 @@
-var farbtastic;
-var boozurkOptions;
+var themeOptions;
 
 (function($) {
 
-boozurkOptions = {
+themeOptions = {
 
 	//initialize
 	init : function() {
 
 		var frame;
 
-		boozurkOptions.switchTab('style');
+		themeOptions.switchTab('style');
 
 		$('#to-defaults').click (function () {
-			var answer = confirm(boozurk_options_l10n.confirm_to_defaults)
+			var answer = confirm(theme_options_l10n.confirm_to_defaults)
 			if (!answer){
 				return false;
 			}
@@ -61,7 +60,7 @@ boozurkOptions = {
 			frame.open();
 		});
 
-		$('#theme-options .boozurk_cp').each(function() {
+		$('#theme-options .theme_option_cp').each(function() {
 			$this = $(this);
 			$this.wpColorPicker({
 				change: function( event, ui ) {
@@ -97,6 +96,6 @@ boozurkOptions = {
 
 };
 
-$(document).ready(function($){ boozurkOptions.init(); });
+$(document).ready(function($){ themeOptions.init(); });
 
 })(jQuery);

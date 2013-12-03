@@ -33,7 +33,6 @@ add_action( 'wp_enqueue_scripts'					, 'boozurk_scripts' );
 add_action( 'wp_footer'								, 'boozurk_initialize_scripts' );
 add_action( 'init'									, 'boozurk_post_expander_activate' );
 add_action( 'init'									, 'boozurk_infinite_scroll_activate' );
-add_action( 'admin_bar_menu'						, 'boozurk_admin_bar_plus', 999 );
 add_action( 'wp_head'								, 'boozurk_plus_snippet' );
 add_action( 'created_category'						, 'boozurk_created_category_color' );
 add_action( 'comment_form_comments_closed'			, 'boozurk_comments_closed' );
@@ -56,6 +55,8 @@ add_action( 'boozurk_hook_entry_bottom'				, 'boozurk_link_pages' );
 add_action( 'boozurk_hook_comments_list_before'		, 'boozurk_navigate_comments' );
 add_action( 'boozurk_hook_comments_list_after'		, 'boozurk_navigate_comments' );
 add_action( 'boozurk_hook_secondary_sidebar_top'	, 'boozurk_secondary_sidebar_top' );
+add_action( 'boozurk_hook_header_before'			, 'boozurk_fixed_header',1 );
+add_action( 'boozurk_hook_header_after'				, 'boozurk_fixed_header',9999 );
 
 
 /* Custom filters - WP hooks */
@@ -105,7 +106,7 @@ function boozurk_get_info( $field ) {
 
 		$infos['theme'] =			wp_get_theme( 'boozurk' );
 		$infos['current_theme'] =	wp_get_theme();
-		$infos['version'] =			$infos['theme']? $infos['theme']['Version'] : '';
+		$infos['version'] =			$infos['current_theme']? $infos['current_theme']['Version'] : '';
 
 	}
 
@@ -273,6 +274,32 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-color: ' . $cat_color . ' ; }' . "\n";
 	}
 ?>
+	#content {
+		margin-right: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) + 75 ); ?>px;
+		margin-left: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 77 ); ?>px;
+	}
+	#fixed-bg {
+		background-position: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 23 ); ?>px 0;
+	}
+	#sidebar-primary {
+		margin-left: -<?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 60 ); ?>px;
+	}
+	#sidebar-primary .overview {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) ); ?>px;
+	}
+	#sidebar-primary.tinyscroll .viewport {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) ); ?>px;
+	}
+	#sidebar-primary.tinyscroll .scrollbar {
+		margin-left: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 10 ); ?>px;
+	}
+	#sidebar-secondary .overview {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) ); ?>px;
+	}
+	#sidebar-secondary.tinyscroll .viewport {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) ); ?>px;
+	}
+
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -311,6 +338,8 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'quotethis';
 			if ( ( boozurk_get_opt( 'boozurk_infinite_scroll' ) ) && !is_singular() && !is_404() )
 				$modules[] = 'infinitescroll';
+			if ( boozurk_get_opt( 'boozurk_scrollable_sidebars' ) )
+				$modules[] = 'tinyscrollbar';
 		}
 
 		if ( boozurk_get_opt( 'boozurk_js_post_expander' ) )
@@ -418,10 +447,16 @@ if ( !function_exists( 'boozurk_stylesheet' ) ) {
 if ( !function_exists( 'boozurk_scripts' ) ) {
 	function boozurk_scripts(){
 
-		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() || ! boozurk_get_opt( 'boozurk_jsani' ) ) return;
+		if ( is_admin() || boozurk_is_mobile() || boozurk_is_printpreview() ) return;
 
-		$deps = array('jquery');
-		$deps[] = 'hoverIntent';
+		$deps = array( 'jquery', 'hoverIntent' );
+
+		wp_enqueue_script( 'boozurk-layout', get_template_directory_uri() . '/js/layout.js', $deps, boozurk_get_info( 'version' ), true );
+
+		if ( ! boozurk_get_opt( 'boozurk_jsani' ) ) return;
+
+		if ( boozurk_get_opt( 'boozurk_scrollable_sidebars' ) )
+			wp_enqueue_script( 'boozurk-scrollbar', get_template_directory_uri() . '/js/tinyscrollbar/jquery.tinyscrollbar.min.js', $deps, boozurk_get_info( 'version' ), true );
 
 		if ( boozurk_get_opt( 'boozurk_tinynav' ) )
 			wp_enqueue_script( 'boozurk-tinynav', get_template_directory_uri() . '/js/tinynav/tinynav.min.js', $deps, boozurk_get_info( 'version' ), true );
@@ -1899,29 +1934,6 @@ function boozurk_infinite_scroll_activate ( ) {
 }
 
 
-// add links to admin bar
-if ( !function_exists( 'boozurk_admin_bar_plus' ) ) {
-	function boozurk_admin_bar_plus() {
-		global $wp_admin_bar;
-
-		if (!is_super_admin() || !is_admin_bar_showing() || !current_user_can( 'edit_theme_options' ) ) return;
-
-		$add_menu_meta = array(
-			'target'    => '_blank'
-		);
-
-		$wp_admin_bar->add_menu( array(
-			'id'		=> 'boozurk_theme_options',
-			'parent'	=> 'appearance',
-			'title'		=> __( 'Theme Options','boozurk' ),
-			'href'		=> get_admin_url() . 'themes.php?page=boozurk_functions',
-			'meta'		=> $add_menu_meta,
-		) );
-
-	}
-}
-
-
 // add the +snippet elements
 if ( !function_exists( 'boozurk_plus_snippet' ) ) {
 	function boozurk_plus_snippet(){
@@ -2173,6 +2185,8 @@ function boozurk_quote_content( $content ) {
 function boozurk_body_classes( $classes ) {
 
 	$classes[] = 'no-js';
+
+	$classes[] = 'theme_version_' . str_replace( ".", '', boozurk_get_info( 'version' ) );
 
 	if ( has_nav_menu( 'secondary1' ) ) $classes[] = 'top-menu';
 
@@ -2607,7 +2621,8 @@ function boozurk_primary_menu() {
 function boozurk_1st_secondary_menu() {
 
 	wp_nav_menu( array(
-		'container'			=> false,
+		'container'			=> 'div',
+		'container_id'		=> 'secondary1_wrap',
 		'menu_id'			=> 'secondary1',
 		'menu_class'		=> 'nav-menu',
 		'fallback_cb'		=> false,
@@ -2722,4 +2737,21 @@ function boozurk_header_widget_area() {
 
 }
 
+
+function boozurk_fixed_header() {
+
+	if ( boozurk_get_opt( 'boozurk_fixed_header' ) ) {
+
+		switch ( current_filter() ) {
+			case 'boozurk_hook_header_before':
+				echo '<div id="head_wrap">';
+				break;
+			case 'boozurk_hook_header_after':
+				echo '</div>';
+				break;
+		}
+
+	}
+
+}
 

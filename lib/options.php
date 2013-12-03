@@ -12,18 +12,6 @@
 // Complete Options Array, with type, defaults values, description, infos and required option
 function boozurk_get_coa( $option = false ) {
 
-	$groups = array(
-		'colors'		=> __( 'Colors' , 'boozurk' ),
-		'index'			=> __( 'Posts archives' , 'boozurk' ),
-		'content'		=> __( 'Contents' , 'boozurk' ),
-		'widgets'		=> __( 'Sidebars and Widgets' , 'boozurk' ),
-		'javascript'	=> __( 'Javascript' , 'boozurk' ),
-		'mobile'		=> __( 'Mobile' , 'boozurk' ),
-		'other'			=> __( 'Other' , 'boozurk' )
-	);
-	$groups = apply_filters( 'boozurk_options_groups', $groups );
-
-
 	$hierarchy = array(
 		'style' => array(
 			'label'			=> __( 'Style', 'boozurk' ),
@@ -72,6 +60,13 @@ function boozurk_get_coa( $option = false ) {
 						'boozurk_sidebar_foot_1_width',
 						'boozurk_sidebar_foot_2_width',
 						'boozurk_sidebar_foot_3_width',
+					),
+				),
+				'header' => array(
+					'label'			=> __( 'Header', 'boozurk' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'boozurk_fixed_header',
 					),
 				),
 				'mobile' => array(
@@ -141,6 +136,7 @@ function boozurk_get_coa( $option = false ) {
 						'boozurk_quotethis',
 						'boozurk_infinite_scroll',
 						'boozurk_tinynav',
+						'boozurk_scrollable_sidebars',
 					),
 				),
 				'other' => array(
@@ -511,7 +507,6 @@ function boozurk_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'boozurk_browse_links' => array(
-							'group'			=> 'content',
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> __( 'quick browsing links', 'boozurk' ),
@@ -582,7 +577,17 @@ function boozurk_get_coa( $option = false ) {
 							'info'			=> '',
 							'options'		=> array( 'scroll', 'fixed', 'hidden' ),
 							'options_l10n'	=> array( __( 'scroll with page', 'boozurk' ), __( 'fixed', 'boozurk' ), __( 'hidden', 'boozurk' ) ),
-							'req'			=> ''
+							'req'			=> '',
+							'sub'			=> array( 'boozurk_primary_sidebar_width' ),
+		),
+		'boozurk_primary_sidebar_width' => array(
+							'type'			=> 'int',
+							'default'		=> 250,
+							'range'			=> array( 150, 400 ),
+							'description'	=> __( 'sidebar width (px)', 'boozurk' ),
+							'info'			=> '[150-400]',
+							'req'			=> '',
+							'sub'			=> false,
 		),
 		'boozurk_sidebar_secondary' => array(
 							'type'			=> 'sel',
@@ -591,7 +596,17 @@ function boozurk_get_coa( $option = false ) {
 							'info'			=> '',
 							'options'		=> array( 'scroll', 'fixed', 'hidden' ),
 							'options_l10n'	=> array( __( 'scroll with page', 'boozurk' ), __( 'fixed', 'boozurk' ), __( 'hidden', 'boozurk' ) ),
-							'req'			=> ''
+							'req'			=> '',
+							'sub'			=> array( 'boozurk_secondary_sidebar_width' ),
+		),
+		'boozurk_secondary_sidebar_width' => array(
+							'type'			=> 'int',
+							'default'		=> 200,
+							'range'			=> array( 150, 400 ),
+							'description'	=> __( 'sidebar width (px)', 'boozurk' ),
+							'info'			=> '[150-400]',
+							'req'			=> '',
+							'sub'			=> false,
 		),
 		'boozurk_sidebar_head_split' => array(
 							'type'			=> 'sel',
@@ -753,6 +768,13 @@ function boozurk_get_coa( $option = false ) {
 							'info'			=> __( 'tiny navigation menu for small screen', 'boozurk' ),
 							'req'			=> 'boozurk_jsani'
 		),
+		'boozurk_scrollable_sidebars' => array(
+							'type'			=> 'chk',
+							'default'		=> 0,
+							'description'	=> __( 'scrollable sidebars', 'boozurk' ),
+							'info'			=> sprintf( __( 'fixed sidebars powered by %s', 'boozurk' ), '<a href="http://www.baijs.nl/tinyscrollbar/">Tiny Scrollbar</a>' ),
+							'req'			=> 'boozurk_jsani'
+		),
 		'boozurk_mobile_css' => array(
 							'type'			=> 'chk',
 							'default'		=> 1,
@@ -846,6 +868,13 @@ function boozurk_get_coa( $option = false ) {
 							'default'		=> 0,
 							'description'	=> __( 'comment style', 'boozurk' ),
 							'info'			=> __( 'let the commenters to choose their comment background', 'boozurk' ),
+							'req'			=> ''
+		),
+		'boozurk_fixed_header' => array(
+							'type'			=> 'chk',
+							'default'		=> 0,
+							'description'	=> __( 'fixed header', 'boozurk' ),
+							'info'			=> '',
 							'req'			=> ''
 		),
 		'boozurk_adaptive_layout' => array(
