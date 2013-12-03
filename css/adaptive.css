@@ -62,7 +62,7 @@
 	.sidebar.tinyscroll .scrollbar{
 		display: none !important;
 	}
-	#fixed-bg {
+	div#fixed-bg {
 		background-position: -14px 0;
 	}
 	.post-top-date,

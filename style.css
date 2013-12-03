@@ -1033,8 +1033,7 @@ img.tb-thumb-format {
 	position: absolute;
 	display: none;
 	z-index: 30;
-	max-width: 300px;
-	min-width: 150px;
+	width: 200px;
 	border: 1px solid #ddd;
 	background-color: #f5f5f5;
 	margin: 0;
