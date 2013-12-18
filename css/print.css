@@ -54,6 +54,8 @@ blockquote {
 .nav-single,
 .img-navi,
 .bz-last-cop,
+.tinynav,
+.tinynav_label,
 .bz-featured-title img,
 #mainmenu,
 #mainmenu_container,
@@ -74,6 +76,11 @@ blockquote {
 #head img,
 body #wpadminbar {
 	display: none;
+}
+div#content,
+div#footer {
+	margin: 0 40px;
+	position: static;
 }
 .fixfloat {
 	clear: both;

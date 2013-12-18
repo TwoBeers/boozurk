@@ -1470,6 +1470,7 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 			'home'		=> 1,
 			'next_prev'	=> 1,
 			'up_down'	=> 1,
+			'fixed'		=> 0,
 		);
 
 	}
@@ -1482,7 +1483,7 @@ class Boozurk_Widget_Navbuttons extends WP_Widget {
 
 ?>
 	<?php echo $before_widget; ?>
-	<?php boozurk_navbuttons( $instance['print'], $instance['comment'], $instance['feed'], $instance['trackback'], $instance['home'], $instance['next_prev'], $instance['up_down'], 0 ); ?>
+	<?php boozurk_navbuttons( $instance ); ?>
 	<?php echo $after_widget; ?>
 <?php
 

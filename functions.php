@@ -44,7 +44,7 @@ add_action( 'comment_form_before'					, 'boozurk_enqueue_comments_reply' );
 
 add_action( 'boozurk_hook_header_after'				, 'boozurk_primary_menu' );
 add_action( 'boozurk_hook_body_top'					, 'boozurk_1st_secondary_menu' );
-add_action( 'boozurk_hook_footer_before'			, 'boozurk_navigation' );
+add_action( 'boozurk_hook_footer_top'				, 'boozurk_navigation' );
 add_action( 'boozurk_hook_footer_top'				, 'boozurk_2nd_secondary_menu' );
 add_action( 'boozurk_hook_header_after'				, 'boozurk_header_widget_area' );
 add_action( 'boozurk_hook_entry_before'				, 'boozurk_print_details' );
@@ -274,32 +274,32 @@ if ( !function_exists( 'boozurk_custom_style' ) ) {
 		echo '.widget .cat-item-' . $category->term_id . ' > a, #posts_content .cat-item-' . $category->term_id . ' > a { border-color: ' . $cat_color . ' ; }' . "\n";
 	}
 ?>
-	#content {
-		margin-right: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) + 75 ); ?>px;
-		margin-left: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 77 ); ?>px;
+	#content,
+	#footer{
+			margin-right: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) + 75 ); ?>px;
+			margin-left: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 77 ); ?>px;
 	}
 	#fixed-bg {
-		background-position: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 23 ); ?>px 0;
+			background-position: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 23 ); ?>px 0;
 	}
 	#sidebar-primary {
-		margin-left: -<?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 60 ); ?>px;
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 34 ); ?>px;
+	}
+	#sidebar-primary .viewport {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) ); ?>px;
 	}
 	#sidebar-primary .overview {
 		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) ); ?>px;
 	}
-	#sidebar-primary.tinyscroll .viewport {
-		width: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) ); ?>px;
+	#sidebar-secondary {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) + 34 ); ?>px;
 	}
-	#sidebar-primary.tinyscroll .scrollbar {
-		margin-left: <?php echo intval( boozurk_get_opt( 'boozurk_primary_sidebar_width' ) + 10 ); ?>px;
+	#sidebar-secondary .viewport {
+		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) ); ?>px;
 	}
 	#sidebar-secondary .overview {
 		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) ); ?>px;
 	}
-	#sidebar-secondary.tinyscroll .viewport {
-		width: <?php echo intval( boozurk_get_opt( 'boozurk_secondary_sidebar_width' ) ); ?>px;
-	}
-
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -451,7 +451,7 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 
 		$deps = array( 'jquery', 'hoverIntent' );
 
-		wp_enqueue_script( 'boozurk-layout', get_template_directory_uri() . '/js/layout.js', $deps, boozurk_get_info( 'version' ), true );
+		wp_enqueue_script( 'boozurk-layout', get_template_directory_uri() . '/js/layout.min.js', $deps, boozurk_get_info( 'version' ), true );
 
 		if ( ! boozurk_get_opt( 'boozurk_jsani' ) ) return;
 
@@ -2689,15 +2689,17 @@ function boozurk_add_home_link( $items = '', $args = null ) {
 // Display search form.
 function boozurk_search_form() {
 
-	$form = '<form role="search" method="get" id="searchform" action="' . esc_url( home_url( '/' ) ) . '" >
-	<div>
-		<label class="screen-reader-text" for="s">Search for:</label>
-		<input type="text" value="' . get_search_query() . '" name="s" id="s" />
-		<button type="submit">
-			<i class="icon-search"></i>
-		</button>
+	$form = '
+	<form role="search" method="get" class="searchform" action="' . esc_url( home_url( '/' ) ) . '" >
+		<div class="searchform-wrap">
+			<label class="screen-reader-text" for="s">Search for:</label>
+			<input type="text" value="' . get_search_query() . '" name="s" id="s" />
+			<button type="submit">
+				<i class="icon-search"></i>
+			</button>
 		</div>
-	</form>';
+	</form>
+	';
 
 	return $form;
 

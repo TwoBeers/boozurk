@@ -11,31 +11,37 @@
 ?>
 
 <!-- begin footer -->
-				<?php boozurk_hook_footer_before(); ?>
+			</div><!-- close content -->
+
+			<div id="sidebars">
 
 				<?php get_sidebar(); // show primary widgets area ?>
 
 				<?php get_sidebar( 'secondary' ); // show secondary widgets area ?>
 
-				<div id="footer">
+			</div>
 
-					<?php boozurk_hook_footer_top(); ?>
+			<?php boozurk_hook_footer_before(); ?>
 
-					<?php get_sidebar( 'footer' ); // show footer widgets area ?>
+			<div id="footer">
 
-					<div id="bz-credits">
-						<?php echo boozurk_get_credits(); ?>
-					</div>
+				<?php boozurk_hook_footer_top(); ?>
 
-					<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
+				<?php get_sidebar( 'footer' ); // show footer widgets area ?>
 
-					<?php boozurk_hook_footer_bottom(); ?>
+				<div id="bz-credits">
 
-				</div><!-- close footer -->
+					<?php echo boozurk_get_credits(); ?>
 
-				<?php boozurk_hook_footer_after(); ?>
+				</div>
 
-			</div><!-- close content -->
+				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
+
+				<?php boozurk_hook_footer_bottom(); ?>
+
+			</div><!-- close footer -->
+
+			<?php boozurk_hook_footer_after(); ?>
 
 		</div><!-- close main -->
 

@@ -12,7 +12,8 @@
 /* Low Resolutions
 ----------------------------------------------------------*/
 @media screen and (max-width: 960px) {
-	div#content {
+	div#content,
+	div#footer {
 		margin: 0 40px;
 		position: static;
 	}
@@ -22,26 +23,23 @@
 	#main {
 		position: relative;
 	}
-	#sidebar-primary ,
-	#sidebar-secondary ,
-	#sidebar-primary.fixed ,
-	#sidebar-secondary.fixed,
-	#sidebar-primary.tinyscroll ,
-	#sidebar-secondary.tinyscroll {
-		position: static;
-		padding: 0;
-		margin: 0;
-		width: auto;
+	#sidebars {
+		margin: 0 40px;
 	}
-	#sidebar-primary.fixed .viewport,
-	#sidebar-secondary.fixed .viewport,
-	#sidebar-primary.tinyscroll .viewport,
-	#sidebar-secondary.tinyscroll .viewport {
+	#main #sidebar-primary ,
+	#main #sidebar-secondary {
 		position: static;
 		width: 49.5%;
+		float: left;
+		padding: 0;
+		margin: 0;
+	}
+	#main  #sidebar-primary .viewport,
+	#main  #sidebar-secondary .viewport {
+		position: static;
+		width: auto !important;
 		height: auto !important;
 		overflow: auto;
-		float: left;
 		padding: 0;
 		margin: 0;
 	}
@@ -49,12 +47,8 @@
 	#sidebar-secondary.fixed:hover .viewport {
 		overflow-y: auto;
 	}
-	#sidebar-primary .overview ,
-	#sidebar-secondary .overview ,
-	#sidebar-primary.fixed .overview ,
-	#sidebar-secondary.fixed .overview,
-	#sidebar-primary.tinyscroll .overview ,
-	#sidebar-secondary.tinyscroll .overview {
+	#main  #sidebar-primary .overview ,
+	#main  #sidebar-secondary .overview {
 		width: auto;
 		padding: 10px;
 		position: static;
@@ -96,9 +90,6 @@
 		margin-bottom: 20px;
 		border: 1px solid #ddd;
 	}
-	#tinynav1 {
-		margin: 0;
-	}
 	body > .tinynav {
 		padding-left: 40px;
 	}
@@ -130,5 +121,13 @@
 	}
 	#posts_content {
 		padding-top: 0 !important;
+	}
+}
+/* Super Low Resolutions
+----------------------------------------------------------*/
+@media screen and (max-width: 640px) {
+	#main #sidebar-primary ,
+	#main #sidebar-secondary {
+		width: 99%;
 	}
 }

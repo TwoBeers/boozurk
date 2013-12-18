@@ -835,7 +835,7 @@ function boozurk_get_coa( $option = false ) {
 		),
 		'boozurk_plusone' => array(
 							'type'			=> 'sel',
-							'default'		=> 'googleplus',
+							'default'		=> 0,
 							'description'	=> __( 'sharing buttons', 'boozurk' ),
 							'info'			=> '',
 							'options'		=> array( 'addthis', 'googleplus', 'googleplus_official', 'facebook', 'twitter', 0 ),

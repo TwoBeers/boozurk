@@ -123,7 +123,7 @@ class Boozurk_Admin {
 
 		wp_enqueue_media();
 		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_script( $this->slug . '-options-script', get_template_directory_uri().'/js/options.js', array( 'jquery', 'farbtastic', 'thickbox' ), $this->get_info( 'version' ), true ); //thebird js
+		wp_enqueue_script( $this->slug . '-options-script', get_template_directory_uri().'/js/options.js', array( 'jquery', 'thickbox' ), $this->get_info( 'version' ), true ); //thebird js
 
 		$data = array(
 			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'boozurk' )

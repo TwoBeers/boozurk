@@ -3,7 +3,7 @@ Theme Name: Boozurk
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-boozurk
 Description: Clear theme with a lot of features. Boozurk supports the latest WP innovations like custom menus, post formats and featured images. It has 2 sidebars, up to 7 widget areas, a ton of new widgets, a new default avatar, cool tooltips, some useful javascript features, mobile support (with a touchscreen-friendly dedicated style) and many customization options!
 Version: 3.00
-Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, three-columns, right-sidebar, left-sidebar, white, light, sticky-post, editor-style, custom-colors, post-formats, rtl-language-support, custom-header, featured-images, flexible-header
+Tags: white, light, three-columns, left-sidebar, right-sidebar, fluid-layout, responsive-layout, buddypress, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -313,16 +313,23 @@ button:focus [class^="icon-"] {
 
 /* Sidebars
 ----------------------------------------------------------*/
+.sidebar {
+	top:0;
+}
+.top-menu .sidebar {
+	top:35px;
+}
 .sidebar .overview {
 	word-wrap: break-word;
 }
 #sidebar-primary {
 	position: absolute;
-	margin-left: -310px;
 	left: 0;
-	top: 0;
+	width: 284px;
 }
 #sidebar-primary .viewport {
+	padding: 0 17px;
+	width: 250px;
 }
 #sidebar-primary .overview {
 	width: 250px;
@@ -340,25 +347,22 @@ button:focus [class^="icon-"] {
 	height:90%;
 }
 #sidebar-primary.tinyscroll .viewport {
-	width: 250px;
-	padding-right: 17px;
 }
 #sidebar-primary.fixed:hover .viewport {
 	overflow-y: scroll;
 }
 #sidebar-primary.tinyscroll .scrollbar {
-	margin-left: 260px;
 	border-left: 1px solid #ddd;
+	right: 0;
 }
 #sidebar-secondary {
 	position: absolute;
-	margin-right: -41px;
 	right: 0;
-	top: 0;
+	width: 234px;
 }
 #sidebar-secondary .viewport {
-	position: absolute;
-	padding-left: 17px;
+	padding: 0 17px;
+	width: 200px;
 }
 #sidebar-secondary .overview {
 	width: 200px;
@@ -376,16 +380,16 @@ button:focus [class^="icon-"] {
 	height:90%;
 }
 #sidebar-secondary.tinyscroll .viewport {
-	width: 200px;
 }
 #sidebar-secondary.fixed:hover .viewport {
 	overflow-y: scroll;
 }
 #sidebar-secondary.tinyscroll .scrollbar {
+	left: 0;
 	border-right: 1px solid #ddd;
 }
 .sidebar.tinyscroll .scrollbar{
-	position: fixed;
+	position: absolute;
 	width: 6px;
 	z-index: 1;
 	display: none;
@@ -441,6 +445,7 @@ button:focus [class^="icon-"] {
 }
 #main {
 	margin: 0 auto 0;
+	position: relative;
 }
 .top-menu #main {
 	padding-top: 35px;
@@ -456,8 +461,11 @@ button:focus [class^="icon-"] {
 /* Footer
 ----------------------------------------------------------*/
 #footer {
+	margin-left: 327px;
+	margin-right: 275px;
 	clear: both;
 	margin-top: 30px;
+	position: relative;
 }
 #bz-credits {
 	text-align:center;
@@ -922,14 +930,26 @@ div.tb_post_details ul {
 	text-align: right;
 	margin-top:12px;
 }
-.widget_search input[type="text"] {
-	width: 175px;
+.widget_search .searchform > div {
+	border: 1px solid #DDDDDD;
+	border-radius: 0 2px 2px 0;
+	position: relative;
+	padding-right: 56px;
 }
-.widget_search button {
+.widget_search .searchform input {
+	border: none;
+	padding: 0;
+	width: 100%;
+	height: 25px;
+	padding: 2px;
+}
+.widget_search .searchform button {
 	font-size: 20px;
-	margin: 5px 0 5px 5px;
-	min-width: 50px;
-	padding: 0 5px 2px;
+	padding: 0 5px;
+	right: 0;
+	top: 0;
+	position: absolute;
+	margin: 0;
 }
 
 /* Post Format icons
@@ -1191,6 +1211,9 @@ img.tb-thumb-format {
 	width: 42px;
 }
 #navbuttons ul {
+	margin: 0;
+}
+#navbuttons.fixed ul {
 	margin: 0;
 	overflow: hidden;
 	border-left: 1px solid #ddd;
