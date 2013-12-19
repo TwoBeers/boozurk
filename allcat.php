@@ -48,7 +48,7 @@ get_header(); ?>
 
 	<?php } else { ?>
 
-		<div class="hentry post">
+		<div class="hentry post post-element">
 
 			<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-folder-close"></i></span></div>
 

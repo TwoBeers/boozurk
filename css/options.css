@@ -45,14 +45,11 @@ div.wrap {
 	vertical-align: bottom;
 }
 .tab-opt {
-	margin: 20px 0;
+	margin-bottom: 20px;
 	padding: 10px;
 	background: #fff;
 	border: 1px solid #E5E5E5;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-}
-.tab-opt + .tab-opt{
-	margin-bottom: 10px;
 }
 .tab-opt input {
 	margin-left: 10px;
@@ -88,9 +85,9 @@ div.wrap {
 .col-tools {
 	border: 1px solid #DFDFDF;
 	float: left;
-	margin: 0 1% 1% 0;
+	margin: 0 1% 10px;
 	padding: 1%;
-	width: 30%;
+	width: 45%;
 	position: relative;
 	text-align: center;
 }
@@ -110,4 +107,24 @@ div.wrap {
 .wp-picker-holder {
 	position: absolute;
 	z-index: 999;
+}
+.wp-picker-container .iris-picker {
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+.wp-picker-container .iris-picker .iris-square,
+.wp-picker-container .iris-picker .iris-slider,
+.wp-picker-container .iris-picker .iris-square-inner,
+.wp-picker-container .iris-picker .iris-palette {
+	border-radius: 0;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.4) inset;
+}
+.wp-picker-container .iris-strip .ui-slider-handle:before {
+	border-radius: 0;
+}
+.wp-picker-container .iris-picker .iris-strip .ui-slider-handle {
+	border-radius: 0;
+	box-shadow: none;
+}
+.wp-picker-container .iris-picker .iris-square-value:focus .iris-square-handle {
+	box-shadow: none;
 }

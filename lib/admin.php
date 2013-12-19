@@ -493,14 +493,12 @@ class Boozurk_Admin {
 				</div>
 			</form>
 			<div id="theme_bottom">
-				<small>
-					<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?><br />
+					<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'boozurk' ); ?>
 					<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-boozurk' ); ?>" target="_blank"><?php _e( 'Leave a feedback', 'boozurk' ); ?></a>
-				</small>
 				<br />
 				-
-				<br />
-				<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
+				<br /><div class="dashicons dashicons-translation"></div>
+				Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.
 			</div>
 		</div>
 		<div id="theme-infos">

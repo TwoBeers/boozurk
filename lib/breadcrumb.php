@@ -118,7 +118,7 @@ class Boozurk_Breadcrumb {
 
 		$chain = '';
 
-		$parent = &get_category($id);
+		$parent = get_category($id);
 
 		if ( is_wp_error( $parent ) )
 			return $parent;
