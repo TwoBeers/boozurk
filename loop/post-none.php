@@ -9,7 +9,7 @@
  */
 ?>
 
-<div class="hentry not-found" id="post-404-not-found">
+<div class="hentry not-found post-element" id="post-404-not-found">
 
 	<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-placeholder"></i></span></div>
 

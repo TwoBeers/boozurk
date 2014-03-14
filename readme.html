@@ -24,7 +24,7 @@
 <h3>REQUIREMENTS :</h3>
 	<ul>
 		<li>PHP 5+</li>
-		<li>Wordpress 3.6+ (REQUIRED)</li>
+		<li>Wordpress 3.7+ (REQUIRED)</li>
 	</ul>
 
 <h3>BUNDLED RESOURCES :</h3>
@@ -47,7 +47,7 @@
 		<li>Tiny Scrollbar, Copyright (c) Maarten Baijs, http://www.baijs.nl/
 			<ul>
 				<li>Source: <a href="http://www.baijs.nl/tinyscrollbar/">Tiny Scrollbar homepage</a></li>
-				<li>License: Dual licensed under the MIT or GPL Version 2 licenses</li>
+				<li>License: MIT License</li>
 				<li>License URI: /js/tinyscrollbar/jquery.tinyscrollbar.js</li>
 			</ul>
 		</li>
@@ -89,9 +89,6 @@
 			<br /><u>Note:</u> the javascript code detects only images linked to the image itself, not to the attachment page.<br />
 			If Jetpack Carousel is active, this will overwrite the built-in feature
 		</li>
-		<li><h4>MP3 Audio player</h4>
-			A player for listening to audio files even in browsers that don't support them. From v2.08, the player (originally based on <a href="http://wpaudioplayer.com/standalone/">WordPress Audio Player</a>) uses the built-in Mediaelements.js library
-		</li>
 		<li><h4>Cool tooltips</h4>
 			Fading tooltips everywhere! ;)
 		</li>
@@ -103,18 +100,6 @@
 			You can set a logo that will be shown in the top right of the window. Go in <em>theme options</em>, find the "logo" option and simply paste the path to the image you want or choose it in your media libray by clicking the "select" button.
 			<br /><u>Note:</u> while the logo image will fit to its container on the right sidebar, we suggest not to use images larger than 200px.
 		</li>
-		<li><h4>Infinite pagination</h4>
-			Append the next page of posts (via AJAX) to your current page. You can decide (always in <em>theme options</em>) if this will be done automatically (when a user scrolls to the bottom) or manually (by clicking the link at the end of posts).
-			<br />
-			<u>Note:</u> this feature has some disvantages, like:
-			<ul>
-				<li>The "footer" of the page may be impossible to reach if in auto mode.</li>
-				<li>There is no permalink to a given state of the page.</li>
-				<li>Some javascript features may not capture the event</li>
-			</ul>
-			If Jetpack Infinite scroll is active, it will overwrite this built-in feature
-			
-		</li>
 		<li><h4>Plug and Play</h4>
 			Native support for some plugins. You just have to install and activate them.
 			Supported plugins:
@@ -124,8 +109,9 @@
 				<li><a href="http://wordpress.org/extend/plugins/wp-multibyte-patch/">WP Multibyte Patch</a></li>
 				<li><a href="https://github.com/TwoBeers/tb-chat-post">TB Chat Post</a></li>
 				<li><a href="http://wordpress.org/extend/plugins/breadcrumb-navxt/">Breadcrumb NavXT</a></li>
-				<li><a href="http://wordpress.org/extend/plugins/breadcrumbs/">Yoast Breadcrumbs</a> ( also included as module in <a href="http://wordpress.org/plugins/wordpress-seo/">WordPress SEO</a> )</li>
+				<li><a href="http://wordpress.org/plugins/wordpress-seo/">Yoast Breadcrumbs</a> ( included as module )</li>
 				<li><a href="https://github.com/TwoBeers/tb-comment-tools">TB Comment Tools</a></li>
+				<li><a href="https://wordpress.org/plugins/jetpack/">Jetpack</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -183,7 +169,7 @@
 		<li><h4>aside</h4>
 		</li>
 		<li><h4>audio</h4>
-			the code will search for the first linked audio file ( .mp3, .ogg, .m4a, .wma, .wav ) inside the content. Make sure there's one, at least.
+			the code will search for the [audio] shortcode in the post. Make sure there's one, at least
 		</li>
 		<li><h4>chat</h4>
 		</li>
@@ -191,10 +177,10 @@
 			the code will search for the [gallery] shortcode in the post. If nothing found, it search for all the attached images
 		</li>
 		<li><h4>image</h4>
-			the code will search for the first image (&lt;img&gt;) tag inside the content. Make sure there's one, at least.
+			the code will search for the first image (&lt;img&gt;) tag inside the content. Make sure there's one, at least
 		</li>
 		<li><h4>link</h4>
-			the code will search for the first anchor (&lt;a&gt;) tag inside the content. Make sure there's one, at least.
+			the code will search for the first anchor (&lt;a&gt;) tag inside the content. Make sure there's one, at least
 		</li>
 		<li><h4>quote</h4>
 			the code will search for the first quote (&lt;blockquote&gt;) tag inside the content. If nothing found, it converts the content to a blockquote
@@ -219,18 +205,24 @@
 <h3>CHANGE LOG :</h3>
 
 	<h4>3.00</h4>
+	NOTES: Since this update, some of the features will be REMOVED/REPLACED:
+		<ul>
+			<li>infinite scroll - removed native feature, <a href="http://jetpack.me/support/infinite-scroll/">Jetpack Infinte Scroll</a> module full supported</li>
+			<li>audio player - removed native feature, use the standard WordPress <a href="http://codex.wordpress.org/Audio_Shortcode">[audio] shortcode</a></li>
+		</ul>
 	Adds:
 		<ul>
 			<li>new look for the theme options page</li>
 			<li>"fixed header" option</li>
-			<li>tinyscrollbars for sidebars</li>
 			<li>sidebars width option</li>
+			<li>tinyscrollbars for sidebars</li>
 		</ul>
 	Fixes:
 		<ul>
 			<li>major css fixes in back/front end</li>
 			<li>"Navigation buttons" widget</li>
 			<li>print stylesheet</li>
+			<li>Yoast Breadcrumbs 1.5+ compatibility</li>
 		</ul>
 
 	<h4>2.08.1</h4>

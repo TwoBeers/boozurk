@@ -14,23 +14,9 @@ class Boozurk_Breadcrumb {
 
 	function __construct() {
 
-		add_action( 'boozurk_hook_header_after', array( $this, 'display' ) );
-
-		if ( function_exists( 'bcn_display' ) ) { // Breadcrumb NavXT
-
-			add_action( 'boozurk_hook_breadcrumb_navigation', 'bcn_display' );
-
-		} elseif ( function_exists( 'yoast_breadcrumb' ) ) { // Yoast Breadcrumbs
-
-			add_action( 'boozurk_hook_breadcrumb_navigation', 'yoast_breadcrumb' );
-
-		} else {
-
-			add_action( 'boozurk_hook_breadcrumb_navigation', array( $this, 'the_breadcrumb' ) );
-
-		}
-
-		add_action( 'boozurk_hook_breadcrumb_navigation', array( $this, 'search_reminder' ) );
+		add_action( 'boozurk_hook_header_after'				, array( $this, 'display' ) );
+		add_action( 'boozurk_hook_breadcrumb_navigation'	, array( $this, 'the_breadcrumb' ) );
+		add_action( 'boozurk_hook_breadcrumb_navigation'	, array( $this, 'search_reminder' ) );
 
 	}
 
@@ -39,6 +25,8 @@ class Boozurk_Breadcrumb {
 
 ?>
 	<div id="breadcrumb-wrap">
+
+		<?php $this->get_home(); ?>
 
 		<?php boozurk_hook_breadcrumb_navigation(); ?>
 
@@ -51,6 +39,27 @@ class Boozurk_Breadcrumb {
 	function the_breadcrumb(){
 
 		echo $this->get_the_breadcrumb();
+
+	}
+
+
+	function get_home( $echo = true ){
+
+		$output = '';
+
+		$on_front = get_option('show_on_front');
+
+		if ($on_front == "page") {
+			$output = '<a class="item-home btn" rel="nofollow" href="' . esc_url( get_permalink( get_option( 'page_on_front' ) ) ) . '"><i class="icon-home"></i></a>';
+		} else {
+			$output = '<a class="item-home btn" rel="nofollow" href="' . esc_url( home_url() ) . '"><i class="icon-home"></i></a>';
+		}
+
+		if ( $echo ) {
+			echo $output;
+		} else {
+			return $output;
+		}
 
 	}
 
@@ -118,7 +127,7 @@ class Boozurk_Breadcrumb {
 
 		$chain = '';
 
-		$parent = get_category($id);
+		$parent = get_category( $id );
 
 		if ( is_wp_error( $parent ) )
 			return $parent;
@@ -128,8 +137,8 @@ class Boozurk_Breadcrumb {
 		else
 			$name = $parent->cat_name;
 
-		if ( $parent->parent && ($parent->parent != $parent->term_id) )
-			$chain .= get_category_parents($parent->parent, true, $separator, $nicename);
+		if ( $parent->parent && ( $parent->parent != $parent->term_id ) )
+			$chain .= get_category_parents( $parent->parent, true, $separator, $nicename );
 
 		$chain .= '<span>' . $name. '</span>';
 
@@ -157,27 +166,20 @@ class Boozurk_Breadcrumb {
 		$opt['nofollow']			= ' rel="nofollow" ';
 
 		$on_front = get_option('show_on_front');
-		if ($on_front == "page") {
-			$homelink = '<a class="item-home btn"' . $opt['nofollow'] . 'href="' . esc_url( get_permalink( get_option( 'page_on_front' ) ) ) . '"><i class="icon-home"></i></a>';
-			$bloglink = $homelink . $opt['sep'] . '<a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . get_the_title( get_option( 'page_for_posts' ) ) . '</a>';
-		} else {
-			$homelink = '<a class="item-home btn"' . $opt['nofollow'] . 'href="' . esc_url( home_url() ) . '"><i class="icon-home"></i></a>';
-			$bloglink = $homelink;
-		}
 
 		$items_found = $wp_query->found_posts ? ' <span class="item-found">(' . $wp_query->found_posts . ')</span>' : '';
 
 		if ( ( $on_front == "page" && is_front_page() ) || ( $on_front == "posts" && is_home() ) ) {
 
-			$output = $homelink . $opt['sep'] . '<span>' . $opt['home'] . '</span>';
+			$output = '<span>' . $opt['home'] . '</span>';
 
 		} elseif ( $on_front == "page" && is_home() ) {
 
-			$output = $homelink . $opt['sep'] . '<span>' . get_the_title( get_option( 'page_for_posts' ) ) . '</span>';
+			$output = '<span>' . get_the_title( get_option( 'page_for_posts' ) ) . '</span>';
 
 		} elseif ( !is_page() ) {
 
-			$output = $bloglink . $opt['sep'];
+			$output = '';
 
 			if ( is_single() && has_category() ) {
 				$cats = get_the_category();
@@ -257,9 +259,9 @@ class Boozurk_Breadcrumb {
 			if ( 0 == $post->post_parent ) {
 
 				if ( get_query_var( 'page' ) ) {
-					$output = $homelink . $opt['sep'] . '<a href="'. esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';
+					$output = '<a href="'. esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
-					$output = $homelink . $opt['sep'] . '<span>' . get_the_title() . '</span>';
+					$output = '<span>' . get_the_title() . '</span>';
 				}
 
 			} else {
@@ -291,12 +293,12 @@ class Boozurk_Breadcrumb {
 					$links[] = $tmp;
 				}
 
-				$output = $homelink;
+				$output = '';
 
 				foreach ( $links as $link ) {
-					$output .= $opt['sep'];
 					if ( ! $link['cur'] ) {
 						$output .= '<a href="' . esc_url( $link['url'] ) . '">' . $link['title'] . '</a>';
+						$output .= $opt['sep'];
 					} else {
 						if ( get_query_var( 'page' ) ) {
 							$output .= '<a href="' . esc_url( $link['url'] ) . '">' . $link['title'] . '</a>' . $opt['sep'] . '<span>' . sprintf ( __( 'Page %s', 'boozurk' ), get_query_var( 'page' ) ) . '</span>';

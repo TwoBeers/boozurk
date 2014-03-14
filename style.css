@@ -464,7 +464,7 @@ button:focus [class^="icon-"] {
 	margin-left: 327px;
 	margin-right: 275px;
 	clear: both;
-	margin-top: 30px;
+	margin-top: 20px;
 	position: relative;
 }
 #bz-credits {
@@ -930,20 +930,20 @@ div.tb_post_details ul {
 	text-align: right;
 	margin-top: 12px;
 }
-.widget_search .searchform > div {
+.searchform > div.searchform-wrap {
 	border: 1px solid #DDDDDD;
 	border-radius: 0 2px 2px 0;
 	position: relative;
 	padding-right: 56px;
 }
-.widget_search .searchform input {
+.searchform .searchform-wrap input {
 	border: none;
 	padding: 0;
 	width: 100%;
 	height: 25px;
 	padding: 2px;
 }
-.widget_search .searchform button {
+.searchform .searchform-wrap button {
 	font-size: 20px;
 	padding: 0 5px;
 	right: 0;
@@ -1258,15 +1258,16 @@ img.tb-thumb-format {
 /* BreadCrumb 
 ----------------------------------------------------------*/
 #breadcrumb-wrap {
-	background: url('images/bc-sep.png') no-repeat -590px center;
+	background: url('images/bc-sep.png') no-repeat -590px 5px;
 	border: solid 1px #ddd;
 	border-left: none;
 	line-height: 30px;
 	margin: 0 0 20px 0;
 	padding: 0 5px 0 10px;
+	position: relative;
+	min-height: 30px;
 }
 #bz-breadcrumb {
-	position: relative;
 }
 #bz-breadcrumb span,
 #bz-breadcrumb a {
@@ -1290,8 +1291,8 @@ img.tb-thumb-format {
 }
 .item-home {
 	position: absolute;
-	left: -42px;
-	top: 0;
+	left: -31px;
+	top: 3px;
 	font-size: 24px;
 }
 .item-found {
@@ -1358,6 +1359,9 @@ img.tb-thumb-format {
 	border: 1px solid #ddd;
 	border-left: none;
 	background: #eee;
+}
+.navigate_comments + #commentlist > .comment:first-child  > .comment-body {
+	border-top: none;
 }
 .comment-body .avatar {
 	position: absolute;
@@ -1598,44 +1602,45 @@ img.aligncenter {
 /* Navigation
 ----------------------------------------------------------*/
 .bz-navigate {
-	border-top: 1px solid #ddd;
 	text-align: center;
-	margin: 0;
-	padding: 10px;
-	color: #646464;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #aaa;
+}
+.bz-navigate > div {
+	margin-bottom: -1px;
+	margin-top: -1px;
 }
 .navigate_comments {
 }
 .navigate_page {
-	padding: 10px 0 0;
 }
 .navigate_archives {
-	border: none;
 }
-#main .bz-navigate span,
-#main .bz-navigate a {
+.bz-navigate li {
+	display: inline;
+}
+.bz-navigate span,
+.bz-navigate a {
+	display: inline-block;
 	margin: 0 4px 0 0;
-	padding: 3px 6px;
+	padding: 4px 8px;
 }
-#main .bz-navigate span {
-	color: #646464;
-	border: none;
-	padding: 0;
+.bz-navigate .current,
+.bz-navigate a {
+	border-bottom: 1px solid;
+	border-top: 1px solid;
 }
-#main .bz-navigate a {
-	background: #f5f5f5;
-	border: 1px solid #ddd;
-	margin: 0 4px 0 0;
+.bz-navigate a:hover,
+.bz-navigate a:active {
 }
-#main .bz-navigate a:hover,
-#main .bz-navigate a:active {
-	border: 1px solid #aaa;
-}
-#main .bz-navigate .current {
-	font-weight: normal;
+.bz-navigate .current {
 	background: #eee;
-	border: 1px solid #aaa;
-	padding: 3px 6px;
+}
+.bz-navigate .title {
+	display: none;
 }
 
 /* MediaElements 
@@ -1955,10 +1960,11 @@ body.coming-soon {
 
 /* Jetpack
 ----------------------------------------------------------*/
-div.sharedaddy li a.sd-button {
+div.sharedaddy li a.sd-button,
+div.sharedaddy li a.sd-button:hover {
 	background: #fff;
-	border-radius: 0;
 	box-shadow: none;
+	padding: 4px;
 }
 div.sharedaddy {
 	margin-top: 20px;

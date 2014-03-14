@@ -134,7 +134,6 @@ function boozurk_get_coa( $option = false ) {
 						'boozurk_js_post_expander',
 						'boozurk_js_tooltips',
 						'boozurk_quotethis',
-						'boozurk_infinite_scroll',
 						'boozurk_tinynav',
 						'boozurk_scrollable_sidebars',
 					),
@@ -144,7 +143,6 @@ function boozurk_get_coa( $option = false ) {
 					'description'	=> '',
 					'sub'			=> array(
 						'boozurk_custom_widgets',
-						'boozurk_js_swfplayer',
 						'boozurk_plusone',
 						'boozurk_editor_style',
 						'boozurk_tbcred',
@@ -261,11 +259,11 @@ function boozurk_get_coa( $option = false ) {
 		),
 		'boozurk_post_formats_audio_content' => array(
 							'type'			=> 'sel',
-							'default'		=> 'audio player',
+							'default'		=> 'content',
 							'description'	=> __( 'content', 'boozurk' ),
 							'info'			=> '',
-							'options'		=> array( 'audio player', 'content', 'excerpt', 'none' ),
-							'options_l10n'	=> array( __( 'audio player', 'boozurk' ), __( 'content', 'boozurk' ), __( 'excerpt', 'boozurk' ), __( 'none', 'boozurk' ) ),
+							'options'		=> array( 'content', 'excerpt', 'audio player', 'none' ),
+							'options_l10n'	=> array( __( 'content', 'boozurk' ), __( 'excerpt', 'boozurk' ), __( 'audio player', 'boozurk' ), __( 'none', 'boozurk' ) ),
 							'req'			=> 'boozurk_post_formats_audio',
 							'sub'			=> false,
 		),
@@ -729,37 +727,12 @@ function boozurk_get_coa( $option = false ) {
 							'info'			=> __( 'replace titles of some links with cool tooltips', 'boozurk' ),
 							'req'			=> 'boozurk_jsani'
 		),
-		'boozurk_js_swfplayer' => array(
-							'type'			=> 'chk',
-							'default'		=> 0,
-							'description'	=> __( 'audio player', 'boozurk' ),
-							'info'			=> __( 'create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts', 'boozurk' ),
-							'req'			=> ''
-		),
 		'boozurk_quotethis' => array(
 							'type'			=> 'chk',
 							'default'		=> 1,
 							'description'	=> __( 'quote link', 'boozurk' ),
 							'info'			=> __( 'show a link for easily add the selected text as a quote inside the comment form', 'boozurk' ),
 							'req'			=> 'boozurk_jsani'
-		),
-		'boozurk_infinite_scroll' => array(
-							'type'			=> 'chk',
-							'default'		=> 0,
-							'description'	=> __( 'infinite pagination', 'boozurk' ),
-							'info'			=> __( 'automatically append the next page of posts (via AJAX) to your current page', 'boozurk' ),
-							'req'			=> 'boozurk_jsani',
-							'sub'			=> array( 'boozurk_infinite_scroll_type' )
-		),
-		'boozurk_infinite_scroll_type' => array(
-							'type'			=> 'sel',
-							'default'		=> 'manual',
-							'description'	=> __( 'behaviour', 'boozurk' ),
-							'info'			=> __( 'auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts', 'boozurk' ),
-							'options'		=> array( 'auto', 'manual' ),
-							'options_l10n'	=> array( __( 'auto', 'boozurk' ), __( 'manual', 'boozurk' ) ),
-							'req'			=> '',
-							'sub'			=> false,
 		),
 		'boozurk_tinynav' => array(
 							'type'			=> 'chk',

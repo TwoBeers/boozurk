@@ -32,7 +32,6 @@ add_action( 'wp_head'								, 'boozurk_custom_style' );
 add_action( 'wp_enqueue_scripts'					, 'boozurk_scripts' );
 add_action( 'wp_footer'								, 'boozurk_initialize_scripts' );
 add_action( 'init'									, 'boozurk_post_expander_activate' );
-add_action( 'init'									, 'boozurk_infinite_scroll_activate' );
 add_action( 'wp_head'								, 'boozurk_plus_snippet' );
 add_action( 'created_category'						, 'boozurk_created_category_color' );
 add_action( 'comment_form_comments_closed'			, 'boozurk_comments_closed' );
@@ -61,11 +60,9 @@ add_action( 'boozurk_hook_header_after'				, 'boozurk_fixed_header',9999 );
 
 /* Custom filters - WP hooks */
 
-add_filter( 'post_gallery'							, 'boozurk_gallery_shortcode', 10, 2 );
 add_filter( 'use_default_gallery_style'				, '__return_false' );
 add_filter( 'embed_oembed_html'						, 'boozurk_wmode_transparent', 10, 3);
 add_filter( 'img_caption_shortcode'					, 'boozurk_img_caption_shortcode', 10, 3 );
-add_filter( 'the_content'							, 'boozurk_quote_content' );
 add_filter( 'smilies_src'							, 'boozurk_smiles_replace',10,2 );
 add_filter( 'body_class'							, 'boozurk_body_classes' );
 add_filter( 'comment_form_default_fields'			, 'boozurk_comments_form_fields');
@@ -90,6 +87,7 @@ add_filter( 'page_css_class'						, 'boozurk_add_parent_class', 10, 4 );
 add_filter( 'page_css_class'						, 'boozurk_add_selected_class_to_page_item', 10, 1 );
 add_filter( 'nav_menu_css_class'					, 'boozurk_add_selected_class_to_menu_item', 10, 2 );
 add_filter( 'get_search_form'						, 'boozurk_search_form' );
+add_filter( 'post_class'							, 'boozurk_post_classes' );
 
 
 /* get the theme options */
@@ -122,17 +120,17 @@ require_once( 'lib/admin.php' ); // load admin functions
 
 require_once( 'lib/hooks.php' ); // load the custom hooks module
 
+require_once( 'lib/functions-formats.php' ); // load the formats-related fuctions
+
 require_once( 'lib/widgets.php' ); // load the custom widgets module
 
 require_once( 'lib/custom-header.php' ); // load the custom header module
 
 require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
-require_once( 'lib/audio-player.php' ); // load the audio player module
-
 require_once( 'lib/plug-n-play.php' ); // load the plugin compatibility module
 
-if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom_comments.php' ); // load the comment style module
+if ( boozurk_get_opt( 'boozurk_comment_style' ) ) require_once( 'lib/custom-comments.php' ); // load the comment style module
 
 $boozurk_is_mobile = false;
 if ( boozurk_get_opt( 'boozurk_mobile_css' ) ) require_once( 'mobile/core-mobile.php' ); // load mobile functions
@@ -336,8 +334,6 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 				$modules[] = 'commentvariants';
 			if ( ! class_exists( 'TB_Comment_Tools' ) && boozurk_get_opt( 'boozurk_quotethis' ) && is_singular() )
 				$modules[] = 'quotethis';
-			if ( ( boozurk_get_opt( 'boozurk_infinite_scroll' ) ) && !is_singular() && !is_404() )
-				$modules[] = 'infinitescroll';
 			if ( boozurk_get_opt( 'boozurk_scrollable_sidebars' ) )
 				$modules[] = 'tinyscrollbar';
 		}
@@ -472,9 +468,6 @@ if ( !function_exists( 'boozurk_scripts' ) ) {
 			'post_expander'				=> esc_js( __( 'Post loading, please wait...','boozurk' ) ),
 			'gallery_preview'			=> esc_js( __( 'Preview','boozurk' ) ),
 			'gallery_click'				=> esc_js( __( 'Click on thumbnails','boozurk' ) ),
-			'infinite_scroll'			=> esc_js( __( 'Page is loading, please wait...','boozurk' ) ),
-			'infinite_scroll_end'		=> esc_js( __( 'No more posts beyond this line','boozurk' ) ),
-			'infinite_scroll_type'		=> boozurk_get_opt( 'boozurk_infinite_scroll_type' ),
 			'quote_tip'					=> esc_js( __( 'Add selected text as a quote', 'boozurk' ) ),
 			'quote'						=> esc_js( __( 'Quote', 'boozurk' ) ),
 			'quote_alert'				=> esc_js( __( 'Nothing to quote. First of all you should select some text...', 'boozurk' ) ),
@@ -612,6 +605,8 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 
 		$args = apply_filters( 'boozurk_extrainfo', $args );
 
+		$share_type = boozurk_get_opt( 'boozurk_plusone' );
+
 ?>
 	<div class="post_meta_container">
 
@@ -625,8 +620,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 		?>
 
 		<?php if ( !post_password_required() && $args['plusone'] ) { ?>
-
-			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' ) { ?>
+			<?php if ( $share_type === 'addthis' ) { ?>
 				<!-- AddThis Button BEGIN -->
 				<div class="addthis_toolbox addthis_16x16_style">
 					<a class="addthis_button_compact" href="javascript:void(0)" addthis:url="<?php echo esc_attr( get_permalink() ); ?>" addthis:title="<?php echo esc_attr( get_the_title() ); ?>"><i class="icon icon-plus"></i></a>
@@ -634,23 +628,23 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 				<!-- AddThis Button END -->
 			<?php } ?>
 
-			<?php if ( ( boozurk_get_opt( 'boozurk_plusone' ) === 1 ) || ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus' ) ) { ?>
+			<?php if ( ( $share_type === 1 ) || ( $share_type === 'googleplus' ) ) { ?>
 				<a class="btn share-with-plusone pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Google+' ) ); ?>" href="http://plus.google.com/share?url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
 					<i class="icon icon-google-plus"></i>
 				</a>
 			<?php } ?>
 
-			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' ) { ?>
+			<?php if ( $share_type === 'googleplus_official' ) { ?>
 				<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php echo esc_url( get_permalink() ); ?>"></div></div>
 			<?php } ?>
 
-			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'facebook' ) { ?>
+			<?php if ( $share_type === 'facebook' ) { ?>
 				<a class="btn share-with-facebook pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Facebook' ) ); ?>" href="http://www.facebook.com/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>&t=<?php echo rawurlencode( get_the_title() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
 					<i class="icon icon-facebook"></i>
 				</a>
 			<?php } ?>
 
-			<?php if ( boozurk_get_opt( 'boozurk_plusone' ) == 'twitter' ) { ?>
+			<?php if ( $share_type === 'twitter' ) { ?>
 				<a class="btn share-with-twitter pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Twitter' ) ); ?>" href="https://twitter.com/intent/tweet?original_referer=<?php echo rawurlencode( get_permalink() ); ?>&text=<?php echo rawurlencode( get_the_title() ); ?>&url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
 					<i class="icon icon-twitter"></i>
 				</a>
@@ -875,24 +869,12 @@ if ( !function_exists( 'boozurk_navigate_archives' ) ) {
 
 ?>
 	<div id="bz-page-nav" class="bz-navigate navigate_archives">
-	<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
+	<?php if ( ! apply_filters( 'boozurk_filter_navigate_archives', false ) ) { ?>
 
-		<?php wp_pagenavi(); ?>
-
-	<?php } elseif ( function_exists( 'wp_paginate' ) ) { ?>
-
-		<?php wp_paginate(); ?>
-
-	<?php } else { ?>
-
-		<div id="bz-page-nav-msg"></div>
 		<div id="bz-page-nav-subcont">
-			<span id="bz-next-posts-link"><?php next_posts_link( '&laquo;' ); ?></span>
+			<?php next_posts_link( '&laquo;' ); ?>
 			<?php printf( '<span>' . __( 'page %1$s of %2$s','boozurk' ) . '</span>', $paged, $wp_query->max_num_pages ); ?>
 			<?php previous_posts_link( '&raquo;' ); ?>
-		</div>
-		<div id="bz-next-posts-button" class="hide-if-no-js">
-			<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" onClick="boozurkScripts.AJAX_paged();" />
 		</div>
 
 	<?php } ?>
@@ -947,7 +929,7 @@ function boozurk_link_pages() {
 
 ?>
 	<div class="fixfloat">
-		<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page">' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div>&echo=0' ) ); ?>
+		<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page"><div>' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div></div>&echo=0' ) ); ?>
 	</div>
 <?php
 
@@ -1304,172 +1286,6 @@ if ( !function_exists( 'boozurk_random_nick' ) ) {
 }
 
 
-// Get first image of a post
-if ( !function_exists( 'boozurk_get_first_image' ) ) {
-	function boozurk_get_first_image( $post_id = null, $filtered_content = false ) {
-
-		$post = get_post( $post_id );
-
-		$first_image = array( 'img' => '', 'title' => '', 'src' => '' );
-
-		//search the images in post content
-		preg_match_all( '/<img[^>]+>/i',$filtered_content ? apply_filters( 'the_content', $post->post_content ): $post->post_content, $result );
-		//grab the first one
-		if ( isset( $result[0][0] ) ){
-			$first_image['img'] = $result[0][0];
-			//get the title (if any)
-			preg_match_all( '/(title)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $title );
-			if ( isset( $title[2][0] ) ){
-				$first_image['title'] = str_replace( '"','',$title[2][0] );
-			}
-			//get the path
-			preg_match_all( '/(src)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $src );
-			if ( isset( $src[2][0] ) ){
-				$first_image['src'] = str_replace( array( '"', '\''),'',$src[2][0] );
-			}
-			return $first_image;
-		} else {
-			return false;
-		}
-
-	}
-}
-
-
-// Get first link of a post
-if ( !function_exists( 'boozurk_get_first_link' ) ) {
-	function boozurk_get_first_link() {
-		global $post;
-
-		$first_info = array( 'anchor' => '', 'title' => '', 'href' => '', 'text' => '' );
-		//search the link in post content
-		preg_match_all( "/<a\b[^>]*>(.*?)<\/a>/i",$post->post_content, $result );
-		//grab the first one
-		if ( isset( $result[0][0] ) ){
-			$first_info['anchor'] = $result[0][0];
-			$first_info['text'] = isset( $result[1][0] ) ? $result[1][0] : '';
-			//get the title (if any)
-			preg_match_all( '/(title)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_title );
-			$first_info['title'] = isset( $link_title[2][0] ) ? str_replace( array('"','\''),'',$link_title[2][0] ) : '';
-			//get the path
-			preg_match_all( '/(href)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_href );
-			$first_info['href'] = isset( $link_href[2][0] ) ? str_replace( array('"','\''),'',$link_href[2][0] ) : '';
-			return $first_info;
-		} else {
-			return false;
-		}
-
-	}
-}
-
-
-// Get first blockquote words
-if ( !function_exists( 'boozurk_get_blockquote' ) ) {
-	function boozurk_get_blockquote() {
-		global $post;
-
-		$first_quote = array( 'quote' => '', 'cite' => '' );
-		//search the blockquote in post content
-		preg_match_all( '/<blockquote\b[^>]*>([\w\W]*?)<\/blockquote>/',$post->post_content, $blockquote );
-		//grab the first one
-		if ( isset( $blockquote[0][0] ) ){
-			$first_quote['quote'] = strip_tags( $blockquote[0][0] );
-			$words = explode( " ", $first_quote['quote'], 6 );
-			if ( count( $words ) == 6 ) $words[5] = '...';
-			$first_quote['quote'] = implode( ' ', $words );
-			preg_match_all( '/<cite>([\w\W]*?)<\/cite>/',$blockquote[0][0], $cite );
-			$first_quote['cite'] = ( isset( $cite[1][0] ) ) ? $cite[1][0] : '';
-			return $first_quote;
-		} else {
-			return false;
-		}
-
-	}
-}
-
-
-// Get first gallery
-if ( !function_exists( 'boozurk_get_gallery_shortcode' ) ) {
-	function boozurk_get_gallery_shortcode() {
-		global $post;
-
-		$pattern = get_shortcode_regex();
-
-		if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
-			&& array_key_exists( 2, $matches )
-			&& in_array( 'gallery', $matches[2] ) ) // gallery shortcode is being used
-		{
-			$key = array_search( 'gallery', $matches[2] );
-			$attrs = shortcode_parse_atts( $matches['3'][$key] );
-			return $attrs;
-		}
-
-	}
-}
-
-
-// run the gallery preview
-if ( !function_exists( 'boozurk_gallery_preview' ) ) {
-	function boozurk_gallery_preview() {
-
-			$attrs = boozurk_get_gallery_shortcode();
-			$attrs['preview'] = true;
-			return boozurk_gallery_shortcode( '', $attrs );
-
-	}
-}
-
-
-// the gallery preview walker
-if ( !function_exists( 'boozurk_gallery_preview_walker' ) ) {
-	function boozurk_gallery_preview_walker( $attachments = '', $id = 0 ) {
-
-		if ( ! $id )
-			return false;
-
-		if ( empty( $attachments ) )
-			$attachments = get_children( array( 'post_parent' => $id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
-
-		if ( empty( $attachments ) )
-			return false;
-
-		$permalink = get_permalink( $id );
-
-		$images_count = count( $attachments );
-		$first_image = array_shift( $attachments );
-		$other_imgs = array_slice( $attachments, 0, 3 );
-
-		$output = '<span class="gallery-item size-medium">' . wp_get_attachment_image( $first_image->ID, 'medium' ) . '</span><!-- .gallery-item -->';
-
-		$output .= '<div class="thumbnail-wrap">';
-		foreach ($other_imgs as $image) {
-			$output .= '
-				<div class="gallery-item size-thumbnail">
-					' . wp_get_attachment_image( $image->ID, 'thumbnail' ) . '
-				</div>
-			';
-		}
-		$output .= '</div>';
-
-		$output .= '
-			<p class="info">
-				<em>' . sprintf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $images_count, 'boozurk' ),
-				'href="' . esc_url( get_permalink() ) . '" title="' . esc_attr__( 'View gallery', 'boozurk' ) . '" rel="bookmark"',
-				number_format_i18n( $images_count )
-				) . '</em>
-			</p>
-			';
-
-		$output = apply_filters( 'boozurk_gallery_preview_walker', $output );
-
-		$output = '<div class="gallery gallery-preview">' . $output . '<br class="fixfloat" /></div>';
-
-		echo $output;
-
-		return true;
-
-	}
-}
 
 
 //add share links to post/page
@@ -1879,61 +1695,6 @@ function boozurk_post_expander_activate ( ) {
 }
 
 
-// retrieve the posts page, then die (for "infinite_scroll" ajax request)
-if ( !function_exists( 'boozurk_infinite_scroll_show_page' ) ) {
-	function boozurk_infinite_scroll_show_page (  ) {
-		global $post, $wp_query, $paged;
-		
-		if ( !$paged ) {
-			$paged = 1;
-		}
-		
-		if ( have_posts() ) {
-			echo '<div class="paged-separator" id="paged-separator-' . $paged . '"><h3>' . sprintf( __('Page %s','boozurk'), $paged ) . '</h3></div>';
-			while ( have_posts() ) {
-				the_post(); ?>
-				<?php get_template_part( 'loop/post', boozurk_get_post_format( $post->ID ) ); ?>
-			
-			<?php } //end while ?>
-
-			<div class="ajaxed bz-navigate navigate_archives" id="bz-page-nav">
-				<div id="bz-page-nav-msg">
-					<?php 
-						echo __( 'Pages', 'boozurk' ); 
-						echo '<a href="#posts_content">1</a>'; 
-						for ($i=2; $i<=$paged; $i++) {
-							echo '<a href="#paged-separator-' . $i . '">' . $i . '</a>';
-						} 
-					?>
-				</div>
-				<div id="bz-page-nav-subcont">
-					<?php //num of pages
-					previous_posts_link( '&laquo;' );
-					printf( __( 'page %1$s of %2$s','boozurk' ), $paged, $wp_query->max_num_pages );
-					?>
-					<span id="bz-next-posts-link"><?php next_posts_link( '&raquo;' ); ?></span>
-				</div>
-				<div class="w_title"></div>
-				<div id="bz-next-posts-button" class="hide-if-no-js">
-					<input type="button" value="<?php echo __( 'Next Page', 'boozurk' ); ?>" />
-				</div>
-			</div>
-		<?php 
-		}
-		die();
-	}
-}
-
-
-//is a "infinite_scroll" ajax request?
-function boozurk_infinite_scroll_activate ( ) {
-
-	if ( isset( $_POST["boozurk_infinite_scroll"] ) )
-		add_action( 'wp', 'boozurk_infinite_scroll_show_page' );
-
-}
-
-
 // add the +snippet elements
 if ( !function_exists( 'boozurk_plus_snippet' ) ) {
 	function boozurk_plus_snippet(){
@@ -1965,12 +1726,12 @@ if ( !function_exists( 'boozurk_navigate_comments' ) ) {
 
 ?>
 	<div class="bz-navigate navigate_comments">
-		<?php if(function_exists('wp_paginate_comments')) {
-			wp_paginate_comments();
-		} else {
-			paginate_comments_links();
-		} ?>
-		<br class="fixfloat" />
+		<div>
+			<?php
+				if ( ! apply_filters( 'boozurk_filter_comments_links', false ) )
+					paginate_comments_links();
+			?>
+		</div>
 	</div>
 <?php 
 
@@ -2161,26 +1922,6 @@ function boozurk_img_caption_shortcode( $deprecated, $attr, $content = null ) {
 }
 
 
-// convert post content in blockquote for quote format posts)
-function boozurk_quote_content( $content ) {
-
-	/* Check if we're displaying a 'quote' post. */
-	if ( has_post_format( 'quote' ) && boozurk_get_opt( 'boozurk_post_formats_quote' ) ) {
-
-		/* Match any <blockquote> elements. */
-		preg_match( '/<blockquote.*?>/', $content, $matches );
-
-		/* If no <blockquote> elements were found, wrap the entire content in one. */
-		if ( empty( $matches ) )
-			$content = "<blockquote>{$content}</blockquote>";
-
-	}
-
-	return $content;
-
-}
-
-
 // Add specific CSS class by filter
 function boozurk_body_classes( $classes ) {
 
@@ -2200,6 +1941,7 @@ function boozurk_body_classes( $classes ) {
 
 }
 
+
 // Add specific CSS class by filter
 function boozurk_post_classes( $classes ) {
 
@@ -2207,109 +1949,6 @@ function boozurk_post_classes( $classes ) {
 
 	return $classes;
 
-}add_filter('post_class','boozurk_post_classes');
-
-// custom gallery shortcode function
-function boozurk_gallery_shortcode( $output, $attr ) {
-
-	$post = get_post();
-
-	static $instance = 0;
-	$instance++;
-
-	if ( ! empty( $attr['ids'] ) ) {
-		// 'ids' is explicitly ordered, unless you specify otherwise.
-		if ( empty( $attr['orderby'] ) )
-			$attr['orderby'] = 'post__in';
-		$attr['include'] = $attr['ids'];
-	}
-
-	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
-	if ( isset( $attr['orderby'] ) ) {
-		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-		if ( !$attr['orderby'] )
-			unset( $attr['orderby'] );
-	}
-
-	extract( shortcode_atts( array(
-		'order'			=> 'ASC',
-		'orderby'		=> 'menu_order ID',
-		'id'			=> $post->ID,
-		'itemtag'		=> 'dl',
-		'icontag'		=> 'dt',
-		'captiontag'	=> 'dd',
-		'columns'		=> 3,
-		'size'			=> 'thumbnail',
-		'include'		=> '',
-		'exclude'		=> '',
-	), $attr) );
-
-	$id = intval( $id );
-	if ( 'RAND' == $order )
-		$orderby = 'none';
-
-	if ( ! empty( $include ) ) {
-		$_attachments = get_posts( array( 'include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-
-		$attachments = array();
-		foreach ( $_attachments as $key => $val ) {
-			$attachments[$val->ID] = $_attachments[$key];
-		}
-	} elseif ( ! empty( $exclude ) ) {
-		$attachments = get_children( array( 'post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-	} else {
-		$attachments = get_children( array( 'post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-	}
-
-	if ( isset( $attr['preview'] ) && $attr['preview'] )
-		return boozurk_gallery_preview_walker( $attachments, $id );
-
-	if ( empty($attachments) )
-		return '';
-
-	if ( is_feed() ) {
-		$output = "\n";
-		foreach ( $attachments as $att_id => $attachment )
-			$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
-		return $output;
-	}
-
-	$itemtag = tag_escape($itemtag);
-	$captiontag = tag_escape($captiontag);
-	$columns = intval($columns);
-	$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
-
-	$selector = "gallery-{$instance}";
-
-	$size_class = sanitize_html_class( $size );
-	$output = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-
-	$i = 0;
-	if ( boozurk_get_opt( 'boozurk_js_thickbox_force' ) ) $attr['link'] = 'file';
-	foreach ( $attachments as $id => $attachment ) {
-		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
-
-		$output .= "<{$itemtag} class='gallery-item'>";
-		$output .= "
-			<{$icontag} class='gallery-icon'>
-				$link
-			</{$icontag}>";
-		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= "
-				<{$captiontag} class='wp-caption-text gallery-caption'>
-				" . wptexturize($attachment->post_excerpt) . "
-				</{$captiontag}>";
-		}
-		$output .= "</{$itemtag}>";
-		if ( $columns > 0 && ++$i % $columns == 0 )
-			$output .= '<br style="clear: both" />';
-	}
-
-	$output .= "
-			<br style='clear: both;' />
-		</div>\n";
-
-	return $output;
 }
 
 

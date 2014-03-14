@@ -1,6 +1,6 @@
 <?php
 /**
- * custom_comments.php
+ * custom-comments.php
  *
  * adds some style to comments
  *

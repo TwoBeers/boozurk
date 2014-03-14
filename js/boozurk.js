@@ -37,10 +37,6 @@ boozurkScripts = {
 					boozurkScripts.init_quote_this();
 					break;
 
-				case 'infinitescroll':
-					boozurkScripts.infinite_scroll(boozurk_l10n.infinite_scroll_type);
-					break;
-
 				case 'animatemenu':
 					boozurkScripts.animate_menu();
 					break;
@@ -97,38 +93,6 @@ boozurkScripts = {
 			});
 
 		});
-
-	},
-
-
-	infinite_scroll : function( behaviour ) {
-
-			$('#bz-page-nav').addClass('ajaxed');
-			$('#bz-next-posts-button').fadeOut();
-			$('.nb-nextprev').hide();
-			return $(window).scroll(function () {
-				if ( $('#bz-page-nav').position().top-$(window).scrollTop()-$(window).height() < -150) {
-					var link = $('#bz-next-posts-link a');
-
-					if ( link.length > 0 ) {
-
-						if ( behaviour == 'auto' ) {
-							boozurkScripts.AJAX_paged();
-						} else if ( behaviour == 'manual' ) {
-							$('#bz-next-posts-button').fadeIn();
-						}
-
-
-					} else {
-
-						$('#bz-next-posts-button').html(boozurk_l10n.infinite_scroll_end).fadeIn();
-
-						return false;
-					}
-
-				}
-
-			});
 
 	},
 
@@ -241,31 +205,6 @@ boozurkScripts = {
 			);
 
 		});
-		
-	},
-
-
-	AJAX_paged : function() {
-
-		var next_href = $('#bz-next-posts-link a').attr( "href" );
-		
-		var nav = $('#bz-page-nav');
-		
-		$.ajax({
-			type: 'POST',
-			url: next_href,
-			beforeSend: function(XMLHttpRequest) { $('#bz-page-nav-msg').addClass('loading').html(boozurk_l10n.infinite_scroll).animate( { 'opacity' : 1 } ); },
-			data: 'boozurk_infinite_scroll=1',
-			success: function(data) {
-				nav.replaceWith( $(data) );
-				boozurkScripts.init(boozurk_l10n.script_modules_afterajax);
-				$('#bz-next-posts-button input').click(function() {
-					boozurkScripts.AJAX_paged();
-				});
-			}
-		});
-		
-		return false;
 		
 	},
 

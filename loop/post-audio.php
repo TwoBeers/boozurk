@@ -41,7 +41,7 @@
 		<?php
 			switch ( boozurk_get_opt( 'boozurk_post_formats_audio_content' ) ) {
 				case 'audio player':
-					( $boozurk_first_link ) ? Boozurk_Audio_Player::audio_player( $boozurk_first_link['anchor'] ) : the_content();
+					boozurk_get_audio_shortcode();
 					break;
 				case 'content':
 					the_content();

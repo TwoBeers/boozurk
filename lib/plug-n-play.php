@@ -16,17 +16,22 @@ class Boozurk_For_Jetpack {
 
 	function __construct() {
 
-		add_action( 'init', array( $this, 'init' ) );
+		add_filter( 'boozurk_options_array'		, array( $this, 'extra_options_array' ), 10, 1 );
+		add_filter( 'boozurk_options_hierarchy'	, array( $this, 'extra_options_hierarchy' ), 10, 1 );
+
+		add_action( 'init'						, array( $this, 'init' ) );
 
 	}
 
 
 	function init() {
 
+		if ( ! class_exists( 'Jetpack' ) ) return;
+
 		if ( boozurk_is_mobile() ) return;
 
 		//Sharedaddy
-		if ( function_exists( 'sharing_display' ) ) {
+		if ( Jetpack::is_module_active( 'sharedaddy' ) ) {
 			remove_filter( 'the_content'								, 'sharing_display', 19 );
 			remove_filter( 'the_excerpt'								, 'sharing_display', 19 );
 			add_action( 'boozurk_hook_entry_bottom'						, array( $this, 'sharedaddy_display' ) );
@@ -34,7 +39,7 @@ class Boozurk_For_Jetpack {
 		}
 
 		//Likes
-		if ( class_exists( 'Jetpack_Likes' ) ) {
+		if ( Jetpack::is_module_active( 'likes' ) ) {
 			add_action		( 'boozurk_hook_entry_bottom'			, array( $this, 'likes' ) );
 			remove_filter	( 'the_content'							, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 			add_filter		( 'boozurk_filter_likes'				, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
@@ -46,21 +51,55 @@ class Boozurk_For_Jetpack {
 			'type'		=> $type,
 			'container'	=> 'posts_content',
 			'render'	=> array( $this, 'infinite_scroll_render' ),
+			'footer'	=> false,
 		) );
 
-		if ( class_exists( 'The_Neverending_Home_Page' ) ) {
+		if ( Jetpack::is_module_active( 'infinite-scroll' ) ) {
 			add_filter( 'boozurk_option_boozurk_infinite_scroll'	, '__return_false' );
 			add_filter( 'infinite_scroll_results'					, array( $this, 'infinite_scroll_encode' ), 11, 1 );
 		}
 
 		//Carousel
-		if ( class_exists( 'Jetpack_Carousel' ) ) {
+		if ( Jetpack::is_module_active( 'carousel' ) ) {
 			remove_filter( 'post_gallery'							, 'boozurk_gallery_shortcode', 10, 2 );
 			add_filter( 'boozurk_option_boozurk_js_thickbox'		, '__return_false' );
 		}
 
 	}
 
+	function extra_options_array( $coa ) {
+
+		//Infinite Scroll
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'infinite-scroll' ) ) {
+
+			$coa['boozurk_infinite_scroll_type'] = array(
+				'type'			=> 'sel',
+				'default'		=> 'manual',
+				'description'	=> __( 'infinite pagination', 'boozurk' ),
+				'info'			=> __( 'automatically append the next page of posts (via AJAX) to your current page', 'boozurk' ). '<br />' . __( 'auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts', 'boozurk' ),
+				'options'		=> array( 'auto', 'manual' ),
+				'options_l10n'	=> array( __( 'auto', 'boozurk' ), __( 'manual', 'boozurk' ) ),
+				'req'			=> 'boozurk_jsani',
+			);
+
+		}
+
+		return $coa;
+
+	}
+
+	function extra_options_hierarchy( $hierarchy ) {
+
+		//Infinite Scroll
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'infinite-scroll' ) ) {
+
+			$hierarchy['features']['sub']['javascript']['sub'][] = 'boozurk_infinite_scroll_type';
+
+		}
+
+		return $hierarchy;
+
+	}
 
 	//print the "likes" button after post content
 	function likes() {
@@ -73,10 +112,8 @@ class Boozurk_For_Jetpack {
 	//Set the code to be rendered on for calling posts,
 	function infinite_scroll_render() {
 
-		if ( isset( $_GET['page'] ) && $page = (int) $_GET['page'] )
-			echo '<div class="page-reminder"><span>' . sprintf( __('Page %s','boozurk'), $page ) . '</span></div>';
-
 		get_template_part( 'loop' );
+
 	}
 
 
@@ -386,3 +423,175 @@ class Boozurk_For_BuddyPress {
 }
 
 new Boozurk_For_BuddyPress;
+
+
+/**
+ * Functions and hooks for Breadcrumb NavXT integration
+ */
+class Boozurk_For_NavXT {
+
+	function __construct() {
+
+		add_filter( 'wpseo_breadcrumb_links'	, array( $this, 'remove_home_from_breadcrumb' ) );
+		add_filter( 'boozurk_filter_breadcrumb'	, array( $this, 'display_breadcrumb' ) );
+
+	}
+
+	function remove_home_from_breadcrumb( $links ) {
+
+		$on_front = get_option('show_on_front');
+
+		if ( ( $on_front == "page" && is_front_page() ) || ( $on_front == "posts" && is_home() ) ) {
+			//nop
+		} else {
+			if ( $links[0]['url'] == get_home_url() ) { array_shift( $links ); }
+		}
+
+		return $links;
+
+	}
+
+	function display_breadcrumb( $output ) {
+
+		if ( function_exists( 'bcn_display' ) ) {
+
+			$output = bcn_display( $return = true );
+
+		}
+
+		return $output;
+
+	}
+
+}
+
+new Boozurk_For_NavXT;
+
+
+/**
+ * Functions and hooks for Yoast Breadcrumbs integration
+ */
+class Boozurk_For_Yoast_Breadcrumbs {
+
+	function __construct() {
+
+		add_filter( 'boozurk_filter_breadcrumb'	, array( $this, 'display_breadcrumb' ) );
+
+	}
+
+	function display_breadcrumb( $output ) {
+
+		if ( function_exists( 'yoast_breadcrumb' ) ) {
+
+			$_output = yoast_breadcrumb( '', '', false );
+
+			if ( $_output )
+				$output = $_output ;
+
+		}
+
+		return $output;
+
+	}
+
+}
+
+new Boozurk_For_Yoast_Breadcrumbs;
+
+
+/**
+ * Functions and hooks for WP Paginate integration
+ */
+class Boozurk_For_WP_Paginate {
+
+	function __construct() {
+
+		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
+
+		add_filter( 'boozurk_filter_comments_links'		, array( $this, 'comments_links' ) );
+		add_filter( 'boozurk_filter_navigate_archives'	, array( $this, 'navigate_archives' ) );
+
+	}
+
+	function dequeue_style() {
+
+		wp_dequeue_style( 'wp-paginate' );
+
+	}
+
+	function comments_links( $bool ) {
+
+		if ( function_exists( 'wp_paginate_comments' ) ) {
+
+			wp_paginate_comments();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+	function navigate_archives( $bool ) {
+
+		if ( function_exists( 'wp_paginate' ) ) {
+
+			wp_paginate();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+}
+
+new Boozurk_For_WP_Paginate;
+
+
+/**
+ * Functions and hooks for WP-Pagenavi integration
+ */
+class Boozurk_For_WP_Pagenavi {
+
+	function __construct() {
+
+		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
+
+		add_filter( 'boozurk_filter_navigate_archives', array( $this, 'navigate_archives' ) );
+
+	}
+
+	function dequeue_style() {
+
+		wp_dequeue_style( 'wp-pagenavi' );
+
+	}
+
+	function navigate_archives( $bool ) {
+
+		if ( function_exists( 'wp_pagenavi' ) ) {
+
+			wp_pagenavi();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+}
+
+new Boozurk_For_WP_Pagenavi;
+
+
+
+
+
+
+
