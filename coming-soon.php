@@ -58,7 +58,7 @@
 
 					<div class="storyshare">
 
-						<?php boozurk_share_this(); ?>
+						<?php do_action( 'boozurk_hook_share_links' ); ?>
 
 					</div>
 

@@ -34,7 +34,7 @@ class Boozurk_For_Jetpack {
 		if ( Jetpack::is_module_active( 'sharedaddy' ) ) {
 			remove_filter( 'the_content'								, 'sharing_display', 19 );
 			remove_filter( 'the_excerpt'								, 'sharing_display', 19 );
-			add_action( 'boozurk_hook_entry_bottom'						, array( $this, 'sharedaddy_display' ) );
+			add_action( 'boozurk_hook_share_links'						, array( $this, 'sharedaddy_display' ) );
 			add_filter( 'boozurk_option_boozurk_plusone'				, '__return_false' );
 		}
 
@@ -117,11 +117,10 @@ class Boozurk_For_Jetpack {
 	}
 
 
-	//encodes html result to UTF8 (jetpack bug?)
-	//http://localhost/wordpress/?infinity=scrolling&action=infinite_scroll&page=5&order=DESC
+	//encodes html result to UTF8 (useless atm)
 	function infinite_scroll_encode( $results ) {
 
-		$results['html'] = utf8_encode( utf8_decode( $results['html'] ) );
+		//$results['html'] = utf8_encode( utf8_decode( $results['html'] ) );
 
 		return $results;
 	}
@@ -231,7 +230,7 @@ class Boozurk_For_Bbpress {
 	function extrainfo( $args ) {
 
 		$args['comments'] = 0;
-		$args['plusone'] = 0;
+		$args['share'] = 0;
 
 		return $args;
 
@@ -508,8 +507,8 @@ class Boozurk_For_WP_Paginate {
 
 		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
 
-		add_filter( 'boozurk_filter_comments_links'		, array( $this, 'comments_links' ) );
-		add_filter( 'boozurk_filter_navigate_archives'	, array( $this, 'navigate_archives' ) );
+		add_filter( 'boozurk_filter_navigation_comments'	, array( $this, 'comments_links' ) );
+		add_filter( 'boozurk_filter_navigation_archives'	, array( $this, 'navigate_archives' ) );
 
 	}
 
@@ -561,7 +560,7 @@ class Boozurk_For_WP_Pagenavi {
 
 		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
 
-		add_filter( 'boozurk_filter_navigate_archives', array( $this, 'navigate_archives' ) );
+		add_filter( 'boozurk_filter_navigation_archives', array( $this, 'navigate_archives' ) );
 
 	}
 
@@ -588,10 +587,3 @@ class Boozurk_For_WP_Pagenavi {
 }
 
 new Boozurk_For_WP_Pagenavi;
-
-
-
-
-
-
-

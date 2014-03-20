@@ -115,6 +115,7 @@ function boozurk_get_coa( $option = false ) {
 						'boozurk_excerpt',
 						'boozurk_more_tag',
 						'boozurk_post_info',
+						'boozurk_browse_links',
 						'boozurk_smilies',
 					),
 				),
@@ -143,7 +144,6 @@ function boozurk_get_coa( $option = false ) {
 					'description'	=> '',
 					'sub'			=> array(
 						'boozurk_custom_widgets',
-						'boozurk_plusone',
 						'boozurk_editor_style',
 						'boozurk_tbcred',
 					),
@@ -259,7 +259,7 @@ function boozurk_get_coa( $option = false ) {
 		),
 		'boozurk_post_formats_audio_content' => array(
 							'type'			=> 'sel',
-							'default'		=> 'content',
+							'default'		=> 'audio player',
 							'description'	=> __( 'content', 'boozurk' ),
 							'info'			=> '',
 							'options'		=> array( 'content', 'excerpt', 'audio player', 'none' ),
@@ -743,7 +743,7 @@ function boozurk_get_coa( $option = false ) {
 		),
 		'boozurk_scrollable_sidebars' => array(
 							'type'			=> 'chk',
-							'default'		=> 0,
+							'default'		=> 1,
 							'description'	=> __( 'scrollable sidebars', 'boozurk' ),
 							'info'			=> sprintf( __( 'fixed sidebars powered by %s', 'boozurk' ), '<a href="http://www.baijs.nl/tinyscrollbar/">Tiny Scrollbar</a>' ),
 							'req'			=> 'boozurk_jsani'
@@ -805,15 +805,6 @@ function boozurk_get_coa( $option = false ) {
 							'info'			=> '',
 							'req'			=> '',
 							'sub'			=> false,
-		),
-		'boozurk_plusone' => array(
-							'type'			=> 'sel',
-							'default'		=> 0,
-							'description'	=> __( 'sharing buttons', 'boozurk' ),
-							'info'			=> '',
-							'options'		=> array( 'addthis', 'googleplus', 'googleplus_official', 'facebook', 'twitter', 0 ),
-							'options_l10n'	=> array( 'AddThis', 'Google+', 'Google+ (' . __( 'official button', 'boozurk' ) . ')', 'Facebook', 'Twitter', __( 'none', 'boozurk' ) ),
-							'req'			=> '',
 		),
 		'boozurk_main_menu' => array(							'type'			=> 'sel',							'default'		=> 'text',							'description'	=> __( 'main menu look', 'boozurk' ),							'info'			=> __( 'select the style of the main menu: text, thumbnails or both', 'boozurk' ),							'options'		=> array( 'text', 'thumbnail', 'thumbnail and text' ),							'options_l10n'	=> array( __( 'text', 'boozurk' ), __( 'thumbnail', 'boozurk' ), __( 'thumbnail and text', 'boozurk' ) ),
 							'req'			=> '',

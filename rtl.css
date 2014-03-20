@@ -210,7 +210,9 @@ div.bz_widget_post_formats ul li.compact {
 
 /* Navigation buttons
 ----------------------------------------------------------*/
-
+#navbuttons.fixed {
+	right: -41px;
+}
 .minibutton {
 	float:right;
 }

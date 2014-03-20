@@ -1,6 +1,7 @@
 /* Very Hi Resolutions
 ----------------------------------------------------------*/
 @media screen and (min-width: 1360px) {
+	#fixed-bg,
 	#main {
 		max-width:1340px;
 	}

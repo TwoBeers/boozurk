@@ -1,9 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Boozurk v2.08\n"
+"Project-Id-Version: Boozurk v3.00\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-03-28 11:34:38+0000\n"
+"PO-Revision-Date: 2014-03-19 21:22:00+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,263 +22,257 @@ msgstr ""
 
 #: comments.php:26
 #: comments.php:32
+#: functions.php:1670
 #@ boozurk
 msgid "% Comments"
 msgstr ""
 
-#: functions.php:1590
+#: functions.php:1466
 #, php-format
 #@ boozurk
 msgid "%s ago"
 msgstr ""
 
-#: lib/options.php:95
-#: lib/options.php:126
-#: lib/options.php:134
-#: lib/options.php:165
-#: lib/options.php:174
-#: lib/options.php:205
-#: lib/options.php:236
-#: lib/options.php:267
-#: lib/options.php:298
-#: lib/options.php:306
+#: lib/options.php:210
+#: lib/options.php:238
+#: lib/options.php:245
+#: lib/options.php:273
+#: lib/options.php:280
+#: lib/options.php:308
+#: lib/options.php:336
+#: lib/options.php:364
+#: lib/options.php:392
+#: lib/options.php:399
 #, php-format
 #@ boozurk
 msgid "%s format posts"
 msgstr ""
 
-#: functions.php:1581
+#: functions.php:1457
 #, php-format
 #@ boozurk
 msgid "%s months ago"
 msgstr ""
 
-#: lib/widgets.php:1389
+#: lib/widgets.php:1429
 #@ boozurk
 msgid "(current post category)"
 msgstr ""
 
-#: functions.php:2181
-#: lib/options.php:321
+#: functions.php:1978
+#: lib/options.php:412
 #@ boozurk
 msgid "(no title)"
 msgstr ""
 
 #: comments.php:26
 #: comments.php:32
+#: functions.php:1669
 #@ boozurk
 msgid "1 Comment"
 msgstr ""
 
-#: lib/widgets.php:1635
+#: lib/widgets.php:1670
 #@ boozurk
 msgid "A list of Post Formats"
 msgstr ""
 
 #: images/temp/new  3.php:12
-#: lib/widgets.php:645
+#: lib/widgets.php:676
 #@ boozurk
 msgid "A list of popular categories"
 msgstr ""
 
-#: lib/widgets.php:1869
+#: lib/widgets.php:1904
 #@ boozurk
 msgid "Add New Post"
 msgstr ""
 
-#: functions.php:385
+#: functions.php:441
 #@ boozurk
 msgid "Add selected text as a quote"
 msgstr ""
 
-#: functions.php:2100
+#: functions.php:1897
 #@ boozurk
 msgid "All rights reserved"
 msgstr ""
 
-#: functions.php:1462
+#: functions.php:1338
 #@ boozurk
 msgid "Aperture"
 msgstr ""
 
-#: lib/widgets.php:2025
+#: lib/widgets.php:1980
 #@ boozurk
 msgid "Archives"
 msgstr ""
 
-#: lib/widgets.php:1590
-#: mobile/core-mobile.php:302
+#: lib/widgets.php:1625
+#: mobile/core-mobile.php:305
 #@ boozurk
 msgid "Author"
 msgstr ""
 
-#: functions.php:680
+#: functions.php:764
 #@ boozurk
 msgid "Bottom of page"
 msgstr ""
 
-#: functions.php:1460
+#: functions.php:1336
 #@ boozurk
 msgid "Camera"
 msgstr ""
 
-#: functions.php:1459
+#: functions.php:1335
 #@ boozurk
 msgid "Caption"
 msgstr ""
 
 #: allcat.php:55
-#: functions.php:1505
-#: lib/widgets.php:1619
+#: functions.php:1381
+#: lib/widgets.php:1654
 #@ boozurk
 msgid "Categories"
 msgstr ""
 
-#: lib/widgets.php:1371
-#: mobile/core-mobile.php:288
+#: lib/widgets.php:1411
+#: mobile/core-mobile.php:291
 #@ boozurk
 msgid "Category"
 msgstr ""
 
-#: lib/widgets.php:2017
+#: lib/widgets.php:1972
 #@ boozurk
 msgid "Clean Archives"
 msgstr ""
 
-#: functions.php:381
+#: functions.php:440
 #@ boozurk
 msgid "Click on thumbnails"
 msgstr ""
 
-#: footer.php:44
+#: footer.php:48
 #@ boozurk
 msgid "Close"
 msgstr ""
 
-#: lib/options.php:16
+#: lib/options.php:21
 #@ boozurk
 msgid "Colors"
 msgstr ""
 
-#: lib/widgets.php:601
+#: lib/widgets.php:632
 #, php-format
 #@ boozurk
 msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
 msgstr ""
 
-#: lib/widgets.php:1876
+#: lib/widgets.php:1911
 #: mobile/comments-mobile.php:21
 #@ boozurk
 msgid "Comments"
 msgstr ""
 
-#: functions.php:388
+#: functions.php:444
 #@ boozurk
 msgid "Comments closed"
 msgstr ""
 
-#: lib/widgets.php:881
+#: lib/widgets.php:914
 #@ boozurk
 msgid "Contact us"
 msgstr ""
 
-#: functions.php:1456
+#: functions.php:1332
 #@ boozurk
 msgid "Copyright"
 msgstr ""
 
-#: lib/widgets.php:1916
+#: lib/widgets.php:1951
 #@ boozurk
 msgid "Create a random nick for not-logged users"
 msgstr ""
 
-#: functions.php:1457
+#: functions.php:1333
 #@ boozurk
 msgid "Credit"
 msgstr ""
 
-#: lib/widgets.php:1609
-#: mobile/core-mobile.php:293
+#: lib/widgets.php:1644
+#: mobile/core-mobile.php:296
 #@ boozurk
 msgid "Date"
 msgstr ""
 
-#: functions.php:1455
+#: functions.php:1331
 #@ boozurk
 msgid "Date Taken"
 msgstr ""
 
-#: lib/admin.php:328
-#: lib/admin.php:349
+#: lib/admin.php:249
+#: lib/admin.php:396
+#: lib/admin.php:463
 #@ boozurk
 msgid "Default"
 msgstr ""
 
-#: lib/widgets.php:1765
+#: lib/widgets.php:1800
 #@ boozurk
 msgid "Display image EXIF details. It's visible ONLY in single attachments"
 msgstr ""
 
-#: functions.php:597
-#@ boozurk
-msgid "Edit"
-msgstr ""
-
-#: functions.php:1840
-#: mobile/core-mobile.php:333
+#: functions.php:1742
+#: mobile/core-mobile.php:336
 #@ boozurk
 msgid "Email"
 msgstr ""
 
-#: lib/widgets.php:127
+#: lib/widgets.php:142
 #@ boozurk
 msgid "Enrich the page 404 with some useful widgets"
 msgstr ""
 
 #: comments.php:18
+#: functions.php:1689
 #: mobile/comments-mobile.php:14
 #@ boozurk
 msgid "Enter your password to view comments"
 msgstr ""
 
-#: lib/widgets.php:1486
+#: lib/widgets.php:1525
 #@ boozurk
 msgid "Feed for comments"
 msgstr ""
 
-#: functions.php:624
+#: functions.php:708
 #@ boozurk
 msgid "Feed for comments on this post"
 msgstr ""
 
-#: lib/widgets.php:95
+#: lib/widgets.php:110
 #@ boozurk
 msgid "First Footer Widget Area"
 msgstr ""
 
-#: lib/widgets.php:1502
-#@ boozurk
-msgid "Fixed position (bottom right)"
-msgstr ""
-
-#: functions.php:1461
+#: functions.php:1337
 #@ boozurk
 msgid "Focal Length"
 msgstr ""
 
-#: lib/widgets.php:777
-#: lib/widgets.php:824
+#: lib/widgets.php:808
+#: lib/widgets.php:857
 #@ boozurk
 msgid "Follow Me"
 msgstr ""
 
-#: lib/widgets.php:871
+#: lib/widgets.php:904
 #, php-format
 #@ boozurk
 msgid "Follow us on %s"
 msgstr ""
 
-#: functions.php:1454
+#: functions.php:1330
 #@ boozurk
 msgid "Height"
 msgstr ""
@@ -287,208 +282,179 @@ msgstr ""
 msgid "Here is something that might help:"
 msgstr ""
 
-#: functions.php:636
-#: lib/breadcrumb.php:153
-#: lib/widgets.php:1492
+#: functions.php:720
+#: functions.php:2222
+#: functions.php:2223
+#: lib/breadcrumb.php:162
+#: lib/widgets.php:1531
 #@ boozurk
 msgid "Home"
 msgstr ""
 
-#: functions.php:1463
+#: functions.php:1339
 #@ boozurk
 msgid "ISO"
 msgstr ""
 
-#: lib/admin.php:374
+#: lib/admin.php:496
 #@ boozurk
 msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
 msgstr ""
 
-#: lib/widgets.php:1766
-#: lib/widgets.php:1770
+#: lib/widgets.php:1801
+#: lib/widgets.php:1805
 #@ boozurk
 msgid "Image EXIF details"
 msgstr ""
 
-#: lib/options.php:20
+#: lib/options.php:128
 #@ boozurk
 msgid "Javascript"
 msgstr ""
 
-#: lib/widgets.php:307
-#: lib/widgets.php:314
+#: lib/widgets.php:338
+#: lib/widgets.php:345
 #@ boozurk
 msgid "Latest activity"
 msgstr ""
 
-#: lib/widgets.php:464
-#: lib/widgets.php:471
+#: lib/widgets.php:495
+#: lib/widgets.php:502
 #@ boozurk
 msgid "Latest comment authors"
 msgstr ""
 
-#: mobile/core-mobile.php:349
+#: mobile/core-mobile.php:352
 #, php-format
 #@ boozurk
 msgid "Leave a Reply to %s"
 msgstr ""
 
 #: comments.php:26
-#: functions.php:618
-#: lib/widgets.php:1483
-#: mobile/core-mobile.php:348
+#: functions.php:702
+#: lib/widgets.php:1522
+#: mobile/core-mobile.php:351
 #@ boozurk
 msgid "Leave a comment"
 msgstr ""
 
-#: lib/admin.php:375
+#: lib/admin.php:497
 #@ boozurk
 msgid "Leave a feedback"
 msgstr ""
 
-#: lib/options.php:720
-#@ boozurk
-msgid "Logo"
-msgstr ""
-
-#: functions.php:906
+#: functions.php:977
 #@ boozurk
 msgid "Main Navigation Menu"
 msgstr ""
 
-#: lib/widgets.php:85
+#: lib/widgets.php:100
 #@ boozurk
 msgid "Menu Widget Area"
 msgstr ""
 
-#: functions.php:1838
-#: mobile/core-mobile.php:331
+#: functions.php:1740
+#: mobile/core-mobile.php:334
 #@ boozurk
 msgid "Name"
 msgstr ""
 
-#: lib/widgets.php:1422
+#: lib/widgets.php:1462
 #@ boozurk
 msgid "Navigation buttons"
 msgstr ""
 
-#: functions.php:668
+#: functions.php:752
 #@ boozurk
 msgid "Newer Posts"
 msgstr ""
 
-#: functions.php:744
-#: functions.php:1729
-#@ boozurk
-msgid "Next Page"
-msgstr ""
-
-#: functions.php:656
-#: functions.php:1406
-#: functions.php:1420
+#: functions.php:740
+#: functions.php:1282
+#: functions.php:1296
 #@ boozurk
 msgid "Next Post"
 msgstr ""
 
-#: mobile/core-mobile.php:224
+#: mobile/core-mobile.php:227
 #@ boozurk
 msgid "Next page"
 msgstr ""
 
 #: comments.php:26
 #: comments.php:32
+#: functions.php:1668
 #@ boozurk
 msgid "No Comments"
 msgstr ""
 
-#: functions.php:1508
+#: functions.php:1384
 #@ boozurk
 msgid "No Tags"
 msgstr ""
 
-#: functions.php:383
-#@ boozurk
-msgid "No more posts beyond this line"
-msgstr ""
-
-#: functions.php:387
+#: functions.php:443
 #@ boozurk
 msgid "Nothing to quote. First of all you should select some text..."
 msgstr ""
 
 #: images/temp/new  3.php:122
-#: lib/widgets.php:746
+#: lib/widgets.php:777
 #@ boozurk
 msgid "Number of categories to show"
 msgstr ""
 
-#: lib/widgets.php:284
-#: lib/widgets.php:441
-#: lib/widgets.php:1203
-#: lib/widgets.php:1399
+#: lib/widgets.php:315
+#: lib/widgets.php:472
+#: lib/widgets.php:1243
+#: lib/widgets.php:1439
 #@ boozurk
 msgid "Number of posts to show"
 msgstr ""
 
-#: lib/widgets.php:614
+#: lib/widgets.php:645
 #@ boozurk
 msgid "Number of users to show"
 msgstr ""
 
-#: functions.php:662
+#: functions.php:746
 #@ boozurk
 msgid "Older Posts"
 msgstr ""
 
-#: lib/admin.php:253
-#: lib/admin.php:259
-#@ boozurk
-msgid "Options"
-msgstr ""
-
-#: lib/admin.php:230
+#: lib/admin.php:302
 #@ boozurk
 msgid "Options saved."
 msgstr ""
 
-#: lib/options.php:22
+#: lib/options.php:37
+#: lib/options.php:112
+#: lib/options.php:142
 #@ boozurk
 msgid "Other"
 msgstr ""
 
-#: lib/breadcrumb.php:245
-#: lib/breadcrumb.php:260
-#: lib/breadcrumb.php:302
-#: lib/breadcrumb.php:314
-#@ boozurk
-msgid "Page"
-msgstr ""
-
-#: functions.php:1703
-#: lib/jetpack.php:64
+#: lib/breadcrumb.php:247
+#: lib/breadcrumb.php:262
+#: lib/breadcrumb.php:304
+#: lib/breadcrumb.php:316
 #, php-format
 #@ boozurk
 msgid "Page %s"
 msgstr ""
 
-#: lib/widgets.php:125
+#: lib/widgets.php:140
 #@ boozurk
 msgid "Page 404"
 msgstr ""
 
-#: functions.php:382
-#@ boozurk
-msgid "Page is loading, please wait..."
-msgstr ""
-
 #: 404.php:25
-#: lib/breadcrumb.php:206
+#: lib/breadcrumb.php:208
 #@ boozurk
 msgid "Page not found"
 msgstr ""
 
-#: functions.php:799
-#: functions.php:1713
+#: functions.php:871
 #: mobile/loop-front-page-mobile.php:23
 #: mobile/loop-single-mobile.php:24
 #@ boozurk
@@ -502,214 +468,191 @@ msgstr ""
 
 #: images/temp/new  3.php:14
 #: images/temp/new  3.php:17
-#: lib/widgets.php:647
-#: lib/widgets.php:650
+#: lib/widgets.php:678
+#: lib/widgets.php:681
 #@ boozurk
 msgid "Popular Categories"
 msgstr ""
 
-#: lib/widgets.php:153
-#: lib/widgets.php:161
+#: lib/widgets.php:184
+#: lib/widgets.php:192
 #@ boozurk
 msgid "Popular Posts"
 msgstr ""
 
-#: lib/widgets.php:1636
-#: lib/widgets.php:1644
+#: lib/widgets.php:1671
+#: lib/widgets.php:1679
 #@ boozurk
 msgid "Post Formats"
 msgstr ""
 
-#: lib/widgets.php:135
+#: lib/widgets.php:150
 #@ boozurk
 msgid "Post Widget Area"
 msgstr ""
 
-#: lib/options.php:383
-#: lib/widgets.php:1517
-#: lib/widgets.php:1521
+#: lib/widgets.php:1552
+#: lib/widgets.php:1556
 #@ boozurk
 msgid "Post details"
 msgstr ""
 
-#: functions.php:379
+#: functions.php:438
 #@ boozurk
 msgid "Post loading, please wait..."
 msgstr ""
 
-#: mobile/core-mobile.php:280
+#: mobile/core-mobile.php:283
 #@ boozurk
 msgid "Posts"
 msgstr ""
 
-#: functions.php:380
+#: functions.php:439
 #@ boozurk
 msgid "Preview"
 msgstr ""
 
-#: functions.php:650
-#: functions.php:1407
-#: functions.php:1413
+#: functions.php:734
+#: functions.php:1283
+#: functions.php:1289
 #@ boozurk
 msgid "Previous Post"
 msgstr ""
 
-#: mobile/core-mobile.php:223
+#: mobile/core-mobile.php:226
 #@ boozurk
 msgid "Previous page"
 msgstr ""
 
-#: lib/widgets.php:1495
+#: lib/widgets.php:1534
 #@ boozurk
 msgid "Previous/Next"
 msgstr ""
 
-#: footer.php:44
-#: functions.php:603
+#: footer.php:48
+#: functions.php:687
 #@ boozurk
 msgid "Print"
 msgstr ""
 
-#: lib/widgets.php:1480
+#: lib/widgets.php:1519
 #@ boozurk
 msgid "Print preview"
 msgstr ""
 
-#: functions.php:386
+#: functions.php:442
 #@ boozurk
 msgid "Quote"
 msgstr ""
 
-#: lib/widgets.php:1230
+#: lib/widgets.php:1270
 #, php-format
 #@ boozurk
 msgid "Recent Posts in %s"
 msgstr ""
 
-#: lib/widgets.php:1222
+#: lib/widgets.php:1262
 #@ boozurk
 msgid "Recent Posts in Category"
 msgstr ""
 
-#: functions.php:643
+#: functions.php:727
 #, php-format
 #@ boozurk
 msgid "Return to %s"
 msgstr ""
 
-#: functions.php:1853
-#: mobile/core-mobile.php:346
+#: functions.php:1755
+#: mobile/core-mobile.php:349
 #@ boozurk
 msgid "Say It!"
 msgstr ""
 
-#: mobile/core-mobile.php:310
+#: mobile/core-mobile.php:313
 #, php-format
 #@ boozurk
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: lib/widgets.php:105
+#: lib/widgets.php:120
 #@ boozurk
 msgid "Second Footer Widget Area"
 msgstr ""
 
-#: functions.php:907
+#: functions.php:978
 #@ boozurk
 msgid "Secondary Navigation Menu #1"
 msgstr ""
 
-#: functions.php:908
+#: functions.php:979
 #@ boozurk
 msgid "Secondary Navigation Menu #2"
 msgstr ""
 
-#: lib/widgets.php:1594
+#: lib/widgets.php:1629
 #@ boozurk
 msgid "Select avatar size"
 msgstr ""
 
-#: lib/widgets.php:1990
-#@ boozurk
-msgid "Select icon size"
-msgstr ""
-
-#: lib/widgets.php:2133
+#: lib/widgets.php:2088
 #@ boozurk
 msgid "Select month style"
 msgstr ""
 
-#: lib/widgets.php:619
-#: lib/widgets.php:993
+#: lib/widgets.php:650
+#: lib/widgets.php:1033
 #@ boozurk
 msgid "Select your icon size"
 msgstr ""
 
-#: lib/widgets.php:1937
-#: lib/widgets.php:1941
-#@ boozurk
-msgid "Share this"
-msgstr ""
-
-#: functions.php:1385
-#, php-format
-#@ boozurk
-msgid "Share with %s"
-msgstr ""
-
-#: lib/widgets.php:1739
+#: lib/widgets.php:1774
 #@ boozurk
 msgid "Show"
 msgstr ""
 
-#: lib/widgets.php:2016
+#: lib/widgets.php:1971
 #@ boozurk
 msgid "Show archives in a cleaner way"
 msgstr ""
 
-#: lib/widgets.php:1395
+#: lib/widgets.php:1435
 #@ boozurk
 msgid "Show category description"
 msgstr ""
 
-#: lib/widgets.php:290
-#: lib/widgets.php:447
-#: lib/widgets.php:1405
+#: lib/widgets.php:321
+#: lib/widgets.php:478
+#: lib/widgets.php:1445
 #@ boozurk
 msgid "Show post thumbnails"
 msgstr ""
 
-#: lib/widgets.php:1749
+#: lib/widgets.php:1784
 #@ boozurk
 msgid "Show posts count"
 msgstr ""
 
-#: lib/widgets.php:1516
+#: lib/widgets.php:1551
 #@ boozurk
 msgid "Show some details and links related to the current post. It's visible ONLY in single posts"
 msgstr ""
 
-#: lib/widgets.php:1936
-#@ boozurk
-msgid "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments"
-msgstr ""
-
-#: lib/widgets.php:1921
+#: lib/widgets.php:1956
 #@ boozurk
 msgid "Show user gravatar"
 msgstr ""
 
-#: functions.php:1464
+#: functions.php:1340
 #@ boozurk
 msgid "Shutter Speed"
 msgstr ""
 
-#: lib/widgets.php:1827
+#: lib/widgets.php:1862
 #@ boozurk
 msgid "Some useful links for users. It's a kind of enhanced meta widget"
 msgstr ""
 
-#: lib/widgets.php:1421
+#: lib/widgets.php:1461
 #@ boozurk
 msgid "Some usefull buttons for an easier navigation experience"
 msgstr ""
@@ -727,67 +670,66 @@ msgstr ""
 msgid "Sorry, you're looking for something that isn't here"
 msgstr ""
 
-#: mobile/core-mobile.php:289
+#: mobile/core-mobile.php:292
 #@ boozurk
 msgid "Tag"
 msgstr ""
 
-#: functions.php:1509
-#: lib/widgets.php:1614
+#: functions.php:1385
+#: lib/widgets.php:1649
 #@ boozurk
 msgid "Tags"
 msgstr ""
 
-#: lib/widgets.php:97
+#: lib/widgets.php:112
 #@ boozurk
 msgid "The first footer widget area"
 msgstr ""
 
-#: lib/widgets.php:463
+#: lib/widgets.php:494
 #@ boozurk
 msgid "The latest comment authors"
 msgstr ""
 
-#: lib/widgets.php:306
+#: lib/widgets.php:337
 #@ boozurk
 msgid "The latest commented posts/pages of your site"
 msgstr ""
 
-#: lib/widgets.php:152
+#: lib/widgets.php:183
 #@ boozurk
 msgid "The most commented posts on your site"
 msgstr ""
 
-#: lib/widgets.php:1221
+#: lib/widgets.php:1261
 #@ boozurk
 msgid "The most recent posts in a single category"
 msgstr ""
 
-#: lib/widgets.php:107
+#: lib/widgets.php:122
 #@ boozurk
 msgid "The second footer widget area"
 msgstr ""
 
-#: lib/widgets.php:117
+#: lib/widgets.php:132
 #@ boozurk
 msgid "The third footer widget area"
 msgstr ""
 
-#: lib/widgets.php:87
+#: lib/widgets.php:102
 #@ boozurk
 msgid "The widget area under the main menu"
 msgstr ""
 
-#: lib/admin.php:250
-#: lib/admin.php:254
-#: lib/admin.php:383
+#: lib/admin.php:325
+#: lib/admin.php:505
 #@ boozurk
 msgid "Theme Info"
 msgstr ""
 
-#: functions.php:1762
-#: lib/admin.php:30
-#: lib/admin.php:241
+#: lib/admin.php:66
+#: lib/admin.php:312
+#: lib/admin.php:526
 #@ boozurk
 msgid "Theme Options"
 msgstr ""
@@ -797,84 +739,83 @@ msgstr ""
 msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
 msgstr ""
 
-#: lib/widgets.php:115
+#: lib/widgets.php:130
 #@ boozurk
 msgid "Third Footer Widget Area"
 msgstr ""
 
-#: lib/widgets.php:773
+#: lib/widgets.php:804
 #@ boozurk
 msgid "This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
 msgstr ""
 
-#: functions.php:1458
+#: functions.php:1334
 #: images/temp/new  3.php:117
-#: lib/widgets.php:279
-#: lib/widgets.php:436
-#: lib/widgets.php:609
-#: lib/widgets.php:741
-#: lib/widgets.php:956
-#: lib/widgets.php:1184
-#: lib/widgets.php:1366
-#: lib/widgets.php:1579
-#: lib/widgets.php:1734
-#: lib/widgets.php:1810
-#: lib/widgets.php:1909
-#: lib/widgets.php:1985
-#: lib/widgets.php:2128
+#: lib/widgets.php:310
+#: lib/widgets.php:467
+#: lib/widgets.php:640
+#: lib/widgets.php:772
+#: lib/widgets.php:996
+#: lib/widgets.php:1224
+#: lib/widgets.php:1406
+#: lib/widgets.php:1614
+#: lib/widgets.php:1769
+#: lib/widgets.php:1845
+#: lib/widgets.php:1944
+#: lib/widgets.php:2083
 #@ boozurk
 msgid "Title"
 msgstr ""
 
-#: functions.php:674
+#: functions.php:758
 #@ boozurk
 msgid "Top of page"
 msgstr ""
 
-#: lib/widgets.php:1498
+#: lib/widgets.php:1537
 #@ boozurk
 msgid "Top/Bottom"
 msgstr ""
 
-#: functions.php:630
-#: lib/widgets.php:1489
+#: functions.php:714
+#: lib/widgets.php:1528
 #@ boozurk
 msgid "Trackback URL"
 msgstr ""
 
-#: lib/widgets.php:1189
+#: lib/widgets.php:1229
 #@ boozurk
 msgid "Type of posts to show"
 msgstr ""
 
-#: lib/admin.php:367
+#: lib/admin.php:488
 #@ boozurk
 msgid "Undo Changes"
 msgstr ""
 
-#: lib/admin.php:366
+#: lib/admin.php:484
 #@ boozurk
 msgid "Update Options"
 msgstr ""
 
-#: lib/widgets.php:1028
+#: lib/widgets.php:1068
 #@ boozurk
 msgid "Use this widget to list your recent Aside and Status posts"
 msgstr ""
 
-#: lib/widgets.php:1828
+#: lib/widgets.php:1863
 #@ boozurk
 msgid "User quick links"
 msgstr ""
 
 #: images/temp/new  3.php:65
-#: lib/widgets.php:689
+#: lib/widgets.php:720
 #@ boozurk
 msgid "View all"
 msgstr ""
 
 #: images/temp/new  3.php:65
-#: lib/widgets.php:689
+#: lib/widgets.php:720
 #@ boozurk
 msgid "View all categories"
 msgstr ""
@@ -890,583 +831,522 @@ msgstr ""
 msgid "View full size"
 msgstr ""
 
-#: functions.php:1305
+#: lib/functions-formats.php:223
 #@ boozurk
 msgid "View gallery"
 msgstr ""
 
-#: functions.php:1842
-#: mobile/core-mobile.php:335
+#: functions.php:1744
+#: mobile/core-mobile.php:338
 #@ boozurk
 msgid "Website"
 msgstr ""
 
-#: lib/widgets.php:1832
+#: lib/widgets.php:1867
 #, php-format
 #@ boozurk
 msgid "Welcome %s"
 msgstr ""
 
-#: functions.php:1453
+#: functions.php:1329
 #@ boozurk
 msgid "Width"
 msgstr ""
 
-#: lib/widgets.php:1867
+#: lib/widgets.php:1902
 #@ boozurk
 msgid "Your Profile"
 msgstr ""
 
-#: lib/options.php:720
+#: lib/options.php:816
 #@ boozurk
 msgid "a logo in the upper right corner of the window. paste here the complete path to image location. leave empty to ignore"
 msgstr ""
 
-#: functions.php:1585
+#: functions.php:1461
 #@ boozurk
 msgid "a month ago"
 msgstr ""
 
-#: lib/widgets.php:137
+#: lib/widgets.php:152
 #@ boozurk
 msgid "a widget area located after the post body"
 msgstr ""
 
-#: lib/options.php:518
+#: lib/options.php:657
 #@ boozurk
 msgid "add a lot of new usefull widgets"
 msgstr ""
 
-#: lib/options.php:732
+#: lib/options.php:827
 #@ boozurk
 msgid "add style to the editor in order to write the post exactly how it will appear on the site"
 msgstr ""
 
-#: lib/options.php:570
+#: lib/options.php:703
 #@ boozurk
 msgid "add the thickbox effect to each linked image and galleries in post content"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "apr"
 msgstr ""
 
-#: lib/options.php:156
+#: lib/options.php:265
 #@ boozurk
 msgid "audio player"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "aug"
 msgstr ""
 
-#: lib/options.php:631
+#: lib/plug-n-play.php:81
 #@ boozurk
 msgid "auto"
 msgstr ""
 
-#: lib/options.php:629
+#: lib/plug-n-play.php:79
 #@ boozurk
 msgid "auto: when a user scrolls to the bottom - manual: by clicking the link at the end of posts"
 msgstr ""
 
-#: lib/options.php:620
+#: lib/plug-n-play.php:79
 #@ boozurk
 msgid "automatically append the next page of posts (via AJAX) to your current page"
 msgstr ""
 
-#: lib/options.php:628
-#@ boozurk
-msgid "behaviour"
-msgstr ""
-
-#: lib/widgets.php:1029
-#: lib/widgets.php:1037
+#: lib/widgets.php:1069
+#: lib/widgets.php:1077
 #@ boozurk
 msgid "besides..."
 msgstr ""
 
-#: functions.php:944
+#: functions.php:1016
 #@ boozurk
 msgid "boozurk Default Gravatar"
 msgstr ""
 
-#: lib/options.php:422
+#: lib/options.php:551
 #@ boozurk
 msgid "both"
 msgstr ""
 
-#: lib/widgets.php:1390
+#: lib/widgets.php:1430
 #@ boozurk
 msgid "by selecting \"(current post category)\", the widget will be visible ONLY in single posts"
 msgstr ""
 
-#: lib/options.php:67
-#@ boozurk
-msgid "colors for categories"
-msgstr ""
-
-#: lib/options.php:114
-#: lib/options.php:117
-#: lib/options.php:153
-#: lib/options.php:156
-#: lib/options.php:193
-#: lib/options.php:196
-#: lib/options.php:224
 #: lib/options.php:227
-#: lib/options.php:255
-#: lib/options.php:258
-#: lib/options.php:286
-#: lib/options.php:289
+#: lib/options.php:230
+#: lib/options.php:262
+#: lib/options.php:265
+#: lib/options.php:297
+#: lib/options.php:300
+#: lib/options.php:325
+#: lib/options.php:328
+#: lib/options.php:353
+#: lib/options.php:356
+#: lib/options.php:381
+#: lib/options.php:384
 #@ boozurk
 msgid "content"
 msgstr ""
 
-#: lib/options.php:595
+#: lib/options.php:725
 #@ boozurk
 msgid "cool tooltips"
 msgstr ""
 
-#: lib/options.php:604
-#@ boozurk
-msgid "create an audio player for linked audio files (mp3,ogg and m4a) in the audio format posts"
-msgstr ""
-
-#: lib/options.php:517
+#: lib/options.php:656
 #@ boozurk
 msgid "custom widgets"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "dec"
 msgstr ""
 
-#: lib/widgets.php:1911
+#: lib/widgets.php:1946
 #, php-format
 #@ boozurk
 msgid "default: \"Welcome %s\" , where %s is the user name"
 msgstr ""
 
-#: lib/options.php:732
+#: lib/options.php:827
 #@ boozurk
 msgid "editor style"
 msgstr ""
 
-#: lib/options.php:419
+#: lib/options.php:548
 #@ boozurk
 msgid "enhanced post title"
 msgstr ""
 
-#: lib/options.php:117
-#: lib/options.php:156
-#: lib/options.php:196
-#: lib/options.php:227
-#: lib/options.php:258
-#: lib/options.php:289
-#: lib/options.php:331
+#: lib/options.php:230
+#: lib/options.php:265
+#: lib/options.php:300
+#: lib/options.php:328
+#: lib/options.php:356
+#: lib/options.php:384
+#: lib/options.php:461
 #@ boozurk
 msgid "excerpt"
 msgstr ""
 
-#: lib/options.php:588
+#: lib/options.php:719
 #@ boozurk
 msgid "expands a post to show the full content when the reader clicks the \"Read more...\" link"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "feb"
 msgstr ""
 
-#: lib/options.php:227
+#: lib/options.php:328
 #@ boozurk
 msgid "first image"
 msgstr ""
 
-#: lib/options.php:216
+#: lib/options.php:318
 #@ boozurk
 msgid "first image title"
 msgstr ""
 
-#: lib/options.php:145
-#: lib/options.php:247
+#: lib/options.php:255
+#: lib/options.php:346
 #@ boozurk
 msgid "first link text"
 msgstr ""
 
-#: lib/options.php:655
+#: lib/options.php:768
 #@ boozurk
 msgid "font family"
 msgstr ""
 
-#: lib/options.php:659
+#: lib/options.php:772
 #@ boozurk
 msgid "font size"
 msgstr ""
 
-#: lib/options.php:487
+#: lib/options.php:629
 #@ boozurk
 msgid "footer widget area #1"
 msgstr ""
 
-#: lib/options.php:497
+#: lib/options.php:638
 #@ boozurk
 msgid "footer widget area #2"
 msgstr ""
 
-#: lib/options.php:507
+#: lib/options.php:647
 #@ boozurk
 msgid "footer widget area #3"
 msgstr ""
 
-#: lib/options.php:579
+#: lib/options.php:711
 #@ boozurk
 msgid "force galleries to use links to image instead of links to attachment"
 msgstr ""
 
-#: lib/widgets.php:1847
+#: lib/widgets.php:1882
 #@ boozurk
 msgid "guest"
 msgstr ""
 
-#: lib/options.php:50
-#@ boozurk
-msgid "highlighted links"
-msgstr ""
-
-#: lib/widgets.php:1742
+#: lib/widgets.php:1777
 #@ boozurk
 msgid "icons"
 msgstr ""
 
-#: lib/widgets.php:1741
+#: lib/widgets.php:1776
 #@ boozurk
 msgid "icons & text"
 msgstr ""
 
-#: lib/options.php:422
+#: lib/options.php:551
 #@ boozurk
 msgid "in lists"
 msgstr ""
 
-#: lib/options.php:422
+#: lib/options.php:551
 #@ boozurk
 msgid "in single posts/pages"
 msgstr ""
 
-#: lib/options.php:619
+#: lib/plug-n-play.php:78
 #@ boozurk
 msgid "infinite pagination"
 msgstr ""
 
-#: lib/options.php:700
-#@ boozurk
-msgid "integrates the +1 feature for your contents"
-msgstr ""
-
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "jan"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "jul"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "jun"
 msgstr ""
 
-#: functions.php:559
+#: functions.php:625
 #@ boozurk
 msgid "last comments"
 msgstr ""
 
-#: lib/options.php:41
+#: lib/options.php:160
 #@ boozurk
 msgid "links"
 msgstr ""
 
-#: lib/options.php:716
+#: lib/options.php:812
 #@ boozurk
 msgid "main menu icon size"
 msgstr ""
 
-#: lib/options.php:712
+#: lib/options.php:808
 #@ boozurk
 msgid "main menu look"
 msgstr ""
 
-#: lib/options.php:631
+#: lib/plug-n-play.php:81
 #@ boozurk
 msgid "manual"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "mar"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "may"
 msgstr ""
 
-#: lib/options.php:639
+#: lib/options.php:753
 #@ boozurk
 msgid "mobile support"
 msgstr ""
 
-#: lib/options.php:106
-#: lib/options.php:117
-#: lib/options.php:145
-#: lib/options.php:156
-#: lib/options.php:185
-#: lib/options.php:196
-#: lib/options.php:216
-#: lib/options.php:227
-#: lib/options.php:247
-#: lib/options.php:258
-#: lib/options.php:278
-#: lib/options.php:289
-#: lib/options.php:422
+#: lib/options.php:220
+#: lib/options.php:230
+#: lib/options.php:255
+#: lib/options.php:265
+#: lib/options.php:290
+#: lib/options.php:300
+#: lib/options.php:318
+#: lib/options.php:328
+#: lib/options.php:346
+#: lib/options.php:356
+#: lib/options.php:374
+#: lib/options.php:384
+#: lib/options.php:551
 #@ boozurk
 msgid "none"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "nov"
 msgstr ""
 
-#: lib/options.php:468
-#: lib/options.php:478
+#: lib/options.php:612
+#: lib/options.php:621
 #@ boozurk
 msgid "number of widget that can stay in the widget area side by side"
 msgstr ""
 
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "oct"
 msgstr ""
 
-#: functions.php:1576
+#: functions.php:1452
 #@ boozurk
 msgid "over a year ago"
 msgstr ""
 
-#: functions.php:740
-#: functions.php:1723
-#: mobile/core-mobile.php:214
+#: functions.php:815
+#: mobile/core-mobile.php:217
 #, php-format
 #@ boozurk
 msgid "page %1$s of %2$s"
 msgstr ""
 
-#: lib/options.php:106
-#: lib/options.php:145
-#: lib/options.php:185
-#: lib/options.php:216
-#: lib/options.php:247
-#: lib/options.php:278
+#: lib/options.php:220
+#: lib/options.php:255
+#: lib/options.php:290
+#: lib/options.php:318
+#: lib/options.php:346
+#: lib/options.php:374
 #@ boozurk
 msgid "post date"
 msgstr ""
 
-#: lib/options.php:587
+#: lib/options.php:718
 #@ boozurk
 msgid "post expander"
 msgstr ""
 
-#: lib/options.php:86
-#@ boozurk
-msgid "post formats support"
-msgstr ""
-
-#: lib/options.php:106
-#: lib/options.php:145
-#: lib/options.php:185
-#: lib/options.php:216
-#: lib/options.php:247
-#: lib/options.php:278
+#: lib/options.php:220
+#: lib/options.php:255
+#: lib/options.php:290
+#: lib/options.php:318
+#: lib/options.php:346
+#: lib/options.php:374
 #@ boozurk
 msgid "post title"
 msgstr ""
 
-#: lib/options.php:196
+#: lib/options.php:300
 #@ boozurk
 msgid "presentation"
 msgstr ""
 
-#: lib/options.php:375
+#: lib/options.php:509
 #@ boozurk
 msgid "quick browsing links"
 msgstr ""
 
-#: functions.php:1572
+#: functions.php:1448
 #@ boozurk
 msgid "quite a long while ago..."
 msgstr ""
 
-#: lib/options.php:611
+#: lib/options.php:732
 #@ boozurk
 msgid "quote link"
 msgstr ""
 
-#: functions.php:2161
+#: functions.php:1958
 #@ boozurk
 msgid "quoted on"
 msgstr ""
 
-#: lib/options.php:578
+#: lib/options.php:710
 #@ boozurk
 msgid "replace links"
 msgstr ""
 
-#: lib/admin.php:360
+#: lib/admin.php:475
 #@ boozurk
 msgid "requires"
 msgstr ""
 
-#: lib/options.php:712
+#: lib/options.php:808
 #@ boozurk
 msgid "select the style of the main menu: text, thumbnails or both"
 msgstr ""
 
-#: lib/options.php:59
-#@ boozurk
-msgid "selected links"
-msgstr ""
-
-#: lib/widgets.php:2072
+#: lib/widgets.php:2027
 #@ boozurk
 msgid "sep"
 msgstr ""
 
-#: lib/options.php:278
+#: lib/options.php:374
 #@ boozurk
 msgid "short quote excerpt"
 msgstr ""
 
-#: lib/options.php:612
+#: lib/options.php:733
 #@ boozurk
 msgid "show a link for easily add the selected text as a quote inside the comment form"
 msgstr ""
 
-#: lib/options.php:376
+#: lib/options.php:510
 #@ boozurk
 msgid "show navigation links before post content"
 msgstr ""
 
-#: lib/options.php:728
+#: lib/options.php:823
 #@ boozurk
 msgid "show site description below the logo"
 msgstr ""
 
-#: lib/options.php:467
-#@ boozurk
-msgid "split Header widget area"
-msgstr ""
-
-#: lib/options.php:477
-#@ boozurk
-msgid "split Post widget area"
-msgstr ""
-
-#: lib/options.php:603
-#@ boozurk
-msgid "swf audio player"
-msgstr ""
-
-#: lib/options.php:727
+#: lib/options.php:822
 #@ boozurk
 msgid "tagline"
 msgstr ""
 
-#: lib/options.php:712
-#: lib/widgets.php:1743
+#: lib/options.php:808
+#: lib/widgets.php:1778
 #@ boozurk
 msgid "text"
 msgstr ""
 
-#: lib/options.php:716
+#: lib/options.php:812
 #@ boozurk
 msgid "the dimension of the thumbnails in main menu (if \"thumbnails\" style is selected)"
 msgstr ""
 
-#: lib/options.php:750
+#: lib/options.php:857
 #@ boozurk
 msgid "theme credits"
 msgstr ""
 
-#: lib/options.php:569
+#: lib/options.php:702
 #@ boozurk
 msgid "thickbox preview"
 msgstr ""
 
-#: lib/audio-player.php:71
-#@ boozurk
-msgid "this audio type is not supported by your browser"
-msgstr ""
-
-#: lib/admin.php:397
-#: lib/options.php:430
-#: lib/options.php:712
-#: lib/widgets.php:1585
+#: lib/admin.php:537
+#: lib/options.php:558
+#: lib/options.php:808
+#: lib/widgets.php:1620
 #@ boozurk
 msgid "thumbnail"
 msgstr ""
 
-#: lib/options.php:712
+#: lib/options.php:808
 #@ boozurk
 msgid "thumbnail and text"
 msgstr ""
 
-#: lib/options.php:103
-#: lib/options.php:142
-#: lib/options.php:182
-#: lib/options.php:213
-#: lib/options.php:244
-#: lib/options.php:275
+#: lib/options.php:217
+#: lib/options.php:252
+#: lib/options.php:287
+#: lib/options.php:315
+#: lib/options.php:343
+#: lib/options.php:371
 #@ boozurk
 msgid "title"
 msgstr ""
 
-#: lib/options.php:640
+#: lib/options.php:754
 #@ boozurk
 msgid "use a dedicated style in mobile devices"
 msgstr ""
 
-#: lib/options.php:420
-#@ boozurk
-msgid "use the featured image as background for the post title"
-msgstr ""
-
-#: lib/options.php:488
-#: lib/options.php:498
-#: lib/options.php:508
+#: lib/options.php:630
+#: lib/options.php:639
+#: lib/options.php:648
 #@ boozurk
 msgid "width of the widget area"
 msgstr ""
 
-#: lib/breadcrumb.php:155
+#: lib/breadcrumb.php:164
 #, php-format
 #@ boozurk
 msgid "Archives for %s"
 msgstr ""
 
-#: lib/breadcrumb.php:156
+#: lib/breadcrumb.php:165
 #, php-format
 #@ boozurk
 msgid "Search for \"%s\""
 msgstr ""
 
-#: functions.php:1304
+#: lib/functions-formats.php:222
 #, php-format
 #@ boozurk
 msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
@@ -1474,248 +1354,231 @@ msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: functions.php:2106
+#: functions.php:1903
 #@ boozurk
 msgid "Mobile View"
 msgstr ""
 
-#: lib/options.php:17
-#@ boozurk
-msgid "Posts archives"
-msgstr ""
-
-#: lib/options.php:18
+#: lib/options.php:83
 #@ boozurk
 msgid "Contents"
 msgstr ""
 
-#: lib/options.php:19
-#@ boozurk
-msgid "Sidebars and Widgets"
-msgstr ""
-
-#: lib/options.php:21
+#: lib/options.php:73
 #@ boozurk
 msgid "Mobile"
 msgstr ""
 
-#: lib/options.php:596
+#: lib/options.php:726
 #@ boozurk
 msgid "replace titles of some links with cool tooltips"
 msgstr ""
 
-#: lib/options.php:447
+#: lib/options.php:573
 #@ boozurk
 msgid "primary sidebar"
 msgstr ""
 
-#: lib/options.php:450
-#: lib/options.php:460
-#: lib/options.php:551
+#: lib/options.php:686
 #@ boozurk
 msgid "scroll"
 msgstr ""
 
-#: lib/options.php:450
-#: lib/options.php:460
+#: lib/options.php:576
+#: lib/options.php:595
 #@ boozurk
 msgid "fixed"
 msgstr ""
 
-#: lib/options.php:457
+#: lib/options.php:592
 #@ boozurk
 msgid "secondary sidebar"
 msgstr ""
 
-#: lib/options.php:31
-#@ boozurk
-msgid "links colors"
-msgstr ""
-
-#: lib/options.php:313
+#: lib/options.php:405
 #@ boozurk
 msgid "blank titles"
 msgstr ""
 
-#: lib/options.php:314
+#: lib/options.php:406
 #@ boozurk
 msgid "set the standard text for blank titles"
 msgstr ""
 
-#: lib/options.php:322
+#: lib/options.php:413
 #@ boozurk
 msgid "default text"
 msgstr ""
 
-#: lib/options.php:340
+#: lib/options.php:469
 #@ boozurk
 msgid "excerpt length"
 msgstr ""
 
-#: lib/options.php:349
+#: lib/options.php:477
 #@ boozurk
 msgid "<em>excerpt more</em> string"
 msgstr ""
 
-#: lib/options.php:358
+#: lib/options.php:485
 #@ boozurk
 msgid "<em>excerpt more</em> linked"
 msgstr ""
 
-#: lib/options.php:359
+#: lib/options.php:486
 #@ boozurk
 msgid "use the <em>excerpt more</em> string as a link to the full post"
 msgstr ""
 
-#: lib/options.php:366
+#: lib/options.php:492
 #@ boozurk
 msgid "(more...)"
 msgstr ""
 
-#: lib/options.php:367
+#: lib/options.php:493
 #@ boozurk
 msgid "\"more\" tag string"
 msgstr ""
 
-#: lib/options.php:368
+#: lib/options.php:494
 #, php-format
 #@ boozurk
 msgid "only plain text. use <code>%t</code> as placeholder for the post title"
 msgstr ""
 
-#: lib/options.php:667
+#: lib/options.php:779
 #@ boozurk
 msgid "Google web font"
 msgstr ""
 
-#: lib/options.php:668
+#: lib/options.php:780
 #@ boozurk
 msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>"
 msgstr ""
 
-#: lib/options.php:676
+#: lib/options.php:787
 #@ boozurk
 msgid "for whole site"
 msgstr ""
 
-#: lib/options.php:685
+#: lib/options.php:795
 #@ boozurk
 msgid "for posts/pages title"
 msgstr ""
 
-#: lib/options.php:694
+#: lib/options.php:803
 #@ boozurk
 msgid "for posts/pages content"
 msgstr ""
 
-#: lib/options.php:439
+#: lib/options.php:566
 #@ boozurk
 msgid "custom smilies"
 msgstr ""
 
-#: lib/options.php:738
+#: lib/options.php:832
 #@ boozurk
 msgid "comment style"
 msgstr ""
 
-#: lib/options.php:739
+#: lib/options.php:833
 #@ boozurk
 msgid "let the commenters to choose their comment background"
 msgstr ""
 
-#: lib/options.php:746
+#: lib/options.php:853
 #@ boozurk
 msgid "custom CSS code"
 msgstr ""
 
-#: lib/options.php:747
+#: lib/options.php:854
 #@ boozurk
 msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
 msgstr ""
 
-#: lib/options.php:650
+#: lib/options.php:763
 #@ boozurk
 msgid "colors"
 msgstr ""
 
-#: lib/widgets.php:65
+#: lib/widgets.php:79
 #@ boozurk
 msgid "Primary Sidebar"
 msgstr ""
 
-#: lib/widgets.php:67
+#: lib/widgets.php:81
 #@ boozurk
 msgid "The primary sidebar widget area"
 msgstr ""
 
-#: lib/widgets.php:75
+#: lib/widgets.php:90
 #@ boozurk
 msgid "Secondary sidebar"
 msgstr ""
 
-#: lib/widgets.php:77
+#: lib/widgets.php:92
 #@ boozurk
 msgid "The secondary sidebar widget area"
 msgstr ""
 
-#: lib/admin.php:82
+#: lib/admin.php:116
 #, php-format
 #@ boozurk
 msgid "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\""
 msgstr ""
 
-#: lib/admin.php:95
+#: lib/admin.php:129
 #@ boozurk
 msgid "Are you really sure you want to set all the options to their default values?"
 msgstr ""
 
-#: lib/admin.php:235
+#: lib/admin.php:307
 #@ boozurk
 msgid "Defaults values loaded."
 msgstr ""
 
-#: lib/admin.php:369
+#: lib/admin.php:492
 #@ boozurk
 msgid "Back to defaults"
 msgstr ""
 
-#: lib/widgets.php:962
+#: lib/widgets.php:1002
 #@ boozurk
 msgid "NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )"
 msgstr ""
 
-#: lib/widgets.php:976
+#: lib/widgets.php:1016
 #, php-format
 #@ boozurk
 msgid "Enter your %1$s account link"
 msgstr ""
 
-#: lib/widgets.php:978
+#: lib/widgets.php:1018
 #@ boozurk
 msgid "Enter email address"
 msgstr ""
 
-#: lib/widgets.php:877
+#: lib/widgets.php:910
 #@ boozurk
 msgid "Keep updated with our RSS feed"
 msgstr ""
 
-#: lib/widgets.php:2135
+#: lib/widgets.php:2090
 #@ boozurk
 msgid "number"
 msgstr ""
 
-#: lib/widgets.php:2136
+#: lib/widgets.php:2091
 #@ boozurk
 msgid "acronym"
 msgstr ""
 
-#: mobile/core-mobile.php:131
+#: mobile/core-mobile.php:134
 #@ boozurk
 msgid "Mobile Widget Area"
 msgstr ""
 
-#: mobile/core-mobile.php:122
+#: mobile/core-mobile.php:125
 #@ boozurk
 msgid "Navigation Menu for mobiles<br /><small>only supports the first level of hierarchy</small>"
 msgstr ""
@@ -1730,122 +1593,115 @@ msgstr ""
 msgid "Desktop View"
 msgstr ""
 
-#: mobile/core-mobile.php:252
+#: mobile/core-mobile.php:255
 #@ boozurk
 msgid "Child pages"
 msgstr ""
 
-#: mobile/core-mobile.php:268
+#: mobile/core-mobile.php:271
 #@ boozurk
 msgid "Parent page"
 msgstr ""
 
-#: functions.php:1782
+#: functions.php:1617
 #@ boozurk
 msgid "read me!"
 msgstr ""
 
-#: functions.php:2182
+#: functions.php:1979
 #@ boozurk
 msgid "Post"
 msgstr ""
 
-#: functions.php:2103
+#: functions.php:1900
 #: mobile/footer-mobile.php:27
 #, php-format
 #@ boozurk
 msgid "Powered by %s and %s"
 msgstr ""
 
-#: lib/widgets.php:2154
+#: lib/widgets.php:2109
 #@ boozurk
 msgid "Decrease font size"
 msgstr ""
 
-#: lib/widgets.php:2156
+#: lib/widgets.php:2111
 #@ boozurk
 msgid "Reset font size"
 msgstr ""
 
-#: lib/widgets.php:2158
+#: lib/widgets.php:2113
 #@ boozurk
 msgid "Increase font size"
 msgstr ""
 
-#: lib/widgets.php:2208
+#: lib/widgets.php:2161
 #@ boozurk
 msgid "Simple javascript-based font resizer"
 msgstr ""
 
 #: 404.php:25
-#: mobile/core-mobile.php:314
+#: mobile/core-mobile.php:317
 #@ boozurk
 msgid "Error 404"
 msgstr ""
 
-#: lib/options.php:392
+#: lib/options.php:524
 #@ boozurk
 msgid "date"
 msgstr ""
 
-#: lib/options.php:401
+#: lib/options.php:192
+#: lib/options.php:532
 #@ boozurk
 msgid "categories"
 msgstr ""
 
-#: lib/options.php:410
+#: lib/options.php:540
 #@ boozurk
 msgid "tags"
 msgstr ""
 
-#: lib/options.php:750
+#: lib/options.php:857
 #@ boozurk
 msgid "It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom"
 msgstr ""
 
-#: functions.php:1379
-#@ boozurk
-msgid "Check it out!"
-msgstr ""
-
-#: functions.php:1822
+#: functions.php:1657
+#: functions.php:1671
+#: functions.php:1685
 #@ boozurk
 msgid "Comments are closed"
 msgstr ""
 
-#: functions.php:2075
+#: functions.php:1870
 #@ boozurk
 msgid "Missing Attachment"
 msgstr ""
 
-#: functions.php:2103
+#: functions.php:1900
 #: mobile/footer-mobile.php:27
 #@ boozurk
 msgid "Visit theme authors homepage"
 msgstr ""
 
-#: functions.php:2103
+#: functions.php:1900
 #@ boozurk
 msgid "Boozurk theme"
 msgstr ""
 
-#: lib/audio-player.php:35
-#@ boozurk
-msgid "unknown media format"
-msgstr ""
-
-#: lib/options.php:323
+#: lib/options.php:414
 #, php-format
 #@ boozurk
 msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id"
 msgstr ""
 
-#: lib/options.php:384
+#: lib/options.php:517
 #@ boozurk
 msgid "show post details in index view, right before the post content<br />in single post view you can use the <strong>Post details</strong> widget"
 msgstr ""
 
-#: lib/widgets.php:980
+#: lib/widgets.php:1020
 #@ boozurk
 msgid "Enter your feed service address. Leave it blank for using the default WordPress feed"
 msgstr ""
@@ -1855,108 +1711,317 @@ msgstr ""
 msgid "Nothing Found"
 msgstr ""
 
-#: functions.php:522
-#@ boozurk
-msgid "recommend this with Google+"
-msgstr ""
-
-#: functions.php:1512
+#: functions.php:1388
 #@ boozurk
 msgid "Published"
 msgstr ""
 
-#: functions.php:1540
+#: functions.php:1416
 #, php-format
 #@ boozurk
 msgid "Follow %s on %s"
 msgstr ""
 
-#: functions.php:2301
+#: functions.php:2122
 #@ boozurk
 msgid "Reply to comment"
 msgstr ""
 
 #: images/temp/new  3.php:127
-#: lib/widgets.php:751
+#: lib/widgets.php:782
 #@ boozurk
 msgid "ID of the page created using the \"List of Categories\" template (if any)"
 msgstr ""
 
-#: lib/admin.php:283
+#: lib/admin.php:365
+#: lib/admin.php:432
 #@ boozurk
 msgid "Choose a Logo Image"
 msgstr ""
 
-#: lib/admin.php:283
+#: lib/admin.php:365
+#: lib/admin.php:432
 #@ boozurk
 msgid "Set as logo"
 msgstr ""
 
-#: lib/admin.php:283
+#: lib/admin.php:365
+#: lib/admin.php:432
 #@ boozurk
 msgid "Choose Image"
 msgstr ""
 
-#: lib/widgets.php:276
-#: lib/widgets.php:433
-#: lib/widgets.php:606
-#: lib/widgets.php:738
-#: lib/widgets.php:953
-#: lib/widgets.php:1009
-#: lib/widgets.php:1181
-#: lib/widgets.php:1363
+#: lib/widgets.php:307
+#: lib/widgets.php:464
+#: lib/widgets.php:637
+#: lib/widgets.php:769
+#: lib/widgets.php:993
+#: lib/widgets.php:1049
+#: lib/widgets.php:1221
+#: lib/widgets.php:1403
 #@ boozurk
 msgid "Invalid value"
 msgstr ""
 
-#: lib/widgets.php:383
-#: lib/widgets.php:542
+#: lib/widgets.php:414
+#: lib/widgets.php:573
 #@ boozurk
 msgid "no comments yet"
 msgstr ""
 
-#: mobile/core-mobile.php:290
+#: mobile/core-mobile.php:293
 #@ boozurk
 msgid "Taxonomy"
 msgstr ""
 
-#: lib/options.php:525
+#: lib/options.php:663
 #@ boozurk
 msgid "javascript features"
 msgstr ""
 
-#: lib/options.php:526
+#: lib/options.php:664
 #@ boozurk
 msgid "try disable all javascript features if you encountered problems with javascript"
 msgstr ""
 
-#: lib/options.php:533
+#: lib/options.php:670
 #@ boozurk
 msgid "basic animations"
 msgstr ""
 
-#: lib/options.php:542
+#: lib/options.php:678
 #@ boozurk
 msgid "main menu"
 msgstr ""
 
-#: lib/options.php:543
+#: lib/options.php:679
 #@ boozurk
 msgid "fade in/out menu subitems"
 msgstr ""
 
-#: lib/options.php:552
+#: lib/options.php:687
 #@ boozurk
 msgid "smooth scroll to top/bottom when click top/bottom buttons"
 msgstr ""
 
-#: lib/options.php:560
+#: lib/options.php:694
 #@ boozurk
 msgid "video resize"
 msgstr ""
 
-#: lib/options.php:561
+#: lib/options.php:695
 #@ boozurk
 msgid "resize embeded video when window resizes"
+msgstr ""
+
+#: functions.php:1340
+#, php-format
+#@ boozurk
+msgid "%s seconds"
+msgstr ""
+
+#: functions.php:1698
+#, php-format
+#@ boozurk
+msgid "Comments on %s"
+msgstr ""
+
+#: functions.php:2132
+#@ boozurk
+msgid "Cancel reply"
+msgstr ""
+
+#: lib/options.php:501
+#@ boozurk
+msgid "prevent page scroll when clicking the more link"
+msgstr ""
+
+#: lib/options.php:576
+#: lib/options.php:595
+#@ boozurk
+msgid "scroll with page"
+msgstr ""
+
+#: lib/options.php:576
+#: lib/options.php:595
+#@ boozurk
+msgid "hidden"
+msgstr ""
+
+#: lib/options.php:740
+#@ boozurk
+msgid "tiny navigation menu for small screen"
+msgstr ""
+
+#: lib/options.php:421
+#@ boozurk
+msgid "Hide titles"
+msgstr ""
+
+#: lib/options.php:422
+#@ boozurk
+msgid "Hide posts/pages title in single view"
+msgstr ""
+
+#: lib/options.php:429
+#@ boozurk
+msgid "in front page"
+msgstr ""
+
+#: lib/options.php:437
+#@ boozurk
+msgid "in every page"
+msgstr ""
+
+#: lib/options.php:445
+#@ boozurk
+msgid "in every post"
+msgstr ""
+
+#: lib/options.php:453
+#@ boozurk
+msgid "in selected posts/pages"
+msgstr ""
+
+#: lib/options.php:454
+#@ boozurk
+msgid "comma-separated list of IDs ( eg. <em>23,86,120</em> )"
+msgstr ""
+
+#: lib/options.php:516
+#@ boozurk
+msgid "post details"
+msgstr ""
+
+#: lib/options.php:611
+#@ boozurk
+msgid "split header widget area"
+msgstr ""
+
+#: lib/options.php:620
+#@ boozurk
+msgid "split post widget area"
+msgstr ""
+
+#: lib/options.php:816
+#@ boozurk
+msgid "logo"
+msgstr ""
+
+#: lib/options.php:846
+#@ boozurk
+msgid "adaptive layout"
+msgstr ""
+
+#: lib/options.php:847
+#@ boozurk
+msgid "the theme changes the layout to fit the small screens"
+msgstr ""
+
+#: lib/plug-n-play.php:244
+#@ boozurk
+msgid "in bbPress"
+msgstr ""
+
+#: lib/plug-n-play.php:379
+#@ boozurk
+msgid "in BuddyPress"
+msgstr ""
+
+#: lib/options.php:549
+#@ boozurk
+msgid "use the featured image as background for the post title (the image must be at least 900px wide)"
+msgstr ""
+
+#: lib/admin.php:315
+#@ boozurk
+msgid "Our developers need coffee (and beer). How about a small donation?"
+msgstr ""
+
+#: lib/options.php:17
+#@ boozurk
+msgid "Style"
+msgstr ""
+
+#: lib/options.php:29
+#@ boozurk
+msgid "Fonts"
+msgstr ""
+
+#: lib/options.php:49
+#@ boozurk
+msgid "Layout"
+msgstr ""
+
+#: lib/options.php:53
+#@ boozurk
+msgid "Sidebars"
+msgstr ""
+
+#: lib/options.php:87
+#@ boozurk
+msgid "learn more about the post formats"
+msgstr ""
+
+#: lib/options.php:87
+#@ boozurk
+msgid "Post formats"
+msgstr ""
+
+#: lib/options.php:88
+#@ boozurk
+msgid "the following options affect only the blog/index view, while in single posts the appearance will be the same"
+msgstr ""
+
+#: lib/options.php:103
+#@ boozurk
+msgid "Titles"
+msgstr ""
+
+#: lib/options.php:124
+#@ boozurk
+msgid "Features"
+msgstr ""
+
+#: lib/options.php:168
+#@ boozurk
+msgid "normal"
+msgstr ""
+
+#: lib/options.php:176
+#@ boozurk
+msgid "highlighted"
+msgstr ""
+
+#: lib/options.php:184
+#@ boozurk
+msgid "selected"
+msgstr ""
+
+#: lib/options.php:66
+#@ boozurk
+msgid "Header"
+msgstr ""
+
+#: lib/options.php:839
+#@ boozurk
+msgid "fixed header"
+msgstr ""
+
+#: lib/options.php:584
+#: lib/options.php:603
+#@ boozurk
+msgid "sidebar width (px)"
+msgstr ""
+
+#: lib/options.php:746
+#@ boozurk
+msgid "scrollable sidebars"
+msgstr ""
+
+#: lib/options.php:747
+#, php-format
+#@ boozurk
+msgid "fixed sidebars powered by %s"
 msgstr ""
 

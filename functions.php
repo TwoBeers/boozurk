@@ -88,6 +88,7 @@ add_filter( 'page_css_class'						, 'boozurk_add_selected_class_to_page_item', 1
 add_filter( 'nav_menu_css_class'					, 'boozurk_add_selected_class_to_menu_item', 10, 2 );
 add_filter( 'get_search_form'						, 'boozurk_search_form' );
 add_filter( 'post_class'							, 'boozurk_post_classes' );
+add_filter( 'wp_link_pages_link'					, 'boozurk_add_current_class', 10, 2 );
 
 
 /* get the theme options */
@@ -344,10 +345,6 @@ if ( !function_exists( 'boozurk_get_js_modules' ) ) {
 			$modules[] = 'thickbox';
 		if ( boozurk_get_opt( 'boozurk_js_tooltips' ) )
 			$modules[] = 'tooltips';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' )
-			$modules[] = 'plusone';
-		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' )
-			$modules[] = 'addthis';
 		if ( boozurk_get_opt( 'boozurk_js_basic_video_resize' ) )
 			$modules[] = 'resizevideo';
 
@@ -377,32 +374,6 @@ if ( !function_exists( 'boozurk_initialize_scripts' ) ) {
 		/* ]]> */
 	</script>
 <?php
-
-		if ( ! boozurk_get_opt( 'boozurk_jsani' ) || boozurk_is_printpreview() ) return;
-
-		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'googleplus_official' ) {
-
-?>
-	<script type="text/javascript" src="//apis.google.com/js/plusone.js">
-		{parsetags: 'explicit'}
-	</script>
-<?php
-
-		}
-
-		if ( boozurk_get_opt( 'boozurk_plusone' ) == 'addthis' ) {
-
-?>
-	<script type="text/javascript">
-		var addthis_config =
-		{
-			ui_delay:200
-		}
-	</script>
-	<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js"></script>
-<?php
-
-		}
 
 	}
 }
@@ -599,7 +570,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 		$defaults = array(
 			'icon'		=> 1,
 			'comments'	=> 1,
-			'plusone'	=> 1,
+			'share'		=> 1,
 		);
 		$args = wp_parse_args( $args, $defaults );
 
@@ -619,38 +590,7 @@ if ( !function_exists( 'boozurk_extrainfo' ) ) {
 			if ( ( ! $page_cd_nc ) && $args['comments'] ) boozurk_comments_link( 'zero=0&one=1&more=%&none=-&class=pmb_comm'); // number of comments
 		?>
 
-		<?php if ( !post_password_required() && $args['plusone'] ) { ?>
-			<?php if ( $share_type === 'addthis' ) { ?>
-				<!-- AddThis Button BEGIN -->
-				<div class="addthis_toolbox addthis_16x16_style">
-					<a class="addthis_button_compact" href="javascript:void(0)" addthis:url="<?php echo esc_attr( get_permalink() ); ?>" addthis:title="<?php echo esc_attr( get_the_title() ); ?>"><i class="icon icon-plus"></i></a>
-				</div>
-				<!-- AddThis Button END -->
-			<?php } ?>
-
-			<?php if ( ( $share_type === 1 ) || ( $share_type === 'googleplus' ) ) { ?>
-				<a class="btn share-with-plusone pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Google+' ) ); ?>" href="http://plus.google.com/share?url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-					<i class="icon icon-google-plus"></i>
-				</a>
-			<?php } ?>
-
-			<?php if ( $share_type === 'googleplus_official' ) { ?>
-				<div class="bz-plusone-wrap"><div class="g-plusone" data-annotation="none" data-href="<?php echo esc_url( get_permalink() ); ?>"></div></div>
-			<?php } ?>
-
-			<?php if ( $share_type === 'facebook' ) { ?>
-				<a class="btn share-with-facebook pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Facebook' ) ); ?>" href="http://www.facebook.com/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>&t=<?php echo rawurlencode( get_the_title() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-					<i class="icon icon-facebook"></i>
-				</a>
-			<?php } ?>
-
-			<?php if ( $share_type === 'twitter' ) { ?>
-				<a class="btn share-with-twitter pmb_comm" title="<?php echo esc_attr( sprintf( __( 'recommend this with %s', 'boozurk' ), 'Twitter' ) ); ?>" href="https://twitter.com/intent/tweet?original_referer=<?php echo rawurlencode( get_permalink() ); ?>&text=<?php echo rawurlencode( get_the_title() ); ?>&url=<?php echo rawurlencode( get_permalink() ); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-					<i class="icon icon-twitter"></i>
-				</a>
-			<?php } ?>
-
-		<?php } ?>
+		<?php boozurk_hook_post_extrainfo( $args ); ?>
 
 		<?php edit_post_link( '<i class="icon icon-pencil"></i>' ); ?>
 
@@ -869,12 +809,12 @@ if ( !function_exists( 'boozurk_navigate_archives' ) ) {
 
 ?>
 	<div id="bz-page-nav" class="bz-navigate navigate_archives">
-	<?php if ( ! apply_filters( 'boozurk_filter_navigate_archives', false ) ) { ?>
+	<?php if ( ! apply_filters( 'boozurk_filter_navigation_archives', false ) ) { ?>
 
 		<div id="bz-page-nav-subcont">
-			<?php next_posts_link( '&laquo;' ); ?>
+			<?php next_posts_link( '<i class="icon-chevron-left"></i>' ); ?>
 			<?php printf( '<span>' . __( 'page %1$s of %2$s','boozurk' ) . '</span>', $paged, $wp_query->max_num_pages ); ?>
-			<?php previous_posts_link( '&raquo;' ); ?>
+			<?php previous_posts_link( '<i class="icon-chevron-right"></i>' ); ?>
 		</div>
 
 	<?php } ?>
@@ -927,12 +867,31 @@ if ( !function_exists( 'boozurk_navigate_attachments' ) ) {
 // displays page-links for paginated posts
 function boozurk_link_pages() {
 
+	$args = array(
+		'before'		=> '<div class="bz-navigate navigate_page"><div>' . '<span>' . __( 'Pages','boozurk' ) . ':</span>',
+		'after'			=> '</div></div>',
+		'link_before'	=> '',
+		'link_after'	=> '',
+		'echo'			=> 0,
+	);
+
 ?>
 	<div class="fixfloat">
-		<?php echo str_replace( '> <', '><', wp_link_pages( 'before=<div class="bz-navigate navigate_page"><div>' . '<span>' . __( 'Pages','boozurk' ) . ':</span>' . '&after=</div></div>&echo=0' ) ); ?>
+		<?php echo str_replace( '> <', '><', wp_link_pages( $args ) ); ?>
 	</div>
 <?php
 
+}
+
+
+//add "current" class to current page
+function boozurk_add_current_class( $link, $i ) {
+	global $page, $more;
+
+	if ( ! ( $i != $page || ! $more && 1 == $page ) )
+		$link = '<span class="current">' . $link . '</span>';
+
+	return $link;
 }
 
 
@@ -1281,37 +1240,6 @@ if ( !function_exists( 'boozurk_random_nick' ) ) {
 		);
 
 		return $prefix[array_rand($prefix)] . $suffix[array_rand($suffix)];
-
-	}
-}
-
-
-
-
-//add share links to post/page
-if ( !function_exists( 'boozurk_share_this' ) ) {
-	function boozurk_share_this(){
-
-?>
-	<!-- AddThis Button BEGIN -->
-	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-		<a class="addthis_button_facebook"></a>
-		<a class="addthis_button_twitter"></a>
-		<a class="addthis_button_google_plusone_share"></a>
-		<a class="addthis_button_compact"></a>
-		<a class="addthis_counter addthis_bubble_style"></a>
-	</div>
-	<br class="fixfloat"/>
-	<script type="text/javascript">
-		var addthis_share =
-		{
-			title: '<?php echo get_bloginfo( 'name' ) ?>',
-			url : '<?php echo home_url( '/' ) ?>'
-		}
-	</script>
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-523ad91d38c2da47"></script>
-	<!-- AddThis Button END -->
-<?php
 
 	}
 }
@@ -1728,7 +1656,7 @@ if ( !function_exists( 'boozurk_navigate_comments' ) ) {
 	<div class="bz-navigate navigate_comments">
 		<div>
 			<?php
-				if ( ! apply_filters( 'boozurk_filter_comments_links', false ) )
+				if ( ! apply_filters( 'boozurk_filter_navigation_comments', false ) )
 					paginate_comments_links();
 			?>
 		</div>

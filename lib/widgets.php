@@ -168,7 +168,7 @@ function boozurk_widgets_style() {
 //add js script to the widgets page
 function boozurk_widgets_scripts() {
 
-	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.js', array('jquery'), boozurk_get_info( 'version' ), true );
+	wp_enqueue_script( 'boozurk-widgets-scripts', get_template_directory_uri() . '/js/widgets.js', array( 'jquery'), boozurk_get_info( 'version' ), true );
 
 }
 
@@ -791,7 +791,7 @@ class Boozurk_Widget_Pop_Categories extends WP_Widget {
 
 /**
  * Social network widget class.
- * Social media services supported: Facebook, Twitter, Myspace, Youtube, LinkedIn, Del.icio.us, Digg, Flickr, Reddit, StumbleUpon, Technorati and Github.
+ * Social media services supported: Facebook, Twitter, Myspace, Youtube, LinkedIn, Del.icio.us, Digg, Flickr, Reddit, StumbleUpon, Technorati, Github and many more.
  * Optional: RSS icon. 
  *
  */
@@ -809,49 +809,52 @@ class Boozurk_Widget_Social extends WP_Widget {
 
 		$this->follow_urls = array(
 			// SLUG => NAME
-			'Blogger'		=> 'Blogger',
-			'blurb'			=> 'Blurb',
-			'cloudup'		=> 'Cloudup',
-			'Delicious'		=> 'Delicious',
-			'Deviantart'	=> 'deviantART',
-			'Digg'			=> 'Digg',
-			'Dropbox'		=> 'Dropbox',
-			'Facebook'		=> 'Facebook',
-			'Flickr'		=> 'Flickr',
-			'Github'		=> 'GitHub',
-			'GooglePlus'	=> 'Google+',
-			'Hi5'			=> 'Hi5',
-			'instagram'		=> 'Instagram',
-			'LinkedIn'		=> 'LinkedIn',
-			'livejournal'	=> 'LiveJournal',
-			'Myspace'		=> 'Myspace',
-			'Odnoklassniki'	=> 'Odnoklassniki',
-			'Orkut'			=> 'Orkut',
-			'pengyou'		=> 'Pengyou',
-			'Picasa'		=> 'Picasa',
-			'pinterest'		=> 'Pinterest',
-			'Qzone'			=> 'Qzone',
-			'Reddit'		=> 'Reddit',
-			'renren'		=> 'Renren',
-			'scribd'		=> 'Scribd',
-			'slideshare'	=> 'SlideShare',
-			'StumbleUpon'	=> 'StumbleUpon',
-			'soundcloud'	=> 'SoundCloud',
-			'Technorati'	=> 'Technorati',
-			'Tencent'		=> 'Tencent',
-			'Twitter'		=> 'Twitter',
-			'tumblr'		=> 'Tumblr',
-			'ubuntuone'		=> 'Ubuntu One',
-			'Vimeo'			=> 'Vimeo',
-			'VKontakte'		=> 'VKontakte',
-			'Sina'			=> 'Weibo',
-			'WindowsLive'	=> 'Windows Live',
-			'xing'			=> 'Xing',
-			'yfrog'			=> 'YFrog',
-			'Youtube'		=> 'Youtube',
-			'Mail'			=> 'mail',
-			'RSS'			=> 'RSS'
+			'Blogger'		=> array( 'Blogger', '' ),
+			'blurb'			=> array( 'Blurb', '' ),
+			'cloudup'		=> array( 'Cloudup', '' ),
+			'Delicious'		=> array( 'Delicious', '' ),
+			'Deviantart'	=> array( 'deviantART', '' ),
+			'Digg'			=> array( 'Digg', '' ),
+			'Dropbox'		=> array( 'Dropbox', '' ),
+			'Facebook'		=> array( 'Facebook', '' ),
+			'Flickr'		=> array( 'Flickr', '' ),
+			'Github'		=> array( 'GitHub', '' ),
+			'GooglePlus'	=> array( 'Google+', '' ),
+			'Hi5'			=> array( 'Hi5', '' ),
+			'instagram'		=> array( 'Instagram', '' ),
+			'LinkedIn'		=> array( 'LinkedIn', '' ),
+			'livejournal'	=> array( 'LiveJournal', '' ),
+			'Myspace'		=> array( 'Myspace', '' ),
+			'Odnoklassniki'	=> array( 'Odnoklassniki', '' ),
+			'Orkut'			=> array( 'Orkut', '' ),
+			'pengyou'		=> array( 'Pengyou', '' ),
+			'Picasa'		=> array( 'Picasa', '' ),
+			'pinterest'		=> array( 'Pinterest', '' ),
+			'Qzone'			=> array( 'Qzone', '' ),
+			'Reddit'		=> array( 'Reddit', '' ),
+			'renren'		=> array( 'Renren', '' ),
+			'scribd'		=> array( 'Scribd', '' ),
+			'slideshare'	=> array( 'SlideShare', '' ),
+			'StumbleUpon'	=> array( 'StumbleUpon', '' ),
+			'soundcloud'	=> array( 'SoundCloud', '' ),
+			'Technorati'	=> array( 'Technorati', '' ),
+			'Tencent'		=> array( 'Tencent', '' ),
+			'Twitter'		=> array( 'Twitter', '' ),
+			'tumblr'		=> array( 'Tumblr', '' ),
+			'ubuntuone'		=> array( 'Ubuntu One', '' ),
+			'Vimeo'			=> array( 'Vimeo', '' ),
+			'vine'			=> array( 'Vine', '' ),
+			'VKontakte'		=> array( 'VKontakte', '' ),
+			'Sina'			=> array( 'Weibo', '' ),
+			'WindowsLive'	=> array( 'Windows Live', '' ),
+			'xing'			=> array( 'Xing', '' ),
+			'yfrog'			=> array( 'YFrog', '' ),
+			'Youtube'		=> array( 'Youtube', '' ),
+			'Mail'			=> array( 'mail', '' ),
+			'RSS'			=> array( 'RSS', '' ),
 		);
+
+		$this->follow_urls = apply_filters( 'tb_social_filter_services', $this->follow_urls );
 
 		$this->defaults = array(
 			'title'		=> __( 'Follow Me', 'boozurk' ),
@@ -886,7 +889,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 			return;
 		}
 
-		extract($args);
+		extract( $args );
 
 		$instance = wp_parse_args( (array)$instance, $this->defaults );
 
@@ -897,7 +900,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 
 		$output = '';
 
-		foreach ($this->follow_urls as $follow_service => $service_name ) {
+		foreach ( $this->follow_urls as $follow_service => $service_name ) {
 
 			$show = $instance['show_'.$follow_service];
 			$account = $instance[$follow_service.'_account'];
@@ -919,8 +922,9 @@ class Boozurk_Widget_Social extends WP_Widget {
 			}
 
 			if ( $show && ! empty( $account ) ) {
-				$icon = '<img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ) . '" alt="' . $follow_service . '" style="width: ' . $icon_size . 'px; height: ' . $icon_size . 'px;" />';
-				$output .= '<a target="' . $target . '" href="' . $account . '"' . $onclick . ' class="tb-social-icon' . $class . '" title="' . esc_attr( sprintf( $prefix, $service_name ) ) . '">' . $icon . '</a>';
+				$src = empty( $service_name[1] ) ? esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ) : esc_url( $service_name[1] );
+				$icon = '<img src="' . $src . '" alt="' . esc_attr( $service_name[0] ) . '" style="width: ' . $icon_size . 'px; height: ' . $icon_size . 'px;" />';
+				$output .= '<a target="' . $target . '" href="' . esc_url( $account ) . '"' . $onclick . ' class="tb-social-icon' . $class . '" title="' . esc_attr( sprintf( $prefix, $service_name[0] ) ) . '">' . $icon . '</a>';
 			}
 
 		}
@@ -935,11 +939,11 @@ class Boozurk_Widget_Social extends WP_Widget {
 	}
 
 
-	function update($new_instance, $old_instance) {
+	function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
 
-		$instance["title"] = strip_tags($new_instance["title"]);
+		$instance["title"] = strip_tags( $new_instance["title"] );
 
 		$instance['icon_size'] = $new_instance['icon_size'];
 		if ( ! in_array( $instance['icon_size'], array ( '16', '24', '32', '48', '64' ) ) ) {
@@ -949,7 +953,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 
 		$url_pattern = "/^(http|https):\/\//";
 		$email_pattern = "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/";
-		foreach ($this->follow_urls as $follow_service => $service_name ) {
+		foreach ( $this->follow_urls as $follow_service => $service_name ) {
 
 			$instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
 			$instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
@@ -957,9 +961,9 @@ class Boozurk_Widget_Social extends WP_Widget {
 			if ( $instance[$follow_service.'_account'] ) {
 
 				if( $follow_service == 'Mail' )
-					preg_match($email_pattern, strtoupper( $instance[$follow_service.'_account'] ), $is_valid_url);
+					preg_match( $email_pattern, strtoupper( $instance[$follow_service.'_account'] ), $is_valid_url );
 				else
-					preg_match($url_pattern, $instance[$follow_service.'_account'], $is_valid_url);
+					preg_match( $url_pattern, $instance[$follow_service.'_account'], $is_valid_url );
 
 				if ( ! $is_valid_url ) {
 					$instance['show_'.$follow_service] = false;
@@ -1002,13 +1006,13 @@ class Boozurk_Widget_Social extends WP_Widget {
 		<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'boozurk' ); ?></p>
 
 		<?php foreach( $this->follow_urls as $follow_service => $service_name ) { ?>
-
+		<?php $src = empty( $service_name[1] ) ? esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ) : esc_url( $service_name[1] ); ?>
 		<div class="service" style="float: left; width: 40%; margin: 0pt 5%;">
 
 			<h2>
 				<input id="<?php echo $this->get_field_id( 'show_'.$follow_service ); ?>" name="<?php echo $this->get_field_name( 'show_'.$follow_service ); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo esc_url( get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png' ); ?>" alt="<?php echo esc_attr( $follow_service ); ?>" />
-				<?php echo $service_name; ?>
+				<img style="vertical-align:middle; width:32px; height:32px;" src="<?php echo $src; ?>" alt="<?php echo esc_attr( $service_name[0] ); ?>" />
+				<?php echo $service_name[0]; ?>
 			</h2>
 
 			<?php
@@ -1020,7 +1024,7 @@ class Boozurk_Widget_Social extends WP_Widget {
 					$text = __( 'Enter your feed service address. Leave it blank for using the default WordPress feed', 'boozurk' );
 			?>
 			<p<?php $this->field_class( $follow_service ); ?>>
-				<label for="<?php echo $this->get_field_id( $follow_service.'_account' ); ?>"><?php printf( $text, $service_name ) ?>:</label>
+				<label for="<?php echo $this->get_field_id( $follow_service.'_account' ); ?>"><?php printf( $text, $service_name[0] ); ?>:</label>
 				<input type="text" id="<?php echo $this->get_field_id( $follow_service.'_account' ); ?>" name="<?php echo $this->get_field_name( $follow_service.'_account' ); ?>" value="<?php if ( isset( $instance[$follow_service.'_account'] ) ) echo $instance[$follow_service.'_account']; ?>" class="widefat" />
 			</p>
 

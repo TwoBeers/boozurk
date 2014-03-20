@@ -92,6 +92,7 @@ function boozurk_hook_entry_top() {
 }
 
 function boozurk_hook_entry_bottom() {
+	do_action( 'boozurk_hook_share_links' );
 	do_action( 'boozurk_hook_entry_bottom' );
 	tha_entry_bottom();
 }
@@ -201,4 +202,11 @@ function boozurk_hook_post_title_after() {
  */
 function  boozurk_hook_breadcrumb_navigation () {
 	do_action( 'boozurk_hook_breadcrumb_navigation' );
+}
+
+/**
+ * the post extrainfos section
+ */
+function  boozurk_hook_post_extrainfo ( $args ) {
+	do_action( 'boozurk_hook_post_extrainfo', $args );
 }
